@@ -3,7 +3,8 @@
 from __future__ import unicode_literals
 
 AUTHOR = 'Seng Chu'
-SITENAME = 'Engineered Perception'
+SITENAME = 'PERCETIVE STUDENT'
+#Perceptive student, student perception, perceptivelearner, learningmentaliy
 SITEURL = ''
 PATH = 'content'
 TIMEZONE = 'America/Los_Angeles'
@@ -27,19 +28,26 @@ SHOW_ARTICLE_CATEGORY = True
 		  
 #Bootstrap sidebar tags settings		  
 DISPLAY_TAGS_ON_SIDEBAR = True
-DISPLAY_TAGS_INLINE = True
+DISPLAY_TAGS_INLINE = False
 TAG_CLOUD_MAX_ITEMS = 25
+TAG_CLOUD_STEPS = 2
+TAG_CLOUD_SORTING = 'random'
+TAG_CLOUD_BADGE = True
 TAGS_URL = ''
 
 #Bootstrap sidebar other settings
 DISPLAY_ARCHIVE_ON_SIDEBAR = True
 DISPLAY_RECENT_POSTS_ON_SIDEBAR = True
 MONTH_ARCHIVE_SAVE_AS = '{date:%Y}/{date:%m}/index.html'
+RECENT_POST_COUNT = 4
+DIRECT_TEMPLATES = ['search']
+#Edited sidebar title icons, see templates/includes/sidebar
 
 #Bootstrap banner and brand settings
 BANNER = 'images/tree.png'
 BANNER_ALL_PAGES = True
 BANNER_SUBTITLE = 'Engineering the way we see the world'
+HIDE_SITENAME = True
 
 #Bootstrap navbar options
 DISPLAY_PAGES_ON_MENU = True
@@ -63,7 +71,7 @@ DEFAULT_PAGINATION = 100
 MARKUP = ('md', 'ipynb')
 
 PLUGIN_PATH = './plugins'
-PLUGINS = ['i18n_subsites', 'ipynb.markup', 'tag_cloud']
+PLUGINS = ['i18n_subsites', 'ipynb.markup', 'tag_cloud', 'tipue_search']
 IGNORE_FILES = ['.ipynb_checkpoints']
 
 #TO DO

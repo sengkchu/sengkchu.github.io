@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>Articles by Seng Chu - Seng Kin Chu</title>
+    <title>Search - Seng Kin Chu
+</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -92,33 +93,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-9">
-            <article>
-                <h2><a href="/2.html">Visualizing Earnings based On College Majors</a></h2>
-                <div class="summary">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Visualizing-Earnings-based-On-College-Majors">Visualizing Earnings based On College Majors<a class="anchor-link" href="#Visualizing-Earnings-based-On-College-Majors">¶</a></h3><p>In this project we will look at earnings from recent college graduates based on each major in 'recent-grads.csv'. We'll visualize the data using histograms, bar charts, and scatter plots and see if we can draw some interesting insights from it. However, the main purpose of this project is to practice some of the data visualization tools.</p>
-                    <a class="btn btn-default btn-xs" href="/2.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/3.html">Learning</a></h2>
-                <div class="summary"><p>Learning Mentality</p>
-                    <a class="btn btn-default btn-xs" href="/3.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/6.html">Projects</a></h2>
-                <div class="summary"><p>Projects</p>
-                    <a class="btn btn-default btn-xs" href="/6.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-
+<div id="tipue_search_content"></div>
         </div>
         <div class="col-sm-3" id="sidebar">
             <aside>
@@ -246,6 +221,18 @@ table.dataframe th, td {
     text-align: left;
 }</style>
 
+    <script type="text/javascript" src="/theme/tipuesearch/tipuesearch_set.js"></script>
+    <script type="text/javascript" src="/theme/tipuesearch/tipuesearch.min.js"></script>
+    <script>
+    $(document).ready(function() {
+      $('#tipue_search_input').tipuesearch({
+        'mode' : 'json',
+        'show': 10,
+        'newWindow': false,
+        'contentLocation': 'tipuesearch_content.json'
+      });
+    });
+    </script>
 
 </body>
 </html>

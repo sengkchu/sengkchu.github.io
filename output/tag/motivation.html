@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>motivation - Engineered Perception</title>
+    <title>motivation - Seng Kin Chu</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -14,11 +14,11 @@
     <meta name="keywords" content="motivation" />
 
     <!-- Open Graph tags -->
-        <meta property="og:site_name" content="Engineered Perception" />
+        <meta property="og:site_name" content="Seng Kin Chu" />
         <meta property="og:type" content="website"/>
-        <meta property="og:title" content="Engineered Perception"/>
+        <meta property="og:title" content="Seng Kin Chu"/>
         <meta property="og:url" content=""/>
-        <meta property="og:description" content="Engineered Perception"/>
+        <meta property="og:description" content="Seng Kin Chu"/>
 
 
 
@@ -27,6 +27,7 @@
     <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
 
     <link href="/theme/css/pygments/default.css" rel="stylesheet">
+    <link href="/theme/tipuesearch/tipuesearch.css" rel="stylesheet">
     <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
 
 
@@ -46,15 +47,12 @@
                 <span class="icon-bar"></span>
             </button>
             <a href="/" class="navbar-brand">
-Engineered Perception            </a>
+            </a>
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
                          <li><a href="/pages/4.html">
                              About me
-                          </a></li>
-                         <li><a href="/pages/CV.html">
-                             CV
                           </a></li>
                         <li >
                             <a href="/category/learning-data-science.html">Learning data science</a>
@@ -67,6 +65,11 @@ Engineered Perception            </a>
                         </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
+              <li><span>
+                <form class="navbar-search" action="/search.html">
+                  <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input" required>
+                </form></span>
+              </li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -82,7 +85,7 @@ Engineered Perception            </a>
 <div id="banner">
 	<div class="container">
 		<div class="copy">
-			<h1>Engineered Perception</h1>
+			<h1>Seng Kin Chu</h1>
 				<p class="intro">Engineering the way we see the world</p>
 		</div>
 	</div>
@@ -118,7 +121,7 @@ Engineered Perception            </a>
 
 <!-- Sidebar/Recent Posts -->
 <li class="list-group-item">
-  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
+  <h4><i class="fa fa-paperclip fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
   <ul class="list-group" id="recentposts">
     <li class="list-group-item"><a href="/3.html">Learning</a></li>
   </ul>
@@ -128,17 +131,17 @@ Engineered Perception            </a>
 <!-- Sidebar/Tag Cloud -->
 <li class="list-group-item">
   <a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
-  <ul class="list-group list-inline tagcloud" id="tags">
-    <li class="list-group-item tag-4">
-      <a href="/tag/matplotlib.html">matplotlib</a>
-    </li>
-    <li class="list-group-item tag-4">
+  <ul class="list-group " id="tags">
+    <li class="list-group-item tag-2">
       <a href="/tag/motivation.html">motivation</a>
     </li>
-    <li class="list-group-item tag-4">
+    <li class="list-group-item tag-2">
       <a href="/tag/pandas.html">pandas</a>
     </li>
-    <li class="list-group-item tag-4">
+    <li class="list-group-item tag-2">
+      <a href="/tag/matplotlib.html">matplotlib</a>
+    </li>
+    <li class="list-group-item tag-2">
       <a href="/tag/projects.html">Projects</a>
     </li>
   </ul>
@@ -147,7 +150,7 @@ Engineered Perception            </a>
 
 <!-- Sidebar/Archive -->
 <li class="list-group-item">
-  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Archive</span></h4>
+  <h4><i class="fa fa-database fa-lg"></i><span class="icon-label">Archive</span></h4>
   <ul class="list-group" id="archive">
         <li class="list-group-item">
           <a href="/2018/01/index.html"><i class="fa fa-calendar fa-lg"></i>January 2018 (1)
