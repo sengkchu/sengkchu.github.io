@@ -3,12 +3,21 @@
 from __future__ import unicode_literals
 
 AUTHOR = 'Seng Chu'
-SITENAME = 'PERCETIVE STUDENT'
-#Perceptive student, student perception, perceptivelearner, learningmentaliy
-SITEURL = ''
+SITENAME = 'Coding Disciple'
+SITEURL = 'http://localhost:8000'
 PATH = 'content'
 TIMEZONE = 'America/Los_Angeles'
 DEFAULT_LANG = 'en'
+
+#General settings
+DEFAULT_PAGINATION = 100
+DISQUS_SITENAME = 'codingdisciple'
+
+##Pelican-bootstrap3 html changes
+#Custom CSS in templates/ipynb.css, injected into base.html
+#Edited sidebar title icons, see templates/includes/sidebar
+#Injected code into article_list.html for category descriptions
+#Maybe inject {{ article.date.strftime("%Y-%m-%d") }}:  to article_list.html
 
 #Bootstrap specific settings
 THEME = "~pelican-themes/pelican-bootstrap3"
@@ -16,11 +25,10 @@ JINJA_ENVIRONMENT = {'extensions': ['jinja2.ext.i18n']}
 BOOSTRAP_FLUID = True
 BOOTSTRAP_THEME = 'cosmo'
 PYGMENTS_STYLE = 'default'
-#Custom CSS in templates/ipynb.css, injected into base.html
+USE_FOLDER_AS_CATEGORY = True
 
 #Social Settings
-SOCIAL = (('twitter', ''),
-          ('linkedin', ''),
+SOCIAL = (('linkedin', ''),
           ('github', ''))
 
 #Bootstrap article settings
@@ -41,17 +49,17 @@ DISPLAY_RECENT_POSTS_ON_SIDEBAR = True
 MONTH_ARCHIVE_SAVE_AS = '{date:%Y}/{date:%m}/index.html'
 RECENT_POST_COUNT = 4
 DIRECT_TEMPLATES = ['search']
-#Edited sidebar title icons, see templates/includes/sidebar
 
 #Bootstrap banner and brand settings
 BANNER = 'images/tree.png'
 BANNER_ALL_PAGES = True
-BANNER_SUBTITLE = 'Engineering the way we see the world'
+BANNER_SUBTITLE = 'A journey of self development'
 HIDE_SITENAME = True
 
 #Bootstrap navbar options
 DISPLAY_PAGES_ON_MENU = True
 DISPLAY_CATEGORIES_ON_MENU = True
+MENUITEMS = [('About Me', 'http://localhost:8000/')]
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
@@ -60,24 +68,17 @@ TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
-
-# Blogroll
-DEFAULT_PAGINATION = 100
-
-
-# Uncomment following line if you want document-relative URLs when developing
-#RELATIVE_URLS = True
-
 MARKUP = ('md', 'ipynb')
 
 PLUGIN_PATH = './plugins'
 PLUGINS = ['i18n_subsites', 'ipynb.markup', 'tag_cloud', 'tipue_search']
 IGNORE_FILES = ['.ipynb_checkpoints']
 
-#TO DO
 
-#ADD DISQUS
-##DISQUS_SITENAME = 
+# Uncomment following line if you want document-relative URLs when developing
+#RELATIVE_URLS = True    #Don't know what these do
+
+#TO DO
 #ADD GOOGLE ANALYTICS
 #ADD CREATIVE COMMONS
 #GOOGLE_ANALYTICS
