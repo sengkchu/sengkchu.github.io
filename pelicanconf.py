@@ -28,8 +28,8 @@ PYGMENTS_STYLE = 'default'
 USE_FOLDER_AS_CATEGORY = True
 
 #Social Settings
-SOCIAL = (('linkedin', ''),
-          ('github', ''))
+SOCIAL = (('linkedin', 'https://www.linkedin.com/in/seng-chu-338140142'),
+          ('github', 'https://github.com/sengkchu'))
 
 #Bootstrap article settings
 SHOW_ARTICLE_CATEGORY = True
@@ -37,8 +37,8 @@ SHOW_ARTICLE_CATEGORY = True
 #Bootstrap sidebar tags settings		  
 DISPLAY_TAGS_ON_SIDEBAR = True
 DISPLAY_TAGS_INLINE = False
-TAG_CLOUD_MAX_ITEMS = 25
-TAG_CLOUD_STEPS = 2
+TAG_CLOUD_MAX_ITEMS = 10
+TAG_CLOUD_STEPS = 6
 TAG_CLOUD_SORTING = 'random'
 TAG_CLOUD_BADGE = True
 TAGS_URL = ''
@@ -74,12 +74,12 @@ PLUGIN_PATH = './plugins'
 PLUGINS = ['i18n_subsites', 'ipynb.markup', 'tag_cloud', 'tipue_search']
 IGNORE_FILES = ['.ipynb_checkpoints']
 
-
-# Uncomment following line if you want document-relative URLs when developing
-#RELATIVE_URLS = True    #Don't know what these do
-
 #TO DO
 #ADD GOOGLE ANALYTICS
 #ADD CREATIVE COMMONS
 #GOOGLE_ANALYTICS
+
+
+# Uncomment following line if you want document-relative URLs when developing
+#RELATIVE_URLS = True    #Don't know what these do
 
