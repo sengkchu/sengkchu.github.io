@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>Exploring U.S. Births - Coding Disciple</title>
+    <title>Web Scraping using Reddit's API - Coding Disciple</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -9,20 +9,24 @@
 
 
 
-<link rel="canonical" href="http://localhost:8000/Exploring U.S. Births.html">
+<link rel="canonical" href="http://localhost:8000/Web Scraping using Reddit's API.html">
 
         <meta name="author" content="Seng Chu" />
-        <meta name="keywords" content="python basics" />
-        <meta name="description" content="In this project, we will look at the number of births in the United States in the file &#34;US_births_1994-2003_CDC_NCHS.csv&#34;. First, we will use basic functions in python to convert the file into a readable format and explore the data." />
+        <meta name="keywords" content="web scraping,pandas,python basics,JSON,data structures" />
+        <meta name="description" content="In this project we will try to scrape data from reddit using their API. The objective is to load reddit data into a pandas dataframe. In order to achieve this, first we&#39;ll import the following libraries. The documentation for this API can be found here." />
 
         <meta property="og:site_name" content="Coding Disciple" />
         <meta property="og:type" content="article"/>
-        <meta property="og:title" content="Exploring U.S. Births"/>
-        <meta property="og:url" content="http://localhost:8000/Exploring U.S. Births.html"/>
-        <meta property="og:description" content="In this project, we will look at the number of births in the United States in the file &#34;US_births_1994-2003_CDC_NCHS.csv&#34;. First, we will use basic functions in python to convert the file into a readable format and explore the data."/>
+        <meta property="og:title" content="Web Scraping using Reddit&#39;s API"/>
+        <meta property="og:url" content="http://localhost:8000/Web Scraping using Reddit's API.html"/>
+        <meta property="og:description" content="In this project we will try to scrape data from reddit using their API. The objective is to load reddit data into a pandas dataframe. In order to achieve this, first we&#39;ll import the following libraries. The documentation for this API can be found here."/>
         <meta property="article:published_time" content="2018-01-26" />
-            <meta property="article:section" content="Learning Data Science" />
+            <meta property="article:section" content="Projects" />
+            <meta property="article:tag" content="web scraping" />
+            <meta property="article:tag" content="pandas" />
             <meta property="article:tag" content="python basics" />
+            <meta property="article:tag" content="JSON" />
+            <meta property="article:tag" content="data structures" />
             <meta property="article:author" content="Seng Chu" />
 
 
@@ -57,13 +61,13 @@
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
                     <li><a href="http://localhost:8000/">About me</a></li>
-                        <li class="active">
+                        <li >
                             <a href="http://localhost:8000/category/learning-data-science.html">Learning data science</a>
                         </li>
                         <li >
                             <a href="http://localhost:8000/category/mentality-and-discipline.html">Mentality and discipline</a>
                         </li>
-                        <li >
+                        <li class="active">
                             <a href="http://localhost:8000/category/projects.html">Projects</a>
                         </li>
             </ul>
@@ -100,10 +104,10 @@
         <article>
             <header class="page-header">
                 <h1>
-                    <a href="http://localhost:8000/Exploring U.S. Births.html"
+                    <a href="http://localhost:8000/Web Scraping using Reddit's API.html"
                        rel="bookmark"
-                       title="Permalink to Exploring U.S. Births">
-                        Exploring U.S. Births
+                       title="Permalink to Web Scraping using Reddit's API">
+                        Web Scraping using Reddit's API
                     </a>
                 </h1>
             </header>
@@ -121,7 +125,15 @@
 
 
 <span class="label label-default">Tags</span>
+	<a href="http://localhost:8000/tag/web-scraping.html">web scraping</a>
+        /
+	<a href="http://localhost:8000/tag/pandas.html">pandas</a>
+        /
 	<a href="http://localhost:8000/tag/python-basics.html">python basics</a>
+        /
+	<a href="http://localhost:8000/tag/json.html">JSON</a>
+        /
+	<a href="http://localhost:8000/tag/data-structures.html">data structures</a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
@@ -1101,7 +1113,8 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In this project, we will look at the number of births in the United States in the file "US_births_1994-2003_CDC_NCHS.csv". First, we will use basic functions in python to convert the file into a readable format and explore the data.</p>
+<p>In this project we will try to scrape data from reddit using their API. The objective is to load reddit data into a pandas dataframe. In order to achieve this, first we'll import the following libraries.</p>
+<p>The documentation for this API can be found <a href="https://github.com/reddit/reddit/wiki/API">here</a>.</p>
 </div>
 </div>
 </div>
@@ -1110,23 +1123,11 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [1]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Opens the file and read it.</span>
-<span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"US_births_1994-2003_CDC_NCHS.csv"</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-
-<span class="c1">#Prints the first 400 characters.</span>
-<span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">400</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">urllib.request</span> <span class="k">as</span> <span class="nn">ur</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">time</span>
 </pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[1]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>'year,month,date_of_month,day_of_week,births\n1994,1,1,6,8096\n1994,1,2,7,7772\n1994,1,3,1,10142\n1994,1,4,2,11248\n1994,1,5,3,11053\n1994,1,6,4,11406\n1994,1,7,5,11251\n1994,1,8,6,8653\n1994,1,9,7,7910\n1994,1,10,1,10498\n1994,1,11,2,11706\n1994,1,12,3,11567\n1994,1,13,4,11212\n1994,1,14,5,11570\n1994,1,15,6,8660\n1994,1,16,7,8123\n1994,1,17,1,10567\n1994,1,18,2,11541\n1994,1,19,3,11257\n1994,1,20,4,11682\n1994,1,21,5'</pre>
-</div>
 </div>
 </div>
 </div>
@@ -1135,7 +1136,9 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>It looks like each entry in the data is seperated by "\n". Let's create a list with the variable "births" and seperate each item in the list by \n. We can accomplish this by using the built in .split() function in python.</p>
+<p>We can access the raw json data of any subreddit by adding '.json' to the URL. Using the urllib.request library, we can extract that data and read it in python.</p>
+<p>From the documentation, we need to fill out the header using the suggested format.</p>
+<p>Example: User-Agent: android:com.example.myredditapp:v1.2.3 (by /u/kemitche)</p>
 </div>
 </div>
 </div>
@@ -1144,28 +1147,19 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [2]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">births</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
-<span class="n">births</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Header to be submitted to reddit.</span>
+<span class="n">hdr</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'User-Agent'</span><span class="p">:</span> <span class="s1">'codingdisciple:playingwithredditAPI:v1.0 (by /u/ivis_reine)'</span><span class="p">}</span>
+
+<span class="c1">#Link to the subreddit of interest.</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s2">"https://www.reddit.com/r/grandorder/.json?sort=top&t;=all"</span>
+
+<span class="c1">#Makes a request object and receive a response.</span>
+<span class="n">req</span> <span class="o">=</span> <span class="n">ur</span><span class="o">.</span><span class="n">Request</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">hdr</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">ur</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">req</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="c1">#Loads the json data into python.</span>
+<span class="n">json_data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">'utf-8'</span><span class="p">))</span>
 </pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[2]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>['year,month,date_of_month,day_of_week,births',
- '1994,1,1,6,8096',
- '1994,1,2,7,7772',
- '1994,1,3,1,10142',
- '1994,1,4,2,11248',
- '1994,1,5,3,11053',
- '1994,1,6,4,11406',
- '1994,1,7,5,11251',
- '1994,1,8,6,8653',
- '1994,1,9,7,7910']</pre>
-</div>
 </div>
 </div>
 </div>
@@ -1174,8 +1168,8 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>This is still not quite what we want, each element in the list contains information on the year, month, day, day of the week, and births. We want to further break down each element in the list. We can accomplish this creating a list of lists.</p>
-<p>In addition, we want to write a generic function that can convert any csv file into this format.</p>
+<p>I took a snapshot of the data structure below. It looks like the data is just a bunch of lists and dictionaries. We want reach the part of the dictionary until we see a list. Each item on this list will be a post made on this subreddit.</p>
+<p><img alt="reddit_data_structure" src="https://raw.githubusercontent.com/sengkchu/Personal-Projects/master/datastructure.png" /></p>
 </div>
 </div>
 </div>
@@ -1184,26 +1178,37 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [3]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">read_csv</span><span class="p">(</span><span class="n">inputs</span><span class="p">):</span>
-    <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-    <span class="n">string_list</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
-    <span class="c1">#Remove the headers.</span>
-    <span class="n">string_list</span> <span class="o">=</span> <span class="n">string_list</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#The actual data starts.</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">json_data</span><span class="p">[</span><span class="s1">'data'</span><span class="p">][</span><span class="s1">'children'</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Each request can only get us 100 posts, we can write a for loop to send 10 requests at 2 second intervals and add the data to the list of posts.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [4]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="c1">#reddit only accepts one request every 2 seconds, adds a delay between each loop</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">last</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s1">'data'</span><span class="p">][</span><span class="s1">'name'</span><span class="p">]</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s1">'https://www.reddit.com/r/grandorder/.json?sort=top&t;=all&limit;=100&after;=</span><span class="si">%s</span><span class="s1">'</span> <span class="o">%</span> <span class="n">last</span>
+    <span class="n">req</span> <span class="o">=</span> <span class="n">ur</span><span class="o">.</span><span class="n">Request</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">hdr</span><span class="p">)</span>
+    <span class="n">text_data</span> <span class="o">=</span> <span class="n">ur</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">req</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="n">datatemp</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">text_data</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">'utf-8'</span><span class="p">))</span>
+    <span class="n">data</span> <span class="o">+=</span> <span class="n">datatemp</span><span class="p">[</span><span class="s1">'data'</span><span class="p">][</span><span class="s1">'children'</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">))</span><span class="o">+</span><span class="s2">" posts loaded"</span><span class="p">)</span>
     
-    <span class="c1">#Splits each list element by ',' and append it to the final list.</span>
-    <span class="n">final_list</span> <span class="o">=</span> <span class="p">[]</span>   
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">string_list</span><span class="p">:</span>
-        <span class="n">int_fields</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">string_fields</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">","</span><span class="p">)</span>
-        <span class="c1">#Converts each string to an integer.</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">string_fields</span><span class="p">:</span>
-            <span class="n">int_fields</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
-        <span class="n">final_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">int_fields</span><span class="p">)</span>   
-    <span class="k">return</span> <span class="n">final_list</span>
-
-<span class="n">cdc_list</span> <span class="o">=</span> <span class="n">read_csv</span><span class="p">(</span><span class="s2">"US_births_1994-2003_CDC_NCHS.csv"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">cdc_list</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -1213,7 +1218,16 @@ h6:hover .anchor-link {
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>[[1994, 1, 1, 6, 8096], [1994, 1, 2, 7, 7772], [1994, 1, 3, 1, 10142], [1994, 1, 4, 2, 11248], [1994, 1, 5, 3, 11053], [1994, 1, 6, 4, 11406], [1994, 1, 7, 5, 11251], [1994, 1, 8, 6, 8653], [1994, 1, 9, 7, 7910], [1994, 1, 10, 1, 10498]]
+<pre>127 posts loaded
+227 posts loaded
+327 posts loaded
+427 posts loaded
+527 posts loaded
+627 posts loaded
+727 posts loaded
+827 posts loaded
+927 posts loaded
+927 posts loaded
 </pre>
 </div>
 </div>
@@ -1224,66 +1238,7 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now that we have the list in the format we want, we can explore the data a little bit. Let's say we are a baby products company, and we want to know if there is a particular month when more babies will be born. If that is the case, we can produce more products in preparation for that month.</p>
-<p>We can write a function that takes the list of lists as an argument and then convert it into a dictionary with each month as the dictionary key and the number of births as the value of that key.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [4]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">month_births</span><span class="p">(</span><span class="n">inputs</span><span class="p">):</span>
-    <span class="n">births_per_month</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="c1">#Loops through the list of lists.</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">inputs</span><span class="p">:</span>
-        <span class="c1">#Sets the month as the first item, and births as the last item.</span>
-        <span class="n">month</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">births</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="c1">#Add the number of births to the current value, if the key exists in the dictionary.</span>
-        <span class="k">if</span> <span class="n">month</span> <span class="ow">in</span> <span class="n">births_per_month</span><span class="p">:</span>
-            <span class="n">births_per_month</span><span class="p">[</span><span class="n">month</span><span class="p">]</span> <span class="o">=</span> <span class="n">births</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">births_per_month</span><span class="p">[</span><span class="n">month</span><span class="p">])</span>
-        <span class="c1">#Set the key equal to the value, if the key doesn't exist in teh dictionary.</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">births_per_month</span><span class="p">[</span><span class="n">month</span><span class="p">]</span> <span class="o">=</span> <span class="n">births</span>           
-    <span class="k">return</span> <span class="n">births_per_month</span>
-
-<span class="c1">#The result is a dictionary with the month as the key and the number of births as values.</span>
-<span class="n">cdc_month_births</span> <span class="o">=</span> <span class="n">month_births</span><span class="p">(</span><span class="n">cdc_list</span><span class="p">)</span>
-<span class="n">cdc_month_births</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[4]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>{1: 3232517,
- 2: 3018140,
- 3: 3322069,
- 4: 3185314,
- 5: 3350907,
- 6: 3296530,
- 7: 3498783,
- 8: 3525858,
- 9: 3439698,
- 10: 3378814,
- 11: 3171647,
- 12: 3301860}</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Looks like the total number births from 1994 - 2003 in August ended up to be the highest. However, the number might not be high enough to justify increased production of baby products.</p>
-<p>Let's repeat the process of what we just did above for the day of the week instead of month. We'll write a function that takes in the list of lists as an argument and generate a dictionary with day of the week as the key and number of births as the value. This will give us a count of the total number of births from 1994-2003 for each day of the week</p>
+<p>We've assigned all the posts to a list with the variable named 'data'. In order to begin constructing our pandas dataframe, we need a list of column names. Each post consists of a dictionary, we can simply loop through this dictionary and extract the column names.</p>
 </div>
 </div>
 </div>
@@ -1292,21 +1247,9 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [5]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">dow_births</span><span class="p">(</span><span class="n">inputs</span><span class="p">):</span>
-    <span class="n">births_dow</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">inputs</span><span class="p">:</span>
-        <span class="n">dow</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
-        <span class="n">births</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">dow</span> <span class="ow">in</span> <span class="n">births_dow</span><span class="p">:</span>
-            <span class="n">births_dow</span><span class="p">[</span><span class="n">dow</span><span class="p">]</span> <span class="o">=</span> <span class="n">births</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">births_dow</span><span class="p">[</span><span class="n">dow</span><span class="p">])</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">births_dow</span><span class="p">[</span><span class="n">dow</span><span class="p">]</span> <span class="o">=</span> <span class="n">births</span>           
-    <span class="k">return</span> <span class="n">births_dow</span>
-
-
-
-<span class="n">cdc_day_births</span> <span class="o">=</span> <span class="n">dow_births</span><span class="p">(</span><span class="n">cdc_list</span><span class="p">)</span>
-<span class="n">cdc_day_births</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Create a list of column name strings to be used to create our pandas dataframe</span>
+<span class="n">data_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">value</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">'data'</span><span class="p">]]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data_names</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1314,15 +1257,10 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[5]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>{1: 5789166,
- 2: 6446196,
- 3: 6322855,
- 4: 6288429,
- 5: 6233657,
- 6: 4562111,
- 7: 4079723}</pre>
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>['edited', 'subreddit_name_prefixed', 'domain', 'is_reddit_media_domain', 'spoiler', 'selftext_html', 'selftext', 'url', 'brand_safe', 'mod_reason_by', 'stickied', 'locked', 'id', 'name', 'ups', 'preview', 'suggested_sort', 'view_count', 'link_flair_text', 'thumbnail', 'link_flair_css_class', 'report_reasons', 'downs', 'likes', 'banned_by', 'thumbnail_width', 'author', 'clicked', 'num_reports', 'hidden', 'contest_mode', 'mod_reports', 'visited', 'whitelist_status', 'created_utc', 'title', 'approved_at_utc', 'can_gild', 'secure_media_embed', 'quarantine', 'secure_media', 'parent_whitelist_status', 'is_video', 'banned_at_utc', 'mod_note', 'thumbnail_height', 'is_crosspostable', 'permalink', 'hide_score', 'pinned', 'post_hint', 'num_comments', 'created', 'user_reports', 'archived', 'can_mod_post', 'gilded', 'over_18', 'media', 'num_crossposts', 'mod_reason_title', 'subreddit', 'removal_reason', 'is_self', 'subreddit_type', 'author_flair_text', 'media_embed', 'saved', 'score', 'distinguished', 'subreddit_id', 'approved_by', 'author_flair_css_class']
+</pre>
 </div>
 </div>
 </div>
@@ -1332,8 +1270,8 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>According to the international standard ISO-8601, the International Organization for Standardization (ISO) has decreed that Monday shall be the first day of the week. So it looks like the highest total amount of births from 1994 - 2003 is actually a Tuesday.</p>
-<p>We can repeat the process again. We'll write a function that takes in the list of lists as an argument and generate a dictionary with year as the key and number of births as the value. This time, the function will be a bit more generic. The function will take in two arguments, the data and the column index. A column index of 0 will refer to the year column, whereas a column index of 1 will refer to the month and so on. That way we can quickly generate dictionary of all the birth counts.</p>
+<p>In order to build a dataframe using the pd.DataFrame() function, we will need a list of dictionaries.</p>
+<p>We can loop through each element in 'data', using each column name as a key to the dictionary, then accessing the corresponding value with that key. If we come across a post that has</p>
 </div>
 </div>
 </div>
@@ -1342,60 +1280,28 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [6]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">calc_counts</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">column</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Create a list of dictionaries to be loaded into a pandas dataframe</span>
+<span class="n">df_loadinglist</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)):</span>
     <span class="n">dictionary</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
-        <span class="n">column_name</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="n">column</span><span class="p">]</span>
-        <span class="n">births</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">column_name</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="n">column_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">births</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="n">column_name</span><span class="p">])</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="n">column_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">births</span>
-            
-    <span class="k">return</span> <span class="n">dictionary</span>
-
-<span class="n">cdc_year_births</span> <span class="o">=</span> <span class="n">calc_counts</span><span class="p">(</span><span class="n">cdc_list</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-<span class="n">cdc_year_births</span>
+    <span class="k">for</span> <span class="n">names</span> <span class="ow">in</span> <span class="n">data_names</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">names</span><span class="p">)]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">'data'</span><span class="p">][</span><span class="nb">str</span><span class="p">(</span><span class="n">names</span><span class="p">)]</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">names</span><span class="p">)]</span> <span class="o">=</span> <span class="s1">'None'</span>
+    <span class="n">df_loadinglist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dictionary</span><span class="p">)</span>
+<span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">df_loadinglist</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[6]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>{1994: 3952767,
- 1995: 3899589,
- 1996: 3891494,
- 1997: 3880894,
- 1998: 3941553,
- 1999: 3959417,
- 2000: 4058814,
- 2001: 4025933,
- 2002: 4021726,
- 2003: 4089950}</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>It looks like the number of births in the US is increasing every year.</p>
-<p>Lastly, we'll use the same function again to look at the total number of births in each day of the month</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [7]:</div>
+<div class="prompt input_prompt">In [8]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cdc_day_births</span> <span class="o">=</span> <span class="n">calc_counts</span><span class="p">(</span><span class="n">cdc_list</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">cdc_day_births</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 </div>
 </div>
@@ -1403,39 +1309,195 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[7]:</div>
+<div class="prompt output_prompt">Out[8]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>{1: 1276557,
- 2: 1288739,
- 3: 1304499,
- 4: 1288154,
- 5: 1299953,
- 6: 1304474,
- 7: 1310459,
- 8: 1312297,
- 9: 1303292,
- 10: 1320764,
- 11: 1314361,
- 12: 1318437,
- 13: 1277684,
- 14: 1320153,
- 15: 1319171,
- 16: 1315192,
- 17: 1324953,
- 18: 1326855,
- 19: 1318727,
- 20: 1324821,
- 21: 1322897,
- 22: 1317381,
- 23: 1293290,
- 24: 1288083,
- 25: 1272116,
- 26: 1284796,
- 27: 1294395,
- 28: 1307685,
- 29: 1223161,
- 30: 1202095,
- 31: 746696}</pre>
+<pre>(927, 73)</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [9]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[9]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>approved_at_utc</th>
+<th>approved_by</th>
+<th>archived</th>
+<th>author</th>
+<th>author_flair_css_class</th>
+<th>author_flair_text</th>
+<th>banned_at_utc</th>
+<th>banned_by</th>
+<th>brand_safe</th>
+<th>can_gild</th>
+<th>...</th>
+<th>thumbnail</th>
+<th>thumbnail_height</th>
+<th>thumbnail_width</th>
+<th>title</th>
+<th>ups</th>
+<th>url</th>
+<th>user_reports</th>
+<th>view_count</th>
+<th>visited</th>
+<th>whitelist_status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>922</th>
+<td>None</td>
+<td>None</td>
+<td>False</td>
+<td>ArcueidAwoo</td>
+<td>9-solomonaf</td>
+<td>H-help me~</td>
+<td>None</td>
+<td>None</td>
+<td>True</td>
+<td>False</td>
+<td>...</td>
+<td>https://a.thumbs.redditmedia.com/-9ZLqglo3aAO6...</td>
+<td>105.0</td>
+<td>140.0</td>
+<td>Seal Thirteen... Decision Start!</td>
+<td>151</td>
+<td>https://www.youtube.com/watch?v=X962oII_Oo8</td>
+<td>[]</td>
+<td>None</td>
+<td>False</td>
+<td>all_ads</td>
+</tr>
+<tr>
+<th>923</th>
+<td>None</td>
+<td>None</td>
+<td>False</td>
+<td>SeijoVangelta</td>
+<td>3-mordred1</td>
+<td>Tomboy Fetish</td>
+<td>None</td>
+<td>None</td>
+<td>True</td>
+<td>False</td>
+<td>...</td>
+<td>self</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Heroic Spirits summoned in the Holy Grail Wars...</td>
+<td>120</td>
+<td>https://www.reddit.com/r/grandorder/comments/7...</td>
+<td>[]</td>
+<td>None</td>
+<td>False</td>
+<td>all_ads</td>
+</tr>
+<tr>
+<th>924</th>
+<td>None</td>
+<td>None</td>
+<td>False</td>
+<td>ArchadianJudge</td>
+<td>3-caren</td>
+<td>Caren &amp; Saber Alter's Husband</td>
+<td>None</td>
+<td>None</td>
+<td>True</td>
+<td>False</td>
+<td>...</td>
+<td>self</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Is your game running fine? Japanese players (a...</td>
+<td>46</td>
+<td>https://www.reddit.com/r/grandorder/comments/7...</td>
+<td>[]</td>
+<td>None</td>
+<td>False</td>
+<td>all_ads</td>
+</tr>
+<tr>
+<th>925</th>
+<td>None</td>
+<td>None</td>
+<td>False</td>
+<td>AutoModerator</td>
+<td>bbmodflair</td>
+<td>♥ HAIIIII ♥</td>
+<td>None</td>
+<td>None</td>
+<td>True</td>
+<td>False</td>
+<td>...</td>
+<td>self</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>[Fanart Megathread] BBs Fanart Folder!</td>
+<td>25</td>
+<td>https://www.reddit.com/r/grandorder/comments/7...</td>
+<td>[]</td>
+<td>None</td>
+<td>False</td>
+<td>all_ads</td>
+</tr>
+<tr>
+<th>926</th>
+<td>None</td>
+<td>None</td>
+<td>False</td>
+<td>GraveRobberJ</td>
+<td>5-nobu2</td>
+<td></td>
+<td>None</td>
+<td>None</td>
+<td>True</td>
+<td>False</td>
+<td>...</td>
+<td>https://b.thumbs.redditmedia.com/fPcmS4bwyULm9...</td>
+<td>140.0</td>
+<td>140.0</td>
+<td>Kiara receives a massage</td>
+<td>85</td>
+<td>https://twitter.com/_JB_K/status/9503128905562...</td>
+<td>[]</td>
+<td>None</td>
+<td>False</td>
+<td>all_ads</td>
+</tr>
+</tbody>
+</table>
+<p>5 rows × 73 columns</p>
+</div>
 </div>
 </div>
 </div>
@@ -1445,7 +1507,49 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We are not really seeing any patterns here other than the 31st day having signficantly less number of births compared to the rest of the days in the month. This makes sense as not every month have 31 days.</p>
+<p>Now that we have a pandas dataframe, we can do simple analysis on the reddit posts. For example, we can write a function to find the most common words used in the last 925 posts.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [10]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Counts each word and return a pandas series</span>
+
+<span class="k">def</span> <span class="nf">word_count</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">column</span><span class="p">):</span>
+    <span class="n">dic</span><span class="o">=</span><span class="p">{}</span>
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+        <span class="n">split</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">" "</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">split</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">dic</span><span class="p">:</span>
+                <span class="n">dic</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">dic</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">dictionary</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">dic</span><span class="p">)</span>
+    <span class="n">dictionary</span> <span class="o">=</span> <span class="n">dictionary</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">dictionary</span>
+
+<span class="n">top_counts</span> <span class="o">=</span> <span class="n">word_count</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s2">"selftext"</span><span class="p">)</span>
+<span class="n">top_counts</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[10]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>the    2490
+to     1870
+       1609
+of     1407
+and    1376
+dtype: int64</pre>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -1453,10 +1557,11 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p>The results are not too surprising, common english words showed up the most.</p>
+<p>That is it for now! We've achieved our goal of turning json data into a pandas dataframe.</p>
 <hr />
-<h4 id="Learning-Summary">Learning Summary<a class="anchor-link" href="#Learning-Summary">¶</a></h4><p>Python concepts explored: lists, dictionaries, functions, for loops<br />
-Python functions and methods used: .read(), open(), .split(), .append(), int()</p>
-<p>The files used for this project can be found in my <a href="https://github.com/sengkchu/Dataquest-Guided-Projects-Solutions/tree/master/Guided%20Project_%20Explore%20U.S.%20Births">GitHub repository</a>.</p>
+<h4 id="Learning-Summary">Learning Summary<a class="anchor-link" href="#Learning-Summary">¶</a></h4><p>Concepts explored: lists, dictionaries, for loops, API, data structures, JSON</p>
+<p>The files for this project can be found in my <a href="https://github.com/sengkchu/Personal-Projects">GitHub repository</a>.</p>
 </div>
 </div>
 </div>
@@ -1501,8 +1606,8 @@ Python functions and methods used: .read(), open(), .split(), .append(), int()</
             /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
             var disqus_shortname = 'codingdisciple'; // required: replace example with your forum shortname
 
-                    var disqus_identifier = 'Exploring U.S. Births';
-                var disqus_url = 'http://localhost:8000/Exploring U.S. Births.html';
+                    var disqus_identifier = 'Web Scraping using Reddit's API';
+                var disqus_url = 'http://localhost:8000/Web Scraping using Reddit's API.html';
 
             var disqus_config = function () {
                 this.language = "en";

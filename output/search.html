@@ -51,7 +51,7 @@
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
-                    <li><a href="http://localhost:8000/">About Me</a></li>
+                    <li><a href="http://localhost:8000/">About me</a></li>
                         <li >
                             <a href="http://localhost:8000/category/learning-data-science.html">Learning data science</a>
                         </li>
@@ -90,10 +90,10 @@
 </div><!-- End Banner -->
 <div class="container">
     <div class="row">
-        <div class="col-sm-9">
+        <div class="col-sm-9 col-sm-push-3">
 <div id="tipue_search_content"></div>
         </div>
-        <div class="col-sm-3" id="sidebar">
+        <div class="col-sm-3 col-sm-pull-9" id="sidebar">
             <aside>
 <!-- Sidebar -->
 <section class="well well-sm">
@@ -109,33 +109,33 @@
 </li>
 <!-- End Sidebar/Social -->
 
-<!-- Sidebar/Recent Posts -->
-<li class="list-group-item">
-  <h4><i class="fa fa-paperclip fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
-  <ul class="list-group" id="recentposts">
-    <li class="list-group-item"><a href="http://localhost:8000/Exploring U.S. Births.html">Exploring U.S. Births</a></li>
-    <li class="list-group-item"><a href="http://localhost:8000/121.html">Learning</a></li>
-    <li class="list-group-item"><a href="http://localhost:8000/1231.html">First Project</a></li>
-    <li class="list-group-item"><a href="http://localhost:8000/2.html">Visualizing Earnings based On College Majors</a></li>
-  </ul>
-</li>
-<!-- End Sidebar/Recent Posts -->
-
 <!-- Sidebar/Tag Cloud -->
 <li class="list-group-item">
   <h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4>
   <ul class="list-group " id="tags">
     <li class="list-group-item tag-1">
-      <a href="http://localhost:8000/tag/pandas.html">pandas</a>
+      <a href="http://localhost:8000/tag/python-basics.html">python basics</a>
     </li>
-    <li class="list-group-item tag-1">
+    <li class="list-group-item tag-6">
+      <a href="http://localhost:8000/tag/web-scraping.html">web scraping</a>
+    </li>
+    <li class="list-group-item tag-6">
+      <a href="http://localhost:8000/tag/learning-strategy.html">learning strategy</a>
+    </li>
+    <li class="list-group-item tag-6">
+      <a href="http://localhost:8000/tag/discipline.html">discipline</a>
+    </li>
+    <li class="list-group-item tag-6">
       <a href="http://localhost:8000/tag/motivation.html">motivation</a>
     </li>
     <li class="list-group-item tag-6">
-      <a href="http://localhost:8000/tag/python.html">Python</a>
+      <a href="http://localhost:8000/tag/json.html">JSON</a>
     </li>
     <li class="list-group-item tag-6">
-      <a href="http://localhost:8000/tag/matplotlib.html">matplotlib</a>
+      <a href="http://localhost:8000/tag/pandas.html">pandas</a>
+    </li>
+    <li class="list-group-item tag-6">
+      <a href="http://localhost:8000/tag/data-structures.html">data structures</a>
     </li>
   </ul>
 </li>
@@ -146,7 +146,7 @@
   <h4><i class="fa fa-database fa-lg"></i><span class="icon-label">Archive</span></h4>
   <ul class="list-group" id="archive">
         <li class="list-group-item">
-          <a href="http://localhost:8000/2018/01/index.html"><i class="fa fa-calendar fa-lg"></i>January 2018 (5)
+          <a href="http://localhost:8000/2018/01/index.html"><i class="fa fa-calendar fa-lg"></i>January 2018 (4)
           </a>
         </li>
   </ul>
@@ -178,6 +178,10 @@
 <!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
 <script src="http://localhost:8000/theme/js/respond.min.js"></script>
 
+
+    <div class="prompt"> </div>
+
+    <div class="prompt input_prompt">  </div>
 
     <script src="http://localhost:8000/theme/js/bodypadding.js"></script>
     <!-- Disqus -->
@@ -211,17 +215,6 @@ div.prompt {
     font-size: 13px;
 }
 
-div.input_prompt {
-    padding: .7em 0.2em;
-}
-
-div.output_prompt {
-    padding: .4em .2em;
-}
-
-div.input_area {
-    margin: .2em 0.4em;
-}
 
 table.dataframe {
     font-family: Arial, sans-serif;

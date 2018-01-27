@@ -17,7 +17,8 @@ DISQUS_SITENAME = 'codingdisciple'
 #Custom CSS in templates/ipynb.css, injected into base.html
 #Edited sidebar title icons, see templates/includes/sidebar
 #Injected code into article_list.html for category descriptions
-#Maybe inject {{ article.date.strftime("%Y-%m-%d") }}:  to article_list.html
+#Edited article_list to remove article summary
+
 
 #Bootstrap specific settings
 THEME = "~pelican-themes/pelican-bootstrap3"
@@ -32,7 +33,7 @@ SOCIAL = (('linkedin', 'https://www.linkedin.com/in/seng-chu-338140142'),
           ('github', 'https://github.com/sengkchu'))
 
 #Bootstrap article settings
-SHOW_ARTICLE_CATEGORY = True
+DISPLAY_ARTICLE_INFO_ON_INDEX = True
 		  
 #Bootstrap sidebar tags settings		  
 DISPLAY_TAGS_ON_SIDEBAR = True
@@ -42,10 +43,11 @@ TAG_CLOUD_STEPS = 6
 TAG_CLOUD_SORTING = 'random'
 TAG_CLOUD_BADGE = True
 TAGS_URL = ''
+SIDEBAR_ON_LEFT = True
 
 #Bootstrap sidebar other settings
 DISPLAY_ARCHIVE_ON_SIDEBAR = True
-DISPLAY_RECENT_POSTS_ON_SIDEBAR = True
+DISPLAY_RECENT_POSTS_ON_SIDEBAR = False
 MONTH_ARCHIVE_SAVE_AS = '{date:%Y}/{date:%m}/index.html'
 RECENT_POST_COUNT = 4
 DIRECT_TEMPLATES = ['search']
@@ -59,7 +61,7 @@ HIDE_SITENAME = True
 #Bootstrap navbar options
 DISPLAY_PAGES_ON_MENU = True
 DISPLAY_CATEGORIES_ON_MENU = True
-MENUITEMS = [('About Me', 'http://localhost:8000/')]
+MENUITEMS = [('About me', 'http://localhost:8000/')]
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
@@ -78,7 +80,7 @@ IGNORE_FILES = ['.ipynb_checkpoints']
 #ADD GOOGLE ANALYTICS
 #ADD CREATIVE COMMONS
 #GOOGLE_ANALYTICS
-
+#NEED TO FIX notebook CSS in ipynb.css
 
 # Uncomment following line if you want document-relative URLs when developing
 #RELATIVE_URLS = True    #Don't know what these do
