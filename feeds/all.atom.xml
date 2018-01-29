@@ -4769,7 +4769,7 @@ Python functions and methods used: .read(), open(), .split(), .append(), int()&l
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
 &lt;/script&gt;
-</content><category term="python basics"></category></entry><entry><title>Web Scraping using Reddit's API to Pandas Dataframe</title><link href="/Web%20Scraping%20using%20Reddit's%20API%20to%20Pandas%20Dataframe.html" rel="alternate"></link><published>2018-01-26T00:00:00-08:00</published><updated>2018-01-26T00:00:00-08:00</updated><author><name>Seng Chu</name></author><id>tag:None,2018-01-26:/Web Scraping using Reddit's API to Pandas Dataframe.html</id><summary type="html">
+</content><category term="python basics"></category></entry><entry><title>Scraping Reddit Data to a Pandas Dataframe using an API</title><link href="/Scraping%20Reddit%20Data%20to%20a%20Pandas%20Dataframe%20using%20an%20API.html" rel="alternate"></link><published>2018-01-26T00:00:00-08:00</published><updated>2018-01-26T00:00:00-08:00</updated><author><name>Seng Chu</name></author><id>tag:None,2018-01-26:/Scraping Reddit Data to a Pandas Dataframe using an API.html</id><summary type="html">
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
