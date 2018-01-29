@@ -34,6 +34,7 @@ SOCIAL = (('linkedin', 'https://www.linkedin.com/in/seng-chu-338140142'),
 
 #Bootstrap article settings
 DISPLAY_ARTICLE_INFO_ON_INDEX = True
+SHOW_SERIES = True
 		  
 #Bootstrap sidebar tags settings		  
 DISPLAY_TAGS_ON_SIDEBAR = True
@@ -63,6 +64,14 @@ DISPLAY_PAGES_ON_MENU = True
 DISPLAY_CATEGORIES_ON_MENU = True
 MENUITEMS = [('About me', 'http://localhost:8000/')]
 
+#Google Analytics/Add this
+GOOGLE_ANALYTICS = 'UA-113145425-1'
+ADDTHIS_PROFILE = 'ra-5a6ece335d878db6'
+ADDTHIS_DATA_TRACK_ADDRESSBAR = False
+#SHARIFF = True
+#SHARIFF_ORIENTATION = 'vertical'
+#SHARIFF_LANG = 'en'
+
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
 CATEGORY_FEED_ATOM = None
@@ -73,14 +82,12 @@ AUTHOR_FEED_RSS = None
 MARKUP = ('md', 'ipynb')
 
 PLUGIN_PATH = './plugins'
-PLUGINS = ['i18n_subsites', 'ipynb.markup', 'tag_cloud', 'tipue_search']
+PLUGINS = ['i18n_subsites', 'ipynb.markup', 'tag_cloud', 'tipue_search', 'series']
 IGNORE_FILES = ['.ipynb_checkpoints']
 
 #TO DO
-#ADD GOOGLE ANALYTICS
 #ADD CREATIVE COMMONS
-#GOOGLE_ANALYTICS
-#NEED TO FIX notebook CSS in ipynb.css
+
 
 # Uncomment following line if you want document-relative URLs when developing
 #RELATIVE_URLS = True    #Don't know what these do

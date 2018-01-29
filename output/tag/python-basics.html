@@ -52,11 +52,14 @@
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
                     <li><a href="http://localhost:8000/">About me</a></li>
+                         <li><a href="http://localhost:8000/pages/timeline.html">
+                             Timeline
+                          </a></li>
                         <li >
                             <a href="http://localhost:8000/category/learning-data-science.html">Learning data science</a>
                         </li>
                         <li >
-                            <a href="http://localhost:8000/category/mentality-and-discipline.html">Mentality and discipline</a>
+                            <a href="http://localhost:8000/category/mentality.html">Mentality</a>
                         </li>
                         <li >
                             <a href="http://localhost:8000/category/projects.html">Projects</a>
@@ -92,6 +95,27 @@
     <div class="row">
         <div class="col-sm-9 col-sm-push-3">
             <article>
+                <h3><a href="http://localhost:8000/Exploring Gun Deaths in the US.html">Exploring Gun Deaths in the US</a></h3>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2018-01-27T00:00:00-08:00"> Sat 27 January 2018</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="http://localhost:8000/tag/python-basics.html">python basics</a>
+        /
+	<a href="http://localhost:8000/tag/data-analysis.html">data analysis</a>
+    
+</footer><!-- /.post-info -->                    </div>
+            </article>
+            <hr/>
+            <article>
                 <h3><a href="http://localhost:8000/Exploring U.S. Births.html">Exploring U.S. Births</a></h3>
                     <div class="well well-sm">
 <footer class="post-info">
@@ -111,7 +135,7 @@
             </article>
             <hr/>
             <article>
-                <h3><a href="http://localhost:8000/Web Scraping using Reddit's API.html">Web Scraping using Reddit's API</a></h3>
+                <h3><a href="http://localhost:8000/Web Scraping using Reddit's API to Pandas Dataframe.html">Web Scraping using Reddit's API to Pandas Dataframe</a></h3>
                     <div class="well well-sm">
 <footer class="post-info">
     <span class="label label-default">Date</span>
@@ -162,26 +186,23 @@
     <li class="list-group-item tag-1">
       <a href="http://localhost:8000/tag/python-basics.html">python basics</a>
     </li>
-    <li class="list-group-item tag-6">
-      <a href="http://localhost:8000/tag/web-scraping.html">web scraping</a>
+    <li class="list-group-item tag-2">
+      <a href="http://localhost:8000/tag/pandas.html">pandas</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="http://localhost:8000/tag/data-analysis.html">data analysis</a>
     </li>
     <li class="list-group-item tag-6">
-      <a href="http://localhost:8000/tag/learning-strategy.html">learning strategy</a>
+      <a href="http://localhost:8000/tag/data-structures.html">data structures</a>
+    </li>
+    <li class="list-group-item tag-6">
+      <a href="http://localhost:8000/tag/web-scraping.html">web scraping</a>
     </li>
     <li class="list-group-item tag-6">
       <a href="http://localhost:8000/tag/discipline.html">discipline</a>
     </li>
     <li class="list-group-item tag-6">
-      <a href="http://localhost:8000/tag/motivation.html">motivation</a>
-    </li>
-    <li class="list-group-item tag-6">
       <a href="http://localhost:8000/tag/json.html">JSON</a>
-    </li>
-    <li class="list-group-item tag-6">
-      <a href="http://localhost:8000/tag/pandas.html">pandas</a>
-    </li>
-    <li class="list-group-item tag-6">
-      <a href="http://localhost:8000/tag/data-structures.html">data structures</a>
     </li>
   </ul>
 </li>
@@ -192,7 +213,7 @@
   <h4><i class="fa fa-database fa-lg"></i><span class="icon-label">Archive</span></h4>
   <ul class="list-group" id="archive">
         <li class="list-group-item">
-          <a href="http://localhost:8000/2018/01/index.html"><i class="fa fa-calendar fa-lg"></i>January 2018 (2)
+          <a href="http://localhost:8000/2018/01/index.html"><i class="fa fa-calendar fa-lg"></i>January 2018 (3)
           </a>
         </li>
   </ul>
@@ -245,12 +266,29 @@
         }());
     </script>
     <!-- End Disqus Code -->
+    <!-- Google Analytics -->
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-113145425-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+    <!-- End Google Analytics Code -->
 <style type="text/css">.text_cell .prompt {
     display: none;
 }
 
 div.cell {
-    padding: 0;
+    padding-bottom: 0.6em;
 }
 
 div.text_cell_render {
@@ -270,7 +308,7 @@ table.dataframe {
 
 table.dataframe th, td {
     padding: 4px;
-    text-align: left;
+    text-align: center;
 }</style>
 
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>Exploring U.S. Births - Coding Disciple</title>
+    <title>Exploring Gun Deaths in the US - Coding Disciple</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -9,20 +9,21 @@
 
 
 
-<link rel="canonical" href="http://localhost:8000/Exploring U.S. Births.html">
+<link rel="canonical" href="http://localhost:8000/Exploring Gun Deaths in the US.html">
 
         <meta name="author" content="Seng Chu" />
-        <meta name="keywords" content="python basics" />
-        <meta name="description" content="In this project, we will look at the number of births in the United States in the file &#34;US_births_1994-2003_CDC_NCHS.csv&#34;. First, we will use basic functions in python to convert the file into a readable format and explore the data." />
+        <meta name="keywords" content="python basics,data analysis" />
+        <meta name="description" content="In this project we will look at the total number of gun deaths by race in the US in the file &#34;guns.csv&#34;. We will also use the US census (&#34;census.csv&#34;) to convert the total number of gun deaths to a perecentage by race. We will accomplish this by using basic functions in python to convert the files into a readable format and explore the data. In addition, we&#39;ll also work with list comprehension techniques and the datetime library." />
 
         <meta property="og:site_name" content="Coding Disciple" />
         <meta property="og:type" content="article"/>
-        <meta property="og:title" content="Exploring U.S. Births"/>
-        <meta property="og:url" content="http://localhost:8000/Exploring U.S. Births.html"/>
-        <meta property="og:description" content="In this project, we will look at the number of births in the United States in the file &#34;US_births_1994-2003_CDC_NCHS.csv&#34;. First, we will use basic functions in python to convert the file into a readable format and explore the data."/>
-        <meta property="article:published_time" content="2018-01-26" />
+        <meta property="og:title" content="Exploring Gun Deaths in the US"/>
+        <meta property="og:url" content="http://localhost:8000/Exploring Gun Deaths in the US.html"/>
+        <meta property="og:description" content="In this project we will look at the total number of gun deaths by race in the US in the file &#34;guns.csv&#34;. We will also use the US census (&#34;census.csv&#34;) to convert the total number of gun deaths to a perecentage by race. We will accomplish this by using basic functions in python to convert the files into a readable format and explore the data. In addition, we&#39;ll also work with list comprehension techniques and the datetime library."/>
+        <meta property="article:published_time" content="2018-01-27" />
             <meta property="article:section" content="Learning Data Science" />
             <meta property="article:tag" content="python basics" />
+            <meta property="article:tag" content="data analysis" />
             <meta property="article:author" content="Seng Chu" />
 
 
@@ -103,10 +104,10 @@
         <article>
             <header class="page-header">
                 <h1>
-                    <a href="http://localhost:8000/Exploring U.S. Births.html"
+                    <a href="http://localhost:8000/Exploring Gun Deaths in the US.html"
                        rel="bookmark"
-                       title="Permalink to Exploring U.S. Births">
-                        Exploring U.S. Births
+                       title="Permalink to Exploring Gun Deaths in the US">
+                        Exploring Gun Deaths in the US
                     </a>
                 </h1>
             </header>
@@ -116,7 +117,7 @@
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2018-01-26T00:00:00-08:00"> Fri 26 January 2018</time>
+        <i class="fa fa-calendar"></i><time datetime="2018-01-27T00:00:00-08:00"> Sat 27 January 2018</time>
     </span>
 
 
@@ -125,6 +126,8 @@
 
 <span class="label label-default">Tags</span>
 	<a href="http://localhost:8000/tag/python-basics.html">python basics</a>
+        /
+	<a href="http://localhost:8000/tag/data-analysis.html">data analysis</a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
@@ -1104,7 +1107,7 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In this project, we will look at the number of births in the United States in the file "US_births_1994-2003_CDC_NCHS.csv". First, we will use basic functions in python to convert the file into a readable format and explore the data.</p>
+<p>In this project we will look at the total number of gun deaths by race in the US in the file "guns.csv". We will also use the US census ("census.csv") to convert the total number of gun deaths to a perecentage by race. We will accomplish this by using basic functions in python to convert the files into a readable format and explore the data. In addition, we'll also work with list comprehension techniques and the datetime library.</p>
 </div>
 </div>
 </div>
@@ -1113,12 +1116,13 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [1]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Opens the file and read it.</span>
-<span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"US_births_1994-2003_CDC_NCHS.csv"</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Converts the csv file into a list of lists</span>
+<span class="kn">import</span> <span class="nn">csv</span>
+<span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"guns.csv"</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span>
+<span class="n">temp</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
 
-<span class="c1">#Prints the first 400 characters.</span>
-<span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">400</span><span class="p">]</span>
+<span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1128,7 +1132,29 @@ h6:hover .anchor-link {
 <div class="output_area">
 <div class="prompt output_prompt">Out[1]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>'year,month,date_of_month,day_of_week,births\n1994,1,1,6,8096\n1994,1,2,7,7772\n1994,1,3,1,10142\n1994,1,4,2,11248\n1994,1,5,3,11053\n1994,1,6,4,11406\n1994,1,7,5,11251\n1994,1,8,6,8653\n1994,1,9,7,7910\n1994,1,10,1,10498\n1994,1,11,2,11706\n1994,1,12,3,11567\n1994,1,13,4,11212\n1994,1,14,5,11570\n1994,1,15,6,8660\n1994,1,16,7,8123\n1994,1,17,1,10567\n1994,1,18,2,11541\n1994,1,19,3,11257\n1994,1,20,4,11682\n1994,1,21,5'</pre>
+<pre>[['',
+  'year',
+  'month',
+  'intent',
+  'police',
+  'sex',
+  'age',
+  'race',
+  'hispanic',
+  'place',
+  'education'],
+ ['1',
+  '2012',
+  '01',
+  'Suicide',
+  '0',
+  'M',
+  '34',
+  'Asian/Pacific Islander',
+  '100',
+  'Home',
+  '4'],
+ ['2', '2012', '01', 'Suicide', '0', 'F', '21', 'White', '100', 'Street', '3']]</pre>
 </div>
 </div>
 </div>
@@ -1138,7 +1164,7 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>It looks like each entry in the data is seperated by "\n". Let's create a list with the variable "births" and seperate each item in the list by \n. We can accomplish this by using the built in .split() function in python.</p>
+<p>The csv module didn't remove the headers for us, but it did convert the file into a list of lists which is the format we are looking for. We can use list slicing techniques remove the header and store it as a seperate variable "headers".</p>
 </div>
 </div>
 </div>
@@ -1147,66 +1173,11 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [2]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">births</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
-<span class="n">births</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[2]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>['year,month,date_of_month,day_of_week,births',
- '1994,1,1,6,8096',
- '1994,1,2,7,7772',
- '1994,1,3,1,10142',
- '1994,1,4,2,11248',
- '1994,1,5,3,11053',
- '1994,1,6,4,11406',
- '1994,1,7,5,11251',
- '1994,1,8,6,8653',
- '1994,1,9,7,7910']</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>This is still not quite what we want, each element in the list contains information on the year, month, day, day of the week, and births. We want to further break down each element in the list. We can accomplish this creating a list of lists.</p>
-<p>In addition, we want to write a generic function that can convert any csv file into this format.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [3]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">read_csv</span><span class="p">(</span><span class="n">inputs</span><span class="p">):</span>
-    <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-    <span class="n">string_list</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
-    <span class="c1">#Remove the headers.</span>
-    <span class="n">string_list</span> <span class="o">=</span> <span class="n">string_list</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
-    
-    <span class="c1">#Splits each list element by ',' and append it to the final list.</span>
-    <span class="n">final_list</span> <span class="o">=</span> <span class="p">[]</span>   
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">string_list</span><span class="p">:</span>
-        <span class="n">int_fields</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">string_fields</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">","</span><span class="p">)</span>
-        <span class="c1">#Converts each string to an integer.</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">string_fields</span><span class="p">:</span>
-            <span class="n">int_fields</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
-        <span class="n">final_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">int_fields</span><span class="p">)</span>   
-    <span class="k">return</span> <span class="n">final_list</span>
-
-<span class="n">cdc_list</span> <span class="o">=</span> <span class="n">read_csv</span><span class="p">(</span><span class="s2">"US_births_1994-2003_CDC_NCHS.csv"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">cdc_list</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">headers</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">headers</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"-------------------------------------"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -1216,7 +1187,9 @@ h6:hover .anchor-link {
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>[[1994, 1, 1, 6, 8096], [1994, 1, 2, 7, 7772], [1994, 1, 3, 1, 10142], [1994, 1, 4, 2, 11248], [1994, 1, 5, 3, 11053], [1994, 1, 6, 4, 11406], [1994, 1, 7, 5, 11251], [1994, 1, 8, 6, 8653], [1994, 1, 9, 7, 7910], [1994, 1, 10, 1, 10498]]
+<pre>[['', 'year', 'month', 'intent', 'police', 'sex', 'age', 'race', 'hispanic', 'place', 'education']]
+-------------------------------------
+[['1', '2012', '01', 'Suicide', '0', 'M', '34', 'Asian/Pacific Islander', '100', 'Home', '4'], ['2', '2012', '01', 'Suicide', '0', 'F', '21', 'White', '100', 'Street', '3'], ['3', '2012', '01', 'Suicide', '0', 'M', '60', 'White', '100', 'Other specified', '4'], ['4', '2012', '02', 'Suicide', '0', 'M', '64', 'White', '100', 'Home', '4'], ['5', '2012', '02', 'Suicide', '0', 'M', '31', 'White', '100', 'Other specified', '2']]
 </pre>
 </div>
 </div>
@@ -1227,8 +1200,40 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now that we have the list in the format we want, we can explore the data a little bit. Let's say we are a baby products company, and we want to know if there is a particular month when more babies will be born. If that is the case, we can produce more products in preparation for that month.</p>
-<p>We can write a function that takes the list of lists as an argument and then convert it into a dictionary with each month as the dictionary key and the number of births as the value of that key.</p>
+<p>Now that the data is in a more readable format , we can begin analyzing the data. The first column is unlabeled, but the values in this column is increases by 1 for every list entry. We can assume that this is the ID column.</p>
+<p>Suppose we are the government and we are interested to see the total number of gun deaths every year. This might give us an idea of how our current gun regulations are doing. We can accomplish this by creating a dictionary and assigning each year to a key and the number of deaths as the value.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [3]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Extracts the 'year' column from the list of lists</span>
+<span class="n">years</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">years</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>['2012', '2012', '2012', '2012', '2012', '2012', '2012', '2012', '2012', '2012']
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Next we can use a for loop to create a counter in order to populate the dictionary.</p>
 </div>
 </div>
 </div>
@@ -1237,24 +1242,13 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [4]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">month_births</span><span class="p">(</span><span class="n">inputs</span><span class="p">):</span>
-    <span class="n">births_per_month</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="c1">#Loops through the list of lists.</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">inputs</span><span class="p">:</span>
-        <span class="c1">#Sets the month as the first item, and births as the last item.</span>
-        <span class="n">month</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">births</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="c1">#Add the number of births to the current value, if the key exists in the dictionary.</span>
-        <span class="k">if</span> <span class="n">month</span> <span class="ow">in</span> <span class="n">births_per_month</span><span class="p">:</span>
-            <span class="n">births_per_month</span><span class="p">[</span><span class="n">month</span><span class="p">]</span> <span class="o">=</span> <span class="n">births</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">births_per_month</span><span class="p">[</span><span class="n">month</span><span class="p">])</span>
-        <span class="c1">#Set the key equal to the value, if the key doesn't exist in teh dictionary.</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">births_per_month</span><span class="p">[</span><span class="n">month</span><span class="p">]</span> <span class="o">=</span> <span class="n">births</span>           
-    <span class="k">return</span> <span class="n">births_per_month</span>
-
-<span class="c1">#The result is a dictionary with the month as the key and the number of births as values.</span>
-<span class="n">cdc_month_births</span> <span class="o">=</span> <span class="n">month_births</span><span class="p">(</span><span class="n">cdc_list</span><span class="p">)</span>
-<span class="n">cdc_month_births</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">year_counts</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">years</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">year_counts</span><span class="p">:</span>
+        <span class="n">year_counts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">year_counts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">year_counts</span>
 </pre></div>
 </div>
 </div>
@@ -1264,18 +1258,7 @@ h6:hover .anchor-link {
 <div class="output_area">
 <div class="prompt output_prompt">Out[4]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>{1: 3232517,
- 2: 3018140,
- 3: 3322069,
- 4: 3185314,
- 5: 3350907,
- 6: 3296530,
- 7: 3498783,
- 8: 3525858,
- 9: 3439698,
- 10: 3378814,
- 11: 3171647,
- 12: 3301860}</pre>
+<pre>{'2012': 33563, '2013': 33636, '2014': 33599}</pre>
 </div>
 </div>
 </div>
@@ -1285,8 +1268,8 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Looks like the total number births from 1994 - 2003 in August ended up to be the highest. However, the number might not be high enough to justify increased production of baby products.</p>
-<p>Let's repeat the process of what we just did above for the day of the week instead of month. We'll write a function that takes in the list of lists as an argument and generate a dictionary with day of the week as the key and number of births as the value. This will give us a count of the total number of births from 1994-2003 for each day of the week</p>
+<p>It looks like the total number of deaths from 2012 to 2014 are relatively close to each other.</p>
+<p>Let's break it down even more, we want to look at each month of each year and calculate the total number of gun deaths. Right now the year and month columns are in the string format. We can create a new dictionary and populate it with the month of each year as the key.</p>
 </div>
 </div>
 </div>
@@ -1295,21 +1278,17 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [5]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">dow_births</span><span class="p">(</span><span class="n">inputs</span><span class="p">):</span>
-    <span class="n">births_dow</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">inputs</span><span class="p">:</span>
-        <span class="n">dow</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
-        <span class="n">births</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">dow</span> <span class="ow">in</span> <span class="n">births_dow</span><span class="p">:</span>
-            <span class="n">births_dow</span><span class="p">[</span><span class="n">dow</span><span class="p">]</span> <span class="o">=</span> <span class="n">births</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">births_dow</span><span class="p">[</span><span class="n">dow</span><span class="p">])</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">births_dow</span><span class="p">[</span><span class="n">dow</span><span class="p">]</span> <span class="o">=</span> <span class="n">births</span>           
-    <span class="k">return</span> <span class="n">births_dow</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">datetime</span>
 
-
-
-<span class="n">cdc_day_births</span> <span class="o">=</span> <span class="n">dow_births</span><span class="p">(</span><span class="n">cdc_list</span><span class="p">)</span>
-<span class="n">cdc_day_births</span>
+<span class="c1">#The day is not specified in our data, this value will be assignedd as 1.</span>
+<span class="n">dates</span> <span class="o">=</span> <span class="p">[</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">month</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span> <span class="n">day</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
+<span class="n">date_counts</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">dates</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">date_counts</span><span class="p">:</span>
+        <span class="n">date_counts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">date_counts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">date_counts</span>
 </pre></div>
 </div>
 </div>
@@ -1319,13 +1298,42 @@ h6:hover .anchor-link {
 <div class="output_area">
 <div class="prompt output_prompt">Out[5]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>{1: 5789166,
- 2: 6446196,
- 3: 6322855,
- 4: 6288429,
- 5: 6233657,
- 6: 4562111,
- 7: 4079723}</pre>
+<pre>{datetime.datetime(2012, 1, 1, 0, 0): 2758,
+ datetime.datetime(2012, 2, 1, 0, 0): 2357,
+ datetime.datetime(2012, 3, 1, 0, 0): 2743,
+ datetime.datetime(2012, 4, 1, 0, 0): 2795,
+ datetime.datetime(2012, 5, 1, 0, 0): 2999,
+ datetime.datetime(2012, 6, 1, 0, 0): 2826,
+ datetime.datetime(2012, 7, 1, 0, 0): 3026,
+ datetime.datetime(2012, 8, 1, 0, 0): 2954,
+ datetime.datetime(2012, 9, 1, 0, 0): 2852,
+ datetime.datetime(2012, 10, 1, 0, 0): 2733,
+ datetime.datetime(2012, 11, 1, 0, 0): 2729,
+ datetime.datetime(2012, 12, 1, 0, 0): 2791,
+ datetime.datetime(2013, 1, 1, 0, 0): 2864,
+ datetime.datetime(2013, 2, 1, 0, 0): 2375,
+ datetime.datetime(2013, 3, 1, 0, 0): 2862,
+ datetime.datetime(2013, 4, 1, 0, 0): 2798,
+ datetime.datetime(2013, 5, 1, 0, 0): 2806,
+ datetime.datetime(2013, 6, 1, 0, 0): 2920,
+ datetime.datetime(2013, 7, 1, 0, 0): 3079,
+ datetime.datetime(2013, 8, 1, 0, 0): 2859,
+ datetime.datetime(2013, 9, 1, 0, 0): 2742,
+ datetime.datetime(2013, 10, 1, 0, 0): 2808,
+ datetime.datetime(2013, 11, 1, 0, 0): 2758,
+ datetime.datetime(2013, 12, 1, 0, 0): 2765,
+ datetime.datetime(2014, 1, 1, 0, 0): 2651,
+ datetime.datetime(2014, 2, 1, 0, 0): 2361,
+ datetime.datetime(2014, 3, 1, 0, 0): 2684,
+ datetime.datetime(2014, 4, 1, 0, 0): 2862,
+ datetime.datetime(2014, 5, 1, 0, 0): 2864,
+ datetime.datetime(2014, 6, 1, 0, 0): 2931,
+ datetime.datetime(2014, 7, 1, 0, 0): 2884,
+ datetime.datetime(2014, 8, 1, 0, 0): 2970,
+ datetime.datetime(2014, 9, 1, 0, 0): 2914,
+ datetime.datetime(2014, 10, 1, 0, 0): 2865,
+ datetime.datetime(2014, 11, 1, 0, 0): 2756,
+ datetime.datetime(2014, 12, 1, 0, 0): 2857}</pre>
 </div>
 </div>
 </div>
@@ -1335,8 +1343,7 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>According to the international standard ISO-8601, the International Organization for Standardization (ISO) has decreed that Monday shall be the first day of the week. So it looks like the highest total amount of births from 1994 - 2003 is actually a Tuesday.</p>
-<p>We can repeat the process again. We'll write a function that takes in the list of lists as an argument and generate a dictionary with year as the key and number of births as the value. This time, the function will be a bit more generic. The function will take in two arguments, the data and the column index. A column index of 0 will refer to the year column, whereas a column index of 1 will refer to the month and so on. That way we can quickly generate dictionary of all the birth counts.</p>
+<p>We can repeat the process above and break down the data by sex.</p>
 </div>
 </div>
 </div>
@@ -1345,20 +1352,14 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [6]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">calc_counts</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">column</span><span class="p">):</span>
-    <span class="n">dictionary</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
-        <span class="n">column_name</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="n">column</span><span class="p">]</span>
-        <span class="n">births</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">column_name</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="n">column_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">births</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="n">column_name</span><span class="p">])</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="n">column_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">births</span>
-            
-    <span class="k">return</span> <span class="n">dictionary</span>
-
-<span class="n">cdc_year_births</span> <span class="o">=</span> <span class="n">calc_counts</span><span class="p">(</span><span class="n">cdc_list</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-<span class="n">cdc_year_births</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sex</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
+<span class="n">sex_counts</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">sex</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">sex_counts</span><span class="p">:</span>
+        <span class="n">sex_counts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">sex_counts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sex_counts</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1366,18 +1367,10 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[6]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>{1994: 3952767,
- 1995: 3899589,
- 1996: 3891494,
- 1997: 3880894,
- 1998: 3941553,
- 1999: 3959417,
- 2000: 4058814,
- 2001: 4025933,
- 2002: 4021726,
- 2003: 4089950}</pre>
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>{'M': 86349, 'F': 14449}
+</pre>
 </div>
 </div>
 </div>
@@ -1387,8 +1380,8 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>It looks like the number of births in the US is increasing every year.</p>
-<p>Lastly, we'll use the same function again to look at the total number of births in each day of the month</p>
+<p>It looks like there are significantly more males gun deaths than females.</p>
+<p>We use the similar for loop to break down the data by race.</p>
 </div>
 </div>
 </div>
@@ -1397,8 +1390,14 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [7]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cdc_day_births</span> <span class="o">=</span> <span class="n">calc_counts</span><span class="p">(</span><span class="n">cdc_list</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">cdc_day_births</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">race</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
+<span class="n">race_counts</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">race</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">race_counts</span><span class="p">:</span>
+        <span class="n">race_counts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">race_counts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">race_counts</span>
 </pre></div>
 </div>
 </div>
@@ -1408,37 +1407,11 @@ h6:hover .anchor-link {
 <div class="output_area">
 <div class="prompt output_prompt">Out[7]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>{1: 1276557,
- 2: 1288739,
- 3: 1304499,
- 4: 1288154,
- 5: 1299953,
- 6: 1304474,
- 7: 1310459,
- 8: 1312297,
- 9: 1303292,
- 10: 1320764,
- 11: 1314361,
- 12: 1318437,
- 13: 1277684,
- 14: 1320153,
- 15: 1319171,
- 16: 1315192,
- 17: 1324953,
- 18: 1326855,
- 19: 1318727,
- 20: 1324821,
- 21: 1322897,
- 22: 1317381,
- 23: 1293290,
- 24: 1288083,
- 25: 1272116,
- 26: 1284796,
- 27: 1294395,
- 28: 1307685,
- 29: 1223161,
- 30: 1202095,
- 31: 746696}</pre>
+<pre>{'Asian/Pacific Islander': 1326,
+ 'Black': 23296,
+ 'Hispanic': 9022,
+ 'Native American/Native Alaskan': 917,
+ 'White': 66237}</pre>
 </div>
 </div>
 </div>
@@ -1448,7 +1421,65 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We are not really seeing any patterns here other than the 31st day having signficantly less number of births compared to the rest of the days in the month. This makes sense as not every month have 31 days.</p>
+<p>It looks like whites have highest total number of gun deaths. However, there are significantly higher number of whites in the US than all the other groups. We need population data that can give us the total population of each race.</p>
+<p>We will need to look at census data "census.csv".</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [8]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">f2</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"census.csv"</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span>
+<span class="n">temp2</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">f2</span><span class="p">)</span>
+<span class="n">census</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">temp2</span><span class="p">)</span>
+<span class="n">census</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[8]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>[['Id',
+  'Year',
+  'Id',
+  'Sex',
+  'Id',
+  'Hispanic Origin',
+  'Id',
+  'Id2',
+  'Geography',
+  'Total',
+  'Race Alone - White',
+  'Race Alone - Hispanic',
+  'Race Alone - Black or African American',
+  'Race Alone - American Indian and Alaska Native',
+  'Race Alone - Asian',
+  'Race Alone - Native Hawaiian and Other Pacific Islander',
+  'Two or More Races'],
+ ['cen42010',
+  'April 1, 2010 Census',
+  'totsex',
+  'Both Sexes',
+  'tothisp',
+  'Total',
+  '0100000US',
+  '',
+  'United States',
+  '308745538',
+  '197318956',
+  '44618105',
+  '40250635',
+  '3739506',
+  '15159516',
+  '674625',
+  '6984195']]</pre>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -1456,10 +1487,128 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p>We are going to create a dictionary of the total population of each race. We'll have to create it this dictionary manually using the data printed above. Next we'll create a another dictionary with each race as the key and the rate of gun deaths per 100,000 people.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [9]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">mapping</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">mapping</span><span class="p">[</span><span class="s1">'Asian/Pacific Islander'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">674625</span><span class="o">+</span><span class="mi">6984195</span>
+<span class="n">mapping</span><span class="p">[</span><span class="s1">'Black'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">44618105</span>
+<span class="n">mapping</span><span class="p">[</span><span class="s1">'Hispanic'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">44618105</span>
+<span class="n">mapping</span><span class="p">[</span><span class="s1">'Native American/Native Alaskan'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">15159516</span>
+<span class="n">mapping</span><span class="p">[</span><span class="s1">'White'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">197318956</span>
+
+<span class="n">race_per_hundredk</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="c1">#We can iterate both the key and the value in a dictionary using .items()</span>
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="p">(</span><span class="n">race_counts</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>    
+    <span class="n">race_per_hundredk</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="o">*</span><span class="mi">100000</span><span class="o">/</span><span class="n">mapping</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+<span class="n">race_per_hundredk</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[9]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>{'Asian/Pacific Islander': 17.313372033811998,
+ 'Black': 52.21198883278436,
+ 'Hispanic': 20.220491210910907,
+ 'Native American/Native Alaskan': 6.049005786200562,
+ 'White': 33.56849303419181}</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>It looks like the category 'black' have the highest rate of gun deaths. Let's look filter the further and look at the rate of gun deaths by homicide.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [10]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">intent</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
+
+<span class="n">races</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
+<span class="n">homicide_race_counts</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="c1">#We can iterate over both the index and the element in the list using the enumerate() function</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">rac</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">races</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">intent</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'Homicide'</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">rac</span> <span class="ow">in</span> <span class="n">homicide_race_counts</span><span class="p">:</span>
+            <span class="n">homicide_race_counts</span><span class="p">[</span><span class="n">rac</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">homicide_race_counts</span><span class="p">[</span><span class="n">rac</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+            
+<span class="n">homicide_race_counts</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[10]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>{'Asian/Pacific Islander': 559,
+ 'Black': 19510,
+ 'Hispanic': 5634,
+ 'Native American/Native Alaskan': 326,
+ 'White': 9147}</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [11]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">homicide_race_per_hundredk</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="p">(</span><span class="n">homicide_race_counts</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>    
+    <span class="n">homicide_race_per_hundredk</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="o">*</span><span class="mi">100000</span><span class="o">/</span><span class="n">mapping</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+<span class="n">homicide_race_per_hundredk</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[11]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>{'Asian/Pacific Islander': 7.298774484842313,
+ 'Black': 43.7266441503959,
+ 'Hispanic': 12.627161104219912,
+ 'Native American/Native Alaskan': 2.1504644343526533,
+ 'White': 4.6356417981453335}</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>It appears that the rate of gun deaths by homicide are highest in the 'black' and 'hispanic' racial categories.</p>
 <hr />
-<h4 id="Learning-Summary">Learning Summary<a class="anchor-link" href="#Learning-Summary">¶</a></h4><p>Python concepts explored: lists, dictionaries, functions, for loops<br />
-Python functions and methods used: .read(), open(), .split(), .append(), int()</p>
-<p>The files used for this project can be found in my <a href="https://github.com/sengkchu/Dataquest-Guided-Projects-Solutions/tree/master/Guided%20Project_%20Explore%20U.S.%20Births">GitHub repository</a>.</p>
+<h4 id="Learning-Summary">Learning Summary<a class="anchor-link" href="#Learning-Summary">¶</a></h4><p>Python concepts explored: list comprehension, datetime module, csv module<br />
+Python functions and methods used: csv.reader(), .items(), list(), datetime.datetime()</p>
+<p>The files used for this project can be found in my <a href="https://github.com/sengkchu/Dataquest-Guided-Projects-Solutions/blob/master/Guided%20Project_%20Exploring%20Gun%20Deaths%20in%20the%20US/">GitHub repository</a>.</p>
 </div>
 </div>
 </div>
@@ -1512,8 +1661,8 @@ Python functions and methods used: .read(), open(), .split(), .append(), int()</
             /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
             var disqus_shortname = 'codingdisciple'; // required: replace example with your forum shortname
 
-                    var disqus_identifier = 'Exploring U.S. Births';
-                var disqus_url = 'http://localhost:8000/Exploring U.S. Births.html';
+                    var disqus_identifier = 'Exploring Gun Deaths in the US';
+                var disqus_url = 'http://localhost:8000/Exploring Gun Deaths in the US.html';
 
             var disqus_config = function () {
                 this.language = "en";
