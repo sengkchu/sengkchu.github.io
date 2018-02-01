@@ -4669,7 +4669,7 @@ Name: 0, dtype: object&lt;/pre&gt;
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
 &lt;/script&gt;
-</content><category term="pandas"></category><category term="data analysis"></category></entry><entry><title>Analyzing Thanksgiving Dinner</title><link href="/Analyzing%20Thanksgiving%20Dinner.html" rel="alternate"></link><published>2018-01-28T00:00:00-08:00</published><updated>2018-01-28T00:00:00-08:00</updated><author><name>Seng Chu</name></author><id>tag:None,2018-01-28:/Analyzing Thanksgiving Dinner.html</id><summary type="html">
+</content><category term="pandas"></category><category term="data analysis"></category><category term="data visualization"></category></entry><entry><title>Analyzing Thanksgiving Dinner</title><link href="/Analyzing%20Thanksgiving%20Dinner.html" rel="alternate"></link><published>2018-01-28T00:00:00-08:00</published><updated>2018-01-28T00:00:00-08:00</updated><author><name>Seng Chu</name></author><id>tag:None,2018-01-28:/Analyzing Thanksgiving Dinner.html</id><summary type="html">
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
