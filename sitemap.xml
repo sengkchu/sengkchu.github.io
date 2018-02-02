@@ -4,77 +4,77 @@ xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitem
 xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
-<loc>/</loc>
-<lastmod>2018-02-01T20:28:17-00:00</lastmod>
+<loc>https://codingdisciple.com/</loc>
+<lastmod>2018-02-01T20:36:40-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>/pages/timeline.html</loc>
+<loc>https://codingdisciple.com/pages/timeline.html</loc>
 <lastmod>2018-01-26T00:00:00-08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>/</loc>
+<loc>https://codingdisciple.com/</loc>
 <lastmod>2018-01-26T00:00:00-08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>/Visualizing-College-Degrees-Gender-Gap.html</loc>
+<loc>https://codingdisciple.com/Visualizing-College-Degrees-Gender-Gap.html</loc>
 <lastmod>2018-01-31T00:00:00-08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>/Visualizing-College-Majors-Earnings.html</loc>
+<loc>https://codingdisciple.com/Visualizing-College-Majors-Earnings.html</loc>
 <lastmod>2018-01-30T00:00:00-08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>/Analyzing-Thanksgiving-Dinner.html</loc>
+<loc>https://codingdisciple.com/Analyzing-Thanksgiving-Dinner.html</loc>
 <lastmod>2018-01-28T00:00:00-08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>/Discipline-vs.-Motivation.html</loc>
+<loc>https://codingdisciple.com/Discipline-vs.-Motivation.html</loc>
 <lastmod>2018-01-27T00:00:00-08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>/Exploring-U.S.-Gun-Deaths.html</loc>
+<loc>https://codingdisciple.com/Exploring-U.S.-Gun-Deaths.html</loc>
 <lastmod>2018-01-27T00:00:00-08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>/Exploring-U.S.-Births.html</loc>
+<loc>https://codingdisciple.com/Exploring-U.S.-Births.html</loc>
 <lastmod>2018-01-26T00:00:00-08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>/Scraping-Reddit-Data-Pandas-Dataframe.html</loc>
+<loc>https://codingdisciple.com/Scraping-Reddit-Data-Pandas-Dataframe.html</loc>
 <lastmod>2018-01-26T00:00:00-08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>/author/seng-chu.html</loc>
+<loc>https://codingdisciple.com/author/seng-chu.html</loc>
 <lastmod>2018-01-31T00:00:00-07:53</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
