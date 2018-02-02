@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>Exploring Gun Deaths in the US - Coding Disciple</title>
+    <title>Analyzing Thanksgiving Dinner - Coding Disciple</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -9,20 +9,20 @@
 
 
 
-<link rel="canonical" href="/Exploring Gun Deaths in the US.html">
+<link rel="canonical" href="/Analyzing-Thanksgiving-Dinner.html">
 
         <meta name="author" content="Seng Chu" />
-        <meta name="keywords" content="python basics,data analysis" />
-        <meta name="description" content="In this project we will look at the total number of gun deaths by race in the US in the file &#34;guns.csv&#34;. We will also use the US census (&#34;census.csv&#34;) to convert the total number of gun deaths to a perecentage by race. We will accomplish this by using basic functions in python to convert the files into a readable format and explore the data. In addition, we&#39;ll also work with list comprehension techniques and the datetime library." />
+        <meta name="keywords" content="pandas,data analysis" />
+        <meta name="description" content="In this project we will analyze data on Thanksgiving dinner in the US. We&#39;ll be working with the pandas library. We will convert the &#34;thanksgiving.csv&#34; file into a dataframe using pandas. In addition we&#39;ll use several basic functions in pandas to explore the data." />
 
         <meta property="og:site_name" content="Coding Disciple" />
         <meta property="og:type" content="article"/>
-        <meta property="og:title" content="Exploring Gun Deaths in the US"/>
-        <meta property="og:url" content="/Exploring Gun Deaths in the US.html"/>
-        <meta property="og:description" content="In this project we will look at the total number of gun deaths by race in the US in the file &#34;guns.csv&#34;. We will also use the US census (&#34;census.csv&#34;) to convert the total number of gun deaths to a perecentage by race. We will accomplish this by using basic functions in python to convert the files into a readable format and explore the data. In addition, we&#39;ll also work with list comprehension techniques and the datetime library."/>
-        <meta property="article:published_time" content="2018-01-27" />
+        <meta property="og:title" content="Analyzing Thanksgiving Dinner"/>
+        <meta property="og:url" content="/Analyzing-Thanksgiving-Dinner.html"/>
+        <meta property="og:description" content="In this project we will analyze data on Thanksgiving dinner in the US. We&#39;ll be working with the pandas library. We will convert the &#34;thanksgiving.csv&#34; file into a dataframe using pandas. In addition we&#39;ll use several basic functions in pandas to explore the data."/>
+        <meta property="article:published_time" content="2018-01-28" />
             <meta property="article:section" content="Learning Data Science" />
-            <meta property="article:tag" content="python basics" />
+            <meta property="article:tag" content="pandas" />
             <meta property="article:tag" content="data analysis" />
             <meta property="article:author" content="Seng Chu" />
 
@@ -108,10 +108,10 @@
         <article>
             <header class="page-header">
                 <h1>
-                    <a href="/Exploring Gun Deaths in the US.html"
+                    <a href="/Analyzing-Thanksgiving-Dinner.html"
                        rel="bookmark"
-                       title="Permalink to Exploring Gun Deaths in the US">
-                        Exploring Gun Deaths in the US
+                       title="Permalink to Analyzing Thanksgiving Dinner">
+                        Analyzing Thanksgiving Dinner
                     </a>
                 </h1>
             </header>
@@ -121,7 +121,7 @@
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2018-01-27T00:00:00-08:00"> Sat 27 January 2018</time>
+        <i class="fa fa-calendar"></i><time datetime="2018-01-28T00:00:00-08:00"> Sun 28 January 2018</time>
     </span>
 
 
@@ -129,7 +129,7 @@
 
 
 <span class="label label-default">Tags</span>
-	<a href="/tag/python-basics.html">python basics</a>
+	<a href="/tag/pandas.html">pandas</a>
         /
 	<a href="/tag/data-analysis.html">data analysis</a>
     
@@ -1111,7 +1111,7 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In this project we will look at the total number of gun deaths by race in the US in the file "guns.csv". We will also use the US census ("census.csv") to convert the total number of gun deaths to a perecentage by race. We will accomplish this by using basic functions in python to convert the files into a readable format and explore the data. In addition, we'll also work with list comprehension techniques and the datetime library.</p>
+<p>In this project we will analyze data on Thanksgiving dinner in the US. We'll be working with the pandas library. We will convert the "thanksgiving.csv" file into a dataframe using pandas. In addition we'll use several basic functions in pandas to explore the data.</p>
 </div>
 </div>
 </div>
@@ -1120,55 +1120,11 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [1]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Converts the csv file into a list of lists</span>
-<span class="kn">import</span> <span class="nn">csv</span>
-<span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"guns.csv"</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span>
-<span class="n">temp</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
-<span class="n">data</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
-
-<span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Import pandas and read the data.</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"thanksgiving.csv"</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span><span class="s2">"Latin-1"</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[1]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>[['',
-  'year',
-  'month',
-  'intent',
-  'police',
-  'sex',
-  'age',
-  'race',
-  'hispanic',
-  'place',
-  'education'],
- ['1',
-  '2012',
-  '01',
-  'Suicide',
-  '0',
-  'M',
-  '34',
-  'Asian/Pacific Islander',
-  '100',
-  'Home',
-  '4'],
- ['2', '2012', '01', 'Suicide', '0', 'F', '21', 'White', '100', 'Street', '3']]</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>The csv module didn't remove the headers for us, but it did convert the file into a list of lists which is the format we are looking for. We can use list slicing techniques remove the header and store it as a seperate variable "headers".</p>
 </div>
 </div>
 </div>
@@ -1177,11 +1133,9 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [2]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">headers</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">headers</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"-------------------------------------"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Print the column names.</span>
+<span class="n">col</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">columns</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1191,21 +1145,72 @@ h6:hover .anchor-link {
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>[['', 'year', 'month', 'intent', 'police', 'sex', 'age', 'race', 'hispanic', 'place', 'education']]
--------------------------------------
-[['1', '2012', '01', 'Suicide', '0', 'M', '34', 'Asian/Pacific Islander', '100', 'Home', '4'], ['2', '2012', '01', 'Suicide', '0', 'F', '21', 'White', '100', 'Street', '3'], ['3', '2012', '01', 'Suicide', '0', 'M', '60', 'White', '100', 'Other specified', '4'], ['4', '2012', '02', 'Suicide', '0', 'M', '64', 'White', '100', 'Home', '4'], ['5', '2012', '02', 'Suicide', '0', 'M', '31', 'White', '100', 'Other specified', '2']]
+<pre>Index(['RespondentID', 'Do you celebrate Thanksgiving?',
+       'What is typically the main dish at your Thanksgiving dinner?',
+       'What is typically the main dish at your Thanksgiving dinner? - Other (please specify)',
+       'How is the main dish typically cooked?',
+       'How is the main dish typically cooked? - Other (please specify)',
+       'What kind of stuffing/dressing do you typically have?',
+       'What kind of stuffing/dressing do you typically have? - Other (please specify)',
+       'What type of cranberry saucedo you typically have?',
+       'What type of cranberry saucedo you typically have? - Other (please specify)',
+       'Do you typically have gravy?',
+       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Brussel sprouts',
+       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Carrots',
+       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Cauliflower',
+       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Corn',
+       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Cornbread',
+       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Fruit salad',
+       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Green beans/green bean casserole',
+       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Macaroni and cheese',
+       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Mashed potatoes',
+       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Rolls/biscuits',
+       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Squash',
+       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Vegetable salad',
+       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Yams/sweet potato casserole',
+       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Other (please specify)',
+       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Other (please specify).1',
+       'Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Apple',
+       'Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Buttermilk',
+       'Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Cherry',
+       'Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Chocolate',
+       'Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Coconut cream',
+       'Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Key lime',
+       'Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Peach',
+       'Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Pecan',
+       'Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Pumpkin',
+       'Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Sweet Potato',
+       'Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - None',
+       'Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Other (please specify)',
+       'Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Other (please specify).1',
+       'Which of these desserts do you typically have at Thanksgiving dinner? Please select all that apply.   - Apple cobbler',
+       'Which of these desserts do you typically have at Thanksgiving dinner? Please select all that apply.   - Blondies',
+       'Which of these desserts do you typically have at Thanksgiving dinner? Please select all that apply.   - Brownies',
+       'Which of these desserts do you typically have at Thanksgiving dinner? Please select all that apply.   - Carrot cake',
+       'Which of these desserts do you typically have at Thanksgiving dinner? Please select all that apply.   - Cheesecake',
+       'Which of these desserts do you typically have at Thanksgiving dinner? Please select all that apply.   - Cookies',
+       'Which of these desserts do you typically have at Thanksgiving dinner? Please select all that apply.   - Fudge',
+       'Which of these desserts do you typically have at Thanksgiving dinner? Please select all that apply.   - Ice cream',
+       'Which of these desserts do you typically have at Thanksgiving dinner? Please select all that apply.   - Peach cobbler',
+       'Which of these desserts do you typically have at Thanksgiving dinner? Please select all that apply.   - None',
+       'Which of these desserts do you typically have at Thanksgiving dinner? Please select all that apply.   - Other (please specify)',
+       'Which of these desserts do you typically have at Thanksgiving dinner? Please select all that apply.   - Other (please specify).1',
+       'Do you typically pray before or after the Thanksgiving meal?',
+       'How far will you travel for Thanksgiving?',
+       'Will you watch any of the following programs on Thanksgiving? Please select all that apply. - Macy's Parade',
+       'What's the age cutoff at your "kids' table" at Thanksgiving?',
+       'Have you ever tried to meet up with hometown friends on Thanksgiving night?',
+       'Have you ever attended a "Friendsgiving?"',
+       'Will you shop any Black Friday sales on Thanksgiving Day?',
+       'Do you work in retail?',
+       'Will you employer make you work on Black Friday?',
+       'How would you describe where you live?', 'Age', 'What is your gender?',
+       'How much total combined money did all members of your HOUSEHOLD earn last year?',
+       'US Region'],
+      dtype='object')
 </pre>
 </div>
 </div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Now that the data is in a more readable format , we can begin analyzing the data. The first column is unlabeled, but the values in this column is increases by 1 for every list entry. We can assume that this is the ID column.</p>
-<p>Suppose we are the government and we are interested to see the total number of gun deaths every year. This might give us an idea of how our current gun regulations are doing. We can accomplish this by creating a dictionary and assigning each year to a key and the number of deaths as the value.</p>
 </div>
 </div>
 </div>
@@ -1214,9 +1219,11 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [3]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Extracts the 'year' column from the list of lists</span>
-<span class="n">years</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">years</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Prints the table structure(row x column)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"rows, columns: "</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+
+<span class="c1">#Outputs the first 5 rows of the dataframe</span>
+<span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1226,8 +1233,179 @@ h6:hover .anchor-link {
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>['2012', '2012', '2012', '2012', '2012', '2012', '2012', '2012', '2012', '2012']
+<pre>rows, columns: (1058, 65)
 </pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt output_prompt">Out[3]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>RespondentID</th>
+<th>Do you celebrate Thanksgiving?</th>
+<th>What is typically the main dish at your Thanksgiving dinner?</th>
+<th>What is typically the main dish at your Thanksgiving dinner? - Other (please specify)</th>
+<th>How is the main dish typically cooked?</th>
+<th>How is the main dish typically cooked? - Other (please specify)</th>
+<th>What kind of stuffing/dressing do you typically have?</th>
+<th>What kind of stuffing/dressing do you typically have? - Other (please specify)</th>
+<th>What type of cranberry saucedo you typically have?</th>
+<th>What type of cranberry saucedo you typically have? - Other (please specify)</th>
+<th>...</th>
+<th>Have you ever tried to meet up with hometown friends on Thanksgiving night?</th>
+<th>Have you ever attended a "Friendsgiving?"</th>
+<th>Will you shop any Black Friday sales on Thanksgiving Day?</th>
+<th>Do you work in retail?</th>
+<th>Will you employer make you work on Black Friday?</th>
+<th>How would you describe where you live?</th>
+<th>Age</th>
+<th>What is your gender?</th>
+<th>How much total combined money did all members of your HOUSEHOLD earn last year?</th>
+<th>US Region</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>4337954960</td>
+<td>Yes</td>
+<td>Turkey</td>
+<td>NaN</td>
+<td>Baked</td>
+<td>NaN</td>
+<td>Bread-based</td>
+<td>NaN</td>
+<td>None</td>
+<td>NaN</td>
+<td>...</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>NaN</td>
+<td>Suburban</td>
+<td>18 - 29</td>
+<td>Male</td>
+<td>$75,000 to $99,999</td>
+<td>Middle Atlantic</td>
+</tr>
+<tr>
+<th>1</th>
+<td>4337951949</td>
+<td>Yes</td>
+<td>Turkey</td>
+<td>NaN</td>
+<td>Baked</td>
+<td>NaN</td>
+<td>Bread-based</td>
+<td>NaN</td>
+<td>Other (please specify)</td>
+<td>Homemade cranberry gelatin ring</td>
+<td>...</td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>NaN</td>
+<td>Rural</td>
+<td>18 - 29</td>
+<td>Female</td>
+<td>$50,000 to $74,999</td>
+<td>East South Central</td>
+</tr>
+<tr>
+<th>2</th>
+<td>4337935621</td>
+<td>Yes</td>
+<td>Turkey</td>
+<td>NaN</td>
+<td>Roasted</td>
+<td>NaN</td>
+<td>Rice-based</td>
+<td>NaN</td>
+<td>Homemade</td>
+<td>NaN</td>
+<td>...</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>NaN</td>
+<td>Suburban</td>
+<td>18 - 29</td>
+<td>Male</td>
+<td>$0 to $9,999</td>
+<td>Mountain</td>
+</tr>
+<tr>
+<th>3</th>
+<td>4337933040</td>
+<td>Yes</td>
+<td>Turkey</td>
+<td>NaN</td>
+<td>Baked</td>
+<td>NaN</td>
+<td>Bread-based</td>
+<td>NaN</td>
+<td>Homemade</td>
+<td>NaN</td>
+<td>...</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>NaN</td>
+<td>Urban</td>
+<td>30 - 44</td>
+<td>Male</td>
+<td>$200,000 and up</td>
+<td>Pacific</td>
+</tr>
+<tr>
+<th>4</th>
+<td>4337931983</td>
+<td>Yes</td>
+<td>Tofurkey</td>
+<td>NaN</td>
+<td>Baked</td>
+<td>NaN</td>
+<td>Bread-based</td>
+<td>NaN</td>
+<td>Canned</td>
+<td>NaN</td>
+<td>...</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>NaN</td>
+<td>Urban</td>
+<td>30 - 44</td>
+<td>Male</td>
+<td>$100,000 to $124,999</td>
+<td>Pacific</td>
+</tr>
+</tbody>
+</table>
+<p>5 rows × 65 columns</p>
+</div>
 </div>
 </div>
 </div>
@@ -1237,7 +1415,8 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Next we can use a for loop to create a counter in order to populate the dictionary.</p>
+<p>It looks like each column name is a survey question and each row is a survey response to each of these questions. Let's clean up the data a little bit by removing all rows didn't answer "Yes" to the first question, "Do you celebrate Thanksgiving?".</p>
+<p>We can accomplish by converting the dataframe into a boolean series. Then we'll use the boolean series to filter out all the data that didn't answer "Yes" to the first question</p>
 </div>
 </div>
 </div>
@@ -1246,13 +1425,7 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [4]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">year_counts</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">years</span><span class="p">:</span>
-    <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">year_counts</span><span class="p">:</span>
-        <span class="n">year_counts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">year_counts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">year_counts</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">"Do you celebrate Thanksgiving?"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
@@ -1260,20 +1433,14 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[4]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>{'2012': 33563, '2013': 33636, '2014': 33599}</pre>
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Yes    980
+No      78
+Name: Do you celebrate Thanksgiving?, dtype: int64
+</pre>
 </div>
 </div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>It looks like the total number of deaths from 2012 to 2014 are relatively close to each other.</p>
-<p>Let's break it down even more, we want to look at each month of each year and calculate the total number of gun deaths. Right now the year and month columns are in the string format. We can create a new dictionary and populate it with the month of each year as the key.</p>
 </div>
 </div>
 </div>
@@ -1282,17 +1449,8 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [5]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">datetime</span>
-
-<span class="c1">#The day is not specified in our data, this value will be assignedd as 1.</span>
-<span class="n">dates</span> <span class="o">=</span> <span class="p">[</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">month</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span> <span class="n">day</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
-<span class="n">date_counts</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">dates</span><span class="p">:</span>
-    <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">date_counts</span><span class="p">:</span>
-        <span class="n">date_counts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">date_counts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">date_counts</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s2">"Do you celebrate Thanksgiving?"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"Yes"</span><span class="p">]</span>
+<span class="n">data</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 </div>
 </div>
@@ -1302,42 +1460,7 @@ h6:hover .anchor-link {
 <div class="output_area">
 <div class="prompt output_prompt">Out[5]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>{datetime.datetime(2012, 1, 1, 0, 0): 2758,
- datetime.datetime(2012, 2, 1, 0, 0): 2357,
- datetime.datetime(2012, 3, 1, 0, 0): 2743,
- datetime.datetime(2012, 4, 1, 0, 0): 2795,
- datetime.datetime(2012, 5, 1, 0, 0): 2999,
- datetime.datetime(2012, 6, 1, 0, 0): 2826,
- datetime.datetime(2012, 7, 1, 0, 0): 3026,
- datetime.datetime(2012, 8, 1, 0, 0): 2954,
- datetime.datetime(2012, 9, 1, 0, 0): 2852,
- datetime.datetime(2012, 10, 1, 0, 0): 2733,
- datetime.datetime(2012, 11, 1, 0, 0): 2729,
- datetime.datetime(2012, 12, 1, 0, 0): 2791,
- datetime.datetime(2013, 1, 1, 0, 0): 2864,
- datetime.datetime(2013, 2, 1, 0, 0): 2375,
- datetime.datetime(2013, 3, 1, 0, 0): 2862,
- datetime.datetime(2013, 4, 1, 0, 0): 2798,
- datetime.datetime(2013, 5, 1, 0, 0): 2806,
- datetime.datetime(2013, 6, 1, 0, 0): 2920,
- datetime.datetime(2013, 7, 1, 0, 0): 3079,
- datetime.datetime(2013, 8, 1, 0, 0): 2859,
- datetime.datetime(2013, 9, 1, 0, 0): 2742,
- datetime.datetime(2013, 10, 1, 0, 0): 2808,
- datetime.datetime(2013, 11, 1, 0, 0): 2758,
- datetime.datetime(2013, 12, 1, 0, 0): 2765,
- datetime.datetime(2014, 1, 1, 0, 0): 2651,
- datetime.datetime(2014, 2, 1, 0, 0): 2361,
- datetime.datetime(2014, 3, 1, 0, 0): 2684,
- datetime.datetime(2014, 4, 1, 0, 0): 2862,
- datetime.datetime(2014, 5, 1, 0, 0): 2864,
- datetime.datetime(2014, 6, 1, 0, 0): 2931,
- datetime.datetime(2014, 7, 1, 0, 0): 2884,
- datetime.datetime(2014, 8, 1, 0, 0): 2970,
- datetime.datetime(2014, 9, 1, 0, 0): 2914,
- datetime.datetime(2014, 10, 1, 0, 0): 2865,
- datetime.datetime(2014, 11, 1, 0, 0): 2756,
- datetime.datetime(2014, 12, 1, 0, 0): 2857}</pre>
+<pre>(980, 65)</pre>
 </div>
 </div>
 </div>
@@ -1347,7 +1470,7 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We can repeat the process above and break down the data by sex.</p>
+<p>We can see that the data frame went from 1058 rows to 980 rows, so it looks like we've successfully filtered out the data. Now we can begin analyzing the data. We can use the .value_counts() method on the second question column to see the types of food served on Thanksgiving. The .value_counts() method is especially useful for dataframes that contains a lot of repeats of the same strings. This is often typical in surveys.</p>
 </div>
 </div>
 </div>
@@ -1356,14 +1479,325 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [6]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sex</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
-<span class="n">sex_counts</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">sex</span><span class="p">:</span>
-    <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">sex_counts</span><span class="p">:</span>
-        <span class="n">sex_counts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="s2">"What is typically the main dish at your Thanksgiving dinner?"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[6]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>Turkey                    859
+Other (please specify)     35
+Ham/Pork                   29
+Tofurkey                   20
+Chicken                    12
+Roast beef                 11
+I don't know                5
+Turducken                   3
+Name: What is typically the main dish at your Thanksgiving dinner?, dtype: int64</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Suppose we own a restaurant and we are interested in serving tofu turkey with gravy on our menu. We are interested the number of families  that actually serve this dish. We can create a new dataframe using boolean filtering to show only rows with people who had Tofurkey as a main dish on Thanksgiving. In addition we'll look at the "Do you typically have gravy" column to see if people eat this dish with gravy.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [7]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data_only_tofurkey</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s2">"What is typically the main dish at your Thanksgiving dinner?"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"Tofurkey"</span><span class="p">]</span>
+<span class="n">Gravy_and_tofurkey</span> <span class="o">=</span> <span class="n">data_only_tofurkey</span><span class="p">[</span><span class="s2">"Do you typically have gravy?"</span><span class="p">]</span>
+<span class="n">Gravy_and_tofurkey</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[7]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>Yes    12
+No      8
+Name: Do you typically have gravy?, dtype: int64</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Only 12 out of 980 people answered yes, so it might be a good idea to not serve this dish in our restaurant.</p>
+<p>Next we are interested to see how many people in this survey have apple, pumpkin, or pecan pies during Thanksgiving. We can use the .isnull() method to convert each column into a boolean, then use the & operator to return a boolean series. Then we can use the .value_counts() method to tally up the total number of False statements in the boolean series.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [8]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">apple</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Apple"</span><span class="p">]</span>
+<span class="n">apple_isnull</span> <span class="o">=</span> <span class="n">apple</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span>
+
+<span class="n">pumpkin</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Pumpkin"</span><span class="p">]</span>
+<span class="n">pumpkin_isnull</span> <span class="o">=</span> <span class="n">pumpkin</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span>
+
+<span class="n">pecan</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Pecan"</span><span class="p">]</span>
+<span class="n">pecan_isnull</span> <span class="o">=</span> <span class="n">pecan</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span>
+
+<span class="n">did_not_eat_pies</span> <span class="o">=</span> <span class="n">apple_isnull</span> <span class="o">&</span> <span class="n">pumpkin_isnull</span> <span class="o">&</span> <span class="n">pecan_isnull</span> 
+
+<span class="n">did_not_eat_pies</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[8]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>False    876
+True     104
+dtype: int64</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>It looks like most people had apple, pumpkin, or pecan pies for Thanksgiving. It might be a good idea to prepare extra pies for Thanksgiving to sell people who are too lazy to bake them for the holidays.</p>
+<p>We want to make sure this survey isn't biased towards the older generation and covers all ages. Currently the age column is a bit difficult to analyze. We can write a function that and use the .apply() function to convert this column into integers. We'll have to play arround with string manipulation methods such as .split() and .replace() to accomplish this.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [9]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Converts the age column to an integer.</span>
+<span class="k">def</span> <span class="nf">convert_to_int</span><span class="p">(</span><span class="n">column</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isnull</span><span class="p">(</span><span class="n">column</span><span class="p">)</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isnull</span><span class="p">(</span><span class="n">column</span><span class="p">)</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
+        <span class="n">string</span> <span class="o">=</span> <span class="n">column</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">' '</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">string</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'+'</span><span class="p">,</span> <span class="s1">''</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+    
+<span class="n">int_age</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"Age"</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">convert_to_int</span><span class="p">)</span>
+<span class="n">data</span><span class="p">[</span><span class="s2">"int_age"</span><span class="p">]</span> <span class="o">=</span> <span class="n">int_age</span>
+
+<span class="c1">#Outputs statistical data of the column.</span>
+<span class="n">data</span><span class="p">[</span><span class="s2">"int_age"</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[9]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>count    947.000000
+mean      40.089757
+std       15.352014
+min       18.000000
+25%       30.000000
+50%       45.000000
+75%       60.000000
+max       60.000000
+Name: int_age, dtype: float64</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>While we took the lower limit of each age range, the respondants of the survey appear to cover all age groups.</p>
+<p>Next we are interested in the income groups of each family. We do this to make sure the average income of the survey respondants is representative of the population.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [10]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="s2">"How much total combined money did all members of your HOUSEHOLD earn last year?"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[10]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>$25,000 to $49,999      166
+$75,000 to $99,999      127
+$50,000 to $74,999      127
+Prefer not to answer    118
+$100,000 to $124,999    109
+$200,000 and up          76
+$10,000 to $24,999       60
+$0 to $9,999             52
+$125,000 to $149,999     48
+$150,000 to $174,999     38
+$175,000 to $199,999     26
+Name: How much total combined money did all members of your HOUSEHOLD earn last year?, dtype: int64</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The responses are in the string format, we are going have to use the apply method along with a function to convert the elements in the column series into an integer so we can use the .describe() method.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [11]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">income_col</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"How much total combined money did all members of your HOUSEHOLD earn last year?"</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">convert_to_int_inc</span><span class="p">(</span><span class="n">column</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isnull</span><span class="p">(</span><span class="n">column</span><span class="p">)</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="n">string</span> <span class="o">=</span> <span class="n">column</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">' '</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">if</span> <span class="s1">'Prefer'</span> <span class="ow">in</span> <span class="n">string</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">sex_counts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">sex_counts</span><span class="p">)</span>
+        <span class="n">string</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'$'</span><span class="p">,</span> <span class="s1">''</span><span class="p">)</span>
+        <span class="n">string</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">','</span><span class="p">,</span> <span class="s1">''</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+    
+<span class="n">data</span><span class="p">[</span><span class="s1">'int_income'</span><span class="p">]</span>  <span class="o">=</span> <span class="n">income_col</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">convert_to_int_inc</span><span class="p">)</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">'int_income'</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[11]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>count       829.000000
+mean      75965.018094
+std       59068.636748
+min           0.000000
+25%       25000.000000
+50%       75000.000000
+75%      100000.000000
+max      200000.000000
+Name: int_income, dtype: float64</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Once again, we took the lower limit of the income range so the average skews downard. The average income is high even though we took the lower limit. The standard deviation is almost as high as the mean. The median is 75,000 which is relatively close to the average.</p>
+<p>Next, let's see if there is any correlation between income and travel distance. We can simply use boolean filtering again with the .value_counts() method.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [12]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">less_150k</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"int_income"</span><span class="p">]</span> <span class="o"><</span> <span class="mi">150000</span>
+<span class="n">less_150k_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">less_150k</span><span class="p">]</span>
+
+<span class="n">how_far</span> <span class="o">=</span> <span class="n">less_150k_data</span><span class="p">[</span><span class="s2">"How far will you travel for Thanksgiving?"</span><span class="p">]</span>
+<span class="n">how_far</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[12]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>Thanksgiving is happening at my home--I won't travel at all                         281
+Thanksgiving is local--it will take place in the town I live in                     203
+Thanksgiving is out of town but not too far--it's a drive of a few hours or less    150
+Thanksgiving is out of town and far away--I have to drive several hours or fly       55
+Name: How far will you travel for Thanksgiving?, dtype: int64</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [13]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">more_150k</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"int_income"</span><span class="p">]</span> <span class="o">></span> <span class="mi">150000</span>
+<span class="n">more_150k_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">more_150k</span><span class="p">]</span>
+
+<span class="n">how_far_150k_plus</span> <span class="o">=</span> <span class="n">more_150k_data</span><span class="p">[</span><span class="s2">"How far will you travel for Thanksgiving?"</span><span class="p">]</span>
+<span class="n">how_far_150k_plus</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[13]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>Thanksgiving is happening at my home--I won't travel at all                         49
+Thanksgiving is local--it will take place in the town I live in                     25
+Thanksgiving is out of town but not too far--it's a drive of a few hours or less    16
+Thanksgiving is out of town and far away--I have to drive several hours or fly      12
+Name: How far will you travel for Thanksgiving?, dtype: int64</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [14]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">high_income_athome</span> <span class="o">=</span> <span class="mi">49</span><span class="o">/</span><span class="p">(</span><span class="mi">49</span><span class="o">+</span><span class="mi">25</span><span class="o">+</span><span class="mi">16</span><span class="o">+</span><span class="mi">12</span><span class="p">)</span> 
+<span class="n">low_income_athome</span> <span class="o">=</span> <span class="mi">281</span><span class="o">/</span><span class="p">(</span><span class="mi">203</span><span class="o">+</span><span class="mi">150</span><span class="o">+</span><span class="mi">55</span><span class="o">+</span><span class="mi">281</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">high_income_athome</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">low_income_athome</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1373,7 +1807,8 @@ h6:hover .anchor-link {
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>{'M': 86349, 'F': 14449}
+<pre>0.4803921568627451
+0.40783744557329465
 </pre>
 </div>
 </div>
@@ -1384,24 +1819,26 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>It looks like there are significantly more males gun deaths than females.</p>
-<p>We use the similar for loop to break down the data by race.</p>
+<p>It looks like high income respondants (> 150k) actually stay home at a higher rate than low income respondants (< 150k). This makes sense because high income respondants are older and have more established families. Whereas low income respondants are mostly students who live on campus and have to travel back home for thanksgiving.</p>
+<p>We can use .pivot_table() method to see if there is a correlation between age/income and people who spend their Thanksgiving with Friends.</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [7]:</div>
+<div class="prompt input_prompt">In [15]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">race</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
-<span class="n">race_counts</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">race</span><span class="p">:</span>
-    <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">race_counts</span><span class="p">:</span>
-        <span class="n">race_counts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">race_counts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">race_counts</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span>
+    <span class="c1">#The index takes a series as an input and populates the rows of the spreadsheet</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="s2">"Have you ever tried to meet up with hometown friends on Thanksgiving night?"</span><span class="p">,</span>
+    
+    <span class="c1">#The columns takes a series as an input and populates the columns with its values</span>
+    <span class="n">columns</span> <span class="o">=</span> <span class="s1">'Have you ever attended a "Friendsgiving?"'</span><span class="p">,</span>
+    
+    <span class="c1">#The values we populate the matrix with, by default the values will be the mean</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="s1">'int_age'</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1409,168 +1846,49 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[7]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>{'Asian/Pacific Islander': 1326,
- 'Black': 23296,
- 'Hispanic': 9022,
- 'Native American/Native Alaskan': 917,
- 'White': 66237}</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>It looks like whites have highest total number of gun deaths. However, there are significantly higher number of whites in the US than all the other groups. We need population data that can give us the total population of each race.</p>
-<p>We will need to look at census data "census.csv".</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [8]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">f2</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"census.csv"</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span>
-<span class="n">temp2</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">f2</span><span class="p">)</span>
-<span class="n">census</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">temp2</span><span class="p">)</span>
-<span class="n">census</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[8]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>[['Id',
-  'Year',
-  'Id',
-  'Sex',
-  'Id',
-  'Hispanic Origin',
-  'Id',
-  'Id2',
-  'Geography',
-  'Total',
-  'Race Alone - White',
-  'Race Alone - Hispanic',
-  'Race Alone - Black or African American',
-  'Race Alone - American Indian and Alaska Native',
-  'Race Alone - Asian',
-  'Race Alone - Native Hawaiian and Other Pacific Islander',
-  'Two or More Races'],
- ['cen42010',
-  'April 1, 2010 Census',
-  'totsex',
-  'Both Sexes',
-  'tothisp',
-  'Total',
-  '0100000US',
-  '',
-  'United States',
-  '308745538',
-  '197318956',
-  '44618105',
-  '40250635',
-  '3739506',
-  '15159516',
-  '674625',
-  '6984195']]</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>We are going to create a dictionary of the total population of each race. We'll have to create it this dictionary manually using the data printed above. Next we'll create a another dictionary with each race as the key and the rate of gun deaths per 100,000 people.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [9]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">mapping</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="n">mapping</span><span class="p">[</span><span class="s1">'Asian/Pacific Islander'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">674625</span><span class="o">+</span><span class="mi">6984195</span>
-<span class="n">mapping</span><span class="p">[</span><span class="s1">'Black'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">44618105</span>
-<span class="n">mapping</span><span class="p">[</span><span class="s1">'Hispanic'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">44618105</span>
-<span class="n">mapping</span><span class="p">[</span><span class="s1">'Native American/Native Alaskan'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">15159516</span>
-<span class="n">mapping</span><span class="p">[</span><span class="s1">'White'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">197318956</span>
+<div class="prompt output_prompt">Out[15]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-<span class="n">race_per_hundredk</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="c1">#We can iterate both the key and the value in a dictionary using .items()</span>
-<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="p">(</span><span class="n">race_counts</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>    
-    <span class="n">race_per_hundredk</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="o">*</span><span class="mi">100000</span><span class="o">/</span><span class="n">mapping</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
-<span class="n">race_per_hundredk</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[9]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>{'Asian/Pacific Islander': 17.313372033811998,
- 'Black': 52.21198883278436,
- 'Hispanic': 20.220491210910907,
- 'Native American/Native Alaskan': 6.049005786200562,
- 'White': 33.56849303419181}</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>It looks like the category 'black' have the highest rate of gun deaths. Let's look filter the further and look at the rate of gun deaths by homicide.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [10]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">intent</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
 
-<span class="n">races</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
-<span class="n">homicide_race_counts</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="c1">#We can iterate over both the index and the element in the list using the enumerate() function</span>
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">rac</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">races</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">intent</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'Homicide'</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">rac</span> <span class="ow">in</span> <span class="n">homicide_race_counts</span><span class="p">:</span>
-            <span class="n">homicide_race_counts</span><span class="p">[</span><span class="n">rac</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">homicide_race_counts</span><span class="p">[</span><span class="n">rac</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-            
-<span class="n">homicide_race_counts</span>
-</pre></div>
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>Have you ever attended a "Friendsgiving?"</th>
+<th>No</th>
+<th>Yes</th>
+</tr>
+<tr>
+<th>Have you ever tried to meet up with hometown friends on Thanksgiving night?</th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>No</th>
+<td>42.283702</td>
+<td>37.010526</td>
+</tr>
+<tr>
+<th>Yes</th>
+<td>41.475410</td>
+<td>33.976744</td>
+</tr>
+</tbody>
+</table>
 </div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[10]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>{'Asian/Pacific Islander': 559,
- 'Black': 19510,
- 'Hispanic': 5634,
- 'Native American/Native Alaskan': 326,
- 'White': 9147}</pre>
 </div>
 </div>
 </div>
@@ -1578,13 +1896,14 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [11]:</div>
+<div class="prompt input_prompt">In [16]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">homicide_race_per_hundredk</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="p">(</span><span class="n">homicide_race_counts</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>    
-    <span class="n">homicide_race_per_hundredk</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="o">*</span><span class="mi">100000</span><span class="o">/</span><span class="n">mapping</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
-<span class="n">homicide_race_per_hundredk</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="s2">"Have you ever tried to meet up with hometown friends on Thanksgiving night?"</span><span class="p">,</span>
+    <span class="n">columns</span> <span class="o">=</span> <span class="s1">'Have you ever attended a "Friendsgiving?"'</span><span class="p">,</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="s1">'int_income'</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1592,13 +1911,49 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[11]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>{'Asian/Pacific Islander': 7.298774484842313,
- 'Black': 43.7266441503959,
- 'Hispanic': 12.627161104219912,
- 'Native American/Native Alaskan': 2.1504644343526533,
- 'White': 4.6356417981453335}</pre>
+<div class="prompt output_prompt">Out[16]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>Have you ever attended a "Friendsgiving?"</th>
+<th>No</th>
+<th>Yes</th>
+</tr>
+<tr>
+<th>Have you ever tried to meet up with hometown friends on Thanksgiving night?</th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>No</th>
+<td>78914.549654</td>
+<td>72894.736842</td>
+</tr>
+<tr>
+<th>Yes</th>
+<td>78750.000000</td>
+<td>66019.736842</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
 </div>
@@ -1608,11 +1963,11 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>It appears that the rate of gun deaths by homicide are highest in the 'black' and 'hispanic' racial categories.</p>
+<p>It turns out that people who spends their thanksgiving with their friends have lower average income and an average age of 34.</p>
 <hr />
-<h4 id="Learning-Summary">Learning Summary<a class="anchor-link" href="#Learning-Summary">¶</a></h4><p>Python concepts explored: list comprehension, datetime module, csv module<br />
-Python functions and methods used: csv.reader(), .items(), list(), datetime.datetime()</p>
-<p>The files used for this project can be found in my <a href="https://github.com/sengkchu/Dataquest-Guided-Projects-Solutions/blob/master/Guided%20Project_%20Exploring%20Gun%20Deaths%20in%20the%20US/">GitHub repository</a>.</p>
+<h4 id="Learning-Summary">Learning Summary<a class="anchor-link" href="#Learning-Summary">¶</a></h4><p>Python concepts explored: pandas, functions, boolean filtering</p>
+<p>Python functions and methods used: .read_csv(), .pivot_table(), .replace(), .describe(), .apply(), .isnull(), .columns, .shape, .head()</p>
+<p>The files used for this project can be found in my <a href="https://github.com/sengkchu/Dataquest-Guided-Projects-Solutions/tree/master/Guided%20Project_%20Analyzing%20Thanksgiving%20Dinner">GitHub repository</a>.</p>
 </div>
 </div>
 </div>
@@ -1666,7 +2021,7 @@ Python functions and methods used: csv.reader(), .items(), list(), datetime.date
             var disqus_shortname = 'codingdisciple'; // required: replace example with your forum shortname
             var disqus_config = function () {
                 this.language = "en";
-                        this.page.identifier = '2018-01-27-Exploring Gun Deaths in the US';
+                        this.page.identifier = '2018-01-28-Analyzing-Thanksgiving-Dinner';
             };
             /* * * DON'T EDIT BELOW THIS LINE * * */
             (function () {
@@ -1719,16 +2074,16 @@ Python functions and methods used: csv.reader(), .items(), list(), datetime.date
       <a href="/tag/data-visualization.html">data visualization</a>
     </li>
     <li class="list-group-item tag-6">
-      <a href="/tag/json.html">JSON</a>
+      <a href="/tag/discipline.html">discipline</a>
+    </li>
+    <li class="list-group-item tag-6">
+      <a href="/tag/data-structures.html">data structures</a>
     </li>
     <li class="list-group-item tag-6">
       <a href="/tag/web-scraping.html">web scraping</a>
     </li>
     <li class="list-group-item tag-6">
-      <a href="/tag/discipline.html">discipline</a>
-    </li>
-    <li class="list-group-item tag-6">
-      <a href="/tag/data-structures.html">data structures</a>
+      <a href="/tag/json.html">JSON</a>
     </li>
   </ul>
 </li>

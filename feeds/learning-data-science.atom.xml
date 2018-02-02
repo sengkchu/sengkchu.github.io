@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Coding Disciple - Learning Data Science</title><link href="/" rel="alternate"></link><link href="/feeds/learning-data-science.atom.xml" rel="self"></link><id>/</id><updated>2018-01-31T00:00:00-08:00</updated><entry><title>Visualizing The Gender Gap In College Degrees</title><link href="/Visualizing%20The%20Gender%20Gap%20In%20College%20Degrees.html" rel="alternate"></link><published>2018-01-31T00:00:00-08:00</published><updated>2018-01-31T00:00:00-08:00</updated><author><name>Seng Chu</name></author><id>tag:None,2018-01-31:/Visualizing The Gender Gap In College Degrees.html</id><summary type="html">
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Coding Disciple - Learning Data Science</title><link href="/" rel="alternate"></link><link href="/feeds/learning-data-science.atom.xml" rel="self"></link><id>/</id><updated>2018-01-31T00:00:00-08:00</updated><entry><title>Visualizing The Gender Gap In College Degrees</title><link href="/Visualizing-College-Degrees-Gender-Gap.html" rel="alternate"></link><published>2018-01-31T00:00:00-08:00</published><updated>2018-01-31T00:00:00-08:00</updated><author><name>Seng Chu</name></author><id>tag:None,2018-01-31:/Visualizing-College-Degrees-Gender-Gap.html</id><summary type="html">
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
@@ -1169,7 +1169,7 @@ h6:hover .anchor-link {
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
 &lt;/script&gt;
-</content><category term="pandas"></category><category term="data analysis"></category><category term="data visualization"></category></entry><entry><title>Visualizing Earnings Based On College Majors</title><link href="/Visualizing%20Earnings%20Based%20On%20College%20Majors.html" rel="alternate"></link><published>2018-01-30T00:00:00-08:00</published><updated>2018-01-30T00:00:00-08:00</updated><author><name>Seng Chu</name></author><id>tag:None,2018-01-30:/Visualizing Earnings Based On College Majors.html</id><summary type="html">
+</content><category term="pandas"></category><category term="data analysis"></category><category term="data visualization"></category></entry><entry><title>Visualizing Earnings Based On College Majors</title><link href="/Visualizing-College-Majors-Earnings.html" rel="alternate"></link><published>2018-01-30T00:00:00-08:00</published><updated>2018-01-30T00:00:00-08:00</updated><author><name>Seng Chu</name></author><id>tag:None,2018-01-30:/Visualizing-College-Majors-Earnings.html</id><summary type="html">
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
@@ -4669,7 +4669,7 @@ Name: 0, dtype: object&lt;/pre&gt;
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
 &lt;/script&gt;
-</content><category term="pandas"></category><category term="data analysis"></category><category term="data visualization"></category></entry><entry><title>Analyzing Thanksgiving Dinner</title><link href="/Analyzing%20Thanksgiving%20Dinner.html" rel="alternate"></link><published>2018-01-28T00:00:00-08:00</published><updated>2018-01-28T00:00:00-08:00</updated><author><name>Seng Chu</name></author><id>tag:None,2018-01-28:/Analyzing Thanksgiving Dinner.html</id><summary type="html">
+</content><category term="pandas"></category><category term="data analysis"></category><category term="data visualization"></category></entry><entry><title>Analyzing Thanksgiving Dinner</title><link href="/Analyzing-Thanksgiving-Dinner.html" rel="alternate"></link><published>2018-01-28T00:00:00-08:00</published><updated>2018-01-28T00:00:00-08:00</updated><author><name>Seng Chu</name></author><id>tag:None,2018-01-28:/Analyzing-Thanksgiving-Dinner.html</id><summary type="html">
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
@@ -6544,7 +6544,7 @@ Name: How far will you travel for Thanksgiving?, dtype: int64&lt;/pre&gt;
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
 &lt;/script&gt;
-</content><category term="pandas"></category><category term="data analysis"></category></entry><entry><title>Exploring Gun Deaths in the US</title><link href="/Exploring%20Gun%20Deaths%20in%20the%20US.html" rel="alternate"></link><published>2018-01-27T00:00:00-08:00</published><updated>2018-01-27T00:00:00-08:00</updated><author><name>Seng Chu</name></author><id>tag:None,2018-01-27:/Exploring Gun Deaths in the US.html</id><summary type="html">
+</content><category term="pandas"></category><category term="data analysis"></category></entry><entry><title>Exploring Gun Deaths in the US</title><link href="/Exploring-U.S.-Gun-Deaths.html" rel="alternate"></link><published>2018-01-27T00:00:00-08:00</published><updated>2018-01-27T00:00:00-08:00</updated><author><name>Seng Chu</name></author><id>tag:None,2018-01-27:/Exploring-U.S.-Gun-Deaths.html</id><summary type="html">
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
@@ -8059,7 +8059,7 @@ Python functions and methods used: csv.reader(), .items(), list(), datetime.date
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
 &lt;/script&gt;
-</content><category term="python basics"></category><category term="data analysis"></category></entry><entry><title>Exploring U.S. Births</title><link href="/Exploring%20U.S.%20Births.html" rel="alternate"></link><published>2018-01-26T00:00:00-08:00</published><updated>2018-01-26T00:00:00-08:00</updated><author><name>Seng Chu</name></author><id>tag:None,2018-01-26:/Exploring U.S. Births.html</id><summary type="html">
+</content><category term="python basics"></category><category term="data analysis"></category></entry><entry><title>Exploring U.S. Births</title><link href="/Exploring-U.S.-Births.html" rel="alternate"></link><published>2018-01-26T00:00:00-08:00</published><updated>2018-01-26T00:00:00-08:00</updated><author><name>Seng Chu</name></author><id>tag:None,2018-01-26:/Exploring-U.S.-Births.html</id><summary type="html">
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;

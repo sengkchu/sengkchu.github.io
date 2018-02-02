@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Coding Disciple</title><link href="/" rel="alternate"></link><link href="/feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2018-01-31T00:00:00-08:00</updated><entry><title>Visualizing The Gender Gap In College Degrees</title><link href="/Visualizing%20The%20Gender%20Gap%20In%20College%20Degrees.html" rel="alternate"></link><published>2018-01-31T00:00:00-08:00</published><updated>2018-01-31T00:00:00-08:00</updated><author><name>Seng Chu</name></author><id>tag:None,2018-01-31:/Visualizing The Gender Gap In College Degrees.html</id><summary type="html">
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Coding Disciple</title><link href="/" rel="alternate"></link><link href="/feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2018-01-31T00:00:00-08:00</updated><entry><title>Visualizing The Gender Gap In College Degrees</title><link href="/Visualizing-College-Degrees-Gender-Gap.html" rel="alternate"></link><published>2018-01-31T00:00:00-08:00</published><updated>2018-01-31T00:00:00-08:00</updated><author><name>Seng Chu</name></author><id>tag:None,2018-01-31:/Visualizing-College-Degrees-Gender-Gap.html</id><summary type="html">
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
@@ -1169,7 +1169,7 @@ h6:hover .anchor-link {
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
 &lt;/script&gt;
-</content><category term="pandas"></category><category term="data analysis"></category><category term="data visualization"></category></entry><entry><title>Visualizing Earnings Based On College Majors</title><link href="/Visualizing%20Earnings%20Based%20On%20College%20Majors.html" rel="alternate"></link><published>2018-01-30T00:00:00-08:00</published><updated>2018-01-30T00:00:00-08:00</updated><author><name>Seng Chu</name></author><id>tag:None,2018-01-30:/Visualizing Earnings Based On College Majors.html</id><summary type="html">
+</content><category term="pandas"></category><category term="data analysis"></category><category term="data visualization"></category></entry><entry><title>Visualizing Earnings Based On College Majors</title><link href="/Visualizing-College-Majors-Earnings.html" rel="alternate"></link><published>2018-01-30T00:00:00-08:00</published><updated>2018-01-30T00:00:00-08:00</updated><author><name>Seng Chu</name></author><id>tag:None,2018-01-30:/Visualizing-College-Majors-Earnings.html</id><summary type="html">
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
@@ -4669,7 +4669,7 @@ Name: 0, dtype: object&lt;/pre&gt;
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
 &lt;/script&gt;
-</content><category term="pandas"></category><category term="data analysis"></category><category term="data visualization"></category></entry><entry><title>Analyzing Thanksgiving Dinner</title><link href="/Analyzing%20Thanksgiving%20Dinner.html" rel="alternate"></link><published>2018-01-28T00:00:00-08:00</published><updated>2018-01-28T00:00:00-08:00</updated><author><name>Seng Chu</name></author><id>tag:None,2018-01-28:/Analyzing Thanksgiving Dinner.html</id><summary type="html">
+</content><category term="pandas"></category><category term="data analysis"></category><category term="data visualization"></category></entry><entry><title>Analyzing Thanksgiving Dinner</title><link href="/Analyzing-Thanksgiving-Dinner.html" rel="alternate"></link><published>2018-01-28T00:00:00-08:00</published><updated>2018-01-28T00:00:00-08:00</updated><author><name>Seng Chu</name></author><id>tag:None,2018-01-28:/Analyzing-Thanksgiving-Dinner.html</id><summary type="html">
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
@@ -6544,13 +6544,13 @@ Name: How far will you travel for Thanksgiving?, dtype: int64&lt;/pre&gt;
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
 &lt;/script&gt;
-</content><category term="pandas"></category><category term="data analysis"></category></entry><entry><title>Discipline vs. Motivation</title><link href="/Discipline%20vs.%20Motivation.html" rel="alternate"></link><published>2018-01-27T00:00:00-08:00</published><updated>2018-01-27T00:00:00-08:00</updated><author><name>Seng Chu</name></author><id>tag:None,2018-01-27:/Discipline vs. Motivation.html</id><summary type="html">&lt;p&gt;I am a strong believer in discipline because motivation is only temporary. &lt;/p&gt;
+</content><category term="pandas"></category><category term="data analysis"></category></entry><entry><title>Discipline vs. Motivation</title><link href="/Discipline-vs.-Motivation.html" rel="alternate"></link><published>2018-01-27T00:00:00-08:00</published><updated>2018-01-27T00:00:00-08:00</updated><author><name>Seng Chu</name></author><id>tag:None,2018-01-27:/Discipline-vs.-Motivation.html</id><summary type="html">&lt;p&gt;I am a strong believer in discipline because motivation is only temporary. &lt;/p&gt;
 &lt;p&gt;For example, people often tell themselves that they need to exercise, but they never take any action. But one day, they suddenly feel like they should really do something about it, so they go outside and run a …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I am a strong believer in discipline because motivation is only temporary. &lt;/p&gt;
 &lt;p&gt;For example, people often tell themselves that they need to exercise, but they never take any action. But one day, they suddenly feel like they should really do something about it, so they go outside and run a few miles.&lt;/p&gt;
 &lt;p&gt;Feeling motivated is easy. The hard part is doing it every single day. Think of it this way, most people don't like waking up in the morning and going to work.
 But we do it anyway, is it because we are afraid of our boss? Possibly, but the main reason is because we are disciplined to do so. I used to work graveyard shift from 6 pm - 6 am. I can confidently say, I had zero motivation to go to work when I wake up.
 Despite the lack of motivation, I made it to work on time every single time. A person's mood changes every single day. You might feel motivated today, and worn out the next day.&lt;/p&gt;
-&lt;p&gt;In the long run, building discipline and a strong work ethic is more important than motivation. If I tell myself I am going to complete at least two units of an online course every single day. I am just going to do it.&lt;/p&gt;</content><category term="discipline"></category></entry><entry><title>Exploring Gun Deaths in the US</title><link href="/Exploring%20Gun%20Deaths%20in%20the%20US.html" rel="alternate"></link><published>2018-01-27T00:00:00-08:00</published><updated>2018-01-27T00:00:00-08:00</updated><author><name>Seng Chu</name></author><id>tag:None,2018-01-27:/Exploring Gun Deaths in the US.html</id><summary type="html">
+&lt;p&gt;In the long run, building discipline and a strong work ethic is more important than motivation. If I tell myself I am going to complete at least two units of an online course every single day. I am just going to do it.&lt;/p&gt;</content><category term="discipline"></category></entry><entry><title>Exploring Gun Deaths in the US</title><link href="/Exploring-U.S.-Gun-Deaths.html" rel="alternate"></link><published>2018-01-27T00:00:00-08:00</published><updated>2018-01-27T00:00:00-08:00</updated><author><name>Seng Chu</name></author><id>tag:None,2018-01-27:/Exploring-U.S.-Gun-Deaths.html</id><summary type="html">
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
@@ -8065,7 +8065,7 @@ Python functions and methods used: csv.reader(), .items(), list(), datetime.date
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
 &lt;/script&gt;
-</content><category term="python basics"></category><category term="data analysis"></category></entry><entry><title>Exploring U.S. Births</title><link href="/Exploring%20U.S.%20Births.html" rel="alternate"></link><published>2018-01-26T00:00:00-08:00</published><updated>2018-01-26T00:00:00-08:00</updated><author><name>Seng Chu</name></author><id>tag:None,2018-01-26:/Exploring U.S. Births.html</id><summary type="html">
+</content><category term="python basics"></category><category term="data analysis"></category></entry><entry><title>Exploring U.S. Births</title><link href="/Exploring-U.S.-Births.html" rel="alternate"></link><published>2018-01-26T00:00:00-08:00</published><updated>2018-01-26T00:00:00-08:00</updated><author><name>Seng Chu</name></author><id>tag:None,2018-01-26:/Exploring-U.S.-Births.html</id><summary type="html">
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
@@ -9439,7 +9439,7 @@ Python functions and methods used: .read(), open(), .split(), .append(), int()&l
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
 &lt;/script&gt;
-</content><category term="python basics"></category></entry><entry><title>Scraping Reddit Data to a Pandas Dataframe</title><link href="/Scraping%20Reddit%20Data%20to%20a%20Pandas%20Dataframe.html" rel="alternate"></link><published>2018-01-26T00:00:00-08:00</published><updated>2018-01-26T00:00:00-08:00</updated><author><name>Seng Chu</name></author><id>tag:None,2018-01-26:/Scraping Reddit Data to a Pandas Dataframe.html</id><summary type="html">
+</content><category term="python basics"></category></entry><entry><title>Scraping Reddit Data to a Pandas Dataframe</title><link href="/Scraping-Reddit-Data-Pandas-Dataframe.html" rel="alternate"></link><published>2018-01-26T00:00:00-08:00</published><updated>2018-01-26T00:00:00-08:00</updated><author><name>Seng Chu</name></author><id>tag:None,2018-01-26:/Scraping-Reddit-Data-Pandas-Dataframe.html</id><summary type="html">
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;

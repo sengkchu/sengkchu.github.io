@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>Analyzing Thanksgiving Dinner - Coding Disciple</title>
+    <title>Scraping Reddit Data to a Pandas Dataframe - Coding Disciple</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -9,21 +9,24 @@
 
 
 
-<link rel="canonical" href="/Analyzing Thanksgiving Dinner.html">
+<link rel="canonical" href="/Scraping-Reddit-Data-Pandas-Dataframe.html">
 
         <meta name="author" content="Seng Chu" />
-        <meta name="keywords" content="pandas,data analysis" />
-        <meta name="description" content="In this project we will analyze data on Thanksgiving dinner in the US. We&#39;ll be working with the pandas library. We will convert the &#34;thanksgiving.csv&#34; file into a dataframe using pandas. In addition we&#39;ll use several basic functions in pandas to explore the data." />
+        <meta name="keywords" content="web scraping,pandas,python basics,JSON,data structures" />
+        <meta name="description" content="In this project we will try to scrape data from reddit using their API. The objective is to load reddit data into a pandas dataframe. In order to achieve this, first we&#39;ll import the following libraries. The documentation for this API can be found here." />
 
         <meta property="og:site_name" content="Coding Disciple" />
         <meta property="og:type" content="article"/>
-        <meta property="og:title" content="Analyzing Thanksgiving Dinner"/>
-        <meta property="og:url" content="/Analyzing Thanksgiving Dinner.html"/>
-        <meta property="og:description" content="In this project we will analyze data on Thanksgiving dinner in the US. We&#39;ll be working with the pandas library. We will convert the &#34;thanksgiving.csv&#34; file into a dataframe using pandas. In addition we&#39;ll use several basic functions in pandas to explore the data."/>
-        <meta property="article:published_time" content="2018-01-28" />
-            <meta property="article:section" content="Learning Data Science" />
+        <meta property="og:title" content="Scraping Reddit Data to a Pandas Dataframe"/>
+        <meta property="og:url" content="/Scraping-Reddit-Data-Pandas-Dataframe.html"/>
+        <meta property="og:description" content="In this project we will try to scrape data from reddit using their API. The objective is to load reddit data into a pandas dataframe. In order to achieve this, first we&#39;ll import the following libraries. The documentation for this API can be found here."/>
+        <meta property="article:published_time" content="2018-01-26" />
+            <meta property="article:section" content="Projects" />
+            <meta property="article:tag" content="web scraping" />
             <meta property="article:tag" content="pandas" />
-            <meta property="article:tag" content="data analysis" />
+            <meta property="article:tag" content="python basics" />
+            <meta property="article:tag" content="JSON" />
+            <meta property="article:tag" content="data structures" />
             <meta property="article:author" content="Seng Chu" />
 
 
@@ -41,8 +44,8 @@
 
 
 
-        <link href="/feeds/learning-data-science.atom.xml" type="application/atom+xml" rel="alternate"
-              title="Coding Disciple Learning Data Science ATOM Feed"/>
+        <link href="/feeds/projects.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Coding Disciple Projects ATOM Feed"/>
 
 </head>
 <body>
@@ -65,13 +68,13 @@
                          <li><a href="/pages/timeline.html">
                              Timeline
                           </a></li>
-                        <li class="active">
+                        <li >
                             <a href="/category/learning-data-science.html">Learning data science</a>
                         </li>
                         <li >
                             <a href="/category/mentality.html">Mentality</a>
                         </li>
-                        <li >
+                        <li class="active">
                             <a href="/category/projects.html">Projects</a>
                         </li>
             </ul>
@@ -108,10 +111,10 @@
         <article>
             <header class="page-header">
                 <h1>
-                    <a href="/Analyzing Thanksgiving Dinner.html"
+                    <a href="/Scraping-Reddit-Data-Pandas-Dataframe.html"
                        rel="bookmark"
-                       title="Permalink to Analyzing Thanksgiving Dinner">
-                        Analyzing Thanksgiving Dinner
+                       title="Permalink to Scraping Reddit Data to a Pandas Dataframe">
+                        Scraping Reddit Data to a Pandas Dataframe
                     </a>
                 </h1>
             </header>
@@ -121,7 +124,7 @@
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2018-01-28T00:00:00-08:00"> Sun 28 January 2018</time>
+        <i class="fa fa-calendar"></i><time datetime="2018-01-26T00:00:00-08:00"> Fri 26 January 2018</time>
     </span>
 
 
@@ -129,9 +132,15 @@
 
 
 <span class="label label-default">Tags</span>
+	<a href="/tag/web-scraping.html">web scraping</a>
+        /
 	<a href="/tag/pandas.html">pandas</a>
         /
-	<a href="/tag/data-analysis.html">data analysis</a>
+	<a href="/tag/python-basics.html">python basics</a>
+        /
+	<a href="/tag/json.html">JSON</a>
+        /
+	<a href="/tag/data-structures.html">data structures</a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
@@ -1111,7 +1120,8 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In this project we will analyze data on Thanksgiving dinner in the US. We'll be working with the pandas library. We will convert the "thanksgiving.csv" file into a dataframe using pandas. In addition we'll use several basic functions in pandas to explore the data.</p>
+<p>In this project we will try to scrape data from reddit using their API. The objective is to load reddit data into a pandas dataframe. In order to achieve this, first we'll import the following libraries.</p>
+<p>The documentation for this API can be found <a href="https://github.com/reddit/reddit/wiki/API">here</a>.</p>
 </div>
 </div>
 </div>
@@ -1120,11 +1130,22 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [1]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Import pandas and read the data.</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"thanksgiving.csv"</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span><span class="s2">"Latin-1"</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">urllib.request</span> <span class="k">as</span> <span class="nn">ur</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">time</span>
 </pre></div>
 </div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can access the raw json data of any subreddit by adding '.json' to the URL. Using the urllib.request library, we can extract that data and read it in python.</p>
+<p>From the documentation, we need to fill out the header using the suggested format.</p>
+<p>Example: User-Agent: android:com.example.myredditapp:v1.2.3 (by /u/kemitche)</p>
 </div>
 </div>
 </div>
@@ -1133,84 +1154,29 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [2]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Print the column names.</span>
-<span class="n">col</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">columns</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Header to be submitted to reddit.</span>
+<span class="n">hdr</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'User-Agent'</span><span class="p">:</span> <span class="s1">'codingdisciple:playingwithredditAPI:v1.0 (by /u/ivis_reine)'</span><span class="p">}</span>
+
+<span class="c1">#Link to the subreddit of interest.</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s2">"https://www.reddit.com/r/datascience/.json?sort=top&t;=all"</span>
+
+<span class="c1">#Makes a request object and receive a response.</span>
+<span class="n">req</span> <span class="o">=</span> <span class="n">ur</span><span class="o">.</span><span class="n">Request</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">hdr</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">ur</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">req</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="c1">#Loads the json data into python.</span>
+<span class="n">json_data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">'utf-8'</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 </div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Index(['RespondentID', 'Do you celebrate Thanksgiving?',
-       'What is typically the main dish at your Thanksgiving dinner?',
-       'What is typically the main dish at your Thanksgiving dinner? - Other (please specify)',
-       'How is the main dish typically cooked?',
-       'How is the main dish typically cooked? - Other (please specify)',
-       'What kind of stuffing/dressing do you typically have?',
-       'What kind of stuffing/dressing do you typically have? - Other (please specify)',
-       'What type of cranberry saucedo you typically have?',
-       'What type of cranberry saucedo you typically have? - Other (please specify)',
-       'Do you typically have gravy?',
-       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Brussel sprouts',
-       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Carrots',
-       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Cauliflower',
-       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Corn',
-       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Cornbread',
-       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Fruit salad',
-       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Green beans/green bean casserole',
-       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Macaroni and cheese',
-       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Mashed potatoes',
-       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Rolls/biscuits',
-       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Squash',
-       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Vegetable salad',
-       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Yams/sweet potato casserole',
-       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Other (please specify)',
-       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Other (please specify).1',
-       'Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Apple',
-       'Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Buttermilk',
-       'Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Cherry',
-       'Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Chocolate',
-       'Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Coconut cream',
-       'Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Key lime',
-       'Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Peach',
-       'Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Pecan',
-       'Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Pumpkin',
-       'Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Sweet Potato',
-       'Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - None',
-       'Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Other (please specify)',
-       'Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Other (please specify).1',
-       'Which of these desserts do you typically have at Thanksgiving dinner? Please select all that apply.   - Apple cobbler',
-       'Which of these desserts do you typically have at Thanksgiving dinner? Please select all that apply.   - Blondies',
-       'Which of these desserts do you typically have at Thanksgiving dinner? Please select all that apply.   - Brownies',
-       'Which of these desserts do you typically have at Thanksgiving dinner? Please select all that apply.   - Carrot cake',
-       'Which of these desserts do you typically have at Thanksgiving dinner? Please select all that apply.   - Cheesecake',
-       'Which of these desserts do you typically have at Thanksgiving dinner? Please select all that apply.   - Cookies',
-       'Which of these desserts do you typically have at Thanksgiving dinner? Please select all that apply.   - Fudge',
-       'Which of these desserts do you typically have at Thanksgiving dinner? Please select all that apply.   - Ice cream',
-       'Which of these desserts do you typically have at Thanksgiving dinner? Please select all that apply.   - Peach cobbler',
-       'Which of these desserts do you typically have at Thanksgiving dinner? Please select all that apply.   - None',
-       'Which of these desserts do you typically have at Thanksgiving dinner? Please select all that apply.   - Other (please specify)',
-       'Which of these desserts do you typically have at Thanksgiving dinner? Please select all that apply.   - Other (please specify).1',
-       'Do you typically pray before or after the Thanksgiving meal?',
-       'How far will you travel for Thanksgiving?',
-       'Will you watch any of the following programs on Thanksgiving? Please select all that apply. - Macy's Parade',
-       'What's the age cutoff at your "kids' table" at Thanksgiving?',
-       'Have you ever tried to meet up with hometown friends on Thanksgiving night?',
-       'Have you ever attended a "Friendsgiving?"',
-       'Will you shop any Black Friday sales on Thanksgiving Day?',
-       'Do you work in retail?',
-       'Will you employer make you work on Black Friday?',
-       'How would you describe where you live?', 'Age', 'What is your gender?',
-       'How much total combined money did all members of your HOUSEHOLD earn last year?',
-       'US Region'],
-      dtype='object')
-</pre>
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>I took a snapshot of the data structure below. It looks like the data is just a bunch of lists and dictionaries. We want reach the part of the dictionary until we see a list. Each item on this list will be a post made on this subreddit.</p>
+<p><img alt="reddit_data_structure" src="https://raw.githubusercontent.com/sengkchu/Personal-Projects/master/datastructure.png" /></p>
 </div>
 </div>
 </div>
@@ -1219,11 +1185,37 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [3]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Prints the table structure(row x column)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"rows, columns: "</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
-
-<span class="c1">#Outputs the first 5 rows of the dataframe</span>
-<span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#The actual data starts.</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">json_data</span><span class="p">[</span><span class="s1">'data'</span><span class="p">][</span><span class="s1">'children'</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Each request can only get us 100 posts, we can write a for loop to send 10 requests at 2 second intervals and add the data to the list of posts.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [4]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="c1">#reddit only accepts one request every 2 seconds, adds a delay between each loop</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">last</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s1">'data'</span><span class="p">][</span><span class="s1">'name'</span><span class="p">]</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s1">'https://www.reddit.com/r/datascience/.json?sort=top&t;=all&limit;=100&after;=</span><span class="si">%s</span><span class="s1">'</span> <span class="o">%</span> <span class="n">last</span>
+    <span class="n">req</span> <span class="o">=</span> <span class="n">ur</span><span class="o">.</span><span class="n">Request</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">hdr</span><span class="p">)</span>
+    <span class="n">text_data</span> <span class="o">=</span> <span class="n">ur</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">req</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="n">datatemp</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">text_data</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">'utf-8'</span><span class="p">))</span>
+    <span class="n">data</span> <span class="o">+=</span> <span class="n">datatemp</span><span class="p">[</span><span class="s1">'data'</span><span class="p">][</span><span class="s1">'children'</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">))</span><span class="o">+</span><span class="s2">" posts loaded"</span><span class="p">)</span>
+    
 </pre></div>
 </div>
 </div>
@@ -1233,12 +1225,119 @@ h6:hover .anchor-link {
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>rows, columns: (1058, 65)
+<pre>125 posts loaded
+225 posts loaded
+325 posts loaded
+425 posts loaded
+525 posts loaded
+625 posts loaded
+725 posts loaded
+825 posts loaded
+898 posts loaded
+898 posts loaded
 </pre>
 </div>
 </div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We've assigned all the posts to a list with the variable named 'data'. In order to begin constructing our pandas dataframe, we need a list of column names. Each post consists of a dictionary, we can simply loop through this dictionary and extract the column names.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [5]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Create a list of column name strings to be used to create our pandas dataframe</span>
+<span class="n">data_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">value</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">'data'</span><span class="p">]]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data_names</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[3]:</div>
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>['contest_mode', 'num_reports', 'subreddit_type', 'report_reasons', 'spoiler', 'quarantine', 'author', 'media_embed', 'banned_at_utc', 'is_self', 'selftext_html', 'stickied', 'banned_by', 'author_flair_css_class', 'approved_by', 'mod_reason_title', 'author_flair_text', 'selftext', 'suggested_sort', 'hide_score', 'brand_safe', 'subreddit', 'hidden', 'link_flair_text', 'mod_note', 'num_comments', 'name', 'pinned', 'user_reports', 'thumbnail', 'subreddit_name_prefixed', 'score', 'can_mod_post', 'can_gild', 'mod_reason_by', 'edited', 'downs', 'domain', 'is_crosspostable', 'clicked', 'approved_at_utc', 'title', 'removal_reason', 'likes', 'is_reddit_media_domain', 'locked', 'view_count', 'id', 'over_18', 'distinguished', 'visited', 'media', 'gilded', 'link_flair_css_class', 'secure_media', 'is_video', 'mod_reports', 'permalink', 'secure_media_embed', 'parent_whitelist_status', 'saved', 'num_crossposts', 'url', 'archived', 'created', 'created_utc', 'subreddit_id', 'whitelist_status', 'ups']
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In order to build a dataframe using the pd.DataFrame() function, we will need a list of dictionaries.</p>
+<p>We can loop through each element in 'data', using each column name as a key to the dictionary, then accessing the corresponding value with that key. If we come across a post that has</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [6]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Create a list of dictionaries to be loaded into a pandas dataframe</span>
+<span class="n">df_loadinglist</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)):</span>
+    <span class="n">dictionary</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">names</span> <span class="ow">in</span> <span class="n">data_names</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">names</span><span class="p">)]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">'data'</span><span class="p">][</span><span class="nb">str</span><span class="p">(</span><span class="n">names</span><span class="p">)]</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">names</span><span class="p">)]</span> <span class="o">=</span> <span class="s1">'None'</span>
+    <span class="n">df_loadinglist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dictionary</span><span class="p">)</span>
+<span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">df_loadinglist</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [7]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[7]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>(898, 69)</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [8]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[8]:</div>
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
 <style scoped="">
@@ -1258,153 +1357,153 @@ h6:hover .anchor-link {
 <thead>
 <tr style="text-align: right;">
 <th></th>
-<th>RespondentID</th>
-<th>Do you celebrate Thanksgiving?</th>
-<th>What is typically the main dish at your Thanksgiving dinner?</th>
-<th>What is typically the main dish at your Thanksgiving dinner? - Other (please specify)</th>
-<th>How is the main dish typically cooked?</th>
-<th>How is the main dish typically cooked? - Other (please specify)</th>
-<th>What kind of stuffing/dressing do you typically have?</th>
-<th>What kind of stuffing/dressing do you typically have? - Other (please specify)</th>
-<th>What type of cranberry saucedo you typically have?</th>
-<th>What type of cranberry saucedo you typically have? - Other (please specify)</th>
+<th>approved_at_utc</th>
+<th>approved_by</th>
+<th>archived</th>
+<th>author</th>
+<th>author_flair_css_class</th>
+<th>author_flair_text</th>
+<th>banned_at_utc</th>
+<th>banned_by</th>
+<th>brand_safe</th>
+<th>can_gild</th>
 <th>...</th>
-<th>Have you ever tried to meet up with hometown friends on Thanksgiving night?</th>
-<th>Have you ever attended a "Friendsgiving?"</th>
-<th>Will you shop any Black Friday sales on Thanksgiving Day?</th>
-<th>Do you work in retail?</th>
-<th>Will you employer make you work on Black Friday?</th>
-<th>How would you describe where you live?</th>
-<th>Age</th>
-<th>What is your gender?</th>
-<th>How much total combined money did all members of your HOUSEHOLD earn last year?</th>
-<th>US Region</th>
+<th>subreddit_type</th>
+<th>suggested_sort</th>
+<th>thumbnail</th>
+<th>title</th>
+<th>ups</th>
+<th>url</th>
+<th>user_reports</th>
+<th>view_count</th>
+<th>visited</th>
+<th>whitelist_status</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<th>0</th>
-<td>4337954960</td>
-<td>Yes</td>
-<td>Turkey</td>
-<td>NaN</td>
-<td>Baked</td>
-<td>NaN</td>
-<td>Bread-based</td>
-<td>NaN</td>
+<th>893</th>
 <td>None</td>
-<td>NaN</td>
+<td>None</td>
+<td>False</td>
+<td>amoun1365</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>True</td>
+<td>False</td>
 <td>...</td>
-<td>Yes</td>
-<td>No</td>
-<td>No</td>
-<td>No</td>
-<td>NaN</td>
-<td>Suburban</td>
-<td>18 - 29</td>
-<td>Male</td>
-<td>$75,000 to $99,999</td>
-<td>Middle Atlantic</td>
+<td>public</td>
+<td>None</td>
+<td></td>
+<td>Is there any good statistics specialization (M...</td>
+<td>10</td>
+<td>https://www.reddit.com/r/datascience/comments/...</td>
+<td>[]</td>
+<td>None</td>
+<td>False</td>
+<td>all_ads</td>
 </tr>
 <tr>
-<th>1</th>
-<td>4337951949</td>
-<td>Yes</td>
-<td>Turkey</td>
-<td>NaN</td>
-<td>Baked</td>
-<td>NaN</td>
-<td>Bread-based</td>
-<td>NaN</td>
-<td>Other (please specify)</td>
-<td>Homemade cranberry gelatin ring</td>
+<th>894</th>
+<td>None</td>
+<td>None</td>
+<td>False</td>
+<td>sananth12</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>True</td>
+<td>False</td>
 <td>...</td>
-<td>No</td>
-<td>No</td>
-<td>Yes</td>
-<td>No</td>
-<td>NaN</td>
-<td>Rural</td>
-<td>18 - 29</td>
-<td>Female</td>
-<td>$50,000 to $74,999</td>
-<td>East South Central</td>
+<td>public</td>
+<td>None</td>
+<td></td>
+<td>Carla – Open source simulator for autonomous d...</td>
+<td>4</td>
+<td>http://www.carla.org/</td>
+<td>[]</td>
+<td>None</td>
+<td>False</td>
+<td>all_ads</td>
 </tr>
 <tr>
-<th>2</th>
-<td>4337935621</td>
-<td>Yes</td>
-<td>Turkey</td>
-<td>NaN</td>
-<td>Roasted</td>
-<td>NaN</td>
-<td>Rice-based</td>
-<td>NaN</td>
-<td>Homemade</td>
-<td>NaN</td>
+<th>895</th>
+<td>None</td>
+<td>None</td>
+<td>False</td>
+<td>blacksite_</td>
+<td>testflair</td>
+<td>BS (Economics) | Data Scientist | IT Operations</td>
+<td>None</td>
+<td>None</td>
+<td>True</td>
+<td>False</td>
 <td>...</td>
-<td>Yes</td>
-<td>Yes</td>
-<td>Yes</td>
-<td>No</td>
-<td>NaN</td>
-<td>Suburban</td>
-<td>18 - 29</td>
-<td>Male</td>
-<td>$0 to $9,999</td>
-<td>Mountain</td>
+<td>public</td>
+<td>None</td>
+<td></td>
+<td>What statistical methods/tools do you use most?</td>
+<td>44</td>
+<td>https://www.reddit.com/r/datascience/comments/...</td>
+<td>[]</td>
+<td>None</td>
+<td>False</td>
+<td>all_ads</td>
 </tr>
 <tr>
-<th>3</th>
-<td>4337933040</td>
-<td>Yes</td>
-<td>Turkey</td>
-<td>NaN</td>
-<td>Baked</td>
-<td>NaN</td>
-<td>Bread-based</td>
-<td>NaN</td>
-<td>Homemade</td>
-<td>NaN</td>
+<th>896</th>
+<td>None</td>
+<td>None</td>
+<td>False</td>
+<td>thatneedle</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>True</td>
+<td>False</td>
 <td>...</td>
-<td>Yes</td>
-<td>No</td>
-<td>No</td>
-<td>No</td>
-<td>NaN</td>
-<td>Urban</td>
-<td>30 - 44</td>
-<td>Male</td>
-<td>$200,000 and up</td>
-<td>Pacific</td>
+<td>public</td>
+<td>None</td>
+<td></td>
+<td>Free, Fast Entity Extraction - requesting feed...</td>
+<td>0</td>
+<td>http://entity.thatneedle.com</td>
+<td>[]</td>
+<td>None</td>
+<td>False</td>
+<td>all_ads</td>
 </tr>
 <tr>
-<th>4</th>
-<td>4337931983</td>
-<td>Yes</td>
-<td>Tofurkey</td>
-<td>NaN</td>
-<td>Baked</td>
-<td>NaN</td>
-<td>Bread-based</td>
-<td>NaN</td>
-<td>Canned</td>
-<td>NaN</td>
+<th>897</th>
+<td>None</td>
+<td>None</td>
+<td>False</td>
+<td>basketballwonk</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>True</td>
+<td>False</td>
 <td>...</td>
-<td>Yes</td>
-<td>No</td>
-<td>No</td>
-<td>No</td>
-<td>NaN</td>
-<td>Urban</td>
-<td>30 - 44</td>
-<td>Male</td>
-<td>$100,000 to $124,999</td>
-<td>Pacific</td>
+<td>public</td>
+<td>None</td>
+<td></td>
+<td>I'm at a crossroads and looking for advice (st...</td>
+<td>2</td>
+<td>https://www.reddit.com/r/datascience/comments/...</td>
+<td>[]</td>
+<td>None</td>
+<td>False</td>
+<td>all_ads</td>
 </tr>
 </tbody>
 </table>
-<p>5 rows × 65 columns</p>
+<p>5 rows × 69 columns</p>
 </div>
 </div>
 </div>
@@ -1415,153 +1514,32 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>It looks like each column name is a survey question and each row is a survey response to each of these questions. Let's clean up the data a little bit by removing all rows didn't answer "Yes" to the first question, "Do you celebrate Thanksgiving?".</p>
-<p>We can accomplish by converting the dataframe into a boolean series. Then we'll use the boolean series to filter out all the data that didn't answer "Yes" to the first question</p>
+<p>Now that we have a pandas dataframe, we can do simple analysis on the reddit posts. For example, we can write a function to find the most common words used in the last 925 posts.</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [4]:</div>
+<div class="prompt input_prompt">In [9]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">"Do you celebrate Thanksgiving?"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Yes    980
-No      78
-Name: Do you celebrate Thanksgiving?, dtype: int64
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [5]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s2">"Do you celebrate Thanksgiving?"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"Yes"</span><span class="p">]</span>
-<span class="n">data</span><span class="o">.</span><span class="n">shape</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[5]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>(980, 65)</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>We can see that the data frame went from 1058 rows to 980 rows, so it looks like we've successfully filtered out the data. Now we can begin analyzing the data. We can use the .value_counts() method on the second question column to see the types of food served on Thanksgiving. The .value_counts() method is especially useful for dataframes that contains a lot of repeats of the same strings. This is often typical in surveys.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [6]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="s2">"What is typically the main dish at your Thanksgiving dinner?"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[6]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>Turkey                    859
-Other (please specify)     35
-Ham/Pork                   29
-Tofurkey                   20
-Chicken                    12
-Roast beef                 11
-I don't know                5
-Turducken                   3
-Name: What is typically the main dish at your Thanksgiving dinner?, dtype: int64</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Suppose we own a restaurant and we are interested in serving tofu turkey with gravy on our menu. We are interested the number of families  that actually serve this dish. We can create a new dataframe using boolean filtering to show only rows with people who had Tofurkey as a main dish on Thanksgiving. In addition we'll look at the "Do you typically have gravy" column to see if people eat this dish with gravy.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [7]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data_only_tofurkey</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s2">"What is typically the main dish at your Thanksgiving dinner?"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"Tofurkey"</span><span class="p">]</span>
-<span class="n">Gravy_and_tofurkey</span> <span class="o">=</span> <span class="n">data_only_tofurkey</span><span class="p">[</span><span class="s2">"Do you typically have gravy?"</span><span class="p">]</span>
-<span class="n">Gravy_and_tofurkey</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[7]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>Yes    12
-No      8
-Name: Do you typically have gravy?, dtype: int64</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Only 12 out of 980 people answered yes, so it might be a good idea to not serve this dish in our restaurant.</p>
-<p>Next we are interested to see how many people in this survey have apple, pumpkin, or pecan pies during Thanksgiving. We can use the .isnull() method to convert each column into a boolean, then use the & operator to return a boolean series. Then we can use the .value_counts() method to tally up the total number of False statements in the boolean series.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [8]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">apple</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Apple"</span><span class="p">]</span>
-<span class="n">apple_isnull</span> <span class="o">=</span> <span class="n">apple</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Counts each word and return a pandas series</span>
 
-<span class="n">pumpkin</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Pumpkin"</span><span class="p">]</span>
-<span class="n">pumpkin_isnull</span> <span class="o">=</span> <span class="n">pumpkin</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">word_count</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">column</span><span class="p">):</span>
+    <span class="n">dic</span><span class="o">=</span><span class="p">{}</span>
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+        <span class="n">split</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">" "</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">split</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">dic</span><span class="p">:</span>
+                <span class="n">dic</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">dic</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">dictionary</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">dic</span><span class="p">)</span>
+    <span class="n">dictionary</span> <span class="o">=</span> <span class="n">dictionary</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">dictionary</span>
 
-<span class="n">pecan</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Pecan"</span><span class="p">]</span>
-<span class="n">pecan_isnull</span> <span class="o">=</span> <span class="n">pecan</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span>
-
-<span class="n">did_not_eat_pies</span> <span class="o">=</span> <span class="n">apple_isnull</span> <span class="o">&</span> <span class="n">pumpkin_isnull</span> <span class="o">&</span> <span class="n">pecan_isnull</span> 
-
-<span class="n">did_not_eat_pies</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<span class="n">top_counts</span> <span class="o">=</span> <span class="n">word_count</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s2">"selftext"</span><span class="p">)</span>
+<span class="n">top_counts</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1569,10 +1547,13 @@ Name: Do you typically have gravy?, dtype: int64</pre>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[8]:</div>
+<div class="prompt output_prompt">Out[9]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>False    876
-True     104
+<pre>to     2820
+the    2670
+i      2575
+a      2554
+and    2189
 dtype: int64</pre>
 </div>
 </div>
@@ -1583,391 +1564,10 @@ dtype: int64</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>It looks like most people had apple, pumpkin, or pecan pies for Thanksgiving. It might be a good idea to prepare extra pies for Thanksgiving to sell people who are too lazy to bake them for the holidays.</p>
-<p>We want to make sure this survey isn't biased towards the older generation and covers all ages. Currently the age column is a bit difficult to analyze. We can write a function that and use the .apply() function to convert this column into integers. We'll have to play arround with string manipulation methods such as .split() and .replace() to accomplish this.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [9]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Converts the age column to an integer.</span>
-<span class="k">def</span> <span class="nf">convert_to_int</span><span class="p">(</span><span class="n">column</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isnull</span><span class="p">(</span><span class="n">column</span><span class="p">)</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
-        <span class="k">return</span> <span class="kc">None</span>
-    <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isnull</span><span class="p">(</span><span class="n">column</span><span class="p">)</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
-        <span class="n">string</span> <span class="o">=</span> <span class="n">column</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">' '</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">string</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'+'</span><span class="p">,</span> <span class="s1">''</span><span class="p">)</span>
-        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
-    
-<span class="n">int_age</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"Age"</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">convert_to_int</span><span class="p">)</span>
-<span class="n">data</span><span class="p">[</span><span class="s2">"int_age"</span><span class="p">]</span> <span class="o">=</span> <span class="n">int_age</span>
-
-<span class="c1">#Outputs statistical data of the column.</span>
-<span class="n">data</span><span class="p">[</span><span class="s2">"int_age"</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[9]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>count    947.000000
-mean      40.089757
-std       15.352014
-min       18.000000
-25%       30.000000
-50%       45.000000
-75%       60.000000
-max       60.000000
-Name: int_age, dtype: float64</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>While we took the lower limit of each age range, the respondants of the survey appear to cover all age groups.</p>
-<p>Next we are interested in the income groups of each family. We do this to make sure the average income of the survey respondants is representative of the population.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [10]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="s2">"How much total combined money did all members of your HOUSEHOLD earn last year?"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[10]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>$25,000 to $49,999      166
-$75,000 to $99,999      127
-$50,000 to $74,999      127
-Prefer not to answer    118
-$100,000 to $124,999    109
-$200,000 and up          76
-$10,000 to $24,999       60
-$0 to $9,999             52
-$125,000 to $149,999     48
-$150,000 to $174,999     38
-$175,000 to $199,999     26
-Name: How much total combined money did all members of your HOUSEHOLD earn last year?, dtype: int64</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>The responses are in the string format, we are going have to use the apply method along with a function to convert the elements in the column series into an integer so we can use the .describe() method.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [11]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">income_col</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"How much total combined money did all members of your HOUSEHOLD earn last year?"</span><span class="p">]</span>
-
-<span class="k">def</span> <span class="nf">convert_to_int_inc</span><span class="p">(</span><span class="n">column</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isnull</span><span class="p">(</span><span class="n">column</span><span class="p">)</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
-        <span class="k">return</span> <span class="kc">None</span>
-    <span class="n">string</span> <span class="o">=</span> <span class="n">column</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">' '</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="k">if</span> <span class="s1">'Prefer'</span> <span class="ow">in</span> <span class="n">string</span><span class="p">:</span>
-        <span class="k">return</span> <span class="kc">None</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">string</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'$'</span><span class="p">,</span> <span class="s1">''</span><span class="p">)</span>
-        <span class="n">string</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">','</span><span class="p">,</span> <span class="s1">''</span><span class="p">)</span>
-        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
-    
-<span class="n">data</span><span class="p">[</span><span class="s1">'int_income'</span><span class="p">]</span>  <span class="o">=</span> <span class="n">income_col</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">convert_to_int_inc</span><span class="p">)</span>
-<span class="n">data</span><span class="p">[</span><span class="s1">'int_income'</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[11]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>count       829.000000
-mean      75965.018094
-std       59068.636748
-min           0.000000
-25%       25000.000000
-50%       75000.000000
-75%      100000.000000
-max      200000.000000
-Name: int_income, dtype: float64</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Once again, we took the lower limit of the income range so the average skews downard. The average income is high even though we took the lower limit. The standard deviation is almost as high as the mean. The median is 75,000 which is relatively close to the average.</p>
-<p>Next, let's see if there is any correlation between income and travel distance. We can simply use boolean filtering again with the .value_counts() method.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [12]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">less_150k</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"int_income"</span><span class="p">]</span> <span class="o"><</span> <span class="mi">150000</span>
-<span class="n">less_150k_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">less_150k</span><span class="p">]</span>
-
-<span class="n">how_far</span> <span class="o">=</span> <span class="n">less_150k_data</span><span class="p">[</span><span class="s2">"How far will you travel for Thanksgiving?"</span><span class="p">]</span>
-<span class="n">how_far</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[12]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>Thanksgiving is happening at my home--I won't travel at all                         281
-Thanksgiving is local--it will take place in the town I live in                     203
-Thanksgiving is out of town but not too far--it's a drive of a few hours or less    150
-Thanksgiving is out of town and far away--I have to drive several hours or fly       55
-Name: How far will you travel for Thanksgiving?, dtype: int64</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [13]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">more_150k</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"int_income"</span><span class="p">]</span> <span class="o">></span> <span class="mi">150000</span>
-<span class="n">more_150k_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">more_150k</span><span class="p">]</span>
-
-<span class="n">how_far_150k_plus</span> <span class="o">=</span> <span class="n">more_150k_data</span><span class="p">[</span><span class="s2">"How far will you travel for Thanksgiving?"</span><span class="p">]</span>
-<span class="n">how_far_150k_plus</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[13]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>Thanksgiving is happening at my home--I won't travel at all                         49
-Thanksgiving is local--it will take place in the town I live in                     25
-Thanksgiving is out of town but not too far--it's a drive of a few hours or less    16
-Thanksgiving is out of town and far away--I have to drive several hours or fly      12
-Name: How far will you travel for Thanksgiving?, dtype: int64</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [14]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">high_income_athome</span> <span class="o">=</span> <span class="mi">49</span><span class="o">/</span><span class="p">(</span><span class="mi">49</span><span class="o">+</span><span class="mi">25</span><span class="o">+</span><span class="mi">16</span><span class="o">+</span><span class="mi">12</span><span class="p">)</span> 
-<span class="n">low_income_athome</span> <span class="o">=</span> <span class="mi">281</span><span class="o">/</span><span class="p">(</span><span class="mi">203</span><span class="o">+</span><span class="mi">150</span><span class="o">+</span><span class="mi">55</span><span class="o">+</span><span class="mi">281</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">high_income_athome</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">low_income_athome</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>0.4803921568627451
-0.40783744557329465
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>It looks like high income respondants (> 150k) actually stay home at a higher rate than low income respondants (< 150k). This makes sense because high income respondants are older and have more established families. Whereas low income respondants are mostly students who live on campus and have to travel back home for thanksgiving.</p>
-<p>We can use .pivot_table() method to see if there is a correlation between age/income and people who spend their Thanksgiving with Friends.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [15]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span>
-    <span class="c1">#The index takes a series as an input and populates the rows of the spreadsheet</span>
-    <span class="n">index</span> <span class="o">=</span> <span class="s2">"Have you ever tried to meet up with hometown friends on Thanksgiving night?"</span><span class="p">,</span>
-    
-    <span class="c1">#The columns takes a series as an input and populates the columns with its values</span>
-    <span class="n">columns</span> <span class="o">=</span> <span class="s1">'Have you ever attended a "Friendsgiving?"'</span><span class="p">,</span>
-    
-    <span class="c1">#The values we populate the matrix with, by default the values will be the mean</span>
-    <span class="n">values</span> <span class="o">=</span> <span class="s1">'int_age'</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[15]:</div>
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-<thead>
-<tr style="text-align: right;">
-<th>Have you ever attended a "Friendsgiving?"</th>
-<th>No</th>
-<th>Yes</th>
-</tr>
-<tr>
-<th>Have you ever tried to meet up with hometown friends on Thanksgiving night?</th>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<th>No</th>
-<td>42.283702</td>
-<td>37.010526</td>
-</tr>
-<tr>
-<th>Yes</th>
-<td>41.475410</td>
-<td>33.976744</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [16]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span>
-    <span class="n">index</span> <span class="o">=</span> <span class="s2">"Have you ever tried to meet up with hometown friends on Thanksgiving night?"</span><span class="p">,</span>
-    <span class="n">columns</span> <span class="o">=</span> <span class="s1">'Have you ever attended a "Friendsgiving?"'</span><span class="p">,</span>
-    <span class="n">values</span> <span class="o">=</span> <span class="s1">'int_income'</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[16]:</div>
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-<thead>
-<tr style="text-align: right;">
-<th>Have you ever attended a "Friendsgiving?"</th>
-<th>No</th>
-<th>Yes</th>
-</tr>
-<tr>
-<th>Have you ever tried to meet up with hometown friends on Thanksgiving night?</th>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<th>No</th>
-<td>78914.549654</td>
-<td>72894.736842</td>
-</tr>
-<tr>
-<th>Yes</th>
-<td>78750.000000</td>
-<td>66019.736842</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>It turns out that people who spends their thanksgiving with their friends have lower average income and an average age of 34.</p>
+<p>The results are not too surprising, common english words showed up the most. That is it for now! We've achieved our goal of turning json data into a pandas dataframe.</p>
 <hr />
-<h4 id="Learning-Summary">Learning Summary<a class="anchor-link" href="#Learning-Summary">¶</a></h4><p>Python concepts explored: pandas, functions, boolean filtering</p>
-<p>Python functions and methods used: .read_csv(), .pivot_table(), .replace(), .describe(), .apply(), .isnull(), .columns, .shape, .head()</p>
-<p>The files used for this project can be found in my <a href="https://github.com/sengkchu/Dataquest-Guided-Projects-Solutions/tree/master/Guided%20Project_%20Analyzing%20Thanksgiving%20Dinner">GitHub repository</a>.</p>
+<h4 id="Learning-Summary">Learning Summary<a class="anchor-link" href="#Learning-Summary">¶</a></h4><p>Concepts explored: lists, dictionaries, API, data structures, JSON</p>
+<p>The files for this project can be found in my <a href="https://github.com/sengkchu/Personal-Projects">GitHub repository</a>.</p>
 </div>
 </div>
 </div>
@@ -2021,7 +1621,7 @@ Name: How far will you travel for Thanksgiving?, dtype: int64</pre>
             var disqus_shortname = 'codingdisciple'; // required: replace example with your forum shortname
             var disqus_config = function () {
                 this.language = "en";
-                        this.page.identifier = '2018-01-28-Analyzing Thanksgiving Dinner';
+                        this.page.identifier = '2018-01-26-Scraping-Reddit-Data-Pandas-Dataframe';
             };
             /* * * DON'T EDIT BELOW THIS LINE * * */
             (function () {
@@ -2074,16 +1674,16 @@ Name: How far will you travel for Thanksgiving?, dtype: int64</pre>
       <a href="/tag/data-visualization.html">data visualization</a>
     </li>
     <li class="list-group-item tag-6">
-      <a href="/tag/json.html">JSON</a>
+      <a href="/tag/discipline.html">discipline</a>
+    </li>
+    <li class="list-group-item tag-6">
+      <a href="/tag/data-structures.html">data structures</a>
     </li>
     <li class="list-group-item tag-6">
       <a href="/tag/web-scraping.html">web scraping</a>
     </li>
     <li class="list-group-item tag-6">
-      <a href="/tag/discipline.html">discipline</a>
-    </li>
-    <li class="list-group-item tag-6">
-      <a href="/tag/data-structures.html">data structures</a>
+      <a href="/tag/json.html">JSON</a>
     </li>
   </ul>
 </li>
