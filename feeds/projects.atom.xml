@@ -1466,4 +1466,4 @@ dtype: int64&lt;/pre&gt;
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
 &lt;/script&gt;
-</content><category term="web scraping"></category><category term="pandas"></category><category term="python basics"></category><category term="JSON"></category><category term="data structures"></category></entry></feed>
+</content><category term="web scraping"></category><category term="pandas"></category><category term="python"></category><category term="JSON"></category><category term="data structures"></category></entry></feed>
