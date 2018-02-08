@@ -5,28 +5,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://codingdisciple.com/</loc>
-<lastmod>2018-02-05T01:57:25-00:00</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
-<loc>https://codingdisciple.com/archives.html</loc>
-<lastmod>2018-02-05T01:57:25-00:00</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
-<loc>https://codingdisciple.com/tags.html</loc>
-<lastmod>2018-02-05T01:57:25-00:00</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
-<loc>https://codingdisciple.com/categories.html</loc>
-<lastmod>2018-02-05T01:57:25-00:00</lastmod>
+<lastmod>2018-02-07T18:21:06-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -46,7 +25,14 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>https://codingdisciple.com/Star-Wars.html</loc>
+<loc>https://codingdisciple.com/Titanic-Survival.html</loc>
+<lastmod>2018-02-07T00:00:00-08:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://codingdisciple.com/Star-Wars-Data.html</loc>
 <lastmod>2018-02-05T00:00:00-08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
@@ -60,14 +46,14 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>https://codingdisciple.com/Visualizing-College-Degrees-Gender-Gap.html</loc>
+<loc>https://codingdisciple.com/College-Degrees-Gender-Gap.html</loc>
 <lastmod>2018-01-31T00:00:00-08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://codingdisciple.com/Visualizing-College-Majors-Earnings.html</loc>
+<loc>https://codingdisciple.com/College-Majors-Earnings.html</loc>
 <lastmod>2018-01-30T00:00:00-08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
@@ -81,21 +67,21 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>https://codingdisciple.com/Discipline-vs.-Motivation.html</loc>
+<loc>https://codingdisciple.com/Discipline-vs-Motivation.html</loc>
 <lastmod>2018-01-27T00:00:00-08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://codingdisciple.com/Exploring-U.S.-Gun-Deaths.html</loc>
+<loc>https://codingdisciple.com/Exploring-Gun-Deaths.html</loc>
 <lastmod>2018-01-27T00:00:00-08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://codingdisciple.com/Exploring-U.S.-Births.html</loc>
+<loc>https://codingdisciple.com/Exploring-Births.html</loc>
 <lastmod>2018-01-26T00:00:00-08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
@@ -105,13 +91,6 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <loc>https://codingdisciple.com/Scraping-Reddit-Data-Pandas-Dataframe.html</loc>
 <lastmod>2018-01-26T00:00:00-08:00</lastmod>
 <changefreq>monthly</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
-<loc>https://codingdisciple.com/author/seng-chu.html</loc>
-<lastmod>2018-02-05T00:00:00-07:53</lastmod>
-<changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
