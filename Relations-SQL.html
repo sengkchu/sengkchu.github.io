@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<link rel="canonical" href="/Exploring-Births.html"/>
+<link rel="canonical" href="/Relations-SQL.html"/>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>Exploring U.S. Births - Coding Disciple</title>
+    <title>Creating Relations in SQL - Coding Disciple</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -10,20 +10,21 @@
 
 
 
-<link rel="canonical" href="/Exploring-Births.html">
+<link rel="canonical" href="/Relations-SQL.html">
 
         <meta name="author" content="Seng Chu" />
-        <meta name="keywords" content="python basics" />
-        <meta name="description" content="In this project, we will look at the number of births in the United States in the file &#34;US_births_1994-2003_CDC_NCHS.csv&#34;. First, we will use basic functions in python to convert the file into a readable format and explore the data." />
+        <meta name="keywords" content="SQL,pandas" />
+        <meta name="description" content="In this project we will use the cleaned data from the previous mission and work mainly in SQL. We will use SQL to transform the nominations tables into new tables, and create relations across these tables. First let&#39;s take a look at the table&#39;s schema and the first ten rows." />
 
         <meta property="og:site_name" content="Coding Disciple" />
         <meta property="og:type" content="article"/>
-        <meta property="og:title" content="Exploring U.S. Births"/>
-        <meta property="og:url" content="/Exploring-Births.html"/>
-        <meta property="og:description" content="In this project, we will look at the number of births in the United States in the file &#34;US_births_1994-2003_CDC_NCHS.csv&#34;. First, we will use basic functions in python to convert the file into a readable format and explore the data."/>
-        <meta property="article:published_time" content="2018-01-26" />
+        <meta property="og:title" content="Creating Relations in SQL"/>
+        <meta property="og:url" content="/Relations-SQL.html"/>
+        <meta property="og:description" content="In this project we will use the cleaned data from the previous mission and work mainly in SQL. We will use SQL to transform the nominations tables into new tables, and create relations across these tables. First let&#39;s take a look at the table&#39;s schema and the first ten rows."/>
+        <meta property="article:published_time" content="2018-02-07" />
             <meta property="article:section" content="Learning Data Science" />
-            <meta property="article:tag" content="python basics" />
+            <meta property="article:tag" content="SQL" />
+            <meta property="article:tag" content="pandas" />
             <meta property="article:author" content="Seng Chu" />
 
 
@@ -100,10 +101,10 @@
         <article>
             <header class="page-header">
                 <h1>
-                    <a href="/Exploring-Births.html"
+                    <a href="/Relations-SQL.html"
                        rel="bookmark"
-                       title="Permalink to Exploring U.S. Births">
-                        Exploring U.S. Births
+                       title="Permalink to Creating Relations in SQL">
+                        Creating Relations in SQL
                     </a>
                 </h1>
             </header>
@@ -113,7 +114,7 @@
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2018-01-26T00:00:00-08:00"> Fri 26 January 2018</time>
+        <i class="fa fa-calendar"></i><time datetime="2018-02-07T00:00:00-08:00"> Wed 07 February 2018</time>
     </span>
 
 
@@ -121,7 +122,9 @@
 
 
 <span class="label label-default">Tags</span>
-	<a href="/tag/python-basics.html">python basics</a>
+	<a href="/tag/sql.html">SQL</a>
+        /
+	<a href="/tag/pandas.html">pandas</a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
@@ -1101,7 +1104,8 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In this project, we will look at the number of births in the United States in the file "US_births_1994-2003_CDC_NCHS.csv". First, we will use basic functions in python to convert the file into a readable format and explore the data.</p>
+<p>In this project we will use the cleaned data from the previous mission and work mainly in SQL. We will use SQL to transform the nominations tables into new tables, and create relations across these tables.</p>
+<p>First let's take a look at the table's schema and the first ten rows.</p>
 </div>
 </div>
 </div>
@@ -1110,32 +1114,11 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [1]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Opens the file and read it.</span>
-<span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"US_births_1994-2003_CDC_NCHS.csv"</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-
-<span class="c1">#Prints the first 400 characters.</span>
-<span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">400</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">sqlite3</span>
+<span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">"nominations.db"</span><span class="p">)</span>
+<span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[1]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>'year,month,date_of_month,day_of_week,births\n1994,1,1,6,8096\n1994,1,2,7,7772\n1994,1,3,1,10142\n1994,1,4,2,11248\n1994,1,5,3,11053\n1994,1,6,4,11406\n1994,1,7,5,11251\n1994,1,8,6,8653\n1994,1,9,7,7910\n1994,1,10,1,10498\n1994,1,11,2,11706\n1994,1,12,3,11567\n1994,1,13,4,11212\n1994,1,14,5,11570\n1994,1,15,6,8660\n1994,1,16,7,8123\n1994,1,17,1,10567\n1994,1,18,2,11541\n1994,1,19,3,11257\n1994,1,20,4,11682\n1994,1,21,5'</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>It looks like each entry in the data is seperated by "\n". Let's create a list with the variable "births" and seperate each item in the list by \n. We can accomplish this by using the built in .split() function in python.</p>
 </div>
 </div>
 </div>
@@ -1144,38 +1127,13 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [2]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">births</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
-<span class="n">births</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">q1</span> <span class="o">=</span> <span class="s1">'''</span>
+<span class="s1">PRAGMA table_info(nominations)</span>
+<span class="s1">'''</span>
+
+<span class="n">schema</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">q1</span><span class="p">)</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[2]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>['year,month,date_of_month,day_of_week,births',
- '1994,1,1,6,8096',
- '1994,1,2,7,7772',
- '1994,1,3,1,10142',
- '1994,1,4,2,11248',
- '1994,1,5,3,11053',
- '1994,1,6,4,11406',
- '1994,1,7,5,11251',
- '1994,1,8,6,8653',
- '1994,1,9,7,7910']</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>This is still not quite what we want, each element in the list contains information on the year, month, day, day of the week, and births. We want to further break down each element in the list. We can accomplish this creating a list of lists.</p>
-<p>In addition, we want to write a generic function that can convert any csv file into this format.</p>
 </div>
 </div>
 </div>
@@ -1184,26 +1142,15 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [3]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">read_csv</span><span class="p">(</span><span class="n">inputs</span><span class="p">):</span>
-    <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-    <span class="n">string_list</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
-    <span class="c1">#Remove the headers.</span>
-    <span class="n">string_list</span> <span class="o">=</span> <span class="n">string_list</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
-    
-    <span class="c1">#Splits each list element by ',' and append it to the final list.</span>
-    <span class="n">final_list</span> <span class="o">=</span> <span class="p">[]</span>   
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">string_list</span><span class="p">:</span>
-        <span class="n">int_fields</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">string_fields</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">","</span><span class="p">)</span>
-        <span class="c1">#Converts each string to an integer.</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">string_fields</span><span class="p">:</span>
-            <span class="n">int_fields</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
-        <span class="n">final_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">int_fields</span><span class="p">)</span>   
-    <span class="k">return</span> <span class="n">final_list</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">q2</span> <span class="o">=</span> <span class="s1">'''</span>
+<span class="s1">SELECT * FROM nominations LIMIT 10</span>
+<span class="s1">'''</span>
 
-<span class="n">cdc_list</span> <span class="o">=</span> <span class="n">read_csv</span><span class="p">(</span><span class="s2">"US_births_1994-2003_CDC_NCHS.csv"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">cdc_list</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">])</span>
+<span class="n">first_ten</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">q2</span><span class="p">)</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+<span class="n">first_ten</span>
+
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">first_ten</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1213,7 +1160,44 @@ h6:hover .anchor-link {
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>[[1994, 1, 1, 6, 8096], [1994, 1, 2, 7, 7772], [1994, 1, 3, 1, 10142], [1994, 1, 4, 2, 11248], [1994, 1, 5, 3, 11053], [1994, 1, 6, 4, 11406], [1994, 1, 7, 5, 11251], [1994, 1, 8, 6, 8653], [1994, 1, 9, 7, 7910], [1994, 1, 10, 1, 10498]]
+<pre>(2010, 'Actor -- Leading Role', 'Javier Bardem', 0, 'Biutiful', 'Uxbal')
+(2010, 'Actor -- Leading Role', 'Jeff Bridges', 0, 'True Grit', 'Rooster Cogburn')
+(2010, 'Actor -- Leading Role', 'Jesse Eisenberg', 0, 'The Social Network', 'Mark Zuckerberg')
+(2010, 'Actor -- Leading Role', 'Colin Firth', 1, "The King's Speech", 'King George VI')
+(2010, 'Actor -- Leading Role', 'James Franco', 0, '127 Hours', 'Aron Ralston')
+(2010, 'Actor -- Supporting Role', 'Christian Bale', 1, 'The Fighter', 'Dicky Eklund')
+(2010, 'Actor -- Supporting Role', 'John Hawkes', 0, "Winter's Bone", 'Teardrop')
+(2010, 'Actor -- Supporting Role', 'Jeremy Renner', 0, 'The Town', 'James Coughlin')
+(2010, 'Actor -- Supporting Role', 'Mark Ruffalo', 0, 'The Kids Are All Right', 'Paul')
+(2010, 'Actor -- Supporting Role', 'Geoffrey Rush', 0, "The King's Speech", 'Lionel Logue')
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [4]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">schema</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(0, 'Year', 'INTEGER', 0, None, 0)
+(1, 'Category', 'TEXT', 0, None, 0)
+(2, 'Nominee', 'TEXT', 0, None, 0)
+(3, 'Won', 'INTEGER', 0, None, 0)
+(4, 'Movie', 'TEXT', 0, None, 0)
+(5, 'Character', 'TEXT', 0, None, 0)
 </pre>
 </div>
 </div>
@@ -1224,66 +1208,7 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now that we have the list in the format we want, we can explore the data a little bit. Let's say we are a baby products company, and we want to know if there is a particular month when more babies will be born. If that is the case, we can produce more products in preparation for that month.</p>
-<p>We can write a function that takes the list of lists as an argument and then convert it into a dictionary with each month as the dictionary key and the number of births as the value of that key.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [4]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">month_births</span><span class="p">(</span><span class="n">inputs</span><span class="p">):</span>
-    <span class="n">births_per_month</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="c1">#Loops through the list of lists.</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">inputs</span><span class="p">:</span>
-        <span class="c1">#Sets the month as the first item, and births as the last item.</span>
-        <span class="n">month</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">births</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="c1">#Add the number of births to the current value, if the key exists in the dictionary.</span>
-        <span class="k">if</span> <span class="n">month</span> <span class="ow">in</span> <span class="n">births_per_month</span><span class="p">:</span>
-            <span class="n">births_per_month</span><span class="p">[</span><span class="n">month</span><span class="p">]</span> <span class="o">=</span> <span class="n">births</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">births_per_month</span><span class="p">[</span><span class="n">month</span><span class="p">])</span>
-        <span class="c1">#Set the key equal to the value, if the key doesn't exist in teh dictionary.</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">births_per_month</span><span class="p">[</span><span class="n">month</span><span class="p">]</span> <span class="o">=</span> <span class="n">births</span>           
-    <span class="k">return</span> <span class="n">births_per_month</span>
-
-<span class="c1">#The result is a dictionary with the month as the key and the number of births as values.</span>
-<span class="n">cdc_month_births</span> <span class="o">=</span> <span class="n">month_births</span><span class="p">(</span><span class="n">cdc_list</span><span class="p">)</span>
-<span class="n">cdc_month_births</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[4]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>{1: 3232517,
- 2: 3018140,
- 3: 3322069,
- 4: 3185314,
- 5: 3350907,
- 6: 3296530,
- 7: 3498783,
- 8: 3525858,
- 9: 3439698,
- 10: 3378814,
- 11: 3171647,
- 12: 3301860}</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Looks like the total number births from 1994 - 2003 in August ended up to be the highest. However, the number might not be high enough to justify increased production of baby products.</p>
-<p>Let's repeat the process of what we just did above for the day of the week instead of month. We'll write a function that takes in the list of lists as an argument and generate a dictionary with day of the week as the key and number of births as the value. This will give us a count of the total number of births from 1994-2003 for each day of the week</p>
+<p>We want to create a new table within the databse named "ceremonies". This table will have the Year and the Host only</p>
 </div>
 </div>
 </div>
@@ -1292,38 +1217,28 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [5]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">dow_births</span><span class="p">(</span><span class="n">inputs</span><span class="p">):</span>
-    <span class="n">births_dow</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">inputs</span><span class="p">:</span>
-        <span class="n">dow</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
-        <span class="n">births</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">dow</span> <span class="ow">in</span> <span class="n">births_dow</span><span class="p">:</span>
-            <span class="n">births_dow</span><span class="p">[</span><span class="n">dow</span><span class="p">]</span> <span class="o">=</span> <span class="n">births</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">births_dow</span><span class="p">[</span><span class="n">dow</span><span class="p">])</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">births_dow</span><span class="p">[</span><span class="n">dow</span><span class="p">]</span> <span class="o">=</span> <span class="n">births</span>           
-    <span class="k">return</span> <span class="n">births_dow</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">q3</span> <span class="o">=</span> <span class="s1">'''</span>
+<span class="s1">    CREATE TABLE ceremonies (</span>
+<span class="s1">    id INTEGER primary key,</span>
+<span class="s1">    Year INTEGER,</span>
+<span class="s1">    Host TEXT</span>
+<span class="s1">);</span>
+<span class="s1">'''</span>
 
-
-
-<span class="n">cdc_day_births</span> <span class="o">=</span> <span class="n">dow_births</span><span class="p">(</span><span class="n">cdc_list</span><span class="p">)</span>
-<span class="n">cdc_day_births</span>
+<span class="n">years_hosts</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">2010</span><span class="p">,</span> <span class="s2">"Steve Martin"</span><span class="p">),</span>
+               <span class="p">(</span><span class="mi">2009</span><span class="p">,</span> <span class="s2">"Hugh Jackman"</span><span class="p">),</span>
+               <span class="p">(</span><span class="mi">2008</span><span class="p">,</span> <span class="s2">"Jon Stewart"</span><span class="p">),</span>
+               <span class="p">(</span><span class="mi">2007</span><span class="p">,</span> <span class="s2">"Ellen DeGeneres"</span><span class="p">),</span>
+               <span class="p">(</span><span class="mi">2006</span><span class="p">,</span> <span class="s2">"Jon Stewart"</span><span class="p">),</span>
+               <span class="p">(</span><span class="mi">2005</span><span class="p">,</span> <span class="s2">"Chris Rock"</span><span class="p">),</span>
+               <span class="p">(</span><span class="mi">2004</span><span class="p">,</span> <span class="s2">"Billy Crystal"</span><span class="p">),</span>
+               <span class="p">(</span><span class="mi">2003</span><span class="p">,</span> <span class="s2">"Steve Martin"</span><span class="p">),</span>
+               <span class="p">(</span><span class="mi">2002</span><span class="p">,</span> <span class="s2">"Whoopi Goldberg"</span><span class="p">),</span>
+               <span class="p">(</span><span class="mi">2001</span><span class="p">,</span> <span class="s2">"Steve Martin"</span><span class="p">),</span>
+               <span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="s2">"Billy Crystal"</span><span class="p">),</span>
+            <span class="p">]</span>
+<span class="n">insert_query</span> <span class="o">=</span> <span class="s2">"INSERT INTO ceremonies (Year, Host) VALUES (?, ?)"</span>
 </pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[5]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>{1: 5789166,
- 2: 6446196,
- 3: 6322855,
- 4: 6288429,
- 5: 6233657,
- 6: 4562111,
- 7: 4079723}</pre>
-</div>
 </div>
 </div>
 </div>
@@ -1332,8 +1247,7 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>According to the international standard ISO-8601, the International Organization for Standardization (ISO) has decreed that Monday shall be the first day of the week. So it looks like the highest total amount of births from 1994 - 2003 is actually a Tuesday.</p>
-<p>We can repeat the process again. We'll write a function that takes in the list of lists as an argument and generate a dictionary with year as the key and number of births as the value. This time, the function will be a bit more generic. The function will take in two arguments, the data and the column index. A column index of 0 will refer to the year column, whereas a column index of 1 will refer to the month and so on. That way we can quickly generate dictionary of all the birth counts.</p>
+<p>The .executemany() method allows us to perform many insert commands at once, until the list ends</p>
 </div>
 </div>
 </div>
@@ -1342,20 +1256,9 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [6]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">calc_counts</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">column</span><span class="p">):</span>
-    <span class="n">dictionary</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
-        <span class="n">column_name</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="n">column</span><span class="p">]</span>
-        <span class="n">births</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">column_name</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="n">column_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">births</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="n">column_name</span><span class="p">])</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="n">column_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">births</span>
-            
-    <span class="k">return</span> <span class="n">dictionary</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">q3</span><span class="p">)</span>
 
-<span class="n">cdc_year_births</span> <span class="o">=</span> <span class="n">calc_counts</span><span class="p">(</span><span class="n">cdc_list</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-<span class="n">cdc_year_births</span>
+<span class="n">conn</span><span class="o">.</span><span class="n">executemany</span><span class="p">(</span><span class="n">insert_query</span><span class="p">,</span> <span class="n">years_hosts</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1365,16 +1268,7 @@ h6:hover .anchor-link {
 <div class="output_area">
 <div class="prompt output_prompt">Out[6]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>{1994: 3952767,
- 1995: 3899589,
- 1996: 3891494,
- 1997: 3880894,
- 1998: 3941553,
- 1999: 3959417,
- 2000: 4058814,
- 2001: 4025933,
- 2002: 4021726,
- 2003: 4089950}</pre>
+<pre><sqlite3.cursor at 0x1cefc369030></pre>
 </div>
 </div>
 </div>
@@ -1384,8 +1278,7 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>It looks like the number of births in the US is increasing every year.</p>
-<p>Lastly, we'll use the same function again to look at the total number of births in each day of the month</p>
+<p>Let's check out the table we just created .</p>
 </div>
 </div>
 </div>
@@ -1394,8 +1287,12 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [7]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cdc_day_births</span> <span class="o">=</span> <span class="n">calc_counts</span><span class="p">(</span><span class="n">cdc_list</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">cdc_day_births</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">q4</span> <span class="o">=</span> <span class="s2">"SELECT * FROM ceremonies LIMIT 10"</span>
+<span class="n">q5</span> <span class="o">=</span> <span class="s2">"PRAGMA table_info(ceremonies)"</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">q4</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+<span class="n">result</span>
 </pre></div>
 </div>
 </div>
@@ -1405,37 +1302,41 @@ h6:hover .anchor-link {
 <div class="output_area">
 <div class="prompt output_prompt">Out[7]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>{1: 1276557,
- 2: 1288739,
- 3: 1304499,
- 4: 1288154,
- 5: 1299953,
- 6: 1304474,
- 7: 1310459,
- 8: 1312297,
- 9: 1303292,
- 10: 1320764,
- 11: 1314361,
- 12: 1318437,
- 13: 1277684,
- 14: 1320153,
- 15: 1319171,
- 16: 1315192,
- 17: 1324953,
- 18: 1326855,
- 19: 1318727,
- 20: 1324821,
- 21: 1322897,
- 22: 1317381,
- 23: 1293290,
- 24: 1288083,
- 25: 1272116,
- 26: 1284796,
- 27: 1294395,
- 28: 1307685,
- 29: 1223161,
- 30: 1202095,
- 31: 746696}</pre>
+<pre>[(1, 2010, 'Steve Martin'),
+ (2, 2009, 'Hugh Jackman'),
+ (3, 2008, 'Jon Stewart'),
+ (4, 2007, 'Ellen DeGeneres'),
+ (5, 2006, 'Jon Stewart'),
+ (6, 2005, 'Chris Rock'),
+ (7, 2004, 'Billy Crystal'),
+ (8, 2003, 'Steve Martin'),
+ (9, 2002, 'Whoopi Goldberg'),
+ (10, 2001, 'Steve Martin')]</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [8]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">q5</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+<span class="n">result</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[8]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>[(0, 'id', 'INTEGER', 0, None, 1),
+ (1, 'Year', 'INTEGER', 0, None, 0),
+ (2, 'Host', 'TEXT', 0, None, 0)]</pre>
 </div>
 </div>
 </div>
@@ -1445,7 +1346,441 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We are not really seeing any patterns here other than the 31st day having signficantly less number of births compared to the rest of the days in the month. This makes sense as not every month have 31 days.</p>
+<p>We want to avoid editing the original table. So let's make a new nominations table, but this time we'll include the ceremony_id as a foriegn key.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [9]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">q6</span> <span class="o">=</span> <span class="s2">"PRAGMA foreign_keys = ON;"</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">q6</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[9]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre><sqlite3.cursor at 0x1cefb338ea0></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [10]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">q7</span> <span class="o">=</span> <span class="s1">'''</span>
+<span class="s1">    CREATE TABLE nominations_two (</span>
+<span class="s1">    id integer primary key,</span>
+<span class="s1">    category text,</span>
+<span class="s1">    nominee text,</span>
+<span class="s1">    movie text,</span>
+<span class="s1">    character text,</span>
+<span class="s1">    won integer,</span>
+<span class="s1">    ceremony_id integer,</span>
+<span class="s1">    foreign key(ceremony_id) references ceremonies(id)</span>
+<span class="s1">);</span>
+<span class="s1">'''</span>
+
+<span class="c1">#Query to be inserted into the new table</span>
+<span class="n">insert_query2</span> <span class="o">=</span> <span class="s2">"INSERT INTO nominations_two (category, nominee, movie, character, won, ceremony_id) VALUES (?, ?, ?, ?, ?, ?)"</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [11]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">q7</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[11]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre><sqlite3.cursor at 0x1cefb338ea0></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We'll need a list of tuples, we can do this by writing a query and setting the results to a list.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [12]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">q8</span> <span class="o">=</span> <span class="s1">'''</span>
+<span class="s1">SELECT nominations.category, nominations.nominee, nominations.movie, nominations.character, nominations.won, ceremonies.id</span>
+<span class="s1">FROM nominations</span>
+<span class="s1">INNER JOIN ceremonies</span>
+<span class="s1">ON nominations.year == ceremonies.year</span>
+<span class="s1">'''</span>
+<span class="c1">#returns a list of tuples</span>
+<span class="n">joined_nominations</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">q8</span><span class="p">)</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+<span class="n">joined_nominations</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[12]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>[('Actor -- Leading Role', 'Javier Bardem', 'Biutiful', 'Uxbal', 0, 1),
+ ('Actor -- Leading Role',
+  'Jeff Bridges',
+  'True Grit',
+  'Rooster Cogburn',
+  0,
+  1),
+ ('Actor -- Leading Role',
+  'Jesse Eisenberg',
+  'The Social Network',
+  'Mark Zuckerberg',
+  0,
+  1),
+ ('Actor -- Leading Role',
+  'Colin Firth',
+  "The King's Speech",
+  'King George VI',
+  1,
+  1),
+ ('Actor -- Leading Role', 'James Franco', '127 Hours', 'Aron Ralston', 0, 1)]</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [13]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#populating the nominations_two table</span>
+<span class="n">conn</span><span class="o">.</span><span class="n">executemany</span><span class="p">(</span><span class="n">insert_query2</span><span class="p">,</span> <span class="n">joined_nominations</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[13]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre><sqlite3.cursor at 0x1cefc369180></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let's check out the new table, "nominations_two" that we just made.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [14]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">q9</span> <span class="o">=</span> <span class="s2">"SELECT * FROM nominations_two LIMIT 5"</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">q9</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+<span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[14]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>[(1, 'Actor -- Leading Role', 'Javier Bardem', 'Biutiful', 'Uxbal', 0, 1),
+ (2,
+  'Actor -- Leading Role',
+  'Jeff Bridges',
+  'True Grit',
+  'Rooster Cogburn',
+  0,
+  1),
+ (3,
+  'Actor -- Leading Role',
+  'Jesse Eisenberg',
+  'The Social Network',
+  'Mark Zuckerberg',
+  0,
+  1),
+ (4,
+  'Actor -- Leading Role',
+  'Colin Firth',
+  "The King's Speech",
+  'King George VI',
+  1,
+  1),
+ (5,
+  'Actor -- Leading Role',
+  'James Franco',
+  '127 Hours',
+  'Aron Ralston',
+  0,
+  1)]</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can change the table name of nominations_two back to nominations, replacing the table.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [15]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#We can drop the table "nominations" with the DROP TABLE sql command</span>
+<span class="n">q10</span> <span class="o">=</span> <span class="s2">"DROP TABLE nominations"</span>
+<span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">q10</span><span class="p">)</span>
+
+<span class="n">q11</span> <span class="o">=</span> <span class="s2">"ALTER TABLE nominations_two RENAME TO nominations"</span>
+<span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">q11</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[15]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre><sqlite3.cursor at 0x1cefc369260></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can repeat the process and create three new tables and use have their IDs cross reference each other.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [16]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">q11</span> <span class="o">=</span> <span class="s1">'''</span>
+<span class="s1">    CREATE TABLE movies(</span>
+<span class="s1">    id integer PRIMARY KEY,</span>
+<span class="s1">    movie text</span>
+<span class="s1">)'''</span>
+
+
+<span class="n">q12</span> <span class="o">=</span> <span class="s1">'''</span>
+<span class="s1">    CREATE TABLE actors(</span>
+<span class="s1">    id integer PRIMARY KEY,</span>
+<span class="s1">    actor text</span>
+<span class="s1">)'''</span>
+
+<span class="n">q13</span> <span class="o">=</span> <span class="s1">'''</span>
+<span class="s1">    CREATE TABLE movies_actors(</span>
+<span class="s1">    id integer PRIMARY KEY,</span>
+<span class="s1">    movie_id integer references movies(id),</span>
+<span class="s1">    actor_id integer references actors(id)</span>
+<span class="s1">    );</span>
+<span class="s1">'''</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [17]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">q11</span><span class="p">)</span>
+<span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">q12</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[17]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre><sqlite3.cursor at 0x1cefc369340></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [18]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">q13</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[18]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre><sqlite3.cursor at 0x1cefc3692d0></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [19]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">insert_into_movies</span> <span class="o">=</span> <span class="s2">"INSERT INTO movies (movie) SELECT nominations.movie from nominations"</span>
+<span class="n">insert_into_actors</span> <span class="o">=</span> <span class="s2">"INSERT INTO actors (actor) SELECT nominations.nominee from nominations"</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [20]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">insert_into_movies</span><span class="p">)</span>
+<span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">insert_into_actors</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[20]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre><sqlite3.cursor at 0x1cefc3693b0></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [21]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"SELECT * FROM actors LIMIT 5"</span><span class="p">)</span><span class="o">.</span><span class="n">fetchall</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"SELECT * FROM movies LIMIT 5"</span><span class="p">)</span><span class="o">.</span><span class="n">fetchall</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[(1, 'Javier Bardem'), (2, 'Jeff Bridges'), (3, 'Jesse Eisenberg'), (4, 'Colin Firth'), (5, 'James Franco')]
+[(1, 'Biutiful'), (2, 'True Grit'), (3, 'The Social Network'), (4, "The King's Speech"), (5, '127 Hours')]
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [22]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">q14</span> <span class="o">=</span> <span class="s2">"SELECT movie, nominee FROM nominations"</span>
+<span class="n">list_actors_movies</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">q14</span><span class="p">)</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+<span class="n">list_actors_movies</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[22]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>[('Biutiful', 'Javier Bardem'),
+ ('True Grit', 'Jeff Bridges'),
+ ('The Social Network', 'Jesse Eisenberg'),
+ ("The King's Speech", 'Colin Firth'),
+ ('127 Hours', 'James Franco')]</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [23]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">insert_query</span> <span class="o">=</span> <span class="s1">'''</span>
+<span class="s1">    INSERT INTO movies_actors(movie_id, actor_id)</span>
+<span class="s1">    VALUES ((SELECT id FROM movies WHERE movie == ?), (SELECT id from actors where actor == ?))</span>
+<span class="s1">'''</span>
+<span class="n">conn</span><span class="o">.</span><span class="n">executemany</span><span class="p">(</span><span class="n">insert_query</span><span class="p">,</span> <span class="n">list_actors_movies</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"SELECT * FROM movies_actors LIMIT 5"</span><span class="p">)</span><span class="o">.</span><span class="n">fetchall</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[(1, 1, 1), (2, 2, 2), (3, 3, 3), (4, 4, 4), (5, 5, 5)]
+</pre>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -1454,9 +1789,10 @@ h6:hover .anchor-link {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr />
-<h4 id="Learning-Summary">Learning Summary<a class="anchor-link" href="#Learning-Summary">¶</a></h4><p>Python concepts explored: lists, dictionaries, functions, for loops<br />
-Python functions and methods used: .read(), open(), .split(), .append(), int()</p>
-<p>The files used for this project can be found in my <a href="https://github.com/sengkchu/Dataquest-Guided-Projects-Solutions/tree/master/Guided%20Project_%20Explore%20U.S.%20Births">GitHub repository</a>.</p>
+<h4 id="Learning-Summary">Learning Summary<a class="anchor-link" href="#Learning-Summary">¶</a></h4><p>Python/SQL concepts explored: python+sqlite3, pandas, multiple tables, foreign keys, subqueries, populating new tables</p>
+<p>Python functions and methods used: .cursor(), .connect(), .execute(), .fetchall(), .executemany()</p>
+<p>SQL statements used: PRAGMA, LIMIT, FROM, SELECT, INNER JOIN, DROP, ALTER, VALUES</p>
+<p>The files used for this project can be found in my <a href="https://github.com/sengkchu/Dataquest-Guided-Projects-Solutions/tree/master/Guided%20Project_%20Creating%20relations%20in%20SQLite">GitHub repository</a>.</p>
 </div>
 </div>
 </div>
@@ -1510,7 +1846,7 @@ Python functions and methods used: .read(), open(), .split(), .append(), int()</
             var disqus_shortname = 'codingdisciple'; // required: replace example with your forum shortname
             var disqus_config = function () {
                 this.language = "en";
-                        this.page.identifier = '2018-01-26-Exploring-Births';
+                        this.page.identifier = '2018-02-07-Relations-SQL';
             };
             /* * * DON'T EDIT BELOW THIS LINE * * */
             (function () {

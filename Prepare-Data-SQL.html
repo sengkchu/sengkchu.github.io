@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<link rel="canonical" href="/Exploring-Births.html"/>
+<link rel="canonical" href="/Prepare-Data-SQL.html"/>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>Exploring U.S. Births - Coding Disciple</title>
+    <title>Preparing Data for SQLite - Coding Disciple</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -10,20 +10,22 @@
 
 
 
-<link rel="canonical" href="/Exploring-Births.html">
+<link rel="canonical" href="/Prepare-Data-SQL.html">
 
         <meta name="author" content="Seng Chu" />
-        <meta name="keywords" content="python basics" />
-        <meta name="description" content="In this project, we will look at the number of births in the United States in the file &#34;US_births_1994-2003_CDC_NCHS.csv&#34;. First, we will use basic functions in python to convert the file into a readable format and explore the data." />
+        <meta name="keywords" content="data cleaning,SQL,pandas" />
+        <meta name="description" content="In this project, we will prepare data in preparation for SQL. We&#39;ll have to first clean the data." />
 
         <meta property="og:site_name" content="Coding Disciple" />
         <meta property="og:type" content="article"/>
-        <meta property="og:title" content="Exploring U.S. Births"/>
-        <meta property="og:url" content="/Exploring-Births.html"/>
-        <meta property="og:description" content="In this project, we will look at the number of births in the United States in the file &#34;US_births_1994-2003_CDC_NCHS.csv&#34;. First, we will use basic functions in python to convert the file into a readable format and explore the data."/>
-        <meta property="article:published_time" content="2018-01-26" />
+        <meta property="og:title" content="Preparing Data for SQLite"/>
+        <meta property="og:url" content="/Prepare-Data-SQL.html"/>
+        <meta property="og:description" content="In this project, we will prepare data in preparation for SQL. We&#39;ll have to first clean the data."/>
+        <meta property="article:published_time" content="2018-02-07" />
             <meta property="article:section" content="Learning Data Science" />
-            <meta property="article:tag" content="python basics" />
+            <meta property="article:tag" content="data cleaning" />
+            <meta property="article:tag" content="SQL" />
+            <meta property="article:tag" content="pandas" />
             <meta property="article:author" content="Seng Chu" />
 
 
@@ -100,10 +102,10 @@
         <article>
             <header class="page-header">
                 <h1>
-                    <a href="/Exploring-Births.html"
+                    <a href="/Prepare-Data-SQL.html"
                        rel="bookmark"
-                       title="Permalink to Exploring U.S. Births">
-                        Exploring U.S. Births
+                       title="Permalink to Preparing Data for SQLite">
+                        Preparing Data for SQLite
                     </a>
                 </h1>
             </header>
@@ -113,7 +115,7 @@
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2018-01-26T00:00:00-08:00"> Fri 26 January 2018</time>
+        <i class="fa fa-calendar"></i><time datetime="2018-02-07T00:00:00-08:00"> Wed 07 February 2018</time>
     </span>
 
 
@@ -121,7 +123,11 @@
 
 
 <span class="label label-default">Tags</span>
-	<a href="/tag/python-basics.html">python basics</a>
+	<a href="/tag/data-cleaning.html">data cleaning</a>
+        /
+	<a href="/tag/sql.html">SQL</a>
+        /
+	<a href="/tag/pandas.html">pandas</a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
@@ -1101,7 +1107,7 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In this project, we will look at the number of births in the United States in the file "US_births_1994-2003_CDC_NCHS.csv". First, we will use basic functions in python to convert the file into a readable format and explore the data.</p>
+<p>In this project, we will prepare data in preparation for SQL. We'll have to first clean the data.</p>
 </div>
 </div>
 </div>
@@ -1110,12 +1116,12 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [1]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Opens the file and read it.</span>
-<span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"US_births_1994-2003_CDC_NCHS.csv"</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'academy_awards.csv'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'ISO-8859-1'</span><span class="p">)</span>
 
-<span class="c1">#Prints the first 400 characters.</span>
-<span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">400</span><span class="p">]</span>
+<span class="c1">#Turns off warnings for potentially confusing assignments</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">mode</span><span class="o">.</span><span class="n">chained_assignment</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># default='warn'</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1124,8 +1130,112 @@ h6:hover .anchor-link {
 <div class="output">
 <div class="output_area">
 <div class="prompt output_prompt">Out[1]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>'year,month,date_of_month,day_of_week,births\n1994,1,1,6,8096\n1994,1,2,7,7772\n1994,1,3,1,10142\n1994,1,4,2,11248\n1994,1,5,3,11053\n1994,1,6,4,11406\n1994,1,7,5,11251\n1994,1,8,6,8653\n1994,1,9,7,7910\n1994,1,10,1,10498\n1994,1,11,2,11706\n1994,1,12,3,11567\n1994,1,13,4,11212\n1994,1,14,5,11570\n1994,1,15,6,8660\n1994,1,16,7,8123\n1994,1,17,1,10567\n1994,1,18,2,11541\n1994,1,19,3,11257\n1994,1,20,4,11682\n1994,1,21,5'</pre>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>Year</th>
+<th>Category</th>
+<th>Nominee</th>
+<th>Additional Info</th>
+<th>Won?</th>
+<th>Unnamed: 5</th>
+<th>Unnamed: 6</th>
+<th>Unnamed: 7</th>
+<th>Unnamed: 8</th>
+<th>Unnamed: 9</th>
+<th>Unnamed: 10</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>2010 (83rd)</td>
+<td>Actor -- Leading Role</td>
+<td>Javier Bardem</td>
+<td>Biutiful {'Uxbal'}</td>
+<td>NO</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr>
+<th>1</th>
+<td>2010 (83rd)</td>
+<td>Actor -- Leading Role</td>
+<td>Jeff Bridges</td>
+<td>True Grit {'Rooster Cogburn'}</td>
+<td>NO</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr>
+<th>2</th>
+<td>2010 (83rd)</td>
+<td>Actor -- Leading Role</td>
+<td>Jesse Eisenberg</td>
+<td>The Social Network {'Mark Zuckerberg'}</td>
+<td>NO</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr>
+<th>3</th>
+<td>2010 (83rd)</td>
+<td>Actor -- Leading Role</td>
+<td>Colin Firth</td>
+<td>The King's Speech {'King George VI'}</td>
+<td>YES</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr>
+<th>4</th>
+<td>2010 (83rd)</td>
+<td>Actor -- Leading Role</td>
+<td>James Franco</td>
+<td>127 Hours {'Aron Ralston'}</td>
+<td>NO</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
 </div>
@@ -1135,7 +1245,25 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>It looks like each entry in the data is seperated by "\n". Let's create a list with the variable "births" and seperate each item in the list by \n. We can accomplish this by using the built in .split() function in python.</p>
+<p>This is not considered tidy data. Here are the issues:</p>
+<ol>
+<li><p>We have string values in the year column, we should change these into integers.</p>
+</li>
+<li><p>Additional Info has the movie name and the role name, this can be split into two columns.</p>
+</li>
+<li><p>The "Won?" column change should be changed to 0's and 1's in.</p>
+</li>
+<li><p>There are a lot of NaN values under the unnammed columns, we should consider dropping them.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>First let's take a look at a unnammed columns, we can use .value_counts() to see if there are any significant values in these columns.</p>
 </div>
 </div>
 </div>
@@ -1144,66 +1272,12 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [2]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">births</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
-<span class="n">births</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[2]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>['year,month,date_of_month,day_of_week,births',
- '1994,1,1,6,8096',
- '1994,1,2,7,7772',
- '1994,1,3,1,10142',
- '1994,1,4,2,11248',
- '1994,1,5,3,11053',
- '1994,1,6,4,11406',
- '1994,1,7,5,11251',
- '1994,1,8,6,8653',
- '1994,1,9,7,7910']</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>This is still not quite what we want, each element in the list contains information on the year, month, day, day of the week, and births. We want to further break down each element in the list. We can accomplish this creating a list of lists.</p>
-<p>In addition, we want to write a generic function that can convert any csv file into this format.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [3]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">read_csv</span><span class="p">(</span><span class="n">inputs</span><span class="p">):</span>
-    <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-    <span class="n">string_list</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
-    <span class="c1">#Remove the headers.</span>
-    <span class="n">string_list</span> <span class="o">=</span> <span class="n">string_list</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
-    
-    <span class="c1">#Splits each list element by ',' and append it to the final list.</span>
-    <span class="n">final_list</span> <span class="o">=</span> <span class="p">[]</span>   
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">string_list</span><span class="p">:</span>
-        <span class="n">int_fields</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">string_fields</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">","</span><span class="p">)</span>
-        <span class="c1">#Converts each string to an integer.</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">string_fields</span><span class="p">:</span>
-            <span class="n">int_fields</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
-        <span class="n">final_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">int_fields</span><span class="p">)</span>   
-    <span class="k">return</span> <span class="n">final_list</span>
-
-<span class="n">cdc_list</span> <span class="o">=</span> <span class="n">read_csv</span><span class="p">(</span><span class="s2">"US_births_1994-2003_CDC_NCHS.csv"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">cdc_list</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'Unnamed: 10'</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'Unnamed: 9'</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'Unnamed: 8'</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'Unnamed: 7'</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'Unnamed: 6'</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'Unnamed: 5'</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
@@ -1213,7 +1287,28 @@ h6:hover .anchor-link {
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>[[1994, 1, 1, 6, 8096], [1994, 1, 2, 7, 7772], [1994, 1, 3, 1, 10142], [1994, 1, 4, 2, 11248], [1994, 1, 5, 3, 11053], [1994, 1, 6, 4, 11406], [1994, 1, 7, 5, 11251], [1994, 1, 8, 6, 8653], [1994, 1, 9, 7, 7910], [1994, 1, 10, 1, 10498]]
+<pre>*    1
+Name: Unnamed: 10, dtype: int64
+*    1
+Name: Unnamed: 9, dtype: int64
+*                                                 1
+ understanding comedy genius - Mack Sennett.""    1
+Name: Unnamed: 8, dtype: int64
+*                                                     1
+ while requiring no dangerous solvents. [Systems]"    1
+ kindly                                               1
+Name: Unnamed: 7, dtype: int64
+*                                                                   9
+ direct radiator bass style cinema loudspeaker systems. [Sound]"    1
+ flexibility and water resistance                                   1
+ sympathetic                                                        1
+Name: Unnamed: 6, dtype: int64
+*                                                                                                               7
+ discoverer of stars                                                                                            1
+ D.B. "Don" Keele and Mark E. Engebretson has resulted in the over 20-year dominance of constant-directivity    1
+ error-prone measurements on sets. [Digital Imaging Technology]"                                                1
+ resilience                                                                                                     1
+Name: Unnamed: 5, dtype: int64
 </pre>
 </div>
 </div>
@@ -1224,8 +1319,134 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now that we have the list in the format we want, we can explore the data a little bit. Let's say we are a baby products company, and we want to know if there is a particular month when more babies will be born. If that is the case, we can produce more products in preparation for that month.</p>
-<p>We can write a function that takes the list of lists as an argument and then convert it into a dictionary with each month as the dictionary key and the number of births as the value of that key.</p>
+<p>It doesn't look like there any significant information under these columns. We can probably drop all the unnamed columns, but first let's convert the year column to integers.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [3]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">'Year'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'Year'</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">'Year'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'Year'</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[3]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>Year</th>
+<th>Category</th>
+<th>Nominee</th>
+<th>Additional Info</th>
+<th>Won?</th>
+<th>Unnamed: 5</th>
+<th>Unnamed: 6</th>
+<th>Unnamed: 7</th>
+<th>Unnamed: 8</th>
+<th>Unnamed: 9</th>
+<th>Unnamed: 10</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>2010</td>
+<td>Actor -- Leading Role</td>
+<td>Javier Bardem</td>
+<td>Biutiful {'Uxbal'}</td>
+<td>NO</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr>
+<th>1</th>
+<td>2010</td>
+<td>Actor -- Leading Role</td>
+<td>Jeff Bridges</td>
+<td>True Grit {'Rooster Cogburn'}</td>
+<td>NO</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr>
+<th>2</th>
+<td>2010</td>
+<td>Actor -- Leading Role</td>
+<td>Jesse Eisenberg</td>
+<td>The Social Network {'Mark Zuckerberg'}</td>
+<td>NO</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr>
+<th>3</th>
+<td>2010</td>
+<td>Actor -- Leading Role</td>
+<td>Colin Firth</td>
+<td>The King's Speech {'King George VI'}</td>
+<td>YES</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr>
+<th>4</th>
+<td>2010</td>
+<td>Actor -- Leading Role</td>
+<td>James Franco</td>
+<td>127 Hours {'Aron Ralston'}</td>
+<td>NO</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -1234,24 +1455,7 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [4]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">month_births</span><span class="p">(</span><span class="n">inputs</span><span class="p">):</span>
-    <span class="n">births_per_month</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="c1">#Loops through the list of lists.</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">inputs</span><span class="p">:</span>
-        <span class="c1">#Sets the month as the first item, and births as the last item.</span>
-        <span class="n">month</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">births</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="c1">#Add the number of births to the current value, if the key exists in the dictionary.</span>
-        <span class="k">if</span> <span class="n">month</span> <span class="ow">in</span> <span class="n">births_per_month</span><span class="p">:</span>
-            <span class="n">births_per_month</span><span class="p">[</span><span class="n">month</span><span class="p">]</span> <span class="o">=</span> <span class="n">births</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">births_per_month</span><span class="p">[</span><span class="n">month</span><span class="p">])</span>
-        <span class="c1">#Set the key equal to the value, if the key doesn't exist in teh dictionary.</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">births_per_month</span><span class="p">[</span><span class="n">month</span><span class="p">]</span> <span class="o">=</span> <span class="n">births</span>           
-    <span class="k">return</span> <span class="n">births_per_month</span>
-
-<span class="c1">#The result is a dictionary with the month as the key and the number of births as values.</span>
-<span class="n">cdc_month_births</span> <span class="o">=</span> <span class="n">month_births</span><span class="p">(</span><span class="n">cdc_list</span><span class="p">)</span>
-<span class="n">cdc_month_births</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">(</span><span class="n">include</span> <span class="o">=</span> <span class="s1">'all'</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1260,19 +1464,196 @@ h6:hover .anchor-link {
 <div class="output">
 <div class="output_area">
 <div class="prompt output_prompt">Out[4]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>{1: 3232517,
- 2: 3018140,
- 3: 3322069,
- 4: 3185314,
- 5: 3350907,
- 6: 3296530,
- 7: 3498783,
- 8: 3525858,
- 9: 3439698,
- 10: 3378814,
- 11: 3171647,
- 12: 3301860}</pre>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>Year</th>
+<th>Category</th>
+<th>Nominee</th>
+<th>Additional Info</th>
+<th>Won?</th>
+<th>Unnamed: 5</th>
+<th>Unnamed: 6</th>
+<th>Unnamed: 7</th>
+<th>Unnamed: 8</th>
+<th>Unnamed: 9</th>
+<th>Unnamed: 10</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>count</th>
+<td>10137.000000</td>
+<td>10137</td>
+<td>10137</td>
+<td>9011</td>
+<td>10137</td>
+<td>11</td>
+<td>12</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<th>unique</th>
+<td>NaN</td>
+<td>40</td>
+<td>6001</td>
+<td>6424</td>
+<td>16</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<th>top</th>
+<td>NaN</td>
+<td>Writing</td>
+<td>Meryl Streep</td>
+<td>Metro-Goldwyn-Mayer</td>
+<td>NO</td>
+<td>*</td>
+<td>*</td>
+<td>*</td>
+<td>*</td>
+<td>*</td>
+<td>*</td>
+</tr>
+<tr>
+<th>freq</th>
+<td>NaN</td>
+<td>888</td>
+<td>16</td>
+<td>60</td>
+<td>7168</td>
+<td>7</td>
+<td>9</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<th>mean</th>
+<td>1970.330768</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr>
+<th>std</th>
+<td>23.332917</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr>
+<th>min</th>
+<td>1927.000000</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr>
+<th>25%</th>
+<td>1950.000000</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr>
+<th>50%</th>
+<td>1970.000000</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr>
+<th>75%</th>
+<td>1991.000000</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr>
+<th>max</th>
+<td>2010.000000</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
 </div>
@@ -1282,8 +1663,7 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Looks like the total number births from 1994 - 2003 in August ended up to be the highest. However, the number might not be high enough to justify increased production of baby products.</p>
-<p>Let's repeat the process of what we just did above for the day of the week instead of month. We'll write a function that takes in the list of lists as an argument and generate a dictionary with day of the week as the key and number of births as the value. This will give us a count of the total number of births from 1994-2003 for each day of the week</p>
+<p>We are only interested in data after year 2000, and actors in award winnng categories. We can use boolean filtering and the .isin() method to filter the data out and then create a new dataframe named "nominations".</p>
 </div>
 </div>
 </div>
@@ -1292,21 +1672,18 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [5]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">dow_births</span><span class="p">(</span><span class="n">inputs</span><span class="p">):</span>
-    <span class="n">births_dow</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">inputs</span><span class="p">:</span>
-        <span class="n">dow</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
-        <span class="n">births</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">dow</span> <span class="ow">in</span> <span class="n">births_dow</span><span class="p">:</span>
-            <span class="n">births_dow</span><span class="p">[</span><span class="n">dow</span><span class="p">]</span> <span class="o">=</span> <span class="n">births</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">births_dow</span><span class="p">[</span><span class="n">dow</span><span class="p">])</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">births_dow</span><span class="p">[</span><span class="n">dow</span><span class="p">]</span> <span class="o">=</span> <span class="n">births</span>           
-    <span class="k">return</span> <span class="n">births_dow</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">later_than_2000</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">'Year'</span><span class="p">]</span> <span class="o">></span> <span class="mi">2000</span><span class="p">]</span>
+
+<span class="n">award_categories</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">"Actor -- Leading Role"</span><span class="p">,</span>
+    <span class="s2">"Actor -- Supporting Role"</span><span class="p">,</span>
+    <span class="s2">"Actress -- Leading Role"</span><span class="p">,</span>
+    <span class="s2">"Actress -- Supporting Role"</span>
+<span class="p">]</span>
 
 
-
-<span class="n">cdc_day_births</span> <span class="o">=</span> <span class="n">dow_births</span><span class="p">(</span><span class="n">cdc_list</span><span class="p">)</span>
-<span class="n">cdc_day_births</span>
+<span class="n">nominations</span> <span class="o">=</span> <span class="n">later_than_2000</span><span class="p">[</span><span class="n">later_than_2000</span><span class="p">[</span><span class="s1">'Category'</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">award_categories</span><span class="p">)]</span>
+<span class="n">nominations</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1315,14 +1692,112 @@ h6:hover .anchor-link {
 <div class="output">
 <div class="output_area">
 <div class="prompt output_prompt">Out[5]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>{1: 5789166,
- 2: 6446196,
- 3: 6322855,
- 4: 6288429,
- 5: 6233657,
- 6: 4562111,
- 7: 4079723}</pre>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>Year</th>
+<th>Category</th>
+<th>Nominee</th>
+<th>Additional Info</th>
+<th>Won?</th>
+<th>Unnamed: 5</th>
+<th>Unnamed: 6</th>
+<th>Unnamed: 7</th>
+<th>Unnamed: 8</th>
+<th>Unnamed: 9</th>
+<th>Unnamed: 10</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>2010</td>
+<td>Actor -- Leading Role</td>
+<td>Javier Bardem</td>
+<td>Biutiful {'Uxbal'}</td>
+<td>NO</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr>
+<th>1</th>
+<td>2010</td>
+<td>Actor -- Leading Role</td>
+<td>Jeff Bridges</td>
+<td>True Grit {'Rooster Cogburn'}</td>
+<td>NO</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr>
+<th>2</th>
+<td>2010</td>
+<td>Actor -- Leading Role</td>
+<td>Jesse Eisenberg</td>
+<td>The Social Network {'Mark Zuckerberg'}</td>
+<td>NO</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr>
+<th>3</th>
+<td>2010</td>
+<td>Actor -- Leading Role</td>
+<td>Colin Firth</td>
+<td>The King's Speech {'King George VI'}</td>
+<td>YES</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr>
+<th>4</th>
+<td>2010</td>
+<td>Actor -- Leading Role</td>
+<td>James Franco</td>
+<td>127 Hours {'Aron Ralston'}</td>
+<td>NO</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
 </div>
@@ -1332,8 +1807,7 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>According to the international standard ISO-8601, the International Organization for Standardization (ISO) has decreed that Monday shall be the first day of the week. So it looks like the highest total amount of births from 1994 - 2003 is actually a Tuesday.</p>
-<p>We can repeat the process again. We'll write a function that takes in the list of lists as an argument and generate a dictionary with year as the key and number of births as the value. This time, the function will be a bit more generic. The function will take in two arguments, the data and the column index. A column index of 0 will refer to the year column, whereas a column index of 1 will refer to the month and so on. That way we can quickly generate dictionary of all the birth counts.</p>
+<p>We can also use use the .map() method to convert all the "No" values to 0 and all the "Yes" values to 1.</p>
 </div>
 </div>
 </div>
@@ -1342,20 +1816,13 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [6]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">calc_counts</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">column</span><span class="p">):</span>
-    <span class="n">dictionary</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
-        <span class="n">column_name</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="n">column</span><span class="p">]</span>
-        <span class="n">births</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">column_name</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="n">column_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">births</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="n">column_name</span><span class="p">])</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="n">column_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">births</span>
-            
-    <span class="k">return</span> <span class="n">dictionary</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">yes_no</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"NO"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"YES"</span><span class="p">:</span><span class="mi">1</span>
+<span class="p">}</span>
 
-<span class="n">cdc_year_births</span> <span class="o">=</span> <span class="n">calc_counts</span><span class="p">(</span><span class="n">cdc_list</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-<span class="n">cdc_year_births</span>
+<span class="n">nominations</span><span class="p">[</span><span class="s1">'Won'</span><span class="p">]</span> <span class="o">=</span> <span class="n">nominations</span><span class="p">[</span><span class="s1">'Won?'</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">yes_no</span><span class="p">)</span>
+<span class="n">nominations</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1364,17 +1831,118 @@ h6:hover .anchor-link {
 <div class="output">
 <div class="output_area">
 <div class="prompt output_prompt">Out[6]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>{1994: 3952767,
- 1995: 3899589,
- 1996: 3891494,
- 1997: 3880894,
- 1998: 3941553,
- 1999: 3959417,
- 2000: 4058814,
- 2001: 4025933,
- 2002: 4021726,
- 2003: 4089950}</pre>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>Year</th>
+<th>Category</th>
+<th>Nominee</th>
+<th>Additional Info</th>
+<th>Won?</th>
+<th>Unnamed: 5</th>
+<th>Unnamed: 6</th>
+<th>Unnamed: 7</th>
+<th>Unnamed: 8</th>
+<th>Unnamed: 9</th>
+<th>Unnamed: 10</th>
+<th>Won</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>2010</td>
+<td>Actor -- Leading Role</td>
+<td>Javier Bardem</td>
+<td>Biutiful {'Uxbal'}</td>
+<td>NO</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>0</td>
+</tr>
+<tr>
+<th>1</th>
+<td>2010</td>
+<td>Actor -- Leading Role</td>
+<td>Jeff Bridges</td>
+<td>True Grit {'Rooster Cogburn'}</td>
+<td>NO</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>0</td>
+</tr>
+<tr>
+<th>2</th>
+<td>2010</td>
+<td>Actor -- Leading Role</td>
+<td>Jesse Eisenberg</td>
+<td>The Social Network {'Mark Zuckerberg'}</td>
+<td>NO</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>0</td>
+</tr>
+<tr>
+<th>3</th>
+<td>2010</td>
+<td>Actor -- Leading Role</td>
+<td>Colin Firth</td>
+<td>The King's Speech {'King George VI'}</td>
+<td>YES</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>1</td>
+</tr>
+<tr>
+<th>4</th>
+<td>2010</td>
+<td>Actor -- Leading Role</td>
+<td>James Franco</td>
+<td>127 Hours {'Aron Ralston'}</td>
+<td>NO</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
 </div>
@@ -1384,8 +1952,7 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>It looks like the number of births in the US is increasing every year.</p>
-<p>Lastly, we'll use the same function again to look at the total number of births in each day of the month</p>
+<p>Next, we'll drop the unnamed columns</p>
 </div>
 </div>
 </div>
@@ -1394,8 +1961,27 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [7]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cdc_day_births</span> <span class="o">=</span> <span class="n">calc_counts</span><span class="p">(</span><span class="n">cdc_list</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">cdc_day_births</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">columns_drop</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">"Won?"</span><span class="p">,</span>
+    <span class="s2">"Unnamed: 5"</span><span class="p">,</span>
+    <span class="s2">"Unnamed: 6"</span><span class="p">,</span>
+    <span class="s2">"Unnamed: 7"</span><span class="p">,</span>
+    <span class="s2">"Unnamed: 8"</span><span class="p">,</span>
+    <span class="s2">"Unnamed: 9"</span><span class="p">,</span>
+    <span class="s2">"Unnamed: 10"</span>
+<span class="p">]</span>
+<span class="n">final_nominations</span> <span class="o">=</span> <span class="n">nominations</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns_drop</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [8]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">final_nominations</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1403,39 +1989,77 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[7]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>{1: 1276557,
- 2: 1288739,
- 3: 1304499,
- 4: 1288154,
- 5: 1299953,
- 6: 1304474,
- 7: 1310459,
- 8: 1312297,
- 9: 1303292,
- 10: 1320764,
- 11: 1314361,
- 12: 1318437,
- 13: 1277684,
- 14: 1320153,
- 15: 1319171,
- 16: 1315192,
- 17: 1324953,
- 18: 1326855,
- 19: 1318727,
- 20: 1324821,
- 21: 1322897,
- 22: 1317381,
- 23: 1293290,
- 24: 1288083,
- 25: 1272116,
- 26: 1284796,
- 27: 1294395,
- 28: 1307685,
- 29: 1223161,
- 30: 1202095,
- 31: 746696}</pre>
+<div class="prompt output_prompt">Out[8]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>Year</th>
+<th>Category</th>
+<th>Nominee</th>
+<th>Additional Info</th>
+<th>Won</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>2010</td>
+<td>Actor -- Leading Role</td>
+<td>Javier Bardem</td>
+<td>Biutiful {'Uxbal'}</td>
+<td>0</td>
+</tr>
+<tr>
+<th>1</th>
+<td>2010</td>
+<td>Actor -- Leading Role</td>
+<td>Jeff Bridges</td>
+<td>True Grit {'Rooster Cogburn'}</td>
+<td>0</td>
+</tr>
+<tr>
+<th>2</th>
+<td>2010</td>
+<td>Actor -- Leading Role</td>
+<td>Jesse Eisenberg</td>
+<td>The Social Network {'Mark Zuckerberg'}</td>
+<td>0</td>
+</tr>
+<tr>
+<th>3</th>
+<td>2010</td>
+<td>Actor -- Leading Role</td>
+<td>Colin Firth</td>
+<td>The King's Speech {'King George VI'}</td>
+<td>1</td>
+</tr>
+<tr>
+<th>4</th>
+<td>2010</td>
+<td>Actor -- Leading Role</td>
+<td>James Franco</td>
+<td>127 Hours {'Aron Ralston'}</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
 </div>
@@ -1445,7 +2069,323 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We are not really seeing any patterns here other than the 31st day having signficantly less number of births compared to the rest of the days in the month. This makes sense as not every month have 31 days.</p>
+<p>The last thing we'll have to do is separate the "Additional Info" column into two new columns "Movie" and "Character". We'll have to manipulate the strings and the split the two values in this one column in two new strings.</p>
+<p>First we'll use .str.rstrip() to remove the end quotation mark and the bracket from the column series, then we'll split the the string again into a series of lists.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [9]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">additional_info_one</span> <span class="o">=</span> <span class="n">final_nominations</span><span class="p">[</span><span class="s1">'Additional Info'</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="n">to_strip</span> <span class="o">=</span> <span class="s2">"'}"</span><span class="p">)</span>
+<span class="n">additional_info_one</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[9]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>0                        Biutiful {'Uxbal
+1             True Grit {'Rooster Cogburn
+2    The Social Network {'Mark Zuckerberg
+3      The King's Speech {'King George VI
+4                127 Hours {'Aron Ralston
+Name: Additional Info, dtype: object</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [10]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Split into a series of lists</span>
+<span class="n">additional_info_two</span> <span class="o">=</span> <span class="n">additional_info_one</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">' {</span><span class="se">\'</span><span class="s1">'</span><span class="p">)</span>
+<span class="n">additional_info_two</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[10]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>0                        [Biutiful, Uxbal]
+1             [True Grit, Rooster Cogburn]
+2    [The Social Network, Mark Zuckerberg]
+3      [The King's Speech, King George VI]
+4                [127 Hours, Aron Ralston]
+Name: Additional Info, dtype: object</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [11]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Set a series with the first element to movie names</span>
+<span class="n">movie_names</span> <span class="o">=</span> <span class="n">additional_info_two</span><span class="o">.</span><span class="n">str</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+
+<span class="c1">#Set a series with the second element to characters</span>
+<span class="n">characters</span> <span class="o">=</span> <span class="n">additional_info_two</span><span class="o">.</span><span class="n">str</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [12]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">final_nominations</span><span class="p">[</span><span class="s2">"Movie"</span><span class="p">]</span> <span class="o">=</span> <span class="n">movie_names</span>
+<span class="n">final_nominations</span><span class="p">[</span><span class="s2">"Character"</span><span class="p">]</span> <span class="o">=</span> <span class="n">characters</span>
+<span class="n">final_nominations</span> <span class="o">=</span> <span class="n">final_nominations</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">"Additional Info"</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">final_nominations</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[12]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>Year</th>
+<th>Category</th>
+<th>Nominee</th>
+<th>Won</th>
+<th>Movie</th>
+<th>Character</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>2010</td>
+<td>Actor -- Leading Role</td>
+<td>Javier Bardem</td>
+<td>0</td>
+<td>Biutiful</td>
+<td>Uxbal</td>
+</tr>
+<tr>
+<th>1</th>
+<td>2010</td>
+<td>Actor -- Leading Role</td>
+<td>Jeff Bridges</td>
+<td>0</td>
+<td>True Grit</td>
+<td>Rooster Cogburn</td>
+</tr>
+<tr>
+<th>2</th>
+<td>2010</td>
+<td>Actor -- Leading Role</td>
+<td>Jesse Eisenberg</td>
+<td>0</td>
+<td>The Social Network</td>
+<td>Mark Zuckerberg</td>
+</tr>
+<tr>
+<th>3</th>
+<td>2010</td>
+<td>Actor -- Leading Role</td>
+<td>Colin Firth</td>
+<td>1</td>
+<td>The King's Speech</td>
+<td>King George VI</td>
+</tr>
+<tr>
+<th>4</th>
+<td>2010</td>
+<td>Actor -- Leading Role</td>
+<td>James Franco</td>
+<td>0</td>
+<td>127 Hours</td>
+<td>Aron Ralston</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now that we are done cleaning up the data, we can do some simply analysis using sqlite3</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [13]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">sqlite3</span>
+
+<span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">"nominations.db"</span><span class="p">)</span>
+<span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+<span class="c1">#Creates the table "nominations"</span>
+<span class="n">final_nominations</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="s2">"nominations"</span><span class="p">,</span> <span class="n">conn</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [14]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">q1</span> <span class="o">=</span> <span class="s1">'''</span>
+<span class="s1">Pragma table_info(nominations)</span>
+<span class="s1">'''</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">q1</span><span class="p">)</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+<span class="n">result</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[14]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>[(0, 'Year', 'INTEGER', 0, None, 0),
+ (1, 'Category', 'TEXT', 0, None, 0),
+ (2, 'Nominee', 'TEXT', 0, None, 0),
+ (3, 'Won', 'INTEGER', 0, None, 0),
+ (4, 'Movie', 'TEXT', 0, None, 0),
+ (5, 'Character', 'TEXT', 0, None, 0)]</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [15]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">q2</span> <span class="o">=</span> <span class="s1">'''</span>
+<span class="s1">SELECT * FROM nominations LIMIT 10</span>
+<span class="s1">'''</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">q2</span><span class="p">)</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+<span class="n">result</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[15]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>[(2010, 'Actor -- Leading Role', 'Javier Bardem', 0, 'Biutiful', 'Uxbal'),
+ (2010,
+  'Actor -- Leading Role',
+  'Jeff Bridges',
+  0,
+  'True Grit',
+  'Rooster Cogburn'),
+ (2010,
+  'Actor -- Leading Role',
+  'Jesse Eisenberg',
+  0,
+  'The Social Network',
+  'Mark Zuckerberg'),
+ (2010,
+  'Actor -- Leading Role',
+  'Colin Firth',
+  1,
+  "The King's Speech",
+  'King George VI'),
+ (2010,
+  'Actor -- Leading Role',
+  'James Franco',
+  0,
+  '127 Hours',
+  'Aron Ralston'),
+ (2010,
+  'Actor -- Supporting Role',
+  'Christian Bale',
+  1,
+  'The Fighter',
+  'Dicky Eklund'),
+ (2010,
+  'Actor -- Supporting Role',
+  'John Hawkes',
+  0,
+  "Winter's Bone",
+  'Teardrop'),
+ (2010,
+  'Actor -- Supporting Role',
+  'Jeremy Renner',
+  0,
+  'The Town',
+  'James Coughlin'),
+ (2010,
+  'Actor -- Supporting Role',
+  'Mark Ruffalo',
+  0,
+  'The Kids Are All Right',
+  'Paul'),
+ (2010,
+  'Actor -- Supporting Role',
+  'Geoffrey Rush',
+  0,
+  "The King's Speech",
+  'Lionel Logue')]</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [16]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -1454,9 +2394,10 @@ h6:hover .anchor-link {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr />
-<h4 id="Learning-Summary">Learning Summary<a class="anchor-link" href="#Learning-Summary">¶</a></h4><p>Python concepts explored: lists, dictionaries, functions, for loops<br />
-Python functions and methods used: .read(), open(), .split(), .append(), int()</p>
-<p>The files used for this project can be found in my <a href="https://github.com/sengkchu/Dataquest-Guided-Projects-Solutions/tree/master/Guided%20Project_%20Explore%20U.S.%20Births">GitHub repository</a>.</p>
+<h4 id="Learning-Summary">Learning Summary<a class="anchor-link" href="#Learning-Summary">¶</a></h4><p>Python/SQL concepts explored: python+sqlite3, pandas, data cleaning, columns manipulation</p>
+<p>Python functions and methods used: .str.rstrip(), .str.split(), .connect(), .cursor(), .drop(), .str[], .map(), .value_counts()</p>
+<p>SQL statements used: SELECT, FROM, PRAGMA</p>
+<p>The files used for this project can be found in my <a href="https://github.com/sengkchu/Dataquest-Guided-Projects-Solutions/tree/master/Guided%20Project_%20Preparing%20data%20for%20SQLite">GitHub repository</a>.</p>
 </div>
 </div>
 </div>
@@ -1510,7 +2451,7 @@ Python functions and methods used: .read(), open(), .split(), .append(), int()</
             var disqus_shortname = 'codingdisciple'; // required: replace example with your forum shortname
             var disqus_config = function () {
                 this.language = "en";
-                        this.page.identifier = '2018-01-26-Exploring-Births';
+                        this.page.identifier = '2018-02-07-Prepare-Data-SQL';
             };
             /* * * DON'T EDIT BELOW THIS LINE * * */
             (function () {
