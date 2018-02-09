@@ -1,5 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Coding Disciple</title><link href="/" rel="alternate"></link><link href="/feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2018-02-07T00:00:00-08:00</updated><entry><title>Analyzing CIA Factbook with SQL/Pandas</title><link href="/CIA-Factbook-SQL.html" rel="alternate"></link><published>2018-02-07T00:00:00-08:00</published><updated>2018-02-07T00:00:00-08:00</updated><author><name>Seng Chu</name></author><id>tag:None,2018-02-07:/CIA-Factbook-SQL.html</id><summary type="html">
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Coding Disciple</title><link href="/" rel="alternate"></link><link href="/feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2018-02-08T00:00:00-08:00</updated><entry><title>Learning How to Network</title><link href="/Learning-Networking.html" rel="alternate"></link><published>2018-02-08T00:00:00-08:00</published><updated>2018-02-08T00:00:00-08:00</updated><author><name>Seng Chu</name></author><id>tag:None,2018-02-08:/Learning-Networking.html</id><summary type="html">&lt;p&gt;It has been about a week since I launched this blog. I mainly created this blog for myself to document my learning journey. 
+However, I also wanted feedback from people who visit this blog. I am learning data science online with no mentors. Having some sort of feedback is extremely …&lt;/p&gt;</summary><content type="html">&lt;p&gt;It has been about a week since I launched this blog. I mainly created this blog for myself to document my learning journey. 
+However, I also wanted feedback from people who visit this blog. I am learning data science online with no mentors. Having some sort of feedback is extremely valuable to me.
+At the time of this post, I've had about seven real visitors, two of which were people I knew. Five of the visits were myself before I figured out how to exclude myself from google analytics. I also got about 37 bots who randomly decided to visit one day. &lt;/p&gt;
+&lt;p&gt;This is what my Google analytics look like right now:&lt;/p&gt;
+&lt;div style="text-align:center"&gt;
+&lt;img src="https://raw.githubusercontent.com/sengkchu/codingdisciple.images/master/Learning-Networking/googleanalytics.PNG" alt="google analytics" style="width: 600px;"/&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The peak you see in the picture are all bots. 
+I spent many hours learning about SEO, and constantly checking my search rankings. I realized that I must be doing something wrong and I needed help.&lt;/p&gt;
+&lt;h3&gt;The Plan&lt;/h3&gt;
+&lt;p&gt;I decided to take a blogging course from John Sonmez from https://simpleprogrammer.com. 
+I am a huge fan of John's Youtube channel, but he does have a tendency to heavily advertise his products and his brand. 
+I believe that is fair considering, that his course was completely free, and all I had to do was give him one of my many email addresses. So I have nothing to lose.
+If you are interested, you can sign up for his course &lt;a href="https://simpleprogrammer.com/blog-course"&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;John's blogging course was 3 weeks long, split into 6 emails. The course is geared towards Wordpress. Since I am using Pelican, a lot of the information did not apply to me.
+But I stuck with the course and even got this pixel badge.&lt;/p&gt;
+&lt;div style="text-align:center"&gt;
+&lt;img src="http://simpleprogrammer.com/wp-content/uploads/2015/04/badge.png"&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Overall, I thought the course was really helpful. Because, it did make me realize one very important thing, the power of networking. It is so painfully obvious, but I always forget about it. 
+It doesn't make sense to worry about SEO when I don't even have a single visitor to my blog. What I want is feedback from the data science community. It doesn't make sense to naturally expect people to find this blog and leave comments.&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;I need to be a part of the community.&lt;/b&gt;&lt;/p&gt;
+&lt;p&gt;Think of it this way, imagine that this website is a house. Right now, I am inside the house. I never talk to anyone, nor do I ask anyone to come visit my house. 
+People don't even know that the house exist. So how can I expect anyone to know where my house is? &lt;/p&gt;
+&lt;p&gt;My plan is to read famous data science blogs, and actively participate in the community. Hopefully in the future, when I feel confident enough with my skills, I can actively participate in community events.&lt;/p&gt;</content><category term="google analytics"></category><category term="networking"></category></entry><entry><title>Analyzing CIA Factbook with SQL/Pandas</title><link href="/CIA-Factbook-SQL.html" rel="alternate"></link><published>2018-02-07T00:00:00-08:00</published><updated>2018-02-07T00:00:00-08:00</updated><author><name>Seng Chu</name></author><id>tag:None,2018-02-07:/CIA-Factbook-SQL.html</id><summary type="html">
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
@@ -21220,13 +21247,26 @@ Name: How far will you travel for Thanksgiving?, dtype: int64&lt;/pre&gt;
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
 &lt;/script&gt;
-</content><category term="python"></category><category term="pandas"></category><category term="data analysis"></category></entry><entry><title>Discipline vs. Motivation</title><link href="/Discipline-vs-Motivation.html" rel="alternate"></link><published>2018-01-27T00:00:00-08:00</published><updated>2018-01-27T00:00:00-08:00</updated><author><name>Seng Chu</name></author><id>tag:None,2018-01-27:/Discipline-vs-Motivation.html</id><summary type="html">&lt;p&gt;I am a strong believer in discipline because motivation is only temporary. &lt;/p&gt;
-&lt;p&gt;For example, people often tell themselves that they need to exercise, but they never take any action. But one day, they suddenly feel like they should really do something about it, so they go outside and run a …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I am a strong believer in discipline because motivation is only temporary. &lt;/p&gt;
+</content><category term="python"></category><category term="pandas"></category><category term="data analysis"></category></entry><entry><title>Discipline vs. Motivation</title><link href="/Discipline-vs-Motivation.html" rel="alternate"></link><published>2018-01-27T00:00:00-08:00</published><updated>2018-01-27T00:00:00-08:00</updated><author><name>Seng Chu</name></author><id>tag:None,2018-01-27:/Discipline-vs-Motivation.html</id><summary type="html">&lt;p&gt;Let's start with some definitions that I copy/pasted from dictionary.com:&lt;/p&gt;
+&lt;p&gt;Discipline - noun, training to act in accordance with rules.&lt;/p&gt;
+&lt;p&gt;Motivation - noun, the act or an instance of motivating, or providing with a reason to act in a certain way.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;From the definition,  discipline has more to do with …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Let's start with some definitions that I copy/pasted from dictionary.com:&lt;/p&gt;
+&lt;p&gt;Discipline - noun, training to act in accordance with rules.&lt;/p&gt;
+&lt;p&gt;Motivation - noun, the act or an instance of motivating, or providing with a reason to act in a certain way.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;From the definition,  discipline has more to do with rules that a person follows.
+Whereas motivation is about providing a reason to act a certain way. &lt;/p&gt;
+&lt;p&gt;&lt;b&gt;I am a strong believer in discipline because motivation is only temporary.&lt;/b&gt;&lt;/p&gt;
 &lt;p&gt;For example, people often tell themselves that they need to exercise, but they never take any action. But one day, they suddenly feel like they should really do something about it, so they go outside and run a few miles.&lt;/p&gt;
 &lt;p&gt;Feeling motivated is easy. The hard part is doing it every single day. Think of it this way, most people don't like waking up in the morning and going to work.
 But we do it anyway, is it because we are afraid of our boss? Possibly, but the main reason is because we are disciplined to do so. I used to work graveyard shift from 6 pm - 6 am. I can confidently say, I had zero motivation to go to work when I wake up.
 Despite the lack of motivation, I made it to work on time every single time. A person's mood changes every single day. You might feel motivated today, and worn out the next day.&lt;/p&gt;
-&lt;p&gt;In the long run, building discipline and a strong work ethic is more important than motivation. If I tell myself I am going to complete at least two units of an online course every single day. I am just going to do it.&lt;/p&gt;</content><category term="discipline"></category></entry><entry><title>Exploring Gun Deaths in the US</title><link href="/Exploring-Gun-Deaths.html" rel="alternate"></link><published>2018-01-27T00:00:00-08:00</published><updated>2018-01-27T00:00:00-08:00</updated><author><name>Seng Chu</name></author><id>tag:None,2018-01-27:/Exploring-Gun-Deaths.html</id><summary type="html">
+&lt;p&gt;In the long run, building discipline and a strong work ethic is more important than motivation. Being disciplined means having a set a rules to follow no matter what. 
+It is something that is core to a person's being. &lt;/p&gt;
+&lt;p&gt;If I set rules for myself, and tell myself I am going to complete at least two units of a course every single day. 
+I am going to do it and not make excuses. If I felt lazy that day, I am going to tell myself that I screwed up. That is all there is to it. 
+The point is to be aware of yourself. That is how we make improvements.&lt;/p&gt;</content><category term="discipline"></category></entry><entry><title>Exploring Gun Deaths in the US</title><link href="/Exploring-Gun-Deaths.html" rel="alternate"></link><published>2018-01-27T00:00:00-08:00</published><updated>2018-01-27T00:00:00-08:00</updated><author><name>Seng Chu</name></author><id>tag:None,2018-01-27:/Exploring-Gun-Deaths.html</id><summary type="html">
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;

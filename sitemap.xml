@@ -5,7 +5,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://codingdisciple.com/</loc>
-<lastmod>2018-02-07T18:38:14-00:00</lastmod>
+<lastmod>2018-02-08T23:22:18-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -20,6 +20,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://codingdisciple.com/</loc>
 <lastmod>2018-01-26T00:00:00-08:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://codingdisciple.com/Learning-Networking.html</loc>
+<lastmod>2018-02-08T00:00:00-08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
