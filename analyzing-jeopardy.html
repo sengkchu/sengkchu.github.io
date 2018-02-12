@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<link rel="canonical" href="/Prepare-Data-SQL.html"/>
+<link rel="canonical" href="/analyzing-jeopardy.html"/>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>Preparing Data for SQLite - Coding Disciple</title>
+    <title>Analyzing Jeopardy Data - Coding Disciple</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -10,22 +10,23 @@
 
 
 
-<link rel="canonical" href="/Prepare-Data-SQL.html">
+<link rel="canonical" href="/analyzing-jeopardy.html">
 
         <meta name="author" content="Seng Chu" />
-        <meta name="keywords" content="data cleaning,SQL,pandas" />
-        <meta name="description" content="In this project, we will prepare data in preparation for SQL. We&#39;ll have to first clean the data." />
+        <meta name="keywords" content="data analysis,statistics,pandas,matplotlib" />
+        <meta name="description" content="In this project, we&#39;ll look at 20,000 rows of the jeopardy dataset in &#34;jeopardy.csv&#34;. We want to see if there are patterns in the questions asked so we can get a little bit of an edge to win. First, we&#39;ll have to tidy up the data." />
 
         <meta property="og:site_name" content="Coding Disciple" />
         <meta property="og:type" content="article"/>
-        <meta property="og:title" content="Preparing Data for SQLite"/>
-        <meta property="og:url" content="/Prepare-Data-SQL.html"/>
-        <meta property="og:description" content="In this project, we will prepare data in preparation for SQL. We&#39;ll have to first clean the data."/>
-        <meta property="article:published_time" content="2018-02-07" />
+        <meta property="og:title" content="Analyzing Jeopardy Data"/>
+        <meta property="og:url" content="/analyzing-jeopardy.html"/>
+        <meta property="og:description" content="In this project, we&#39;ll look at 20,000 rows of the jeopardy dataset in &#34;jeopardy.csv&#34;. We want to see if there are patterns in the questions asked so we can get a little bit of an edge to win. First, we&#39;ll have to tidy up the data."/>
+        <meta property="article:published_time" content="2018-02-09" />
             <meta property="article:section" content="Learning Data Science" />
-            <meta property="article:tag" content="data cleaning" />
-            <meta property="article:tag" content="SQL" />
+            <meta property="article:tag" content="data analysis" />
+            <meta property="article:tag" content="statistics" />
             <meta property="article:tag" content="pandas" />
+            <meta property="article:tag" content="matplotlib" />
             <meta property="article:author" content="Seng Chu" />
 
 
@@ -102,10 +103,10 @@
         <article>
             <header class="page-header">
                 <h1>
-                    <a href="/Prepare-Data-SQL.html"
+                    <a href="/analyzing-jeopardy.html"
                        rel="bookmark"
-                       title="Permalink to Preparing Data for SQLite">
-                        Preparing Data for SQLite
+                       title="Permalink to Analyzing Jeopardy Data">
+                        Analyzing Jeopardy Data
                     </a>
                 </h1>
             </header>
@@ -115,7 +116,7 @@
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2018-02-07T00:00:00-08:00"> Wed 07 February 2018</time>
+        <i class="fa fa-calendar"></i><time datetime="2018-02-09T00:00:00-08:00"> Fri 09 February 2018</time>
     </span>
 
 
@@ -123,11 +124,13 @@
 
 
 <span class="label label-default">Tags</span>
-	<a href="/tag/data-cleaning.html">data cleaning</a>
+	<a href="/tag/data-analysis.html">data analysis</a>
         /
-	<a href="/tag/sql.html">SQL</a>
+	<a href="/tag/statistics.html">statistics</a>
         /
 	<a href="/tag/pandas.html">pandas</a>
+        /
+	<a href="/tag/matplotlib.html">matplotlib</a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
@@ -1107,7 +1110,8 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In this project, we will prepare data in preparation for SQL. We'll have to first clean the data.</p>
+<p>In this project, we'll look at 20,000 rows of the jeopardy dataset in "jeopardy.csv". We want to see if there are patterns in the questions asked so we can get a little bit of an edge to win.</p>
+<p>First, we'll have to tidy up the data.</p>
 </div>
 </div>
 </div>
@@ -1117,11 +1121,10 @@ h6:hover .anchor-link {
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'academy_awards.csv'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'ISO-8859-1'</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
-<span class="c1">#Turns off warnings for potentially confusing assignments</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">mode</span><span class="o">.</span><span class="n">chained_assignment</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># default='warn'</span>
-<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="n">jeopardy</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'jeopardy.csv'</span><span class="p">)</span>
+<span class="n">jeopardy</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1149,89 +1152,65 @@ h6:hover .anchor-link {
 <thead>
 <tr style="text-align: right;">
 <th></th>
-<th>Year</th>
+<th>Show Number</th>
+<th>Air Date</th>
+<th>Round</th>
 <th>Category</th>
-<th>Nominee</th>
-<th>Additional Info</th>
-<th>Won?</th>
-<th>Unnamed: 5</th>
-<th>Unnamed: 6</th>
-<th>Unnamed: 7</th>
-<th>Unnamed: 8</th>
-<th>Unnamed: 9</th>
-<th>Unnamed: 10</th>
+<th>Value</th>
+<th>Question</th>
+<th>Answer</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <th>0</th>
-<td>2010 (83rd)</td>
-<td>Actor -- Leading Role</td>
-<td>Javier Bardem</td>
-<td>Biutiful {'Uxbal'}</td>
-<td>NO</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
+<td>4680</td>
+<td>2004-12-31</td>
+<td>Jeopardy!</td>
+<td>HISTORY</td>
+<td>$200</td>
+<td>For the last 8 years of his life, Galileo was ...</td>
+<td>Copernicus</td>
 </tr>
 <tr>
 <th>1</th>
-<td>2010 (83rd)</td>
-<td>Actor -- Leading Role</td>
-<td>Jeff Bridges</td>
-<td>True Grit {'Rooster Cogburn'}</td>
-<td>NO</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
+<td>4680</td>
+<td>2004-12-31</td>
+<td>Jeopardy!</td>
+<td>ESPN's TOP 10 ALL-TIME ATHLETES</td>
+<td>$200</td>
+<td>No. 2: 1912 Olympian; football star at Carlisl...</td>
+<td>Jim Thorpe</td>
 </tr>
 <tr>
 <th>2</th>
-<td>2010 (83rd)</td>
-<td>Actor -- Leading Role</td>
-<td>Jesse Eisenberg</td>
-<td>The Social Network {'Mark Zuckerberg'}</td>
-<td>NO</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
+<td>4680</td>
+<td>2004-12-31</td>
+<td>Jeopardy!</td>
+<td>EVERYBODY TALKS ABOUT IT...</td>
+<td>$200</td>
+<td>The city of Yuma in this state has a record av...</td>
+<td>Arizona</td>
 </tr>
 <tr>
 <th>3</th>
-<td>2010 (83rd)</td>
-<td>Actor -- Leading Role</td>
-<td>Colin Firth</td>
-<td>The King's Speech {'King George VI'}</td>
-<td>YES</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
+<td>4680</td>
+<td>2004-12-31</td>
+<td>Jeopardy!</td>
+<td>THE COMPANY LINE</td>
+<td>$200</td>
+<td>In 1963, live on "The Art Linkletter Show", th...</td>
+<td>McDonald's</td>
 </tr>
 <tr>
 <th>4</th>
-<td>2010 (83rd)</td>
-<td>Actor -- Leading Role</td>
-<td>James Franco</td>
-<td>127 Hours {'Aron Ralston'}</td>
-<td>NO</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
+<td>4680</td>
+<td>2004-12-31</td>
+<td>Jeopardy!</td>
+<td>EPITAPHS & TRIBUTES</td>
+<td>$200</td>
+<td>Signer of the Dec. of Indep., framer of the Co...</td>
+<td>John Adams</td>
 </tr>
 </tbody>
 </table>
@@ -1241,43 +1220,12 @@ h6:hover .anchor-link {
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>This is not considered tidy data. Here are the issues:</p>
-<ol>
-<li><p>We have string values in the year column, we should change these into integers.</p>
-</li>
-<li><p>Additional Info has the movie name and the role name, this can be split into two columns.</p>
-</li>
-<li><p>The "Won?" column change should be changed to 0's and 1's in.</p>
-</li>
-<li><p>There are a lot of NaN values under the unnammed columns, we should consider dropping them.</p>
-</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>First let's take a look at a unnammed columns, we can use .value_counts() to see if there are any significant values in these columns.</p>
-</div>
-</div>
-</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In [2]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'Unnamed: 10'</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'Unnamed: 9'</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'Unnamed: 8'</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'Unnamed: 7'</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'Unnamed: 6'</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">'Unnamed: 5'</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">jeopardy</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1287,28 +1235,9 @@ h6:hover .anchor-link {
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>*    1
-Name: Unnamed: 10, dtype: int64
-*    1
-Name: Unnamed: 9, dtype: int64
-*                                                 1
- understanding comedy genius - Mack Sennett.""    1
-Name: Unnamed: 8, dtype: int64
-*                                                     1
- while requiring no dangerous solvents. [Systems]"    1
- kindly                                               1
-Name: Unnamed: 7, dtype: int64
-*                                                                   9
- direct radiator bass style cinema loudspeaker systems. [Sound]"    1
- flexibility and water resistance                                   1
- sympathetic                                                        1
-Name: Unnamed: 6, dtype: int64
-*                                                                                                               7
- discoverer of stars                                                                                            1
- D.B. "Don" Keele and Mark E. Engebretson has resulted in the over 20-year dominance of constant-directivity    1
- error-prone measurements on sets. [Digital Imaging Technology]"                                                1
- resilience                                                                                                     1
-Name: Unnamed: 5, dtype: int64
+<pre>Index(['Show Number', ' Air Date', ' Round', ' Category', ' Value',
+       ' Question', ' Answer'],
+      dtype='object')
 </pre>
 </div>
 </div>
@@ -1319,7 +1248,7 @@ Name: Unnamed: 5, dtype: int64
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>It doesn't look like there any significant information under these columns. We can probably drop all the unnamed columns, but first let's convert the year column to integers.</p>
+<p>Looks like there is a space after each column name, we can fix this pretty easily with the .columns() method.</p>
 </div>
 </div>
 </div>
@@ -1328,9 +1257,9 @@ Name: Unnamed: 5, dtype: int64
 <div class="prompt input_prompt">In [3]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">'Year'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'Year'</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">'Year'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'Year'</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">jeopardy</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'Show Number'</span><span class="p">,</span> <span class="s1">'Air Date'</span><span class="p">,</span> <span class="s1">'Round'</span><span class="p">,</span> <span class="s1">'Category'</span><span class="p">,</span> <span class="s1">'Value'</span><span class="p">,</span>
+       <span class="s1">'Question'</span><span class="p">,</span> <span class="s1">'Answer'</span><span class="p">]</span>
+<span class="n">jeopardy</span><span class="o">.</span><span class="n">columns</span>
 </pre></div>
 </div>
 </div>
@@ -1339,114 +1268,21 @@ Name: Unnamed: 5, dtype: int64
 <div class="output">
 <div class="output_area">
 <div class="prompt output_prompt">Out[3]:</div>
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-<thead>
-<tr style="text-align: right;">
-<th></th>
-<th>Year</th>
-<th>Category</th>
-<th>Nominee</th>
-<th>Additional Info</th>
-<th>Won?</th>
-<th>Unnamed: 5</th>
-<th>Unnamed: 6</th>
-<th>Unnamed: 7</th>
-<th>Unnamed: 8</th>
-<th>Unnamed: 9</th>
-<th>Unnamed: 10</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<th>0</th>
-<td>2010</td>
-<td>Actor -- Leading Role</td>
-<td>Javier Bardem</td>
-<td>Biutiful {'Uxbal'}</td>
-<td>NO</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-</tr>
-<tr>
-<th>1</th>
-<td>2010</td>
-<td>Actor -- Leading Role</td>
-<td>Jeff Bridges</td>
-<td>True Grit {'Rooster Cogburn'}</td>
-<td>NO</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-</tr>
-<tr>
-<th>2</th>
-<td>2010</td>
-<td>Actor -- Leading Role</td>
-<td>Jesse Eisenberg</td>
-<td>The Social Network {'Mark Zuckerberg'}</td>
-<td>NO</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-</tr>
-<tr>
-<th>3</th>
-<td>2010</td>
-<td>Actor -- Leading Role</td>
-<td>Colin Firth</td>
-<td>The King's Speech {'King George VI'}</td>
-<td>YES</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-</tr>
-<tr>
-<th>4</th>
-<td>2010</td>
-<td>Actor -- Leading Role</td>
-<td>James Franco</td>
-<td>127 Hours {'Aron Ralston'}</td>
-<td>NO</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-</tr>
-</tbody>
-</table>
+<div class="output_text output_subarea output_execute_result">
+<pre>Index(['Show Number', 'Air Date', 'Round', 'Category', 'Value', 'Question',
+       'Answer'],
+      dtype='object')</pre>
 </div>
 </div>
 </div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Next, let's make all the strings in the question and answer columns lower case. We can do write a function and then use the .apply() method.</p>
+<p>We also want to remove all the punctuations, the goal is to have the "Question" and "Answer" columns down to just words.</p>
 </div>
 </div>
 </div>
@@ -1455,215 +1291,13 @@ Name: Unnamed: 5, dtype: int64
 <div class="prompt input_prompt">In [4]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">(</span><span class="n">include</span> <span class="o">=</span> <span class="s1">'all'</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+<span class="k">def</span> <span class="nf">lowercase_no_punct</span><span class="p">(</span><span class="n">string</span><span class="p">):</span>
+    <span class="n">lower</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="n">punremoved</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">'[^A-Za-z0-9\s]'</span><span class="p">,</span><span class="s1">''</span><span class="p">,</span> <span class="n">lower</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">punremoved</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[4]:</div>
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-<thead>
-<tr style="text-align: right;">
-<th></th>
-<th>Year</th>
-<th>Category</th>
-<th>Nominee</th>
-<th>Additional Info</th>
-<th>Won?</th>
-<th>Unnamed: 5</th>
-<th>Unnamed: 6</th>
-<th>Unnamed: 7</th>
-<th>Unnamed: 8</th>
-<th>Unnamed: 9</th>
-<th>Unnamed: 10</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<th>count</th>
-<td>10137.000000</td>
-<td>10137</td>
-<td>10137</td>
-<td>9011</td>
-<td>10137</td>
-<td>11</td>
-<td>12</td>
-<td>3</td>
-<td>2</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<th>unique</th>
-<td>NaN</td>
-<td>40</td>
-<td>6001</td>
-<td>6424</td>
-<td>16</td>
-<td>5</td>
-<td>4</td>
-<td>3</td>
-<td>2</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<th>top</th>
-<td>NaN</td>
-<td>Writing</td>
-<td>Meryl Streep</td>
-<td>Metro-Goldwyn-Mayer</td>
-<td>NO</td>
-<td>*</td>
-<td>*</td>
-<td>*</td>
-<td>*</td>
-<td>*</td>
-<td>*</td>
-</tr>
-<tr>
-<th>freq</th>
-<td>NaN</td>
-<td>888</td>
-<td>16</td>
-<td>60</td>
-<td>7168</td>
-<td>7</td>
-<td>9</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<th>mean</th>
-<td>1970.330768</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-</tr>
-<tr>
-<th>std</th>
-<td>23.332917</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-</tr>
-<tr>
-<th>min</th>
-<td>1927.000000</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-</tr>
-<tr>
-<th>25%</th>
-<td>1950.000000</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-</tr>
-<tr>
-<th>50%</th>
-<td>1970.000000</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-</tr>
-<tr>
-<th>75%</th>
-<td>1991.000000</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-</tr>
-<tr>
-<th>max</th>
-<td>2010.000000</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>We are only interested in data after year 2000, and actors in award winnng categories. We can use boolean filtering and the .isin() method to filter the data out and then create a new dataframe named "nominations".</p>
 </div>
 </div>
 </div>
@@ -1672,133 +1306,9 @@ Name: Unnamed: 5, dtype: int64
 <div class="prompt input_prompt">In [5]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">later_than_2000</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">'Year'</span><span class="p">]</span> <span class="o">></span> <span class="mi">2000</span><span class="p">]</span>
-
-<span class="n">award_categories</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">"Actor -- Leading Role"</span><span class="p">,</span>
-    <span class="s2">"Actor -- Supporting Role"</span><span class="p">,</span>
-    <span class="s2">"Actress -- Leading Role"</span><span class="p">,</span>
-    <span class="s2">"Actress -- Supporting Role"</span>
-<span class="p">]</span>
-
-
-<span class="n">nominations</span> <span class="o">=</span> <span class="n">later_than_2000</span><span class="p">[</span><span class="n">later_than_2000</span><span class="p">[</span><span class="s1">'Category'</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">award_categories</span><span class="p">)]</span>
-<span class="n">nominations</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">jeopardy</span><span class="p">[</span><span class="s1">'clean_question'</span><span class="p">]</span> <span class="o">=</span> <span class="n">jeopardy</span><span class="p">[</span><span class="s1">'Question'</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">lowercase_no_punct</span><span class="p">)</span>
+<span class="n">jeopardy</span><span class="p">[</span><span class="s1">'clean_answer'</span><span class="p">]</span> <span class="o">=</span> <span class="n">jeopardy</span><span class="p">[</span><span class="s1">'Answer'</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">lowercase_no_punct</span><span class="p">)</span>
 </pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[5]:</div>
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-<thead>
-<tr style="text-align: right;">
-<th></th>
-<th>Year</th>
-<th>Category</th>
-<th>Nominee</th>
-<th>Additional Info</th>
-<th>Won?</th>
-<th>Unnamed: 5</th>
-<th>Unnamed: 6</th>
-<th>Unnamed: 7</th>
-<th>Unnamed: 8</th>
-<th>Unnamed: 9</th>
-<th>Unnamed: 10</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<th>0</th>
-<td>2010</td>
-<td>Actor -- Leading Role</td>
-<td>Javier Bardem</td>
-<td>Biutiful {'Uxbal'}</td>
-<td>NO</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-</tr>
-<tr>
-<th>1</th>
-<td>2010</td>
-<td>Actor -- Leading Role</td>
-<td>Jeff Bridges</td>
-<td>True Grit {'Rooster Cogburn'}</td>
-<td>NO</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-</tr>
-<tr>
-<th>2</th>
-<td>2010</td>
-<td>Actor -- Leading Role</td>
-<td>Jesse Eisenberg</td>
-<td>The Social Network {'Mark Zuckerberg'}</td>
-<td>NO</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-</tr>
-<tr>
-<th>3</th>
-<td>2010</td>
-<td>Actor -- Leading Role</td>
-<td>Colin Firth</td>
-<td>The King's Speech {'King George VI'}</td>
-<td>YES</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-</tr>
-<tr>
-<th>4</th>
-<td>2010</td>
-<td>Actor -- Leading Role</td>
-<td>James Franco</td>
-<td>127 Hours {'Aron Ralston'}</td>
-<td>NO</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
 </div>
 </div>
 </div>
@@ -1807,7 +1317,7 @@ Name: Unnamed: 5, dtype: int64
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We can also use use the .map() method to convert all the "No" values to 0 and all the "Yes" values to 1.</p>
+<p>The "Value" column is usually a dollar sign followed by a number. However, this is currently in a string format. We should conver tthis to an integer and remove the dollar sign.</p>
 </div>
 </div>
 </div>
@@ -1816,143 +1326,15 @@ Name: Unnamed: 5, dtype: int64
 <div class="prompt input_prompt">In [6]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">yes_no</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">"NO"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
-    <span class="s2">"YES"</span><span class="p">:</span><span class="mi">1</span>
-<span class="p">}</span>
-
-<span class="n">nominations</span><span class="p">[</span><span class="s1">'Won'</span><span class="p">]</span> <span class="o">=</span> <span class="n">nominations</span><span class="p">[</span><span class="s1">'Won?'</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">yes_no</span><span class="p">)</span>
-<span class="n">nominations</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">punremovandtoint</span><span class="p">(</span><span class="n">string</span><span class="p">):</span>
+    <span class="n">punremoved</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">'[^A-Za-z0-9\s]'</span><span class="p">,</span><span class="s1">''</span><span class="p">,</span> <span class="n">string</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">integer</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">punremoved</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+        <span class="n">integer</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="n">integer</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[6]:</div>
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-<thead>
-<tr style="text-align: right;">
-<th></th>
-<th>Year</th>
-<th>Category</th>
-<th>Nominee</th>
-<th>Additional Info</th>
-<th>Won?</th>
-<th>Unnamed: 5</th>
-<th>Unnamed: 6</th>
-<th>Unnamed: 7</th>
-<th>Unnamed: 8</th>
-<th>Unnamed: 9</th>
-<th>Unnamed: 10</th>
-<th>Won</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<th>0</th>
-<td>2010</td>
-<td>Actor -- Leading Role</td>
-<td>Javier Bardem</td>
-<td>Biutiful {'Uxbal'}</td>
-<td>NO</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>0</td>
-</tr>
-<tr>
-<th>1</th>
-<td>2010</td>
-<td>Actor -- Leading Role</td>
-<td>Jeff Bridges</td>
-<td>True Grit {'Rooster Cogburn'}</td>
-<td>NO</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>0</td>
-</tr>
-<tr>
-<th>2</th>
-<td>2010</td>
-<td>Actor -- Leading Role</td>
-<td>Jesse Eisenberg</td>
-<td>The Social Network {'Mark Zuckerberg'}</td>
-<td>NO</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>0</td>
-</tr>
-<tr>
-<th>3</th>
-<td>2010</td>
-<td>Actor -- Leading Role</td>
-<td>Colin Firth</td>
-<td>The King's Speech {'King George VI'}</td>
-<td>YES</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>1</td>
-</tr>
-<tr>
-<th>4</th>
-<td>2010</td>
-<td>Actor -- Leading Role</td>
-<td>James Franco</td>
-<td>127 Hours {'Aron Ralston'}</td>
-<td>NO</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>0</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Next, we'll drop the unnamed columns</p>
 </div>
 </div>
 </div>
@@ -1961,18 +1343,17 @@ Name: Unnamed: 5, dtype: int64
 <div class="prompt input_prompt">In [7]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">columns_drop</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">"Won?"</span><span class="p">,</span>
-    <span class="s2">"Unnamed: 5"</span><span class="p">,</span>
-    <span class="s2">"Unnamed: 6"</span><span class="p">,</span>
-    <span class="s2">"Unnamed: 7"</span><span class="p">,</span>
-    <span class="s2">"Unnamed: 8"</span><span class="p">,</span>
-    <span class="s2">"Unnamed: 9"</span><span class="p">,</span>
-    <span class="s2">"Unnamed: 10"</span>
-<span class="p">]</span>
-<span class="n">final_nominations</span> <span class="o">=</span> <span class="n">nominations</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns_drop</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">jeopardy</span><span class="p">[</span><span class="s1">'clean_values'</span><span class="p">]</span> <span class="o">=</span> <span class="n">jeopardy</span><span class="p">[</span><span class="s1">'Value'</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">punremovandtoint</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We'll have to convert the values in the "Air Date" column into a datetime object</p>
 </div>
 </div>
 </div>
@@ -1981,7 +1362,26 @@ Name: Unnamed: 5, dtype: int64
 <div class="prompt input_prompt">In [8]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">final_nominations</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">jeopardy</span><span class="p">[</span><span class="s1">'Air Date'</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">jeopardy</span><span class="p">[</span><span class="s1">'Air Date'</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let's see what our table currently looks like</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [9]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">jeopardy</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1989,7 +1389,7 @@ Name: Unnamed: 5, dtype: int64
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[8]:</div>
+<div class="prompt output_prompt">Out[9]:</div>
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div>
 <style scoped="">
@@ -2009,53 +1409,83 @@ Name: Unnamed: 5, dtype: int64
 <thead>
 <tr style="text-align: right;">
 <th></th>
-<th>Year</th>
+<th>Show Number</th>
+<th>Air Date</th>
+<th>Round</th>
 <th>Category</th>
-<th>Nominee</th>
-<th>Additional Info</th>
-<th>Won</th>
+<th>Value</th>
+<th>Question</th>
+<th>Answer</th>
+<th>clean_question</th>
+<th>clean_answer</th>
+<th>clean_values</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <th>0</th>
-<td>2010</td>
-<td>Actor -- Leading Role</td>
-<td>Javier Bardem</td>
-<td>Biutiful {'Uxbal'}</td>
-<td>0</td>
+<td>4680</td>
+<td>2004-12-31</td>
+<td>Jeopardy!</td>
+<td>HISTORY</td>
+<td>$200</td>
+<td>For the last 8 years of his life, Galileo was ...</td>
+<td>Copernicus</td>
+<td>for the last 8 years of his life galileo was u...</td>
+<td>copernicus</td>
+<td>200</td>
 </tr>
 <tr>
 <th>1</th>
-<td>2010</td>
-<td>Actor -- Leading Role</td>
-<td>Jeff Bridges</td>
-<td>True Grit {'Rooster Cogburn'}</td>
-<td>0</td>
+<td>4680</td>
+<td>2004-12-31</td>
+<td>Jeopardy!</td>
+<td>ESPN's TOP 10 ALL-TIME ATHLETES</td>
+<td>$200</td>
+<td>No. 2: 1912 Olympian; football star at Carlisl...</td>
+<td>Jim Thorpe</td>
+<td>no 2 1912 olympian football star at carlisle i...</td>
+<td>jim thorpe</td>
+<td>200</td>
 </tr>
 <tr>
 <th>2</th>
-<td>2010</td>
-<td>Actor -- Leading Role</td>
-<td>Jesse Eisenberg</td>
-<td>The Social Network {'Mark Zuckerberg'}</td>
-<td>0</td>
+<td>4680</td>
+<td>2004-12-31</td>
+<td>Jeopardy!</td>
+<td>EVERYBODY TALKS ABOUT IT...</td>
+<td>$200</td>
+<td>The city of Yuma in this state has a record av...</td>
+<td>Arizona</td>
+<td>the city of yuma in this state has a record av...</td>
+<td>arizona</td>
+<td>200</td>
 </tr>
 <tr>
 <th>3</th>
-<td>2010</td>
-<td>Actor -- Leading Role</td>
-<td>Colin Firth</td>
-<td>The King's Speech {'King George VI'}</td>
-<td>1</td>
+<td>4680</td>
+<td>2004-12-31</td>
+<td>Jeopardy!</td>
+<td>THE COMPANY LINE</td>
+<td>$200</td>
+<td>In 1963, live on "The Art Linkletter Show", th...</td>
+<td>McDonald's</td>
+<td>in 1963 live on the art linkletter show this c...</td>
+<td>mcdonalds</td>
+<td>200</td>
 </tr>
 <tr>
 <th>4</th>
-<td>2010</td>
-<td>Actor -- Leading Role</td>
-<td>James Franco</td>
-<td>127 Hours {'Aron Ralston'}</td>
-<td>0</td>
+<td>4680</td>
+<td>2004-12-31</td>
+<td>Jeopardy!</td>
+<td>EPITAPHS & TRIBUTES</td>
+<td>$200</td>
+<td>Signer of the Dec. of Indep., framer of the Co...</td>
+<td>John Adams</td>
+<td>signer of the dec of indep framer of the const...</td>
+<td>john adams</td>
+<td>200</td>
 </tr>
 </tbody>
 </table>
@@ -2069,35 +1499,8 @@ Name: Unnamed: 5, dtype: int64
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The last thing we'll have to do is separate the "Additional Info" column into two new columns "Movie" and "Character". We'll have to manipulate the strings and the split the two values in this one column in two new strings.</p>
-<p>First we'll use .str.rstrip() to remove the end quotation mark and the bracket from the column series, then we'll split the the string again into a series of lists.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [9]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">additional_info_one</span> <span class="o">=</span> <span class="n">final_nominations</span><span class="p">[</span><span class="s1">'Additional Info'</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="n">to_strip</span> <span class="o">=</span> <span class="s2">"'}"</span><span class="p">)</span>
-<span class="n">additional_info_one</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[9]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>0                        Biutiful {'Uxbal
-1             True Grit {'Rooster Cogburn
-2    The Social Network {'Mark Zuckerberg
-3      The King's Speech {'King George VI
-4                127 Hours {'Aron Ralston
-Name: Additional Info, dtype: object</pre>
-</div>
-</div>
+<p>Now that the data is cleaned, we can start analyzing it.</p>
+<p>Suppose we are interested in the number of words in the answer that occurs in the question. We'll create a function and use the .apply() method to create a new column. This column will have ratio of matching question words to total answer words.</p>
 </div>
 </div>
 </div>
@@ -2106,25 +1509,19 @@ Name: Additional Info, dtype: object</pre>
 <div class="prompt input_prompt">In [10]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Split into a series of lists</span>
-<span class="n">additional_info_two</span> <span class="o">=</span> <span class="n">additional_info_one</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">' {</span><span class="se">\'</span><span class="s1">'</span><span class="p">)</span>
-<span class="n">additional_info_two</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">cleaner</span><span class="p">(</span><span class="n">series</span><span class="p">):</span>
+    <span class="n">split_answer</span> <span class="o">=</span> <span class="n">series</span><span class="p">[</span><span class="s1">'clean_answer'</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">' '</span><span class="p">)</span>
+    <span class="n">split_question</span> <span class="o">=</span> <span class="n">series</span><span class="p">[</span><span class="s1">'clean_question'</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">' '</span><span class="p">)</span>
+    <span class="n">match_count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">if</span> <span class="s2">"the"</span> <span class="ow">in</span> <span class="n">split_answer</span><span class="p">:</span>
+        <span class="n">split_answer</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">'the'</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">split_answer</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">split_answer</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">split_question</span><span class="p">:</span>
+            <span class="n">match_count</span> <span class="o">+=</span><span class="mi">1</span>
+    <span class="k">return</span> <span class="n">match_count</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">split_answer</span><span class="p">)</span>
 </pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[10]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>0                        [Biutiful, Uxbal]
-1             [True Grit, Rooster Cogburn]
-2    [The Social Network, Mark Zuckerberg]
-3      [The King's Speech, King George VI]
-4                [127 Hours, Aron Ralston]
-Name: Additional Info, dtype: object</pre>
-</div>
 </div>
 </div>
 </div>
@@ -2134,26 +1531,8 @@ Name: Additional Info, dtype: object</pre>
 <div class="prompt input_prompt">In [11]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Set a series with the first element to movie names</span>
-<span class="n">movie_names</span> <span class="o">=</span> <span class="n">additional_info_two</span><span class="o">.</span><span class="n">str</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-
-
-<span class="c1">#Set a series with the second element to characters</span>
-<span class="n">characters</span> <span class="o">=</span> <span class="n">additional_info_two</span><span class="o">.</span><span class="n">str</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [12]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">final_nominations</span><span class="p">[</span><span class="s2">"Movie"</span><span class="p">]</span> <span class="o">=</span> <span class="n">movie_names</span>
-<span class="n">final_nominations</span><span class="p">[</span><span class="s2">"Character"</span><span class="p">]</span> <span class="o">=</span> <span class="n">characters</span>
-<span class="n">final_nominations</span> <span class="o">=</span> <span class="n">final_nominations</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">"Additional Info"</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">final_nominations</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">jeopardy</span><span class="p">[</span><span class="s1">'answer_in_question'</span><span class="p">]</span> <span class="o">=</span> <span class="n">jeopardy</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">cleaner</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">jeopardy</span><span class="p">[</span><span class="s1">'answer_in_question'</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -2161,83 +1540,9 @@ Name: Additional Info, dtype: object</pre>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[12]:</div>
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-<thead>
-<tr style="text-align: right;">
-<th></th>
-<th>Year</th>
-<th>Category</th>
-<th>Nominee</th>
-<th>Won</th>
-<th>Movie</th>
-<th>Character</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<th>0</th>
-<td>2010</td>
-<td>Actor -- Leading Role</td>
-<td>Javier Bardem</td>
-<td>0</td>
-<td>Biutiful</td>
-<td>Uxbal</td>
-</tr>
-<tr>
-<th>1</th>
-<td>2010</td>
-<td>Actor -- Leading Role</td>
-<td>Jeff Bridges</td>
-<td>0</td>
-<td>True Grit</td>
-<td>Rooster Cogburn</td>
-</tr>
-<tr>
-<th>2</th>
-<td>2010</td>
-<td>Actor -- Leading Role</td>
-<td>Jesse Eisenberg</td>
-<td>0</td>
-<td>The Social Network</td>
-<td>Mark Zuckerberg</td>
-</tr>
-<tr>
-<th>3</th>
-<td>2010</td>
-<td>Actor -- Leading Role</td>
-<td>Colin Firth</td>
-<td>1</td>
-<td>The King's Speech</td>
-<td>King George VI</td>
-</tr>
-<tr>
-<th>4</th>
-<td>2010</td>
-<td>Actor -- Leading Role</td>
-<td>James Franco</td>
-<td>0</td>
-<td>127 Hours</td>
-<td>Aron Ralston</td>
-</tr>
-</tbody>
-</table>
-</div>
+<div class="prompt output_prompt">Out[11]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>0.060493257069335872</pre>
 </div>
 </div>
 </div>
@@ -2247,7 +1552,38 @@ Name: Additional Info, dtype: object</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now that we are done cleaning up the data, we can do some simply analysis using sqlite3</p>
+<p>It looks like the answer only appears in the question 6% of the time, so this is not a super reliable strategy.</p>
+<p>Next, we'll look at words used in the questions column. We can write a function to see how often they repeat</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [12]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">question_overlap</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="c1">#a python set is an unordered list of items</span>
+<span class="n">terms_used</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">jeopardy</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">split_question</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">'clean_question'</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">" "</span><span class="p">)</span>     
+    <span class="n">match_count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">newlist</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">split_question</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="o">>=</span> <span class="mi">6</span><span class="p">:</span>
+            <span class="n">newlist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">newlist</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">terms_used</span><span class="p">:</span>
+            <span class="n">match_count</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">newlist</span><span class="p">:</span>
+        <span class="n">terms_used</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">newlist</span><span class="p">)</span> <span class="o">></span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">match_count</span> <span class="o">=</span> <span class="n">match_count</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">newlist</span><span class="p">)</span>
+    <span class="n">question_overlap</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">match_count</span><span class="p">)</span>
+
+<span class="n">jeopardy</span><span class="p">[</span><span class="s1">'question_overlap'</span><span class="p">]</span> <span class="o">=</span> <span class="n">question_overlap</span>
+</pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -2256,15 +1592,28 @@ Name: Additional Info, dtype: object</pre>
 <div class="prompt input_prompt">In [13]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">sqlite3</span>
-
-<span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">"nominations.db"</span><span class="p">)</span>
-<span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
-
-<span class="c1">#Creates the table "nominations"</span>
-<span class="n">final_nominations</span><span class="o">.</span><span class="n">to_sql</span><span class="p">(</span><span class="s2">"nominations"</span><span class="p">,</span> <span class="n">conn</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">jeopardy</span><span class="p">[</span><span class="s1">'question_overlap'</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[13]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>0.69087373156719623</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>There is a 69% overlap of words between new questions and old ones. However words can be put together as different phases with a big difference in meaning. So this  huge overlap is not super significant.</p>
+<p>Let's take a look at the number of questions that are > 800 dollars. Maybe it is a good idea to only study high value questions.</p>
 </div>
 </div>
 </div>
@@ -2273,27 +1622,14 @@ Name: Additional Info, dtype: object</pre>
 <div class="prompt input_prompt">In [14]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">q1</span> <span class="o">=</span> <span class="s1">'''</span>
-<span class="s1">Pragma table_info(nominations)</span>
-<span class="s1">'''</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">q1</span><span class="p">)</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
-<span class="n">result</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">highvalue</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="s1">'clean_values'</span><span class="p">]</span> <span class="o">></span> <span class="mi">800</span><span class="p">:</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">value</span>
+
+<span class="n">jeopardy</span><span class="p">[</span><span class="s1">'high_value'</span><span class="p">]</span> <span class="o">=</span> <span class="n">jeopardy</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">highvalue</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[14]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>[(0, 'Year', 'INTEGER', 0, None, 0),
- (1, 'Category', 'TEXT', 0, None, 0),
- (2, 'Nominee', 'TEXT', 0, None, 0),
- (3, 'Won', 'INTEGER', 0, None, 0),
- (4, 'Movie', 'TEXT', 0, None, 0),
- (5, 'Character', 'TEXT', 0, None, 0)]</pre>
-</div>
 </div>
 </div>
 </div>
@@ -2303,77 +1639,9 @@ Name: Additional Info, dtype: object</pre>
 <div class="prompt input_prompt">In [15]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">q2</span> <span class="o">=</span> <span class="s1">'''</span>
-<span class="s1">SELECT * FROM nominations LIMIT 10</span>
-<span class="s1">'''</span>
-
-<span class="n">result</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">q2</span><span class="p">)</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
-<span class="n">result</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">high_value_count</span> <span class="o">=</span> <span class="n">jeopardy</span><span class="p">[</span><span class="n">jeopardy</span><span class="p">[</span><span class="s1">'high_value'</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">low_value_count</span> <span class="o">=</span> <span class="n">jeopardy</span><span class="p">[</span><span class="n">jeopardy</span><span class="p">[</span><span class="s1">'high_value'</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[15]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>[(2010, 'Actor -- Leading Role', 'Javier Bardem', 0, 'Biutiful', 'Uxbal'),
- (2010,
-  'Actor -- Leading Role',
-  'Jeff Bridges',
-  0,
-  'True Grit',
-  'Rooster Cogburn'),
- (2010,
-  'Actor -- Leading Role',
-  'Jesse Eisenberg',
-  0,
-  'The Social Network',
-  'Mark Zuckerberg'),
- (2010,
-  'Actor -- Leading Role',
-  'Colin Firth',
-  1,
-  "The King's Speech",
-  'King George VI'),
- (2010,
-  'Actor -- Leading Role',
-  'James Franco',
-  0,
-  '127 Hours',
-  'Aron Ralston'),
- (2010,
-  'Actor -- Supporting Role',
-  'Christian Bale',
-  1,
-  'The Fighter',
-  'Dicky Eklund'),
- (2010,
-  'Actor -- Supporting Role',
-  'John Hawkes',
-  0,
-  "Winter's Bone",
-  'Teardrop'),
- (2010,
-  'Actor -- Supporting Role',
-  'Jeremy Renner',
-  0,
-  'The Town',
-  'James Coughlin'),
- (2010,
-  'Actor -- Supporting Role',
-  'Mark Ruffalo',
-  0,
-  'The Kids Are All Right',
-  'Paul'),
- (2010,
-  'Actor -- Supporting Role',
-  'Geoffrey Rush',
-  0,
-  "The King's Speech",
-  'Lionel Logue')]</pre>
-</div>
 </div>
 </div>
 </div>
@@ -2383,8 +1651,26 @@ Name: Additional Info, dtype: object</pre>
 <div class="prompt input_prompt">In [16]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">high_value_count</span><span class="p">)</span>
+<span class="n">low_value_count</span>
 </pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>5734
+</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt output_prompt">Out[16]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>14265</pre>
+</div>
 </div>
 </div>
 </div>
@@ -2393,11 +1679,148 @@ Name: Additional Info, dtype: object</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p>It doesnt look like there are that many high value questions in the dataset.</p>
+<p>We can create a function that takes in a word, then return the # of high/low values questions this word showed up in. Maybe this will help us study.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [17]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">highlowcounts</span><span class="p">(</span><span class="n">word</span><span class="p">):</span>
+    <span class="n">low_count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">high_count</span> <span class="o">=</span> <span class="mi">0</span> 
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">jeopardy</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">row</span><span class="p">[</span><span class="s1">'clean_question'</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">' '</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="s2">"high_value"</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">high_count</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">low_count</span> <span class="o">+=</span> <span class="mi">1</span>   
+    <span class="k">return</span> <span class="n">high_count</span><span class="p">,</span> <span class="n">low_count</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [18]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">observed_expected</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">comparison_terms</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">terms_used</span><span class="p">)[:</span><span class="mi">5</span><span class="p">]</span>
+<span class="n">comparison_terms</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[18]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>['emigrated', 'ruffles', 'waterworld', 'mussorgsky', 'appendages']</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [19]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">term</span> <span class="ow">in</span> <span class="n">comparison_terms</span><span class="p">:</span>
+    <span class="n">observed_expected</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">highlowcounts</span><span class="p">(</span><span class="n">term</span><span class="p">))</span>
+
+<span class="n">observed_expected</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[19]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>[(1, 0), (0, 2), (1, 0), (1, 1), (1, 2)]</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can use the chi squared test to see if the values of the terms in "comparsion_terms" are statiscally significant.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [20]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">chi_squared</span> <span class="o">=</span><span class="p">[]</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="k">import</span> <span class="n">chisquare</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="k">for</span> <span class="n">lists</span> <span class="ow">in</span> <span class="n">observed_expected</span><span class="p">:</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">lists</span><span class="p">)</span>
+    <span class="n">total_prop</span> <span class="o">=</span> <span class="n">total</span><span class="o">/</span><span class="n">jeopardy</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">expected_high</span> <span class="o">=</span> <span class="n">total_prop</span> <span class="o">*</span> <span class="n">high_value_count</span>
+    <span class="n">expected_low</span> <span class="o">=</span> <span class="n">total_prop</span> <span class="o">*</span> <span class="n">low_value_count</span>
+    <span class="n">observed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">lists</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">lists</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+    <span class="n">expected</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">expected_high</span><span class="p">,</span> <span class="n">expected_low</span><span class="p">])</span>
+    <span class="n">chi_squared</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">chisquare</span><span class="p">(</span><span class="n">observed</span><span class="p">,</span> <span class="n">expected</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [21]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">chi_squared</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[21]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>[Power_divergenceResult(statistic=2.4877921171956752, pvalue=0.11473257634454047),
+ Power_divergenceResult(statistic=0.80392569225376798, pvalue=0.36992223780795708),
+ Power_divergenceResult(statistic=2.4877921171956752, pvalue=0.11473257634454047),
+ Power_divergenceResult(statistic=0.44487748166127949, pvalue=0.50477764875459963),
+ Power_divergenceResult(statistic=0.031881167234403623, pvalue=0.85828871632352932)]</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>None of the p values are less than 0.05 so this is not statiscally significant.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <hr />
-<h4 id="Learning-Summary">Learning Summary<a class="anchor-link" href="#Learning-Summary">¶</a></h4><p>Python/SQL concepts explored: python+sqlite3, pandas, data cleaning, columns manipulation</p>
-<p>Python functions and methods used: .str.rstrip(), .str.split(), .connect(), .cursor(), .drop(), .str[], .map(), .value_counts()</p>
-<p>SQL statements used: SELECT, FROM, PRAGMA</p>
-<p>The files used for this project can be found in my <a href="https://github.com/sengkchu/Dataquest-Guided-Projects-Solutions/tree/master/Guided%20Project_%20Preparing%20data%20for%20SQLite">GitHub repository</a>.</p>
+<h4 id="Learning-Summary">Learning Summary<a class="anchor-link" href="#Learning-Summary">¶</a></h4><p>Python concepts explored: pandas, matplotlib, data cleaning, string manipulation, chi squared test, regex, try/except</p>
+<p>Python functions and methods used: .columns, .lower(), .sub(), .apply(), sum(), .array(), .split(), .shape, .mean(), .iterrows(), .remove(), .add(), .append()</p>
+<p>The files used for this project can be found in my <a href="https://github.com/sengkchu/Dataquest-Guided-Projects-Solutions/tree/master/Guided%20Project_%20Winning%20Jeopardy">GitHub repository</a>.</p>
 </div>
 </div>
 </div>
@@ -2451,7 +1874,7 @@ Name: Additional Info, dtype: object</pre>
             var disqus_shortname = 'codingdisciple'; // required: replace example with your forum shortname
             var disqus_config = function () {
                 this.language = "en";
-                        this.page.identifier = '2018-02-07-Prepare-Data-SQL';
+                        this.page.identifier = '2018-02-09-analyzing-jeopardy';
             };
             /* * * DON'T EDIT BELOW THIS LINE * * */
             (function () {
