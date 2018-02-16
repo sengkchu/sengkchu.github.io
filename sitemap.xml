@@ -5,7 +5,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://codingdisciple.com/</loc>
-<lastmod>2018-02-13T18:17:25-00:00</lastmod>
+<lastmod>2018-02-15T23:35:29-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -20,6 +20,27 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://codingdisciple.com/</loc>
 <lastmod>2018-01-26T00:00:00-08:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://codingdisciple.com/spark-dataframe-sql-python.html</loc>
+<lastmod>2018-02-15T00:00:00-08:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://codingdisciple.com/spark-python.html</loc>
+<lastmod>2018-02-15T00:00:00-08:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://codingdisciple.com/predicting-bike-rentals.html</loc>
+<lastmod>2018-02-14T00:00:00-08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<link rel="canonical" href="/Relations-SQL.html"/>
+<link rel="canonical" href="/spark-python.html"/>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>Creating Relations in SQL - Coding Disciple</title>
+    <title>Working with Spark in Python - Coding Disciple</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -10,21 +10,20 @@
 
 
 
-<link rel="canonical" href="/Relations-SQL.html">
+<link rel="canonical" href="/spark-python.html">
 
         <meta name="author" content="Seng Chu" />
-        <meta name="keywords" content="SQL,pandas" />
-        <meta name="description" content="In this project we will use the cleaned data from the previous mission and work mainly in SQL. We will use SQL to transform the nominations tables into new tables, and create relations across these tables. First let&#39;s take a look at the table&#39;s schema and the first ten rows." />
+        <meta name="keywords" content="Spark" />
+        <meta name="description" content="This is more of a review project from one of the missions on dataquest. We are going to use Apache Spark 1.5 with Jupyter. Instead of doing any heavy analysis. This project will focus more on the syntax. We&#39;ll be using spark with a txt file &#39;hamlet.txt&#39;." />
 
         <meta property="og:site_name" content="Coding Disciple" />
         <meta property="og:type" content="article"/>
-        <meta property="og:title" content="Creating Relations in SQL"/>
-        <meta property="og:url" content="/Relations-SQL.html"/>
-        <meta property="og:description" content="In this project we will use the cleaned data from the previous mission and work mainly in SQL. We will use SQL to transform the nominations tables into new tables, and create relations across these tables. First let&#39;s take a look at the table&#39;s schema and the first ten rows."/>
-        <meta property="article:published_time" content="2018-02-07" />
+        <meta property="og:title" content="Working with Spark in Python"/>
+        <meta property="og:url" content="/spark-python.html"/>
+        <meta property="og:description" content="This is more of a review project from one of the missions on dataquest. We are going to use Apache Spark 1.5 with Jupyter. Instead of doing any heavy analysis. This project will focus more on the syntax. We&#39;ll be using spark with a txt file &#39;hamlet.txt&#39;."/>
+        <meta property="article:published_time" content="2018-02-15" />
             <meta property="article:section" content="Learning Data Science" />
-            <meta property="article:tag" content="SQL" />
-            <meta property="article:tag" content="pandas" />
+            <meta property="article:tag" content="Spark" />
             <meta property="article:author" content="Seng Chu" />
 
 
@@ -102,10 +101,10 @@
         <article>
             <header class="page-header">
                 <h1>
-                    <a href="/Relations-SQL.html"
+                    <a href="/spark-python.html"
                        rel="bookmark"
-                       title="Permalink to Creating Relations in SQL">
-                        Creating Relations in SQL
+                       title="Permalink to Working with Spark in Python">
+                        Working with Spark in Python
                     </a>
                 </h1>
             </header>
@@ -115,7 +114,7 @@
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2018-02-07T00:00:00-08:00"> Wed 07 February 2018</time>
+        <i class="fa fa-calendar"></i><time datetime="2018-02-15T00:00:00-08:00"> Thu 15 February 2018</time>
     </span>
 
 
@@ -123,9 +122,7 @@
 
 
 <span class="label label-default">Tags</span>
-	<a href="/tag/sql.html">SQL</a>
-        /
-	<a href="/tag/pandas.html">pandas</a>
+	<a href="/tag/spark.html">Spark</a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
@@ -1105,8 +1102,8 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In this project we will use the cleaned data from the previous mission and work mainly in SQL. We will use SQL to transform the nominations tables into new tables, and create relations across these tables.</p>
-<p>First let's take a look at the table's schema and the first ten rows.</p>
+<p>This is more of a review project from one of the missions on dataquest. We are going to use Apache Spark 1.5 with Jupyter. Instead of doing any heavy analysis. This project will focus more on the syntax.</p>
+<p>We'll be using spark with a txt file 'hamlet.txt'.</p>
 </div>
 </div>
 </div>
@@ -1115,9 +1112,12 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [1]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">sqlite3</span>
-<span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">"nominations.db"</span><span class="p">)</span>
-<span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Initialize findspark and pyspark, create the sc object</span>
+<span class="kn">import</span> <span class="nn">findspark</span>
+<span class="n">findspark</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+
+<span class="kn">import</span> <span class="nn">pyspark</span>
+<span class="n">sc</span> <span class="o">=</span> <span class="n">pyspark</span><span class="o">.</span><span class="n">SparkContext</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1128,13 +1128,30 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [2]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">q1</span> <span class="o">=</span> <span class="s1">'''</span>
-<span class="s1">PRAGMA table_info(nominations)</span>
-<span class="s1">'''</span>
-
-<span class="n">schema</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">q1</span><span class="p">)</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Reads the file hamlet.txt into a RDD object</span>
+<span class="n">raw_hamlet</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">textFile</span><span class="p">(</span><span class="s1">'hamlet.txt'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">raw_hamlet</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
 </pre></div>
 </div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>['hamlet@0\t\tHAMLET', 'hamlet@8', 'hamlet@9', 'hamlet@10\t\tDRAMATIS PERSONAE', 'hamlet@29']
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="The-.map()-method">The .map() method<a class="anchor-link" href="#The-.map()-method">¶</a></h4><p>In spark, we can use the .map() method in conjunction with a lambda function to iterate through the data. This method transforms the RDD of length N to another RDD with length N.</p>
 </div>
 </div>
 </div>
@@ -1143,15 +1160,10 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [3]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">q2</span> <span class="o">=</span> <span class="s1">'''</span>
-<span class="s1">SELECT * FROM nominations LIMIT 10</span>
-<span class="s1">'''</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Iterates over every element in the list from raw data, split it into a list of lists on '\t'</span>
+<span class="n">split_hamlet</span> <span class="o">=</span> <span class="n">raw_hamlet</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">line</span><span class="p">:</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">'</span><span class="se">\t</span><span class="s1">'</span><span class="p">))</span>
 
-<span class="n">first_ten</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">q2</span><span class="p">)</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
-<span class="n">first_ten</span>
-
-<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">first_ten</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+<span class="n">split_hamlet</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1159,21 +1171,23 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>(2010, 'Actor -- Leading Role', 'Javier Bardem', 0, 'Biutiful', 'Uxbal')
-(2010, 'Actor -- Leading Role', 'Jeff Bridges', 0, 'True Grit', 'Rooster Cogburn')
-(2010, 'Actor -- Leading Role', 'Jesse Eisenberg', 0, 'The Social Network', 'Mark Zuckerberg')
-(2010, 'Actor -- Leading Role', 'Colin Firth', 1, "The King's Speech", 'King George VI')
-(2010, 'Actor -- Leading Role', 'James Franco', 0, '127 Hours', 'Aron Ralston')
-(2010, 'Actor -- Supporting Role', 'Christian Bale', 1, 'The Fighter', 'Dicky Eklund')
-(2010, 'Actor -- Supporting Role', 'John Hawkes', 0, "Winter's Bone", 'Teardrop')
-(2010, 'Actor -- Supporting Role', 'Jeremy Renner', 0, 'The Town', 'James Coughlin')
-(2010, 'Actor -- Supporting Role', 'Mark Ruffalo', 0, 'The Kids Are All Right', 'Paul')
-(2010, 'Actor -- Supporting Role', 'Geoffrey Rush', 0, "The King's Speech", 'Lionel Logue')
-</pre>
+<div class="prompt output_prompt">Out[3]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>[['hamlet@0', '', 'HAMLET'],
+ ['hamlet@8'],
+ ['hamlet@9'],
+ ['hamlet@10', '', 'DRAMATIS PERSONAE'],
+ ['hamlet@29']]</pre>
 </div>
 </div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="The-.flatMap()-method">The .flatMap() method<a class="anchor-link" href="#The-.flatMap()-method">¶</a></h4><p>This method transform an RDD of length N into a collection of N collections, then transform the collections into one RDD. This method is useful if we want to transform one RDD into another with a different length.</p>
 </div>
 </div>
 </div>
@@ -1182,8 +1196,103 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [4]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">schema</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Extracts all the lines where hamlet speaks and yeilds a new RDD object</span>
+<span class="k">def</span> <span class="nf">hamlet_speaks</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">speaketh</span> <span class="o">=</span> <span class="kc">False</span>
+    
+    <span class="k">if</span> <span class="s2">"HAMLET"</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+        <span class="n">speaketh</span> <span class="o">=</span> <span class="kc">True</span>
+    
+    <span class="k">if</span> <span class="n">speaketh</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="nb">id</span><span class="p">,</span><span class="s2">"hamlet speaketh!"</span>
+
+<span class="n">hamlet_spoken</span> <span class="o">=</span> <span class="n">split_hamlet</span><span class="o">.</span><span class="n">flatMap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">hamlet_speaks</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="n">hamlet_spoken</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[4]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>[('hamlet@0', 'hamlet speaketh!'),
+ ('hamlet@75', 'hamlet speaketh!'),
+ ('hamlet@1004', 'hamlet speaketh!'),
+ ('hamlet@9144', 'hamlet speaketh!'),
+ ('hamlet@12313', 'hamlet speaketh!')]</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="The-.filter()-method">The .filter() method<a class="anchor-link" href="#The-.filter()-method">¶</a></h4><p>The filter method takes in a function with boolean results. This is useful if we want to search for a certain name or value.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [5]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">filter_hamlet_speaks</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
+    <span class="k">if</span> <span class="s2">"HAMLET"</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+<span class="c1">#Filters split_hamlet, only lines with 'HAMLET' will be kept</span>
+
+<span class="n">hamlet_spoken_lines</span> <span class="o">=</span> <span class="n">split_hamlet</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">line</span><span class="p">:</span> <span class="n">filter_hamlet_speaks</span><span class="p">(</span><span class="n">line</span><span class="p">))</span>
+<span class="n">hamlet_spoken_lines</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[5]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>[['hamlet@0', '', 'HAMLET'],
+ ['hamlet@75', 'HAMLET', 'son to the late, and nephew to the present king.'],
+ ['hamlet@1004', '', 'HAMLET'],
+ ['hamlet@9144', '', 'HAMLET'],
+ ['hamlet@12313',
+  'HAMLET',
+  '[Aside]  A little more than kin, and less than kind.']]</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="The-.count()-and-.collect()-actions">The .count() and .collect() actions<a class="anchor-link" href="#The-.count()-and-.collect()-actions">¶</a></h4><p>The collect action copies the dataset to the driver. If the dataset is very large and won't fit in memory, we'll run into issues. The .take() action is generally better if we only want a certain number of elements.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [11]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Counts the total number of elements in hamlet_spoken_lines</span>
+<span class="n">spoken_count</span> <span class="o">=</span> <span class="n">hamlet_spoken_lines</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+
+<span class="c1">#Collects all the elements in hamlet_spoken_lines</span>
+<span class="n">spoken_101</span> <span class="o">=</span> <span class="n">hamlet_spoken_lines</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">spoken_count</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">spoken_101</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -1193,12 +1302,8 @@ h6:hover .anchor-link {
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>(0, 'Year', 'INTEGER', 0, None, 0)
-(1, 'Category', 'TEXT', 0, None, 0)
-(2, 'Nominee', 'TEXT', 0, None, 0)
-(3, 'Won', 'INTEGER', 0, None, 0)
-(4, 'Movie', 'TEXT', 0, None, 0)
-(5, 'Character', 'TEXT', 0, None, 0)
+<pre>381
+[['hamlet@0', '', 'HAMLET'], ['hamlet@75', 'HAMLET', 'son to the late, and nephew to the present king.'], ['hamlet@1004', '', 'HAMLET'], ['hamlet@9144', '', 'HAMLET'], ['hamlet@12313', 'HAMLET', '[Aside]  A little more than kin, and less than kind.'], ['hamlet@12434', 'HAMLET', "Not so, my lord; I am too much i' the sun."], ['hamlet@12760', 'HAMLET', 'Ay, madam, it is common.'], ['hamlet@12858', 'HAMLET', "Seems, madam! nay it is; I know not 'seems.'"], ['hamlet@14821', 'HAMLET', 'I shall in all my best obey you, madam.'], ['hamlet@15261', 'HAMLET', 'O, that this too too solid flesh would melt']]
 </pre>
 </div>
 </div>
@@ -1209,77 +1314,7 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We want to create a new table within the databse named "ceremonies". This table will have the Year and the Host only</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [5]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">q3</span> <span class="o">=</span> <span class="s1">'''</span>
-<span class="s1">    CREATE TABLE ceremonies (</span>
-<span class="s1">    id INTEGER primary key,</span>
-<span class="s1">    Year INTEGER,</span>
-<span class="s1">    Host TEXT</span>
-<span class="s1">);</span>
-<span class="s1">'''</span>
-
-<span class="n">years_hosts</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">2010</span><span class="p">,</span> <span class="s2">"Steve Martin"</span><span class="p">),</span>
-               <span class="p">(</span><span class="mi">2009</span><span class="p">,</span> <span class="s2">"Hugh Jackman"</span><span class="p">),</span>
-               <span class="p">(</span><span class="mi">2008</span><span class="p">,</span> <span class="s2">"Jon Stewart"</span><span class="p">),</span>
-               <span class="p">(</span><span class="mi">2007</span><span class="p">,</span> <span class="s2">"Ellen DeGeneres"</span><span class="p">),</span>
-               <span class="p">(</span><span class="mi">2006</span><span class="p">,</span> <span class="s2">"Jon Stewart"</span><span class="p">),</span>
-               <span class="p">(</span><span class="mi">2005</span><span class="p">,</span> <span class="s2">"Chris Rock"</span><span class="p">),</span>
-               <span class="p">(</span><span class="mi">2004</span><span class="p">,</span> <span class="s2">"Billy Crystal"</span><span class="p">),</span>
-               <span class="p">(</span><span class="mi">2003</span><span class="p">,</span> <span class="s2">"Steve Martin"</span><span class="p">),</span>
-               <span class="p">(</span><span class="mi">2002</span><span class="p">,</span> <span class="s2">"Whoopi Goldberg"</span><span class="p">),</span>
-               <span class="p">(</span><span class="mi">2001</span><span class="p">,</span> <span class="s2">"Steve Martin"</span><span class="p">),</span>
-               <span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="s2">"Billy Crystal"</span><span class="p">),</span>
-            <span class="p">]</span>
-<span class="n">insert_query</span> <span class="o">=</span> <span class="s2">"INSERT INTO ceremonies (Year, Host) VALUES (?, ?)"</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>The .executemany() method allows us to perform many insert commands at once, until the list ends</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [6]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">q3</span><span class="p">)</span>
-
-<span class="n">conn</span><span class="o">.</span><span class="n">executemany</span><span class="p">(</span><span class="n">insert_query</span><span class="p">,</span> <span class="n">years_hosts</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[6]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre><sqlite3.cursor at 0x1cefc369030></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's check out the table we just created .</p>
+<p>Below are some more examples of using the .map() and .filter() methods.</p>
 </div>
 </div>
 </div>
@@ -1288,12 +1323,21 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [7]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">q4</span> <span class="o">=</span> <span class="s2">"SELECT * FROM ceremonies LIMIT 10"</span>
-<span class="n">q5</span> <span class="o">=</span> <span class="s2">"PRAGMA table_info(ceremonies)"</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Change each line in raw_hamlet from 'hamlet@id' to 'id' where id is an integer in each line</span>
+<span class="n">raw_hamlet</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">textFile</span><span class="p">(</span><span class="s2">"hamlet.txt"</span><span class="p">)</span>
+<span class="n">split_hamlet</span> <span class="o">=</span> <span class="n">raw_hamlet</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">line</span><span class="p">:</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">'</span><span class="se">\t</span><span class="s1">'</span><span class="p">))</span>
 
-<span class="n">result</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">q4</span><span class="p">)</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
-<span class="n">result</span>
+<span class="k">def</span> <span class="nf">line_replace</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
+    <span class="n">lists</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s1">'hamlet@'</span> <span class="ow">in</span> <span class="n">element</span><span class="p">:</span>
+            <span class="n">lists</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'hamlet@'</span><span class="p">,</span> <span class="s1">''</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">lists</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">lists</span>
+                                                
+<span class="n">hamlet_with_ids</span> <span class="o">=</span> <span class="n">split_hamlet</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">line</span><span class="p">:</span> <span class="n">line_replace</span><span class="p">(</span><span class="n">line</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">hamlet_with_ids</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -1301,18 +1345,10 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[7]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>[(1, 2010, 'Steve Martin'),
- (2, 2009, 'Hugh Jackman'),
- (3, 2008, 'Jon Stewart'),
- (4, 2007, 'Ellen DeGeneres'),
- (5, 2006, 'Jon Stewart'),
- (6, 2005, 'Chris Rock'),
- (7, 2004, 'Billy Crystal'),
- (8, 2003, 'Steve Martin'),
- (9, 2002, 'Whoopi Goldberg'),
- (10, 2001, 'Steve Martin')]</pre>
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[['0', '', 'HAMLET'], ['8'], ['9'], ['10', '', 'DRAMATIS PERSONAE'], ['29']]
+</pre>
 </div>
 </div>
 </div>
@@ -1323,9 +1359,25 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [8]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">q5</span><span class="p">)</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
-<span class="n">result</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Remove any element with only an id and any element that is blank.</span>
+<span class="k">def</span> <span class="nf">text_only</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
+    <span class="n">lists</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">element</span> <span class="o">==</span> <span class="s1">''</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">lists</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">lists</span>
+
+<span class="k">def</span> <span class="nf">one_element</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="o">></span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+<span class="n">hamlet_shortened</span> <span class="o">=</span> <span class="n">hamlet_with_ids</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">line</span><span class="p">:</span> <span class="n">one_element</span><span class="p">(</span><span class="n">line</span><span class="p">))</span>
+<span class="n">hamlet_text_only</span> <span class="o">=</span> <span class="n">hamlet_shortened</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">text_only</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="n">hamlet_text_only</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1335,19 +1387,18 @@ h6:hover .anchor-link {
 <div class="output_area">
 <div class="prompt output_prompt">Out[8]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>[(0, 'id', 'INTEGER', 0, None, 1),
- (1, 'Year', 'INTEGER', 0, None, 0),
- (2, 'Host', 'TEXT', 0, None, 0)]</pre>
+<pre>[['0', 'HAMLET'],
+ ['10', 'DRAMATIS PERSONAE'],
+ ['31', 'CLAUDIUS', 'king of Denmark. (KING CLAUDIUS:)'],
+ ['75', 'HAMLET', 'son to the late, and nephew to the present king.'],
+ ['132', 'POLONIUS', 'lord chamberlain. (LORD POLONIUS:)'],
+ ['177', 'HORATIO', 'friend to Hamlet.'],
+ ['204', 'LAERTES', 'son to Polonius.'],
+ ['230', 'LUCIANUS', 'nephew to the king.'],
+ ['261', 'VOLTIMAND', '|'],
+ ['273', '|']]</pre>
 </div>
 </div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>We want to avoid editing the original table. So let's make a new nominations table, but this time we'll include the ceremony_id as a foriegn key.</p>
 </div>
 </div>
 </div>
@@ -1356,8 +1407,19 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [9]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">q6</span> <span class="o">=</span> <span class="s2">"PRAGMA foreign_keys = ON;"</span>
-<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">q6</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Remove pipe characters.</span>
+<span class="k">def</span> <span class="nf">line_replace2</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
+    <span class="n">lists</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">element</span> <span class="o">==</span> <span class="s1">'|'</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="k">elif</span> <span class="s1">'|'</span> <span class="ow">in</span> <span class="n">element</span><span class="p">:</span>
+            <span class="n">lists</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'|'</span><span class="p">,</span> <span class="s1">''</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">lists</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">lists</span>
+<span class="n">clean_hamlet</span> <span class="o">=</span> <span class="n">hamlet_text_only</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">line_replace2</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="n">clean_hamlet</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1367,419 +1429,16 @@ h6:hover .anchor-link {
 <div class="output_area">
 <div class="prompt output_prompt">Out[9]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre><sqlite3.cursor at 0x1cefb338ea0></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [10]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">q7</span> <span class="o">=</span> <span class="s1">'''</span>
-<span class="s1">    CREATE TABLE nominations_two (</span>
-<span class="s1">    id integer primary key,</span>
-<span class="s1">    category text,</span>
-<span class="s1">    nominee text,</span>
-<span class="s1">    movie text,</span>
-<span class="s1">    character text,</span>
-<span class="s1">    won integer,</span>
-<span class="s1">    ceremony_id integer,</span>
-<span class="s1">    foreign key(ceremony_id) references ceremonies(id)</span>
-<span class="s1">);</span>
-<span class="s1">'''</span>
-
-<span class="c1">#Query to be inserted into the new table</span>
-<span class="n">insert_query2</span> <span class="o">=</span> <span class="s2">"INSERT INTO nominations_two (category, nominee, movie, character, won, ceremony_id) VALUES (?, ?, ?, ?, ?, ?)"</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [11]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">q7</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[11]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre><sqlite3.cursor at 0x1cefb338ea0></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>We'll need a list of tuples, we can do this by writing a query and setting the results to a list.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [12]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">q8</span> <span class="o">=</span> <span class="s1">'''</span>
-<span class="s1">SELECT nominations.category, nominations.nominee, nominations.movie, nominations.character, nominations.won, ceremonies.id</span>
-<span class="s1">FROM nominations</span>
-<span class="s1">INNER JOIN ceremonies</span>
-<span class="s1">ON nominations.year == ceremonies.year</span>
-<span class="s1">'''</span>
-<span class="c1">#returns a list of tuples</span>
-<span class="n">joined_nominations</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">q8</span><span class="p">)</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
-<span class="n">joined_nominations</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[12]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>[('Actor -- Leading Role', 'Javier Bardem', 'Biutiful', 'Uxbal', 0, 1),
- ('Actor -- Leading Role',
-  'Jeff Bridges',
-  'True Grit',
-  'Rooster Cogburn',
-  0,
-  1),
- ('Actor -- Leading Role',
-  'Jesse Eisenberg',
-  'The Social Network',
-  'Mark Zuckerberg',
-  0,
-  1),
- ('Actor -- Leading Role',
-  'Colin Firth',
-  "The King's Speech",
-  'King George VI',
-  1,
-  1),
- ('Actor -- Leading Role', 'James Franco', '127 Hours', 'Aron Ralston', 0, 1)]</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [13]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#populating the nominations_two table</span>
-<span class="n">conn</span><span class="o">.</span><span class="n">executemany</span><span class="p">(</span><span class="n">insert_query2</span><span class="p">,</span> <span class="n">joined_nominations</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[13]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre><sqlite3.cursor at 0x1cefc369180></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's check out the new table, "nominations_two" that we just made.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [14]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">q9</span> <span class="o">=</span> <span class="s2">"SELECT * FROM nominations_two LIMIT 5"</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">q9</span><span class="p">)</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
-<span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[14]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>[(1, 'Actor -- Leading Role', 'Javier Bardem', 'Biutiful', 'Uxbal', 0, 1),
- (2,
-  'Actor -- Leading Role',
-  'Jeff Bridges',
-  'True Grit',
-  'Rooster Cogburn',
-  0,
-  1),
- (3,
-  'Actor -- Leading Role',
-  'Jesse Eisenberg',
-  'The Social Network',
-  'Mark Zuckerberg',
-  0,
-  1),
- (4,
-  'Actor -- Leading Role',
-  'Colin Firth',
-  "The King's Speech",
-  'King George VI',
-  1,
-  1),
- (5,
-  'Actor -- Leading Role',
-  'James Franco',
-  '127 Hours',
-  'Aron Ralston',
-  0,
-  1)]</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>We can change the table name of nominations_two back to nominations, replacing the table.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [15]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#We can drop the table "nominations" with the DROP TABLE sql command</span>
-<span class="n">q10</span> <span class="o">=</span> <span class="s2">"DROP TABLE nominations"</span>
-<span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">q10</span><span class="p">)</span>
-
-<span class="n">q11</span> <span class="o">=</span> <span class="s2">"ALTER TABLE nominations_two RENAME TO nominations"</span>
-<span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">q11</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[15]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre><sqlite3.cursor at 0x1cefc369260></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>We can repeat the process and create three new tables and use have their IDs cross reference each other.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [16]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">q11</span> <span class="o">=</span> <span class="s1">'''</span>
-<span class="s1">    CREATE TABLE movies(</span>
-<span class="s1">    id integer PRIMARY KEY,</span>
-<span class="s1">    movie text</span>
-<span class="s1">)'''</span>
-
-
-<span class="n">q12</span> <span class="o">=</span> <span class="s1">'''</span>
-<span class="s1">    CREATE TABLE actors(</span>
-<span class="s1">    id integer PRIMARY KEY,</span>
-<span class="s1">    actor text</span>
-<span class="s1">)'''</span>
-
-<span class="n">q13</span> <span class="o">=</span> <span class="s1">'''</span>
-<span class="s1">    CREATE TABLE movies_actors(</span>
-<span class="s1">    id integer PRIMARY KEY,</span>
-<span class="s1">    movie_id integer references movies(id),</span>
-<span class="s1">    actor_id integer references actors(id)</span>
-<span class="s1">    );</span>
-<span class="s1">'''</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [17]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">q11</span><span class="p">)</span>
-<span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">q12</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[17]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre><sqlite3.cursor at 0x1cefc369340></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [18]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">q13</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[18]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre><sqlite3.cursor at 0x1cefc3692d0></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [19]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">insert_into_movies</span> <span class="o">=</span> <span class="s2">"INSERT INTO movies (movie) SELECT nominations.movie from nominations"</span>
-<span class="n">insert_into_actors</span> <span class="o">=</span> <span class="s2">"INSERT INTO actors (actor) SELECT nominations.nominee from nominations"</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [20]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">insert_into_movies</span><span class="p">)</span>
-<span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">insert_into_actors</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[20]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre><sqlite3.cursor at 0x1cefc3693b0></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [21]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"SELECT * FROM actors LIMIT 5"</span><span class="p">)</span><span class="o">.</span><span class="n">fetchall</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"SELECT * FROM movies LIMIT 5"</span><span class="p">)</span><span class="o">.</span><span class="n">fetchall</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>[(1, 'Javier Bardem'), (2, 'Jeff Bridges'), (3, 'Jesse Eisenberg'), (4, 'Colin Firth'), (5, 'James Franco')]
-[(1, 'Biutiful'), (2, 'True Grit'), (3, 'The Social Network'), (4, "The King's Speech"), (5, '127 Hours')]
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [22]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">q14</span> <span class="o">=</span> <span class="s2">"SELECT movie, nominee FROM nominations"</span>
-<span class="n">list_actors_movies</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">q14</span><span class="p">)</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
-<span class="n">list_actors_movies</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[22]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>[('Biutiful', 'Javier Bardem'),
- ('True Grit', 'Jeff Bridges'),
- ('The Social Network', 'Jesse Eisenberg'),
- ("The King's Speech", 'Colin Firth'),
- ('127 Hours', 'James Franco')]</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [23]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">insert_query</span> <span class="o">=</span> <span class="s1">'''</span>
-<span class="s1">    INSERT INTO movies_actors(movie_id, actor_id)</span>
-<span class="s1">    VALUES ((SELECT id FROM movies WHERE movie == ?), (SELECT id from actors where actor == ?))</span>
-<span class="s1">'''</span>
-<span class="n">conn</span><span class="o">.</span><span class="n">executemany</span><span class="p">(</span><span class="n">insert_query</span><span class="p">,</span> <span class="n">list_actors_movies</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"SELECT * FROM movies_actors LIMIT 5"</span><span class="p">)</span><span class="o">.</span><span class="n">fetchall</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>[(1, 1, 1), (2, 2, 2), (3, 3, 3), (4, 4, 4), (5, 5, 5)]
-</pre>
+<pre>[['0', 'HAMLET'],
+ ['10', 'DRAMATIS PERSONAE'],
+ ['31', 'CLAUDIUS', 'king of Denmark. (KING CLAUDIUS:)'],
+ ['75', 'HAMLET', 'son to the late, and nephew to the present king.'],
+ ['132', 'POLONIUS', 'lord chamberlain. (LORD POLONIUS:)'],
+ ['177', 'HORATIO', 'friend to Hamlet.'],
+ ['204', 'LAERTES', 'son to Polonius.'],
+ ['230', 'LUCIANUS', 'nephew to the king.'],
+ ['261', 'VOLTIMAND'],
+ ['273']]</pre>
 </div>
 </div>
 </div>
@@ -1790,10 +1449,9 @@ h6:hover .anchor-link {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <hr />
-<h4 id="Learning-Summary">Learning Summary<a class="anchor-link" href="#Learning-Summary">¶</a></h4><p>Python/SQL concepts explored: python+sqlite3, pandas, multiple tables, foreign keys, subqueries, populating new tables</p>
-<p>Python functions and methods used: .cursor(), .connect(), .execute(), .fetchall(), .executemany()</p>
-<p>SQL statements used: PRAGMA, LIMIT, FROM, SELECT, INNER JOIN, DROP, ALTER, VALUES</p>
-<p>The files used for this project can be found in my <a href="https://github.com/sengkchu/Dataquest-Guided-Projects-Solutions/tree/master/Guided%20Project_%20Creating%20relations%20in%20SQLite">GitHub repository</a>.</p>
+<h4 id="Learning-Summary">Learning Summary<a class="anchor-link" href="#Learning-Summary">¶</a></h4><p>Concepts explored: Spark</p>
+<p>PySpark methods used: .map(), .flatMap(), .filter(), .count(), .collect(), .take()</p>
+<p>The files used for this project can be found in my <a href="https://github.com/sengkchu/Dataquest-Guided-Projects-Solutions/blob/master/Review%20Project_%20Working%20with%20Spark%20in%20Jupyter%20Notebook">GitHub repository</a>.</p>
 </div>
 </div>
 </div>
@@ -1847,7 +1505,7 @@ h6:hover .anchor-link {
             var disqus_shortname = 'codingdisciple'; // required: replace example with your forum shortname
             var disqus_config = function () {
                 this.language = "en";
-                        this.page.identifier = '2018-02-07-Relations-SQL';
+                        this.page.identifier = '2018-02-15-spark-python';
             };
             /* * * DON'T EDIT BELOW THIS LINE * * */
             (function () {

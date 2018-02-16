@@ -5954,7 +5954,7 @@ h6:hover .anchor-link {
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;I took a snapshot of the data structure below. It looks like the data is just a bunch of lists and dictionaries. We want reach the part of the dictionary until we see a list. Each item on this list will be a post made on this subreddit.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="reddit_data_structure" src="https://raw.githubusercontent.com/sengkchu/Personal-Projects/master/Web%20Scraping%20using%20Reddit's%20API/datastructure.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="reddit_data_structure" src="https://raw.githubusercontent.com/sengkchu/codingdisciple.images/master/scraping-reddit-data-pandas-dataframe/datastructure.png" /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
