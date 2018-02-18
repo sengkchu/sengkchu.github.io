@@ -1025,7 +1025,9 @@ h6:hover .anchor-link {
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;img alt="chinook_relation" src="https://raw.githubusercontent.com/sengkchu/codingdisciple.images/master/chinook/relationchart.png" /&gt;&lt;/p&gt;
+&lt;div style="text-align:center"&gt;
+&lt;img alt="database schema" src="images/chinook/relationchart.png" /&gt;
+&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -5954,7 +5956,7 @@ h6:hover .anchor-link {
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;I took a snapshot of the data structure below. It looks like the data is just a bunch of lists and dictionaries. We want reach the part of the dictionary until we see a list. Each item on this list will be a post made on this subreddit.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="reddit_data_structure" src="https://raw.githubusercontent.com/sengkchu/codingdisciple.images/master/scraping-reddit-data-pandas-dataframe/datastructure.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="reddit_data_structure" src="images/scraping-reddit-data-pandas-dataframe/datastructure.png" /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -6345,7 +6347,7 @@ dtype: int64&lt;/pre&gt;
 &lt;p&gt;The results are not too surprising, common english words showed up the most. That is it for now! We've achieved our goal of turning json data into a pandas dataframe.&lt;/p&gt;
 &lt;hr /&gt;
 &lt;h4 id="Learning-Summary"&gt;Learning Summary&lt;a class="anchor-link" href="#Learning-Summary"&gt;¶&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;Concepts explored: lists, dictionaries, API, data structures, JSON&lt;/p&gt;
-&lt;p&gt;The files for this project can be found in my &lt;a href="https://github.com/sengkchu/Personal-Projects"&gt;GitHub repository&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The files for this project can be found in my &lt;a href="https://github.com/sengkchu/codingdisciple.content/tree/master/Personal-Projects"&gt;GitHub repository&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;

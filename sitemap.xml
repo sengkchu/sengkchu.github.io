@@ -5,7 +5,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://codingdisciple.com/</loc>
-<lastmod>2018-02-15T23:35:29-00:00</lastmod>
+<lastmod>2018-02-18T14:13:11-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -25,15 +25,36 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>https://codingdisciple.com/dispersion.html</loc>
+<lastmod>2018-02-18T00:00:00-08:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://codingdisciple.com/central-tendency.html</loc>
+<lastmod>2018-02-17T00:00:00-08:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://codingdisciple.com/cross-validation-machine-learning.html</loc>
+<lastmod>2018-02-16T00:00:00-08:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
 <loc>https://codingdisciple.com/spark-dataframe-sql-python.html</loc>
-<lastmod>2018-02-15T00:00:00-08:00</lastmod>
+<lastmod>2018-02-15T11:20:00-08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://codingdisciple.com/spark-python.html</loc>
-<lastmod>2018-02-15T00:00:00-08:00</lastmod>
+<lastmod>2018-02-15T10:20:00-08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
@@ -46,15 +67,15 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>https://codingdisciple.com/predict-car-price-kneighbors.html</loc>
-<lastmod>2018-02-13T00:00:00-08:00</lastmod>
+<loc>https://codingdisciple.com/predict-house-price-regression.html</loc>
+<lastmod>2018-02-13T10:20:00-08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://codingdisciple.com/predict-house-price-regression.html</loc>
-<lastmod>2018-02-13T00:00:00-08:00</lastmod>
+<loc>https://codingdisciple.com/predict-car-price-kneighbors.html</loc>
+<lastmod>2018-02-13T09:20:00-08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
@@ -88,22 +109,22 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>https://codingdisciple.com/CIA-Factbook-SQL.html</loc>
-<lastmod>2018-02-07T00:00:00-08:00</lastmod>
+<loc>https://codingdisciple.com/relation-sql.html</loc>
+<lastmod>2018-02-07T12:20:00-08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://codingdisciple.com/Prepare-Data-SQL.html</loc>
-<lastmod>2018-02-07T00:00:00-08:00</lastmod>
+<loc>https://codingdisciple.com/prepare-data-sql.html</loc>
+<lastmod>2018-02-07T11:20:00-08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://codingdisciple.com/Relations-SQL.html</loc>
-<lastmod>2018-02-07T00:00:00-08:00</lastmod>
+<loc>https://codingdisciple.com/cia-factboook-sql.html</loc>
+<lastmod>2018-02-07T10:20:00-08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
@@ -116,21 +137,21 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>https://codingdisciple.com/Star-Wars-Data.html</loc>
+<loc>https://codingdisciple.com/star-wars-data.html</loc>
 <lastmod>2018-02-05T00:00:00-08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://codingdisciple.com/New-York-High-Schools-Analysis.html</loc>
+<loc>https://codingdisciple.com/new-york-high-schools-analysis.html</loc>
 <lastmod>2018-02-03T00:00:00-08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://codingdisciple.com/College-Degrees-Gender-Gap.html</loc>
+<loc>https://codingdisciple.com/college-degrees-gender-gap.html</loc>
 <lastmod>2018-01-31T00:00:00-08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
@@ -144,7 +165,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>https://codingdisciple.com/Analyzing-Thanksgiving-Dinner.html</loc>
+<loc>https://codingdisciple.com/analyzing-thanksgiving-dinner.html</loc>
 <lastmod>2018-01-28T00:00:00-08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
@@ -158,21 +179,21 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>https://codingdisciple.com/Exploring-Gun-Deaths.html</loc>
+<loc>https://codingdisciple.com/exploring-gun-deaths.html</loc>
 <lastmod>2018-01-27T00:00:00-08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://codingdisciple.com/Exploring-Births.html</loc>
+<loc>https://codingdisciple.com/Scraping-Reddit-Data-Pandas-Dataframe.html</loc>
 <lastmod>2018-01-26T00:00:00-08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://codingdisciple.com/Scraping-Reddit-Data-Pandas-Dataframe.html</loc>
+<loc>https://codingdisciple.com/exploring-births.html</loc>
 <lastmod>2018-01-26T00:00:00-08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>

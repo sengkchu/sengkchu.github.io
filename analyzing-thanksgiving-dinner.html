@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<link rel="canonical" href="/Relations-SQL.html"/>
+<link rel="canonical" href="/analyzing-thanksgiving-dinner.html"/>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>Creating Relations in SQL - Coding Disciple</title>
+    <title>Analyzing Thanksgiving Dinner - Coding Disciple</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -10,21 +10,22 @@
 
 
 
-<link rel="canonical" href="/Relations-SQL.html">
+<link rel="canonical" href="/analyzing-thanksgiving-dinner.html">
 
         <meta name="author" content="Seng Chu" />
-        <meta name="keywords" content="SQL,pandas" />
-        <meta name="description" content="In this project we will use the cleaned data from the previous mission and work mainly in SQL. We will use SQL to transform the nominations tables into new tables, and create relations across these tables. First let&#39;s take a look at the table&#39;s schema and the first ten rows." />
+        <meta name="keywords" content="python,pandas,data analysis" />
+        <meta name="description" content="In this project we will analyze data on Thanksgiving dinner in the US. We&#39;ll be working with the pandas library. We will convert the &#34;thanksgiving.csv&#34; file into a dataframe using pandas. In addition we&#39;ll use several basic functions in pandas to explore the data." />
 
         <meta property="og:site_name" content="Coding Disciple" />
         <meta property="og:type" content="article"/>
-        <meta property="og:title" content="Creating Relations in SQL"/>
-        <meta property="og:url" content="/Relations-SQL.html"/>
-        <meta property="og:description" content="In this project we will use the cleaned data from the previous mission and work mainly in SQL. We will use SQL to transform the nominations tables into new tables, and create relations across these tables. First let&#39;s take a look at the table&#39;s schema and the first ten rows."/>
-        <meta property="article:published_time" content="2018-02-07" />
+        <meta property="og:title" content="Analyzing Thanksgiving Dinner"/>
+        <meta property="og:url" content="/analyzing-thanksgiving-dinner.html"/>
+        <meta property="og:description" content="In this project we will analyze data on Thanksgiving dinner in the US. We&#39;ll be working with the pandas library. We will convert the &#34;thanksgiving.csv&#34; file into a dataframe using pandas. In addition we&#39;ll use several basic functions in pandas to explore the data."/>
+        <meta property="article:published_time" content="2018-01-28" />
             <meta property="article:section" content="Learning Data Science" />
-            <meta property="article:tag" content="SQL" />
+            <meta property="article:tag" content="python" />
             <meta property="article:tag" content="pandas" />
+            <meta property="article:tag" content="data analysis" />
             <meta property="article:author" content="Seng Chu" />
 
 
@@ -102,10 +103,10 @@
         <article>
             <header class="page-header">
                 <h1>
-                    <a href="/Relations-SQL.html"
+                    <a href="/analyzing-thanksgiving-dinner.html"
                        rel="bookmark"
-                       title="Permalink to Creating Relations in SQL">
-                        Creating Relations in SQL
+                       title="Permalink to Analyzing Thanksgiving Dinner">
+                        Analyzing Thanksgiving Dinner
                     </a>
                 </h1>
             </header>
@@ -115,17 +116,21 @@
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2018-02-07T00:00:00-08:00"> Wed 07 February 2018</time>
+        <i class="fa fa-calendar"></i><time datetime="2018-01-28T00:00:00-08:00"> Sun 28 January 2018</time>
     </span>
 
+            <span class="label label-default">Series</span>
+            Part 3 of Dataquest
 
 
 
 
 <span class="label label-default">Tags</span>
-	<a href="/tag/sql.html">SQL</a>
+	<a href="/tag/python.html">python</a>
         /
 	<a href="/tag/pandas.html">pandas</a>
+        /
+	<a href="/tag/data-analysis.html">data analysis</a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
@@ -1105,8 +1110,7 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In this project we will use the cleaned data from the previous mission and work mainly in SQL. We will use SQL to transform the nominations tables into new tables, and create relations across these tables.</p>
-<p>First let's take a look at the table's schema and the first ten rows.</p>
+<p>In this project we will analyze data on Thanksgiving dinner in the US. We'll be working with the pandas library. We will convert the "thanksgiving.csv" file into a dataframe using pandas. In addition we'll use several basic functions in pandas to explore the data.</p>
 </div>
 </div>
 </div>
@@ -1115,9 +1119,9 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [1]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">sqlite3</span>
-<span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">"nominations.db"</span><span class="p">)</span>
-<span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Import pandas and read the data.</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"thanksgiving.csv"</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span><span class="s2">"Latin-1"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1128,12 +1132,83 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [2]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">q1</span> <span class="o">=</span> <span class="s1">'''</span>
-<span class="s1">PRAGMA table_info(nominations)</span>
-<span class="s1">'''</span>
-
-<span class="n">schema</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">q1</span><span class="p">)</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Print the column names.</span>
+<span class="n">col</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">columns</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Index(['RespondentID', 'Do you celebrate Thanksgiving?',
+       'What is typically the main dish at your Thanksgiving dinner?',
+       'What is typically the main dish at your Thanksgiving dinner? - Other (please specify)',
+       'How is the main dish typically cooked?',
+       'How is the main dish typically cooked? - Other (please specify)',
+       'What kind of stuffing/dressing do you typically have?',
+       'What kind of stuffing/dressing do you typically have? - Other (please specify)',
+       'What type of cranberry saucedo you typically have?',
+       'What type of cranberry saucedo you typically have? - Other (please specify)',
+       'Do you typically have gravy?',
+       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Brussel sprouts',
+       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Carrots',
+       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Cauliflower',
+       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Corn',
+       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Cornbread',
+       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Fruit salad',
+       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Green beans/green bean casserole',
+       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Macaroni and cheese',
+       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Mashed potatoes',
+       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Rolls/biscuits',
+       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Squash',
+       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Vegetable salad',
+       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Yams/sweet potato casserole',
+       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Other (please specify)',
+       'Which of these side dishes aretypically served at your Thanksgiving dinner? Please select all that apply. - Other (please specify).1',
+       'Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Apple',
+       'Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Buttermilk',
+       'Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Cherry',
+       'Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Chocolate',
+       'Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Coconut cream',
+       'Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Key lime',
+       'Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Peach',
+       'Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Pecan',
+       'Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Pumpkin',
+       'Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Sweet Potato',
+       'Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - None',
+       'Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Other (please specify)',
+       'Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Other (please specify).1',
+       'Which of these desserts do you typically have at Thanksgiving dinner? Please select all that apply.   - Apple cobbler',
+       'Which of these desserts do you typically have at Thanksgiving dinner? Please select all that apply.   - Blondies',
+       'Which of these desserts do you typically have at Thanksgiving dinner? Please select all that apply.   - Brownies',
+       'Which of these desserts do you typically have at Thanksgiving dinner? Please select all that apply.   - Carrot cake',
+       'Which of these desserts do you typically have at Thanksgiving dinner? Please select all that apply.   - Cheesecake',
+       'Which of these desserts do you typically have at Thanksgiving dinner? Please select all that apply.   - Cookies',
+       'Which of these desserts do you typically have at Thanksgiving dinner? Please select all that apply.   - Fudge',
+       'Which of these desserts do you typically have at Thanksgiving dinner? Please select all that apply.   - Ice cream',
+       'Which of these desserts do you typically have at Thanksgiving dinner? Please select all that apply.   - Peach cobbler',
+       'Which of these desserts do you typically have at Thanksgiving dinner? Please select all that apply.   - None',
+       'Which of these desserts do you typically have at Thanksgiving dinner? Please select all that apply.   - Other (please specify)',
+       'Which of these desserts do you typically have at Thanksgiving dinner? Please select all that apply.   - Other (please specify).1',
+       'Do you typically pray before or after the Thanksgiving meal?',
+       'How far will you travel for Thanksgiving?',
+       'Will you watch any of the following programs on Thanksgiving? Please select all that apply. - Macy's Parade',
+       'What's the age cutoff at your "kids' table" at Thanksgiving?',
+       'Have you ever tried to meet up with hometown friends on Thanksgiving night?',
+       'Have you ever attended a "Friendsgiving?"',
+       'Will you shop any Black Friday sales on Thanksgiving Day?',
+       'Do you work in retail?',
+       'Will you employer make you work on Black Friday?',
+       'How would you describe where you live?', 'Age', 'What is your gender?',
+       'How much total combined money did all members of your HOUSEHOLD earn last year?',
+       'US Region'],
+      dtype='object')
+</pre>
+</div>
 </div>
 </div>
 </div>
@@ -1143,15 +1218,11 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [3]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">q2</span> <span class="o">=</span> <span class="s1">'''</span>
-<span class="s1">SELECT * FROM nominations LIMIT 10</span>
-<span class="s1">'''</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Prints the table structure(row x column)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"rows, columns: "</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
 
-<span class="n">first_ten</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">q2</span><span class="p">)</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
-<span class="n">first_ten</span>
-
-<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">first_ten</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+<span class="c1">#Outputs the first 5 rows of the dataframe</span>
+<span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1161,19 +1232,190 @@ h6:hover .anchor-link {
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>(2010, 'Actor -- Leading Role', 'Javier Bardem', 0, 'Biutiful', 'Uxbal')
-(2010, 'Actor -- Leading Role', 'Jeff Bridges', 0, 'True Grit', 'Rooster Cogburn')
-(2010, 'Actor -- Leading Role', 'Jesse Eisenberg', 0, 'The Social Network', 'Mark Zuckerberg')
-(2010, 'Actor -- Leading Role', 'Colin Firth', 1, "The King's Speech", 'King George VI')
-(2010, 'Actor -- Leading Role', 'James Franco', 0, '127 Hours', 'Aron Ralston')
-(2010, 'Actor -- Supporting Role', 'Christian Bale', 1, 'The Fighter', 'Dicky Eklund')
-(2010, 'Actor -- Supporting Role', 'John Hawkes', 0, "Winter's Bone", 'Teardrop')
-(2010, 'Actor -- Supporting Role', 'Jeremy Renner', 0, 'The Town', 'James Coughlin')
-(2010, 'Actor -- Supporting Role', 'Mark Ruffalo', 0, 'The Kids Are All Right', 'Paul')
-(2010, 'Actor -- Supporting Role', 'Geoffrey Rush', 0, "The King's Speech", 'Lionel Logue')
+<pre>rows, columns: (1058, 65)
 </pre>
 </div>
 </div>
+<div class="output_area">
+<div class="prompt output_prompt">Out[3]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>RespondentID</th>
+<th>Do you celebrate Thanksgiving?</th>
+<th>What is typically the main dish at your Thanksgiving dinner?</th>
+<th>What is typically the main dish at your Thanksgiving dinner? - Other (please specify)</th>
+<th>How is the main dish typically cooked?</th>
+<th>How is the main dish typically cooked? - Other (please specify)</th>
+<th>What kind of stuffing/dressing do you typically have?</th>
+<th>What kind of stuffing/dressing do you typically have? - Other (please specify)</th>
+<th>What type of cranberry saucedo you typically have?</th>
+<th>What type of cranberry saucedo you typically have? - Other (please specify)</th>
+<th>...</th>
+<th>Have you ever tried to meet up with hometown friends on Thanksgiving night?</th>
+<th>Have you ever attended a "Friendsgiving?"</th>
+<th>Will you shop any Black Friday sales on Thanksgiving Day?</th>
+<th>Do you work in retail?</th>
+<th>Will you employer make you work on Black Friday?</th>
+<th>How would you describe where you live?</th>
+<th>Age</th>
+<th>What is your gender?</th>
+<th>How much total combined money did all members of your HOUSEHOLD earn last year?</th>
+<th>US Region</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>4337954960</td>
+<td>Yes</td>
+<td>Turkey</td>
+<td>NaN</td>
+<td>Baked</td>
+<td>NaN</td>
+<td>Bread-based</td>
+<td>NaN</td>
+<td>None</td>
+<td>NaN</td>
+<td>...</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>NaN</td>
+<td>Suburban</td>
+<td>18 - 29</td>
+<td>Male</td>
+<td>$75,000 to $99,999</td>
+<td>Middle Atlantic</td>
+</tr>
+<tr>
+<th>1</th>
+<td>4337951949</td>
+<td>Yes</td>
+<td>Turkey</td>
+<td>NaN</td>
+<td>Baked</td>
+<td>NaN</td>
+<td>Bread-based</td>
+<td>NaN</td>
+<td>Other (please specify)</td>
+<td>Homemade cranberry gelatin ring</td>
+<td>...</td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>NaN</td>
+<td>Rural</td>
+<td>18 - 29</td>
+<td>Female</td>
+<td>$50,000 to $74,999</td>
+<td>East South Central</td>
+</tr>
+<tr>
+<th>2</th>
+<td>4337935621</td>
+<td>Yes</td>
+<td>Turkey</td>
+<td>NaN</td>
+<td>Roasted</td>
+<td>NaN</td>
+<td>Rice-based</td>
+<td>NaN</td>
+<td>Homemade</td>
+<td>NaN</td>
+<td>...</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>NaN</td>
+<td>Suburban</td>
+<td>18 - 29</td>
+<td>Male</td>
+<td>$0 to $9,999</td>
+<td>Mountain</td>
+</tr>
+<tr>
+<th>3</th>
+<td>4337933040</td>
+<td>Yes</td>
+<td>Turkey</td>
+<td>NaN</td>
+<td>Baked</td>
+<td>NaN</td>
+<td>Bread-based</td>
+<td>NaN</td>
+<td>Homemade</td>
+<td>NaN</td>
+<td>...</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>NaN</td>
+<td>Urban</td>
+<td>30 - 44</td>
+<td>Male</td>
+<td>$200,000 and up</td>
+<td>Pacific</td>
+</tr>
+<tr>
+<th>4</th>
+<td>4337931983</td>
+<td>Yes</td>
+<td>Tofurkey</td>
+<td>NaN</td>
+<td>Baked</td>
+<td>NaN</td>
+<td>Bread-based</td>
+<td>NaN</td>
+<td>Canned</td>
+<td>NaN</td>
+<td>...</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>NaN</td>
+<td>Urban</td>
+<td>30 - 44</td>
+<td>Male</td>
+<td>$100,000 to $124,999</td>
+<td>Pacific</td>
+</tr>
+</tbody>
+</table>
+<p>5 rows × 65 columns</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>It looks like each column name is a survey question and each row is a survey response to each of these questions. Let's clean up the data a little bit by removing all rows didn't answer "Yes" to the first question, "Do you celebrate Thanksgiving?".</p>
+<p>We can accomplish by converting the dataframe into a boolean series. Then we'll use the boolean series to filter out all the data that didn't answer "Yes" to the first question</p>
 </div>
 </div>
 </div>
@@ -1182,8 +1424,7 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [4]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">schema</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">"Do you celebrate Thanksgiving?"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
@@ -1193,23 +1434,12 @@ h6:hover .anchor-link {
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>(0, 'Year', 'INTEGER', 0, None, 0)
-(1, 'Category', 'TEXT', 0, None, 0)
-(2, 'Nominee', 'TEXT', 0, None, 0)
-(3, 'Won', 'INTEGER', 0, None, 0)
-(4, 'Movie', 'TEXT', 0, None, 0)
-(5, 'Character', 'TEXT', 0, None, 0)
+<pre>Yes    980
+No      78
+Name: Do you celebrate Thanksgiving?, dtype: int64
 </pre>
 </div>
 </div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>We want to create a new table within the databse named "ceremonies". This table will have the Year and the Host only</p>
 </div>
 </div>
 </div>
@@ -1218,28 +1448,19 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [5]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">q3</span> <span class="o">=</span> <span class="s1">'''</span>
-<span class="s1">    CREATE TABLE ceremonies (</span>
-<span class="s1">    id INTEGER primary key,</span>
-<span class="s1">    Year INTEGER,</span>
-<span class="s1">    Host TEXT</span>
-<span class="s1">);</span>
-<span class="s1">'''</span>
-
-<span class="n">years_hosts</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">2010</span><span class="p">,</span> <span class="s2">"Steve Martin"</span><span class="p">),</span>
-               <span class="p">(</span><span class="mi">2009</span><span class="p">,</span> <span class="s2">"Hugh Jackman"</span><span class="p">),</span>
-               <span class="p">(</span><span class="mi">2008</span><span class="p">,</span> <span class="s2">"Jon Stewart"</span><span class="p">),</span>
-               <span class="p">(</span><span class="mi">2007</span><span class="p">,</span> <span class="s2">"Ellen DeGeneres"</span><span class="p">),</span>
-               <span class="p">(</span><span class="mi">2006</span><span class="p">,</span> <span class="s2">"Jon Stewart"</span><span class="p">),</span>
-               <span class="p">(</span><span class="mi">2005</span><span class="p">,</span> <span class="s2">"Chris Rock"</span><span class="p">),</span>
-               <span class="p">(</span><span class="mi">2004</span><span class="p">,</span> <span class="s2">"Billy Crystal"</span><span class="p">),</span>
-               <span class="p">(</span><span class="mi">2003</span><span class="p">,</span> <span class="s2">"Steve Martin"</span><span class="p">),</span>
-               <span class="p">(</span><span class="mi">2002</span><span class="p">,</span> <span class="s2">"Whoopi Goldberg"</span><span class="p">),</span>
-               <span class="p">(</span><span class="mi">2001</span><span class="p">,</span> <span class="s2">"Steve Martin"</span><span class="p">),</span>
-               <span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="s2">"Billy Crystal"</span><span class="p">),</span>
-            <span class="p">]</span>
-<span class="n">insert_query</span> <span class="o">=</span> <span class="s2">"INSERT INTO ceremonies (Year, Host) VALUES (?, ?)"</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s2">"Do you celebrate Thanksgiving?"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"Yes"</span><span class="p">]</span>
+<span class="n">data</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[5]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>(980, 65)</pre>
+</div>
 </div>
 </div>
 </div>
@@ -1248,7 +1469,7 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The .executemany() method allows us to perform many insert commands at once, until the list ends</p>
+<p>We can see that the data frame went from 1058 rows to 980 rows, so it looks like we've successfully filtered out the data. Now we can begin analyzing the data. We can use the .value_counts() method on the second question column to see the types of food served on Thanksgiving. The .value_counts() method is especially useful for dataframes that contains a lot of repeats of the same strings. This is often typical in surveys.</p>
 </div>
 </div>
 </div>
@@ -1257,9 +1478,7 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [6]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">q3</span><span class="p">)</span>
-
-<span class="n">conn</span><span class="o">.</span><span class="n">executemany</span><span class="p">(</span><span class="n">insert_query</span><span class="p">,</span> <span class="n">years_hosts</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="s2">"What is typically the main dish at your Thanksgiving dinner?"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1269,7 +1488,15 @@ h6:hover .anchor-link {
 <div class="output_area">
 <div class="prompt output_prompt">Out[6]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre><sqlite3.cursor at 0x1cefc369030></pre>
+<pre>Turkey                    859
+Other (please specify)     35
+Ham/Pork                   29
+Tofurkey                   20
+Chicken                    12
+Roast beef                 11
+I don't know                5
+Turducken                   3
+Name: What is typically the main dish at your Thanksgiving dinner?, dtype: int64</pre>
 </div>
 </div>
 </div>
@@ -1279,7 +1506,7 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's check out the table we just created .</p>
+<p>Suppose we own a restaurant and we are interested in serving tofu turkey with gravy on our menu. We are interested the number of families  that actually serve this dish. We can create a new dataframe using boolean filtering to show only rows with people who had Tofurkey as a main dish on Thanksgiving. In addition we'll look at the "Do you typically have gravy" column to see if people eat this dish with gravy.</p>
 </div>
 </div>
 </div>
@@ -1288,12 +1515,9 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [7]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">q4</span> <span class="o">=</span> <span class="s2">"SELECT * FROM ceremonies LIMIT 10"</span>
-<span class="n">q5</span> <span class="o">=</span> <span class="s2">"PRAGMA table_info(ceremonies)"</span>
-
-<span class="n">result</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">q4</span><span class="p">)</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
-<span class="n">result</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data_only_tofurkey</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s2">"What is typically the main dish at your Thanksgiving dinner?"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"Tofurkey"</span><span class="p">]</span>
+<span class="n">Gravy_and_tofurkey</span> <span class="o">=</span> <span class="n">data_only_tofurkey</span><span class="p">[</span><span class="s2">"Do you typically have gravy?"</span><span class="p">]</span>
+<span class="n">Gravy_and_tofurkey</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1303,18 +1527,20 @@ h6:hover .anchor-link {
 <div class="output_area">
 <div class="prompt output_prompt">Out[7]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>[(1, 2010, 'Steve Martin'),
- (2, 2009, 'Hugh Jackman'),
- (3, 2008, 'Jon Stewart'),
- (4, 2007, 'Ellen DeGeneres'),
- (5, 2006, 'Jon Stewart'),
- (6, 2005, 'Chris Rock'),
- (7, 2004, 'Billy Crystal'),
- (8, 2003, 'Steve Martin'),
- (9, 2002, 'Whoopi Goldberg'),
- (10, 2001, 'Steve Martin')]</pre>
+<pre>Yes    12
+No      8
+Name: Do you typically have gravy?, dtype: int64</pre>
 </div>
 </div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Only 12 out of 980 people answered yes, so it might be a good idea to not serve this dish in our restaurant.</p>
+<p>Next we are interested to see how many people in this survey have apple, pumpkin, or pecan pies during Thanksgiving. We can use the .isnull() method to convert each column into a boolean, then use the & operator to return a boolean series. Then we can use the .value_counts() method to tally up the total number of False statements in the boolean series.</p>
 </div>
 </div>
 </div>
@@ -1323,9 +1549,18 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [8]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">q5</span><span class="p">)</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
-<span class="n">result</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">apple</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Apple"</span><span class="p">]</span>
+<span class="n">apple_isnull</span> <span class="o">=</span> <span class="n">apple</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span>
+
+<span class="n">pumpkin</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Pumpkin"</span><span class="p">]</span>
+<span class="n">pumpkin_isnull</span> <span class="o">=</span> <span class="n">pumpkin</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span>
+
+<span class="n">pecan</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"Which type of pie is typically served at your Thanksgiving dinner? Please select all that apply. - Pecan"</span><span class="p">]</span>
+<span class="n">pecan_isnull</span> <span class="o">=</span> <span class="n">pecan</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span>
+
+<span class="n">did_not_eat_pies</span> <span class="o">=</span> <span class="n">apple_isnull</span> <span class="o">&</span> <span class="n">pumpkin_isnull</span> <span class="o">&</span> <span class="n">pecan_isnull</span> 
+
+<span class="n">did_not_eat_pies</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1335,9 +1570,9 @@ h6:hover .anchor-link {
 <div class="output_area">
 <div class="prompt output_prompt">Out[8]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>[(0, 'id', 'INTEGER', 0, None, 1),
- (1, 'Year', 'INTEGER', 0, None, 0),
- (2, 'Host', 'TEXT', 0, None, 0)]</pre>
+<pre>False    876
+True     104
+dtype: int64</pre>
 </div>
 </div>
 </div>
@@ -1347,7 +1582,8 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We want to avoid editing the original table. So let's make a new nominations table, but this time we'll include the ceremony_id as a foriegn key.</p>
+<p>It looks like most people had apple, pumpkin, or pecan pies for Thanksgiving. It might be a good idea to prepare extra pies for Thanksgiving to sell people who are too lazy to bake them for the holidays.</p>
+<p>We want to make sure this survey isn't biased towards the older generation and covers all ages. Currently the age column is a bit difficult to analyze. We can write a function that and use the .apply() function to convert this column into integers. We'll have to play arround with string manipulation methods such as .split() and .replace() to accomplish this.</p>
 </div>
 </div>
 </div>
@@ -1356,8 +1592,20 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [9]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">q6</span> <span class="o">=</span> <span class="s2">"PRAGMA foreign_keys = ON;"</span>
-<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">q6</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Converts the age column to an integer.</span>
+<span class="k">def</span> <span class="nf">convert_to_int</span><span class="p">(</span><span class="n">column</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isnull</span><span class="p">(</span><span class="n">column</span><span class="p">)</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isnull</span><span class="p">(</span><span class="n">column</span><span class="p">)</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
+        <span class="n">string</span> <span class="o">=</span> <span class="n">column</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">' '</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">string</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'+'</span><span class="p">,</span> <span class="s1">''</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+    
+<span class="n">int_age</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"Age"</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">convert_to_int</span><span class="p">)</span>
+<span class="n">data</span><span class="p">[</span><span class="s2">"int_age"</span><span class="p">]</span> <span class="o">=</span> <span class="n">int_age</span>
+
+<span class="c1">#Outputs statistical data of the column.</span>
+<span class="n">data</span><span class="p">[</span><span class="s2">"int_age"</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1367,53 +1615,15 @@ h6:hover .anchor-link {
 <div class="output_area">
 <div class="prompt output_prompt">Out[9]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre><sqlite3.cursor at 0x1cefb338ea0></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [10]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">q7</span> <span class="o">=</span> <span class="s1">'''</span>
-<span class="s1">    CREATE TABLE nominations_two (</span>
-<span class="s1">    id integer primary key,</span>
-<span class="s1">    category text,</span>
-<span class="s1">    nominee text,</span>
-<span class="s1">    movie text,</span>
-<span class="s1">    character text,</span>
-<span class="s1">    won integer,</span>
-<span class="s1">    ceremony_id integer,</span>
-<span class="s1">    foreign key(ceremony_id) references ceremonies(id)</span>
-<span class="s1">);</span>
-<span class="s1">'''</span>
-
-<span class="c1">#Query to be inserted into the new table</span>
-<span class="n">insert_query2</span> <span class="o">=</span> <span class="s2">"INSERT INTO nominations_two (category, nominee, movie, character, won, ceremony_id) VALUES (?, ?, ?, ?, ?, ?)"</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [11]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">q7</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[11]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre><sqlite3.cursor at 0x1cefb338ea0></pre>
+<pre>count    947.000000
+mean      40.089757
+std       15.352014
+min       18.000000
+25%       30.000000
+50%       45.000000
+75%       60.000000
+max       60.000000
+Name: int_age, dtype: float64</pre>
 </div>
 </div>
 </div>
@@ -1423,7 +1633,100 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We'll need a list of tuples, we can do this by writing a query and setting the results to a list.</p>
+<p>While we took the lower limit of each age range, the respondants of the survey appear to cover all age groups.</p>
+<p>Next we are interested in the income groups of each family. We do this to make sure the average income of the survey respondants is representative of the population.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [10]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="s2">"How much total combined money did all members of your HOUSEHOLD earn last year?"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[10]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>$25,000 to $49,999      166
+$75,000 to $99,999      127
+$50,000 to $74,999      127
+Prefer not to answer    118
+$100,000 to $124,999    109
+$200,000 and up          76
+$10,000 to $24,999       60
+$0 to $9,999             52
+$125,000 to $149,999     48
+$150,000 to $174,999     38
+$175,000 to $199,999     26
+Name: How much total combined money did all members of your HOUSEHOLD earn last year?, dtype: int64</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The responses are in the string format, we are going have to use the apply method along with a function to convert the elements in the column series into an integer so we can use the .describe() method.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [11]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">income_col</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"How much total combined money did all members of your HOUSEHOLD earn last year?"</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">convert_to_int_inc</span><span class="p">(</span><span class="n">column</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isnull</span><span class="p">(</span><span class="n">column</span><span class="p">)</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="n">string</span> <span class="o">=</span> <span class="n">column</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">' '</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">if</span> <span class="s1">'Prefer'</span> <span class="ow">in</span> <span class="n">string</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">string</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'$'</span><span class="p">,</span> <span class="s1">''</span><span class="p">)</span>
+        <span class="n">string</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">','</span><span class="p">,</span> <span class="s1">''</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+    
+<span class="n">data</span><span class="p">[</span><span class="s1">'int_income'</span><span class="p">]</span>  <span class="o">=</span> <span class="n">income_col</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">convert_to_int_inc</span><span class="p">)</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">'int_income'</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[11]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>count       829.000000
+mean      75965.018094
+std       59068.636748
+min           0.000000
+25%       25000.000000
+50%       75000.000000
+75%      100000.000000
+max      200000.000000
+Name: int_income, dtype: float64</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Once again, we took the lower limit of the income range so the average skews downard. The average income is high even though we took the lower limit. The standard deviation is almost as high as the mean. The median is 75,000 which is relatively close to the average.</p>
+<p>Next, let's see if there is any correlation between income and travel distance. We can simply use boolean filtering again with the .value_counts() method.</p>
 </div>
 </div>
 </div>
@@ -1432,15 +1735,11 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [12]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">q8</span> <span class="o">=</span> <span class="s1">'''</span>
-<span class="s1">SELECT nominations.category, nominations.nominee, nominations.movie, nominations.character, nominations.won, ceremonies.id</span>
-<span class="s1">FROM nominations</span>
-<span class="s1">INNER JOIN ceremonies</span>
-<span class="s1">ON nominations.year == ceremonies.year</span>
-<span class="s1">'''</span>
-<span class="c1">#returns a list of tuples</span>
-<span class="n">joined_nominations</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">q8</span><span class="p">)</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
-<span class="n">joined_nominations</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">less_150k</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"int_income"</span><span class="p">]</span> <span class="o"><</span> <span class="mi">150000</span>
+<span class="n">less_150k_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">less_150k</span><span class="p">]</span>
+
+<span class="n">how_far</span> <span class="o">=</span> <span class="n">less_150k_data</span><span class="p">[</span><span class="s2">"How far will you travel for Thanksgiving?"</span><span class="p">]</span>
+<span class="n">how_far</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1450,26 +1749,11 @@ h6:hover .anchor-link {
 <div class="output_area">
 <div class="prompt output_prompt">Out[12]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>[('Actor -- Leading Role', 'Javier Bardem', 'Biutiful', 'Uxbal', 0, 1),
- ('Actor -- Leading Role',
-  'Jeff Bridges',
-  'True Grit',
-  'Rooster Cogburn',
-  0,
-  1),
- ('Actor -- Leading Role',
-  'Jesse Eisenberg',
-  'The Social Network',
-  'Mark Zuckerberg',
-  0,
-  1),
- ('Actor -- Leading Role',
-  'Colin Firth',
-  "The King's Speech",
-  'King George VI',
-  1,
-  1),
- ('Actor -- Leading Role', 'James Franco', '127 Hours', 'Aron Ralston', 0, 1)]</pre>
+<pre>Thanksgiving is happening at my home--I won't travel at all                         281
+Thanksgiving is local--it will take place in the town I live in                     203
+Thanksgiving is out of town but not too far--it's a drive of a few hours or less    150
+Thanksgiving is out of town and far away--I have to drive several hours or fly       55
+Name: How far will you travel for Thanksgiving?, dtype: int64</pre>
 </div>
 </div>
 </div>
@@ -1480,8 +1764,11 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [13]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#populating the nominations_two table</span>
-<span class="n">conn</span><span class="o">.</span><span class="n">executemany</span><span class="p">(</span><span class="n">insert_query2</span><span class="p">,</span> <span class="n">joined_nominations</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">more_150k</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"int_income"</span><span class="p">]</span> <span class="o">></span> <span class="mi">150000</span>
+<span class="n">more_150k_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">more_150k</span><span class="p">]</span>
+
+<span class="n">how_far_150k_plus</span> <span class="o">=</span> <span class="n">more_150k_data</span><span class="p">[</span><span class="s2">"How far will you travel for Thanksgiving?"</span><span class="p">]</span>
+<span class="n">how_far_150k_plus</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1491,17 +1778,13 @@ h6:hover .anchor-link {
 <div class="output_area">
 <div class="prompt output_prompt">Out[13]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre><sqlite3.cursor at 0x1cefc369180></pre>
+<pre>Thanksgiving is happening at my home--I won't travel at all                         49
+Thanksgiving is local--it will take place in the town I live in                     25
+Thanksgiving is out of town but not too far--it's a drive of a few hours or less    16
+Thanksgiving is out of town and far away--I have to drive several hours or fly      12
+Name: How far will you travel for Thanksgiving?, dtype: int64</pre>
 </div>
 </div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's check out the new table, "nominations_two" that we just made.</p>
 </div>
 </div>
 </div>
@@ -1510,10 +1793,10 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [14]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">q9</span> <span class="o">=</span> <span class="s2">"SELECT * FROM nominations_two LIMIT 5"</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">q9</span><span class="p">)</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
-<span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">high_income_athome</span> <span class="o">=</span> <span class="mi">49</span><span class="o">/</span><span class="p">(</span><span class="mi">49</span><span class="o">+</span><span class="mi">25</span><span class="o">+</span><span class="mi">16</span><span class="o">+</span><span class="mi">12</span><span class="p">)</span> 
+<span class="n">low_income_athome</span> <span class="o">=</span> <span class="mi">281</span><span class="o">/</span><span class="p">(</span><span class="mi">203</span><span class="o">+</span><span class="mi">150</span><span class="o">+</span><span class="mi">55</span><span class="o">+</span><span class="mi">281</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">high_income_athome</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">low_income_athome</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1521,37 +1804,11 @@ h6:hover .anchor-link {
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[14]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>[(1, 'Actor -- Leading Role', 'Javier Bardem', 'Biutiful', 'Uxbal', 0, 1),
- (2,
-  'Actor -- Leading Role',
-  'Jeff Bridges',
-  'True Grit',
-  'Rooster Cogburn',
-  0,
-  1),
- (3,
-  'Actor -- Leading Role',
-  'Jesse Eisenberg',
-  'The Social Network',
-  'Mark Zuckerberg',
-  0,
-  1),
- (4,
-  'Actor -- Leading Role',
-  'Colin Firth',
-  "The King's Speech",
-  'King George VI',
-  1,
-  1),
- (5,
-  'Actor -- Leading Role',
-  'James Franco',
-  '127 Hours',
-  'Aron Ralston',
-  0,
-  1)]</pre>
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>0.4803921568627451
+0.40783744557329465
+</pre>
 </div>
 </div>
 </div>
@@ -1561,7 +1818,8 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We can change the table name of nominations_two back to nominations, replacing the table.</p>
+<p>It looks like high income respondants (> 150k) actually stay home at a higher rate than low income respondants (< 150k). This makes sense because high income respondants are older and have more established families. Whereas low income respondants are mostly students who live on campus and have to travel back home for thanksgiving.</p>
+<p>We can use .pivot_table() method to see if there is a correlation between age/income and people who spend their Thanksgiving with Friends.</p>
 </div>
 </div>
 </div>
@@ -1570,12 +1828,16 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [15]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#We can drop the table "nominations" with the DROP TABLE sql command</span>
-<span class="n">q10</span> <span class="o">=</span> <span class="s2">"DROP TABLE nominations"</span>
-<span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">q10</span><span class="p">)</span>
-
-<span class="n">q11</span> <span class="o">=</span> <span class="s2">"ALTER TABLE nominations_two RENAME TO nominations"</span>
-<span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">q11</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span>
+    <span class="c1">#The index takes a series as an input and populates the rows of the spreadsheet</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="s2">"Have you ever tried to meet up with hometown friends on Thanksgiving night?"</span><span class="p">,</span>
+    
+    <span class="c1">#The columns takes a series as an input and populates the columns with its values</span>
+    <span class="n">columns</span> <span class="o">=</span> <span class="s1">'Have you ever attended a "Friendsgiving?"'</span><span class="p">,</span>
+    
+    <span class="c1">#The values we populate the matrix with, by default the values will be the mean</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="s1">'int_age'</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1584,18 +1846,50 @@ h6:hover .anchor-link {
 <div class="output">
 <div class="output_area">
 <div class="prompt output_prompt">Out[15]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre><sqlite3.cursor at 0x1cefc369260></pre>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>Have you ever attended a "Friendsgiving?"</th>
+<th>No</th>
+<th>Yes</th>
+</tr>
+<tr>
+<th>Have you ever tried to meet up with hometown friends on Thanksgiving night?</th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>No</th>
+<td>42.283702</td>
+<td>37.010526</td>
+</tr>
+<tr>
+<th>Yes</th>
+<td>41.475410</td>
+<td>33.976744</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>We can repeat the process and create three new tables and use have their IDs cross reference each other.</p>
 </div>
 </div>
 </div>
@@ -1604,182 +1898,61 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [16]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">q11</span> <span class="o">=</span> <span class="s1">'''</span>
-<span class="s1">    CREATE TABLE movies(</span>
-<span class="s1">    id integer PRIMARY KEY,</span>
-<span class="s1">    movie text</span>
-<span class="s1">)'''</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="s2">"Have you ever tried to meet up with hometown friends on Thanksgiving night?"</span><span class="p">,</span>
+    <span class="n">columns</span> <span class="o">=</span> <span class="s1">'Have you ever attended a "Friendsgiving?"'</span><span class="p">,</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="s1">'int_income'</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[16]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
 
-<span class="n">q12</span> <span class="o">=</span> <span class="s1">'''</span>
-<span class="s1">    CREATE TABLE actors(</span>
-<span class="s1">    id integer PRIMARY KEY,</span>
-<span class="s1">    actor text</span>
-<span class="s1">)'''</span>
-
-<span class="n">q13</span> <span class="o">=</span> <span class="s1">'''</span>
-<span class="s1">    CREATE TABLE movies_actors(</span>
-<span class="s1">    id integer PRIMARY KEY,</span>
-<span class="s1">    movie_id integer references movies(id),</span>
-<span class="s1">    actor_id integer references actors(id)</span>
-<span class="s1">    );</span>
-<span class="s1">'''</span>
-</pre></div>
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>Have you ever attended a "Friendsgiving?"</th>
+<th>No</th>
+<th>Yes</th>
+</tr>
+<tr>
+<th>Have you ever tried to meet up with hometown friends on Thanksgiving night?</th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>No</th>
+<td>78914.549654</td>
+<td>72894.736842</td>
+</tr>
+<tr>
+<th>Yes</th>
+<td>78750.000000</td>
+<td>66019.736842</td>
+</tr>
+</tbody>
+</table>
 </div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [17]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">q11</span><span class="p">)</span>
-<span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">q12</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[17]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre><sqlite3.cursor at 0x1cefc369340></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [18]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">q13</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[18]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre><sqlite3.cursor at 0x1cefc3692d0></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [19]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">insert_into_movies</span> <span class="o">=</span> <span class="s2">"INSERT INTO movies (movie) SELECT nominations.movie from nominations"</span>
-<span class="n">insert_into_actors</span> <span class="o">=</span> <span class="s2">"INSERT INTO actors (actor) SELECT nominations.nominee from nominations"</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [20]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">insert_into_movies</span><span class="p">)</span>
-<span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">insert_into_actors</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[20]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre><sqlite3.cursor at 0x1cefc3693b0></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [21]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"SELECT * FROM actors LIMIT 5"</span><span class="p">)</span><span class="o">.</span><span class="n">fetchall</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"SELECT * FROM movies LIMIT 5"</span><span class="p">)</span><span class="o">.</span><span class="n">fetchall</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>[(1, 'Javier Bardem'), (2, 'Jeff Bridges'), (3, 'Jesse Eisenberg'), (4, 'Colin Firth'), (5, 'James Franco')]
-[(1, 'Biutiful'), (2, 'True Grit'), (3, 'The Social Network'), (4, "The King's Speech"), (5, '127 Hours')]
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [22]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">q14</span> <span class="o">=</span> <span class="s2">"SELECT movie, nominee FROM nominations"</span>
-<span class="n">list_actors_movies</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">q14</span><span class="p">)</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
-<span class="n">list_actors_movies</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt output_prompt">Out[22]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre>[('Biutiful', 'Javier Bardem'),
- ('True Grit', 'Jeff Bridges'),
- ('The Social Network', 'Jesse Eisenberg'),
- ("The King's Speech", 'Colin Firth'),
- ('127 Hours', 'James Franco')]</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [23]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">insert_query</span> <span class="o">=</span> <span class="s1">'''</span>
-<span class="s1">    INSERT INTO movies_actors(movie_id, actor_id)</span>
-<span class="s1">    VALUES ((SELECT id FROM movies WHERE movie == ?), (SELECT id from actors where actor == ?))</span>
-<span class="s1">'''</span>
-<span class="n">conn</span><span class="o">.</span><span class="n">executemany</span><span class="p">(</span><span class="n">insert_query</span><span class="p">,</span> <span class="n">list_actors_movies</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"SELECT * FROM movies_actors LIMIT 5"</span><span class="p">)</span><span class="o">.</span><span class="n">fetchall</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>[(1, 1, 1), (2, 2, 2), (3, 3, 3), (4, 4, 4), (5, 5, 5)]
-</pre>
 </div>
 </div>
 </div>
@@ -1789,11 +1962,11 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p>It turns out that people who spends their thanksgiving with their friends have lower average income and an average age of 34.</p>
 <hr />
-<h4 id="Learning-Summary">Learning Summary<a class="anchor-link" href="#Learning-Summary">¶</a></h4><p>Python/SQL concepts explored: python+sqlite3, pandas, multiple tables, foreign keys, subqueries, populating new tables</p>
-<p>Python functions and methods used: .cursor(), .connect(), .execute(), .fetchall(), .executemany()</p>
-<p>SQL statements used: PRAGMA, LIMIT, FROM, SELECT, INNER JOIN, DROP, ALTER, VALUES</p>
-<p>The files used for this project can be found in my <a href="https://github.com/sengkchu/Dataquest-Guided-Projects-Solutions/tree/master/Guided%20Project_%20Creating%20relations%20in%20SQLite">GitHub repository</a>.</p>
+<h4 id="Learning-Summary">Learning Summary<a class="anchor-link" href="#Learning-Summary">¶</a></h4><p>Python concepts explored: pandas, functions, boolean filtering</p>
+<p>Python functions and methods used: .read_csv(), .pivot_table(), .replace(), .describe(), .apply(), .isnull(), .columns, .shape, .head()</p>
+<p>The files used for this project can be found in my <a href="https://github.com/sengkchu/Dataquest-Guided-Projects-Solutions/tree/master/Guided%20Project_%20Analyzing%20Thanksgiving%20Dinner">GitHub repository</a>.</p>
 </div>
 </div>
 </div>
@@ -1829,6 +2002,31 @@ h6:hover .anchor-link {
 
             </div>
             <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h4>Part 3 of the Dataquest series</h4>
+       <h5>Previous articles</h5>
+       <ul>
+           <li><a href="/exploring-births.html">Exploring U.S. Births</a></li>
+           <li><a href="/exploring-gun-deaths.html">Exploring Gun Deaths in the US</a></li>
+       </ul>
+       <h5>Next articles</h5>
+       <ul>
+           <li><a href="/College-Majors-Earnings.html">Visualizing Earnings Based On College Majors</a></li>
+           <li><a href="/college-degrees-gender-gap.html">Visualizing The Gender Gap In College Degrees</a></li>
+           <li><a href="/new-york-high-schools-analysis.html">Analyzing High Schools in New York City</a></li>
+           <li><a href="/star-wars-data.html">Analyzing Star Wars Survey Data</a></li>
+           <li><a href="/cia-factboook-sql.html">Analyzing CIA Factbook with SQL/Pandas</a></li>
+           <li><a href="/prepare-data-sql.html">Preparing Data for SQLite</a></li>
+           <li><a href="/relation-sql.html">Creating Relations in SQL</a></li>
+           <li><a href="/comparing-movie-review-websites.html">Comparing Movie Review Websites</a></li>
+           <li><a href="/analyzing-jeopardy.html">Analyzing Jeopardy Data</a></li>
+           <li><a href="/predict-car-price-kneighbors.html">Predicting Car Prices with K-Nearest Neighbors</a></li>
+           <li><a href="/predict-house-price-regression.html">Predicting House Prices with Linear Regression</a></li>
+           <li><a href="/predicting-bike-rentals.html">Predicting Bike Rentals with Decision Trees</a></li>
+           <li><a href="/spark-python.html">Working with Spark in Python</a></li>
+           <li><a href="/spark-dataframe-sql-python.html">Spark Dataframes and Spark SQL in Python</a></li>
+       </ul>
+</section>
     <hr />
     <!-- AddThis Button BEGIN -->
     <div class="addthis_toolbox addthis_default_style">
@@ -1847,7 +2045,7 @@ h6:hover .anchor-link {
             var disqus_shortname = 'codingdisciple'; // required: replace example with your forum shortname
             var disqus_config = function () {
                 this.language = "en";
-                        this.page.identifier = '2018-02-07-Relations-SQL';
+                        this.page.identifier = '2018-01-28-analyzing-thanksgiving-dinner';
             };
             /* * * DON'T EDIT BELOW THIS LINE * * */
             (function () {
@@ -1888,34 +2086,34 @@ h6:hover .anchor-link {
   <h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4>
   <ul class="list-group " id="tags">
     <li class="list-group-item tag-2">
-      <a href="/tag/hyperparameter-tuning.html">hyperparameter tuning</a>
+      <a href="/tag/pandas.html">pandas</a>
     </li>
     <li class="list-group-item tag-2">
       <a href="/tag/data-analysis.html">data analysis</a>
     </li>
     <li class="list-group-item tag-2">
-      <a href="/tag/sql.html">SQL</a>
-    </li>
-    <li class="list-group-item tag-2">
-      <a href="/tag/spark.html">Spark</a>
+      <a href="/tag/matplotlib.html">matplotlib</a>
     </li>
     <li class="list-group-item tag-2">
       <a href="/tag/python.html">python</a>
     </li>
     <li class="list-group-item tag-2">
-      <a href="/tag/features-engineering.html">features engineering</a>
+      <a href="/tag/machine-learning.html">machine learning</a>
     </li>
     <li class="list-group-item tag-2">
-      <a href="/tag/matplotlib.html">matplotlib</a>
-    </li>
-    <li class="list-group-item tag-2">
-      <a href="/tag/pandas.html">pandas</a>
+      <a href="/tag/sql.html">SQL</a>
     </li>
     <li class="list-group-item tag-2">
       <a href="/tag/data-cleaning.html">data cleaning</a>
     </li>
     <li class="list-group-item tag-2">
-      <a href="/tag/machine-learning.html">machine learning</a>
+      <a href="/tag/features-engineering.html">features engineering</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="/tag/central-tendency.html">central tendency</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="/tag/descriptive-statistics.html">descriptive statistics</a>
     </li>
   </ul>
 </li>
@@ -1926,7 +2124,7 @@ h6:hover .anchor-link {
   <h4><i class="fa fa-database fa-lg"></i><span class="icon-label">Archive</span></h4>
   <ul class="list-group" id="archive">
         <li class="list-group-item">
-          <a href="/2018/02/index.html"><i class="fa fa-calendar fa-lg"></i>February 2018 (15)
+          <a href="/2018/02/index.html"><i class="fa fa-calendar fa-lg"></i>February 2018 (18)
           </a>
         </li>
         <li class="list-group-item">
