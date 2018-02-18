@@ -5,7 +5,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://codingdisciple.com/</loc>
-<lastmod>2018-02-18T14:13:11-00:00</lastmod>
+<lastmod>2018-02-18T14:57:12-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -95,14 +95,14 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>https://codingdisciple.com/Learning-Networking.html</loc>
+<loc>https://codingdisciple.com/comparing-movie-review-websites.html</loc>
 <lastmod>2018-02-08T00:00:00-08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://codingdisciple.com/comparing-movie-review-websites.html</loc>
+<loc>https://codingdisciple.com/learning-networking.html</loc>
 <lastmod>2018-02-08T00:00:00-08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
@@ -130,7 +130,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>https://codingdisciple.com/Titanic-Survival.html</loc>
+<loc>https://codingdisciple.com/titanic-survival.html</loc>
 <lastmod>2018-02-07T00:00:00-08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
@@ -172,7 +172,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>https://codingdisciple.com/Discipline-vs-Motivation.html</loc>
+<loc>https://codingdisciple.com/discipline-vs-motivation.html</loc>
 <lastmod>2018-01-27T00:00:00-08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
@@ -186,14 +186,14 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>https://codingdisciple.com/Scraping-Reddit-Data-Pandas-Dataframe.html</loc>
+<loc>https://codingdisciple.com/exploring-births.html</loc>
 <lastmod>2018-01-26T00:00:00-08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://codingdisciple.com/exploring-births.html</loc>
+<loc>https://codingdisciple.com/scraping-reddit-data-pandas-dataframe.html</loc>
 <lastmod>2018-01-26T00:00:00-08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>

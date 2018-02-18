@@ -1355,7 +1355,7 @@ median_absolute_deviation_cnt: 134.627
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
 &lt;/script&gt;
-</content><category term="pandas"></category><category term="central tendency"></category><category term="descriptive statistics"></category></entry><entry><title>Understanding Central Tedency</title><link href="/central-tendency.html" rel="alternate"></link><published>2018-02-17T00:00:00-08:00</published><updated>2018-02-17T00:00:00-08:00</updated><author><name>Seng Chu</name></author><id>tag:None,2018-02-17:/central-tendency.html</id><summary type="html">
+</content><category term="pandas"></category><category term="matplotlib"></category><category term="dispersion"></category><category term="central tendency"></category><category term="descriptive statistics"></category></entry><entry><title>Understanding Central Tedency</title><link href="/central-tendency.html" rel="alternate"></link><published>2018-02-17T00:00:00-08:00</published><updated>2018-02-17T00:00:00-08:00</updated><author><name>Seng Chu</name></author><id>tag:None,2018-02-17:/central-tendency.html</id><summary type="html">
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
