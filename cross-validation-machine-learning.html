@@ -1332,7 +1332,7 @@ h6:hover .anchor-link {
 <li>A testing set to predict our results.</li>
 </ul>
 <div style="text-align:center">
-<img alt="holdout validation" src="images/cross-validation/method1.png" />
+<img alt="holdout validation diagram" src="images/cross-validation/method1.PNG" />
 </div><p>We can then compare the predictions from the testing set with the actual data using RMSE as the error metric.</p>
 </div>
 </div>
@@ -1443,7 +1443,7 @@ h6:hover .anchor-link {
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Method-2:-K-Fold-Cross-Validation">Method 2: K-Fold Cross Validation<a class="anchor-link" href="#Method-2:-K-Fold-Cross-Validation">¶</a></h3><p>This is where cross validation is really useful. Suppose we split the data set into four blocks (K = 4). We can train four linear regression models with each block being the test set once. The rest of the data will be the training set.</p>
 <div style="text-align:center">
-<img alt="holdout validation" src="images/cross-validation/Kfold.png" style="width:800px;" />
+<img alt="K-Fold Cross validation Diagram" src="images/cross-validation/Kfold.PNG" style="width:800px;" />
 </div><p>Each one of these model will have its own error, in our this case this error will be the RMSE. We can evaluate the model based on the average error from the four models. This method is useful because we are eliminating some of the selection bias. In the first method, only part of the data end up as the training set. In cross validation, all of the data end up in both the training set and the testing set.</p>
 </div>
 </div>
@@ -1500,7 +1500,7 @@ Average RMSE:
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Method-3:-Leave-One-Out-Validation">Method 3: Leave One Out Validation<a class="anchor-link" href="#Method-3:-Leave-One-Out-Validation">¶</a></h3><p>So what happens if we take K to the extreme, and set K = n. Where n is the number of rows in a dataset. We are going to train n number of models. Each one of these models will have one row as the testing set, and the rest of the data as the training set.</p>
 <div style="text-align:center">
-<img alt="Leave One Out Validation" src="images/cross-validation/leaveoneout.png" style="width:800px;" />
+<img alt="Leave One Out Validation Diagram" src="images/cross-validation/leaveoneout.PNG" style="width:800px;" />
 </div><p>We generate n number of models. Each one of these models will use every single row except for one row as the training set. Then we'll test the model with the row that was not a part of the training set. Finally, we check the error of this model.</p>
 <p>This process gets repeated until all of the rows in our dataset get tested. Once that is complete, we can compute the average error to see how well the model performed.</p>
 <p>The biggest drawback to this method is the computation time. We can use the time module from python to determine how long it takes to complete the process.</p>

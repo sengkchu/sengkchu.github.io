@@ -3892,7 +3892,7 @@ h6:hover .anchor-link {
 &lt;li&gt;A testing set to predict our results.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div style="text-align:center"&gt;
-&lt;img alt="holdout validation" src="images/cross-validation/method1.png" /&gt;
+&lt;img alt="holdout validation diagram" src="images/cross-validation/method1.PNG" /&gt;
 &lt;/div&gt;&lt;p&gt;We can then compare the predictions from the testing set with the actual data using RMSE as the error metric.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -4003,7 +4003,7 @@ h6:hover .anchor-link {
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;h3 id="Method-2:-K-Fold-Cross-Validation"&gt;Method 2: K-Fold Cross Validation&lt;a class="anchor-link" href="#Method-2:-K-Fold-Cross-Validation"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;This is where cross validation is really useful. Suppose we split the data set into four blocks (K = 4). We can train four linear regression models with each block being the test set once. The rest of the data will be the training set.&lt;/p&gt;
 &lt;div style="text-align:center"&gt;
-&lt;img alt="holdout validation" src="images/cross-validation/Kfold.png" style="width:800px;" /&gt;
+&lt;img alt="K-Fold Cross validation Diagram" src="images/cross-validation/Kfold.PNG" style="width:800px;" /&gt;
 &lt;/div&gt;&lt;p&gt;Each one of these model will have its own error, in our this case this error will be the RMSE. We can evaluate the model based on the average error from the four models. This method is useful because we are eliminating some of the selection bias. In the first method, only part of the data end up as the training set. In cross validation, all of the data end up in both the training set and the testing set.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -4060,7 +4060,7 @@ Average RMSE:
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;h3 id="Method-3:-Leave-One-Out-Validation"&gt;Method 3: Leave One Out Validation&lt;a class="anchor-link" href="#Method-3:-Leave-One-Out-Validation"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;So what happens if we take K to the extreme, and set K = n. Where n is the number of rows in a dataset. We are going to train n number of models. Each one of these models will have one row as the testing set, and the rest of the data as the training set.&lt;/p&gt;
 &lt;div style="text-align:center"&gt;
-&lt;img alt="Leave One Out Validation" src="images/cross-validation/leaveoneout.png" style="width:800px;" /&gt;
+&lt;img alt="Leave One Out Validation Diagram" src="images/cross-validation/leaveoneout.PNG" style="width:800px;" /&gt;
 &lt;/div&gt;&lt;p&gt;We generate n number of models. Each one of these models will use every single row except for one row as the training set. Then we'll test the model with the row that was not a part of the training set. Finally, we check the error of this model.&lt;/p&gt;
 &lt;p&gt;This process gets repeated until all of the rows in our dataset get tested. Once that is complete, we can compute the average error to see how well the model performed.&lt;/p&gt;
 &lt;p&gt;The biggest drawback to this method is the computation time. We can use the time module from python to determine how long it takes to complete the process.&lt;/p&gt;
