@@ -2455,7 +2455,7 @@ h6:hover .anchor-link {
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;hr /&gt;
 &lt;h4 id="Learning-Summary"&gt;Learning Summary&lt;a class="anchor-link" href="#Learning-Summary"&gt;¶&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;Concepts explored: data visualization, SQL, business oriented data analysis, seaborn plots&lt;/p&gt;
-&lt;p&gt;The files used for this project can be found in my &lt;a href="https://github.com/sengkchu/Personal-Projects"&gt;GitHub repository&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The files used for this project can be found in my &lt;a href="https://github.com/sengkchu/codingdisciple.content/tree/master/Projects"&gt;GitHub repository&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -4880,7 +4880,7 @@ Best Model Parameters:{'max_depth': 5, 'n_estimators': 4, 'min_samples_split': 2
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;hr /&gt;
 &lt;h4 id="Learning-Summary"&gt;Learning Summary&lt;a class="anchor-link" href="#Learning-Summary"&gt;¶&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;Concepts explored: feature engineering, feature selection, model selection, model tuning, binary classification problem&lt;/p&gt;
-&lt;p&gt;The files used for this project can be found in my &lt;a href="https://github.com/sengkchu/Personal-Projects"&gt;GitHub repository&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The files used for this project can be found in my &lt;a href="https://github.com/sengkchu/codingdisciple.content/tree/master/Projects"&gt;GitHub repository&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -6347,7 +6347,7 @@ dtype: int64&lt;/pre&gt;
 &lt;p&gt;The results are not too surprising, common english words showed up the most. That is it for now! We've achieved our goal of turning json data into a pandas dataframe.&lt;/p&gt;
 &lt;hr /&gt;
 &lt;h4 id="Learning-Summary"&gt;Learning Summary&lt;a class="anchor-link" href="#Learning-Summary"&gt;¶&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;Concepts explored: lists, dictionaries, API, data structures, JSON&lt;/p&gt;
-&lt;p&gt;The files for this project can be found in my &lt;a href="https://github.com/sengkchu/codingdisciple.content/tree/master/Personal-Projects"&gt;GitHub repository&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The files for this project can be found in my &lt;a href="https://github.com/sengkchu/codingdisciple.content/tree/master/Projects"&gt;GitHub repository&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
