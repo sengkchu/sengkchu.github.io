@@ -1,5 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Coding Disciple</title><link href="/" rel="alternate"></link><link href="/feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2018-02-22T00:00:00-08:00</updated><entry><title>The Normal Distribution and the Central Limit Theorem - Applications to Data Science</title><link href="/central-limit-theorem-data-science.html" rel="alternate"></link><published>2018-02-22T00:00:00-08:00</published><updated>2018-02-22T00:00:00-08:00</updated><author><name>Seng Chu</name></author><id>tag:None,2018-02-22:/central-limit-theorem-data-science.html</id><summary type="html">
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Coding Disciple</title><link href="/" rel="alternate"></link><link href="/feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2018-02-23T00:00:00-08:00</updated><entry><title>Learning How to Learn</title><link href="/how-to-learn.html" rel="alternate"></link><published>2018-02-23T00:00:00-08:00</published><updated>2018-02-23T00:00:00-08:00</updated><author><name>Seng Chu</name></author><id>tag:None,2018-02-23:/how-to-learn.html</id><summary type="html">&lt;p&gt;Learning a new subject or topic can be very difficult, especially when we get older.
+Is this really true? There is definitely correlation between age and the ability to learn.
+In fact, a simple Google search would reveal many scientific studies that can show this correlation.
+But correlation does not …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Learning a new subject or topic can be very difficult, especially when we get older.
+Is this really true? There is definitely correlation between age and the ability to learn.
+In fact, a simple Google search would reveal many scientific studies that can show this correlation.
+But correlation does not equate causation, I really want to challenge this topic from a logical standpoint.&lt;/p&gt;
+&lt;h3&gt;Why Learning as an Adult is Hard&lt;/h3&gt;
+&lt;p&gt;When we are young, we were told to study hard and get good grades in school. 
+For students, their full time job is to study, learn and play.
+As we get older, we start to take on new responsibilities. 
+We have to work to make money to sustain ourselves.
+We have to deal with bills and taxes. 
+We have to prepare our own meals.
+As a result, the majority of us actually end up in something I'd like to call the "steady-state."
+This is actually a chemical engineering term where the variables of a system are unchanging with time.
+The same can be applied to life, we eventually reach a point where we settle with our life, and we try maintain the status quo.
+We stop improving ourselves, because there is no motivation to do so.
+We become very satisfied with what we have, and time goes by very quickly.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;One month - Two months - One Year - Two Years&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Time flashes by before our eyes. Then we realize that nothing has changed in the past three years.&lt;/p&gt;
+&lt;h3&gt;The Learning Mindset&lt;/h3&gt;
+&lt;p&gt;Be honest with yourself, and ask yourself this question:&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;Are you content with your life?&lt;/b&gt;&lt;/p&gt;
+&lt;p&gt;If you answered yes, then I suggest you change the answer to no. You don't want to be content with your life.
+You can be happy with your life, but never get too comfortable with it.
+Once you are comfortable with your life, you stop evolving. 
+Of course learning anything new will be difficult, because there are no goals.
+If you truly want to change yourself, you have to be hungry.
+You have to strive towards a goal, and work towards it every single day.
+You want to be uncomfortable and challenged. Doing so allows us to push ourselves to the limits.&lt;/p&gt;</content><category term="learning"></category><category term="motivational"></category></entry><entry><title>The Normal Distribution and the Central Limit Theorem - Applications to Data Science</title><link href="/central-limit-theorem-data-science.html" rel="alternate"></link><published>2018-02-22T00:00:00-08:00</published><updated>2018-02-22T00:00:00-08:00</updated><author><name>Seng Chu</name></author><id>tag:None,2018-02-22:/central-limit-theorem-data-science.html</id><summary type="html">
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
@@ -1263,7 +1293,7 @@ h6:hover .anchor-link {
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [17]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In [8]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
 &lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sns&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;font_scale&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;1.4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;    
@@ -1300,7 +1330,7 @@ h6:hover .anchor-link {
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [18]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In [9]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
 &lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;peak_rpm_cleaned&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'peak-rpm'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;replace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"?"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;nan&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dropna&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;astype&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"float"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -1339,7 +1369,7 @@ h6:hover .anchor-link {
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [19]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In [10]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
 &lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;fig&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;figure&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;figsize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;11&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mf"&gt;3.5&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
@@ -1388,7 +1418,7 @@ h6:hover .anchor-link {
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [23]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In [11]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
 &lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;sampler&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n_samples&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;sample_size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
