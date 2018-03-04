@@ -1,5 +1,1486 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Coding Disciple</title><link href="/" rel="alternate"></link><link href="/feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2018-02-25T00:00:00-08:00</updated><entry><title>Hypothesis Testing with Welch's t-test in Python</title><link href="/hypothesis-testing-welch-python.html" rel="alternate"></link><published>2018-02-25T00:00:00-08:00</published><updated>2018-02-25T00:00:00-08:00</updated><author><name>Seng Chu</name></author><id>tag:None,2018-02-25:/hypothesis-testing-welch-python.html</id><summary type="html">
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Coding Disciple</title><link href="/" rel="alternate"></link><link href="/feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2018-03-01T00:00:00-08:00</updated><entry><title>Hypothesis Testing with ANOVA in Python</title><link href="/hypothesis-testing-ANOVA-python.html" rel="alternate"></link><published>2018-03-01T00:00:00-08:00</published><updated>2018-03-01T00:00:00-08:00</updated><author><name>Seng Chu</name></author><id>tag:None,2018-03-01:/hypothesis-testing-ANOVA-python.html</id><summary type="html">
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;In the previous article, we talked about hypothesis testing using the Welch's t-test on two independent samples of data. So what happens if we want know the statiscal significance for $k$ groups of data?&lt;/p&gt;
+&lt;p&gt;This is where the analysis of variance technique, or ANOVA is useful.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="ANOVA-Assumptions"&gt;ANOVA Assumptions&lt;a class="anchor-link" href="#ANOVA-Assumptions"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;We'll be looking at SAT scores for five different districts in New York City. Specifically, we'll be using "scores.csv" from &lt;a href="https://www.kaggle.com/nycopendata/high-schools"&gt;Kaggle&lt;/a&gt;</summary><content type="html">&lt;style type="text/css"&gt;/*!
+*
+* IPython notebook
+*
+*/
+/* CSS font colors for translated ANSI colors. */
+.ansibold {
+  font-weight: bold;
+}
+/* use dark versions for foreground, to improve visibility */
+.ansiblack {
+  color: black;
+}
+.ansired {
+  color: darkred;
+}
+.ansigreen {
+  color: darkgreen;
+}
+.ansiyellow {
+  color: #c4a000;
+}
+.ansiblue {
+  color: darkblue;
+}
+.ansipurple {
+  color: darkviolet;
+}
+.ansicyan {
+  color: steelblue;
+}
+.ansigray {
+  color: gray;
+}
+/* and light for background, for the same reason */
+.ansibgblack {
+  background-color: black;
+}
+.ansibgred {
+  background-color: red;
+}
+.ansibggreen {
+  background-color: green;
+}
+.ansibgyellow {
+  background-color: yellow;
+}
+.ansibgblue {
+  background-color: blue;
+}
+.ansibgpurple {
+  background-color: magenta;
+}
+.ansibgcyan {
+  background-color: cyan;
+}
+.ansibggray {
+  background-color: gray;
+}
+div.cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border-radius: 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  width: 100%;
+  padding: 5px;
+  /* This acts as a spacer between cells, that is outside the border */
+  margin: 0px;
+  outline: none;
+  border-left-width: 1px;
+  padding-left: 5px;
+  background: linear-gradient(to right, transparent -40px, transparent 1px, transparent 1px, transparent 100%);
+}
+div.cell.jupyter-soft-selected {
+  border-left-color: #90CAF9;
+  border-left-color: #E3F2FD;
+  border-left-width: 1px;
+  padding-left: 5px;
+  border-right-color: #E3F2FD;
+  border-right-width: 1px;
+  background: #E3F2FD;
+}
+@media print {
+  div.cell.jupyter-soft-selected {
+    border-color: transparent;
+  }
+}
+div.cell.selected {
+  border-color: #ababab;
+  border-left-width: 0px;
+  padding-left: 6px;
+  background: linear-gradient(to right, #42A5F5 -40px, #42A5F5 5px, transparent 5px, transparent 100%);
+}
+@media print {
+  div.cell.selected {
+    border-color: transparent;
+  }
+}
+div.cell.selected.jupyter-soft-selected {
+  border-left-width: 0;
+  padding-left: 6px;
+  background: linear-gradient(to right, #42A5F5 -40px, #42A5F5 7px, #E3F2FD 7px, #E3F2FD 100%);
+}
+.edit_mode div.cell.selected {
+  border-color: #66BB6A;
+  border-left-width: 0px;
+  padding-left: 6px;
+  background: linear-gradient(to right, #66BB6A -40px, #66BB6A 5px, transparent 5px, transparent 100%);
+}
+@media print {
+  .edit_mode div.cell.selected {
+    border-color: transparent;
+  }
+}
+.prompt {
+  /* This needs to be wide enough for 3 digit prompt numbers: In[100]: */
+  min-width: 14ex;
+  /* This padding is tuned to match the padding on the CodeMirror editor. */
+  padding: 0.4em;
+  margin: 0px;
+  font-family: monospace;
+  text-align: right;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+  /* Don't highlight prompt number selection */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  /* Use default cursor */
+  cursor: default;
+}
+@media (max-width: 540px) {
+  .prompt {
+    text-align: left;
+  }
+}
+div.inner_cell {
+  min-width: 0;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_area {
+  border: 1px solid #cfcfcf;
+  border-radius: 2px;
+  background: #f7f7f7;
+  line-height: 1.21429em;
+}
+/* This is needed so that empty prompt areas can collapse to zero height when there
+   is no content in the output_subarea and the prompt. The main purpose of this is
+   to make sure that empty JavaScript output_subareas have no height. */
+div.prompt:empty {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+div.unrecognized_cell {
+  padding: 5px 5px 5px 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.unrecognized_cell .inner_cell {
+  border-radius: 2px;
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+  border: 1px solid #cfcfcf;
+  background: #eaeaea;
+}
+div.unrecognized_cell .inner_cell a {
+  color: inherit;
+  text-decoration: none;
+}
+div.unrecognized_cell .inner_cell a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+@media (max-width: 540px) {
+  div.unrecognized_cell &gt; div.prompt {
+    display: none;
+  }
+}
+div.code_cell {
+  /* avoid page breaking on code cells when printing */
+}
+@media print {
+  div.code_cell {
+    page-break-inside: avoid;
+  }
+}
+/* any special styling for code cells that are currently running goes here */
+div.input {
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.input {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_prompt {
+  color: #303F9F;
+  border-top: 1px solid transparent;
+}
+div.input_area &gt; div.highlight {
+  margin: 0.4em;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+div.input_area &gt; div.highlight &gt; pre {
+  margin: 0px;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+/* The following gets added to the &lt;head&gt; if it is detected that the user has a
+ * monospace font with inconsistent normal/bold/italic height.  See
+ * notebookmain.js.  Such fonts will have keywords vertically offset with
+ * respect to the rest of the text.  The user should select a better font.
+ * See: https://github.com/ipython/ipython/issues/1503
+ *
+ * .CodeMirror span {
+ *      vertical-align: bottom;
+ * }
+ */
+.CodeMirror {
+  line-height: 1.21429em;
+  /* Changed from 1em to our global default */
+  font-size: 14px;
+  height: auto;
+  /* Changed to auto to autogrow */
+  background: none;
+  /* Changed from white to allow our bg to show through */
+}
+.CodeMirror-scroll {
+  /*  The CodeMirror docs are a bit fuzzy on if overflow-y should be hidden or visible.*/
+  /*  We have found that if it is visible, vertical scrollbars appear with font size changes.*/
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+.CodeMirror-lines {
+  /* In CM2, this used to be 0.4em, but in CM3 it went to 4px. We need the em value because */
+  /* we have set a different line-height and want this to scale with that. */
+  padding: 0.4em;
+}
+.CodeMirror-linenumber {
+  padding: 0 8px 0 4px;
+}
+.CodeMirror-gutters {
+  border-bottom-left-radius: 2px;
+  border-top-left-radius: 2px;
+}
+.CodeMirror pre {
+  /* In CM3 this went to 4px from 0 in CM2. We need the 0 value because of how we size */
+  /* .CodeMirror-lines */
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+}
+/*
+
+Original style from softwaremaniacs.org (c) Ivan Sagalaev &lt;Maniac@SoftwareManiacs.Org&gt;
+Adapted from GitHub theme
+
+*/
+.highlight-base {
+  color: #000;
+}
+.highlight-variable {
+  color: #000;
+}
+.highlight-variable-2 {
+  color: #1a1a1a;
+}
+.highlight-variable-3 {
+  color: #333333;
+}
+.highlight-string {
+  color: #BA2121;
+}
+.highlight-comment {
+  color: #408080;
+  font-style: italic;
+}
+.highlight-number {
+  color: #080;
+}
+.highlight-atom {
+  color: #88F;
+}
+.highlight-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.highlight-builtin {
+  color: #008000;
+}
+.highlight-error {
+  color: #f00;
+}
+.highlight-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.highlight-meta {
+  color: #AA22FF;
+}
+/* previously not defined, copying from default codemirror */
+.highlight-def {
+  color: #00f;
+}
+.highlight-string-2 {
+  color: #f50;
+}
+.highlight-qualifier {
+  color: #555;
+}
+.highlight-bracket {
+  color: #997;
+}
+.highlight-tag {
+  color: #170;
+}
+.highlight-attribute {
+  color: #00c;
+}
+.highlight-header {
+  color: blue;
+}
+.highlight-quote {
+  color: #090;
+}
+.highlight-link {
+  color: #00c;
+}
+/* apply the same style to codemirror */
+.cm-s-ipython span.cm-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-atom {
+  color: #88F;
+}
+.cm-s-ipython span.cm-number {
+  color: #080;
+}
+.cm-s-ipython span.cm-def {
+  color: #00f;
+}
+.cm-s-ipython span.cm-variable {
+  color: #000;
+}
+.cm-s-ipython span.cm-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-variable-2 {
+  color: #1a1a1a;
+}
+.cm-s-ipython span.cm-variable-3 {
+  color: #333333;
+}
+.cm-s-ipython span.cm-comment {
+  color: #408080;
+  font-style: italic;
+}
+.cm-s-ipython span.cm-string {
+  color: #BA2121;
+}
+.cm-s-ipython span.cm-string-2 {
+  color: #f50;
+}
+.cm-s-ipython span.cm-meta {
+  color: #AA22FF;
+}
+.cm-s-ipython span.cm-qualifier {
+  color: #555;
+}
+.cm-s-ipython span.cm-builtin {
+  color: #008000;
+}
+.cm-s-ipython span.cm-bracket {
+  color: #997;
+}
+.cm-s-ipython span.cm-tag {
+  color: #170;
+}
+.cm-s-ipython span.cm-attribute {
+  color: #00c;
+}
+.cm-s-ipython span.cm-header {
+  color: blue;
+}
+.cm-s-ipython span.cm-quote {
+  color: #090;
+}
+.cm-s-ipython span.cm-link {
+  color: #00c;
+}
+.cm-s-ipython span.cm-error {
+  color: #f00;
+}
+.cm-s-ipython span.cm-tab {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAMCAYAAAAkuj5RAAAAAXNSR0IArs4c6QAAAGFJREFUSMft1LsRQFAQheHPowAKoACx3IgEKtaEHujDjORSgWTH/ZOdnZOcM/sgk/kFFWY0qV8foQwS4MKBCS3qR6ixBJvElOobYAtivseIE120FaowJPN75GMu8j/LfMwNjh4HUpwg4LUAAAAASUVORK5CYII=);
+  background-position: right;
+  background-repeat: no-repeat;
+}
+div.output_wrapper {
+  /* this position must be relative to enable descendents to be absolute within it */
+  position: relative;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  z-index: 1;
+}
+/* class for the output area when it should be height-limited */
+div.output_scroll {
+  /* ideally, this would be max-height, but FF barfs all over that */
+  height: 24em;
+  /* FF needs this *and the wrapper* to specify full width, or it will shrinkwrap */
+  width: 100%;
+  overflow: auto;
+  border-radius: 2px;
+  -webkit-box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  display: block;
+}
+/* output div while it is collapsed */
+div.output_collapsed {
+  margin: 0px;
+  padding: 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+div.out_prompt_overlay {
+  height: 100%;
+  padding: 0px 0.4em;
+  position: absolute;
+  border-radius: 2px;
+}
+div.out_prompt_overlay:hover {
+  /* use inner shadow to get border that is computed the same on WebKit/FF */
+  -webkit-box-shadow: inset 0 0 1px #000;
+  box-shadow: inset 0 0 1px #000;
+  background: rgba(240, 240, 240, 0.5);
+}
+div.output_prompt {
+  color: #D84315;
+}
+/* This class is the outer container of all output sections. */
+div.output_area {
+  padding: 0px;
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.output_area .MathJax_Display {
+  text-align: left !important;
+}
+div.output_area 
+div.output_area 
+div.output_area img,
+div.output_area svg {
+  max-width: 100%;
+  height: auto;
+}
+div.output_area img.unconfined,
+div.output_area svg.unconfined {
+  max-width: none;
+}
+/* This is needed to protect the pre formating from global settings such
+   as that of bootstrap */
+.output {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.output_area {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+div.output_area pre {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+  color: black;
+  background-color: transparent;
+  border-radius: 0;
+}
+/* This class is for the output subarea inside the output_area and after
+   the prompt div. */
+div.output_subarea {
+  overflow-x: auto;
+  padding: 0.4em;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+  max-width: calc(100% - 14ex);
+}
+div.output_scroll div.output_subarea {
+  overflow-x: visible;
+}
+/* The rest of the output_* classes are for special styling of the different
+   output types */
+/* all text output has this class: */
+div.output_text {
+  text-align: left;
+  color: #000;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+}
+/* stdout/stderr are 'text' as well as 'stream', but execute_result/error are *not* streams */
+div.output_stderr {
+  background: #fdd;
+  /* very light red background for stderr */
+}
+div.output_latex {
+  text-align: left;
+}
+/* Empty output_javascript divs should have no height */
+div.output_javascript:empty {
+  padding: 0;
+}
+.js-error {
+  color: darkred;
+}
+/* raw_input styles */
+div.raw_input_container {
+  line-height: 1.21429em;
+  padding-top: 5px;
+}
+pre.raw_input_prompt {
+  /* nothing needed here. */
+}
+input.raw_input {
+  font-family: monospace;
+  font-size: inherit;
+  color: inherit;
+  width: auto;
+  /* make sure input baseline aligns with prompt */
+  vertical-align: baseline;
+  /* padding + margin = 0.5em between prompt and cursor */
+  padding: 0em 0.25em;
+  margin: 0em 0.25em;
+}
+input.raw_input:focus {
+  box-shadow: none;
+}
+p.p-space {
+  margin-bottom: 10px;
+}
+div.output_unrecognized {
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+}
+div.output_unrecognized a {
+  color: inherit;
+  text-decoration: none;
+}
+div.output_unrecognized a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+.rendered_html {
+  color: #000;
+  /* any extras will just be numbers: */
+}
+
+
+
+.rendered_html :link {
+  text-decoration: underline;
+}
+.rendered_html :visited {
+  text-decoration: underline;
+}
+
+
+
+
+
+
+.rendered_html h1:first-child {
+  margin-top: 0.538em;
+}
+.rendered_html h2:first-child {
+  margin-top: 0.636em;
+}
+.rendered_html h3:first-child {
+  margin-top: 0.777em;
+}
+.rendered_html h4:first-child {
+  margin-top: 1em;
+}
+.rendered_html h5:first-child {
+  margin-top: 1em;
+}
+.rendered_html h6:first-child {
+  margin-top: 1em;
+}
+
+
+
+
+
+
+
+
+.rendered_html * + ul {
+  margin-top: 1em;
+}
+.rendered_html * + ol {
+  margin-top: 1em;
+}
+
+
+.rendered_html pre,
+
+
+
+.rendered_html tr,
+.rendered_html th,
+
+.rendered_html td,
+
+
+.rendered_html * + table {
+  margin-top: 1em;
+}
+
+.rendered_html * + p {
+  margin-top: 1em;
+}
+
+.rendered_html * + img {
+  margin-top: 1em;
+}
+.rendered_html img,
+
+.rendered_html img.unconfined,
+
+div.text_cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.text_cell &gt; div.prompt {
+    display: none;
+  }
+}
+div.text_cell_render {
+  /*font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;*/
+  outline: none;
+  resize: none;
+  width: inherit;
+  border-style: none;
+  padding: 0.5em 0.5em 0.5em 0.4em;
+  color: #000;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+a.anchor-link:link {
+  text-decoration: none;
+  padding: 0px 20px;
+  visibility: hidden;
+}
+h1:hover .anchor-link,
+h2:hover .anchor-link,
+h3:hover .anchor-link,
+h4:hover .anchor-link,
+h5:hover .anchor-link,
+h6:hover .anchor-link {
+  visibility: visible;
+}
+.text_cell.rendered .input_area {
+  display: none;
+}
+.text_cell.rendered 
+.text_cell.unrendered .text_cell_render {
+  display: none;
+}
+.cm-header-1,
+.cm-header-2,
+.cm-header-3,
+.cm-header-4,
+.cm-header-5,
+.cm-header-6 {
+  font-weight: bold;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.cm-header-1 {
+  font-size: 185.7%;
+}
+.cm-header-2 {
+  font-size: 157.1%;
+}
+.cm-header-3 {
+  font-size: 128.6%;
+}
+.cm-header-4 {
+  font-size: 110%;
+}
+.cm-header-5 {
+  font-size: 100%;
+  font-style: italic;
+}
+.cm-header-6 {
+  font-size: 100%;
+  font-style: italic;
+}
+&lt;/style&gt;
+&lt;style type="text/css"&gt;.highlight .hll { background-color: #ffffcc }
+.highlight  { background: #f8f8f8; }
+.highlight .c { color: #408080; font-style: italic } /* Comment */
+.highlight .err { border: 1px solid #FF0000 } /* Error */
+.highlight .k { color: #008000; font-weight: bold } /* Keyword */
+.highlight .o { color: #666666 } /* Operator */
+.highlight .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #BC7A00 } /* Comment.Preproc */
+.highlight .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #408080; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #A00000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #FF0000 } /* Generic.Error */
+.highlight .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #00A000 } /* Generic.Inserted */
+.highlight .go { color: #888888 } /* Generic.Output */
+.highlight .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #0044DD } /* Generic.Traceback */
+.highlight .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #008000 } /* Keyword.Pseudo */
+.highlight .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #B00040 } /* Keyword.Type */
+.highlight .m { color: #666666 } /* Literal.Number */
+.highlight .s { color: #BA2121 } /* Literal.String */
+.highlight .na { color: #7D9029 } /* Name.Attribute */
+.highlight .nb { color: #008000 } /* Name.Builtin */
+.highlight .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.highlight .no { color: #880000 } /* Name.Constant */
+.highlight .nd { color: #AA22FF } /* Name.Decorator */
+.highlight .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #0000FF } /* Name.Function */
+.highlight .nl { color: #A0A000 } /* Name.Label */
+.highlight .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #19177C } /* Name.Variable */
+.highlight .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mb { color: #666666 } /* Literal.Number.Bin */
+.highlight .mf { color: #666666 } /* Literal.Number.Float */
+.highlight .mh { color: #666666 } /* Literal.Number.Hex */
+.highlight .mi { color: #666666 } /* Literal.Number.Integer */
+.highlight .mo { color: #666666 } /* Literal.Number.Oct */
+.highlight .sa { color: #BA2121 } /* Literal.String.Affix */
+.highlight .sb { color: #BA2121 } /* Literal.String.Backtick */
+.highlight .sc { color: #BA2121 } /* Literal.String.Char */
+.highlight .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.highlight .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #BA2121 } /* Literal.String.Double */
+.highlight .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.highlight .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.highlight .sx { color: #008000 } /* Literal.String.Other */
+.highlight .sr { color: #BB6688 } /* Literal.String.Regex */
+.highlight .s1 { color: #BA2121 } /* Literal.String.Single */
+.highlight .ss { color: #19177C } /* Literal.String.Symbol */
+.highlight .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #0000FF } /* Name.Function.Magic */
+.highlight .vc { color: #19177C } /* Name.Variable.Class */
+.highlight .vg { color: #19177C } /* Name.Variable.Global */
+.highlight .vi { color: #19177C } /* Name.Variable.Instance */
+.highlight .vm { color: #19177C } /* Name.Variable.Magic */
+.highlight .il { color: #666666 } /* Literal.Number.Integer.Long */&lt;/style&gt;
+&lt;style type="text/css"&gt;
+/* Temporary definitions which will become obsolete with Notebook release 5.0 */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-bold { font-weight: bold; }
+&lt;/style&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;In the previous article, we talked about hypothesis testing using the Welch's t-test on two independent samples of data. So what happens if we want know the statiscal significance for $k$ groups of data?&lt;/p&gt;
+&lt;p&gt;This is where the analysis of variance technique, or ANOVA is useful.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="ANOVA-Assumptions"&gt;ANOVA Assumptions&lt;a class="anchor-link" href="#ANOVA-Assumptions"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;We'll be looking at SAT scores for five different districts in New York City. Specifically, we'll be using "scores.csv" from &lt;a href="https://www.kaggle.com/nycopendata/high-schools"&gt;Kaggle&lt;/a&gt;. First let's get the assumptions out of the way:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The dependent variable (SAT scores) should be continuous. &lt;/li&gt;
+&lt;li&gt;The independent variables (districts) should be two or more categorical groups.&lt;/li&gt;
+&lt;li&gt;There must be different participants in each group with no participant being in more than one group. In our case, each school cannot be in more than one district.&lt;/li&gt;
+&lt;li&gt;The dependent variable should be approximately normally distributed for each category.&lt;/li&gt;
+&lt;li&gt;Variances of each group are approximately equal.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Data-Exploration"&gt;Data Exploration&lt;a class="anchor-link" href="#Data-Exploration"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Let's begin by taking a look at what our data looks like.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [1]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;pandas&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;pd&lt;/span&gt; 
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;matplotlib.pyplot&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;plt&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;seaborn&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;sns&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;scipy&lt;/span&gt; &lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="n"&gt;stats&lt;/span&gt;
+&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="k"&gt;matplotlib&lt;/span&gt; inline
+
+&lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read_csv&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"scores.csv"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt output_prompt"&gt;Out[1]:&lt;/div&gt;
+&lt;div class="output_html rendered_html output_subarea output_execute_result"&gt;
+&lt;div&gt;
+&lt;style scoped=""&gt;
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+&lt;/style&gt;
+&lt;table border="1" class="dataframe"&gt;
+&lt;thead&gt;
+&lt;tr style="text-align: right;"&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;School ID&lt;/th&gt;
+&lt;th&gt;School Name&lt;/th&gt;
+&lt;th&gt;Borough&lt;/th&gt;
+&lt;th&gt;Building Code&lt;/th&gt;
+&lt;th&gt;Street Address&lt;/th&gt;
+&lt;th&gt;City&lt;/th&gt;
+&lt;th&gt;State&lt;/th&gt;
+&lt;th&gt;Zip Code&lt;/th&gt;
+&lt;th&gt;Latitude&lt;/th&gt;
+&lt;th&gt;Longitude&lt;/th&gt;
+&lt;th&gt;...&lt;/th&gt;
+&lt;th&gt;End Time&lt;/th&gt;
+&lt;th&gt;Student Enrollment&lt;/th&gt;
+&lt;th&gt;Percent White&lt;/th&gt;
+&lt;th&gt;Percent Black&lt;/th&gt;
+&lt;th&gt;Percent Hispanic&lt;/th&gt;
+&lt;th&gt;Percent Asian&lt;/th&gt;
+&lt;th&gt;Average Score (SAT Math)&lt;/th&gt;
+&lt;th&gt;Average Score (SAT Reading)&lt;/th&gt;
+&lt;th&gt;Average Score (SAT Writing)&lt;/th&gt;
+&lt;th&gt;Percent Tested&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;th&gt;0&lt;/th&gt;
+&lt;td&gt;02M260&lt;/td&gt;
+&lt;td&gt;Clinton School Writers and Artists&lt;/td&gt;
+&lt;td&gt;Manhattan&lt;/td&gt;
+&lt;td&gt;M933&lt;/td&gt;
+&lt;td&gt;425 West 33rd Street&lt;/td&gt;
+&lt;td&gt;Manhattan&lt;/td&gt;
+&lt;td&gt;NY&lt;/td&gt;
+&lt;td&gt;10001&lt;/td&gt;
+&lt;td&gt;40.75321&lt;/td&gt;
+&lt;td&gt;-73.99786&lt;/td&gt;
+&lt;td&gt;...&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;1&lt;/th&gt;
+&lt;td&gt;06M211&lt;/td&gt;
+&lt;td&gt;Inwood Early College for Health and Informatio...&lt;/td&gt;
+&lt;td&gt;Manhattan&lt;/td&gt;
+&lt;td&gt;M052&lt;/td&gt;
+&lt;td&gt;650 Academy Street&lt;/td&gt;
+&lt;td&gt;Manhattan&lt;/td&gt;
+&lt;td&gt;NY&lt;/td&gt;
+&lt;td&gt;10002&lt;/td&gt;
+&lt;td&gt;40.86605&lt;/td&gt;
+&lt;td&gt;-73.92486&lt;/td&gt;
+&lt;td&gt;...&lt;/td&gt;
+&lt;td&gt;3:00 PM&lt;/td&gt;
+&lt;td&gt;87.0&lt;/td&gt;
+&lt;td&gt;3.4%&lt;/td&gt;
+&lt;td&gt;21.8%&lt;/td&gt;
+&lt;td&gt;67.8%&lt;/td&gt;
+&lt;td&gt;4.6%&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;td&gt;NaN&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2&lt;/th&gt;
+&lt;td&gt;01M539&lt;/td&gt;
+&lt;td&gt;New Explorations into Science, Technology and ...&lt;/td&gt;
+&lt;td&gt;Manhattan&lt;/td&gt;
+&lt;td&gt;M022&lt;/td&gt;
+&lt;td&gt;111 Columbia Street&lt;/td&gt;
+&lt;td&gt;Manhattan&lt;/td&gt;
+&lt;td&gt;NY&lt;/td&gt;
+&lt;td&gt;10002&lt;/td&gt;
+&lt;td&gt;40.71873&lt;/td&gt;
+&lt;td&gt;-73.97943&lt;/td&gt;
+&lt;td&gt;...&lt;/td&gt;
+&lt;td&gt;4:00 PM&lt;/td&gt;
+&lt;td&gt;1735.0&lt;/td&gt;
+&lt;td&gt;28.6%&lt;/td&gt;
+&lt;td&gt;13.3%&lt;/td&gt;
+&lt;td&gt;18.0%&lt;/td&gt;
+&lt;td&gt;38.5%&lt;/td&gt;
+&lt;td&gt;657.0&lt;/td&gt;
+&lt;td&gt;601.0&lt;/td&gt;
+&lt;td&gt;601.0&lt;/td&gt;
+&lt;td&gt;91.0%&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;3&lt;/th&gt;
+&lt;td&gt;02M294&lt;/td&gt;
+&lt;td&gt;Essex Street Academy&lt;/td&gt;
+&lt;td&gt;Manhattan&lt;/td&gt;
+&lt;td&gt;M445&lt;/td&gt;
+&lt;td&gt;350 Grand Street&lt;/td&gt;
+&lt;td&gt;Manhattan&lt;/td&gt;
+&lt;td&gt;NY&lt;/td&gt;
+&lt;td&gt;10002&lt;/td&gt;
+&lt;td&gt;40.71687&lt;/td&gt;
+&lt;td&gt;-73.98953&lt;/td&gt;
+&lt;td&gt;...&lt;/td&gt;
+&lt;td&gt;2:45 PM&lt;/td&gt;
+&lt;td&gt;358.0&lt;/td&gt;
+&lt;td&gt;11.7%&lt;/td&gt;
+&lt;td&gt;38.5%&lt;/td&gt;
+&lt;td&gt;41.3%&lt;/td&gt;
+&lt;td&gt;5.9%&lt;/td&gt;
+&lt;td&gt;395.0&lt;/td&gt;
+&lt;td&gt;411.0&lt;/td&gt;
+&lt;td&gt;387.0&lt;/td&gt;
+&lt;td&gt;78.9%&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;4&lt;/th&gt;
+&lt;td&gt;02M308&lt;/td&gt;
+&lt;td&gt;Lower Manhattan Arts Academy&lt;/td&gt;
+&lt;td&gt;Manhattan&lt;/td&gt;
+&lt;td&gt;M445&lt;/td&gt;
+&lt;td&gt;350 Grand Street&lt;/td&gt;
+&lt;td&gt;Manhattan&lt;/td&gt;
+&lt;td&gt;NY&lt;/td&gt;
+&lt;td&gt;10002&lt;/td&gt;
+&lt;td&gt;40.71687&lt;/td&gt;
+&lt;td&gt;-73.98953&lt;/td&gt;
+&lt;td&gt;...&lt;/td&gt;
+&lt;td&gt;3:00 PM&lt;/td&gt;
+&lt;td&gt;383.0&lt;/td&gt;
+&lt;td&gt;3.1%&lt;/td&gt;
+&lt;td&gt;28.2%&lt;/td&gt;
+&lt;td&gt;56.9%&lt;/td&gt;
+&lt;td&gt;8.6%&lt;/td&gt;
+&lt;td&gt;418.0&lt;/td&gt;
+&lt;td&gt;428.0&lt;/td&gt;
+&lt;td&gt;415.0&lt;/td&gt;
+&lt;td&gt;65.1%&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;5 rows × 22 columns&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [2]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'Borough'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;value_counts&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt output_prompt"&gt;Out[2]:&lt;/div&gt;
+&lt;div class="output_text output_subarea output_execute_result"&gt;
+&lt;pre&gt;Brooklyn         121
+Bronx            118
+Manhattan        106
+Queens            80
+Staten Island     10
+Name: Borough, dtype: int64&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Creating-New-Columns"&gt;Creating New Columns&lt;a class="anchor-link" href="#Creating-New-Columns"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;There is no total score column, so we'll have to create it. In addition, we'll have to find the mean score of the each district across all schools.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [3]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'total_score'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'Average Score (SAT Reading)'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;  \
+                      &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'Average Score (SAT Math)'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;    &lt;span class="o"&gt;+&lt;/span&gt;  \
+                      &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'Average Score (SAT Writing)'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="s1"&gt;'Borough'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'total_score'&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dropna&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;        
+&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'Brooklyn'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'Bronx'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'Manhattan'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'Queens'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'Staten Island'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;district_dict&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
+
+&lt;span class="c1"&gt;#Assigns each test score series to a dictionary key&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;district&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;district_dict&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;district&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'Borough'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;district&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="s1"&gt;'total_score'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+
+&lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+&lt;span class="n"&gt;yerror&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+&lt;span class="c1"&gt;#Assigns the mean score and 95% confidence limit to each district&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;district&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;district_dict&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;district&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mean&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+    &lt;span class="n"&gt;yerror&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;1.96&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;district_dict&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;district&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sqrt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;district_dict&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;district&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;shape&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]))&lt;/span&gt;    
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;district&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;'_std : &lt;/span&gt;&lt;span class="si"&gt;{}&lt;/span&gt;&lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;district_dict&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;district&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="p"&gt;()))&lt;/span&gt;
+    
+&lt;span class="n"&gt;sns&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;font_scale&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;1.8&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;fig&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;figure&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;figsize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="n"&gt;ax&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;sns&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;barplot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;yerr&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;yerror&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;ax&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_ylabel&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Average Total SAT Score'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;show&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
+&lt;pre&gt;Brooklyn_std : 154.8684270520867
+Bronx_std : 150.39390071890665
+Manhattan_std : 230.29413953637814
+Queens_std : 195.25289850192115
+Staten Island_std : 222.30359621222706
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_png output_subarea "&gt;
+&lt;img src="data:image/png;base64,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qfV2MhERERG9fGq9Ijhx4kTExsZi8eLFWLFiBUpKSlBRUYGuXbvC19dXVrdt2zYcOnQIFy9eRLt27TB27NgGaZyIiIiIXkytQVBPTw87duzADz/8gJMnT6K8vBx9+vTB//3f/0FH53+7bdq0Cffu3UP37t2xdu1aPmNHRERE1ETUubKIsbExPv30U3z66ae11nz11VcwMzND165dVd4cEREREanPM9cafpb+/furog8iIiIiamC1vixCRERERM0bgyARERGRhmIQJCIiItJQDIJEREREGopBkIiIiEhDMQgSERERaahap48ZMGDAcx1QJBLh+PHjz9sPERERETWQWoNgeXk5RCJRQ/ZCRERERA2o1iB49uzZhuyDiIiIiBoYnxEkIiIi0lD1WmIuJycHR48eRW5uLiorKyEIAgBAEAQ8efIEjx49QkJCAo4dO6aWZomIiIhIdZQOgteuXcP48eNRUlICQRBkzw9Wh0GRSARBENCmTRv1dEpEREREKqV0EAwJCcHjx4/h5+cHsViMpUuXwtbWFsOGDUNGRgY2bdoEHR0dHDx4UJ39EhEREZGKKP2M4JUrV+Dk5ISAgAAMGjQI7733HrKzs+Hs7Izp06dj+/btkEqlWL9+vTr7JSIiIiIVUToIFhYWwsbGRvb3Tp06ITU1FZWVlQCAd955B4MGDcKZM2dU3yURERERqZzSQdDExAQlJSWyv7dr1w5lZWXIzMyUjb311lu4e/euajskIiIiIrVQOgja29vj2LFjKCwsBFB1RVAQBPz222+ymvT0dOjp6am+SyIiIiJSOaVfFpk4cSImT56MoUOHIigoCE5OTujevTtWr16NR48e4e+//8aJEyeee2k6IiIiImpYSl8RdHJywsqVK6GlpSW7KvjFF19AR0cHwcHBiIiIgJmZGT777DO1NUtEREREqlOvCaU9PDzg4eGBiooKAICtrS3i4+Nx5swZ6OnpwdHREcbGxmpplIiIiIhUS+krghs2bMClS5cAANra2rJxExMTuLm5wdnZGVeuXMGSJUtU3yURERERqZzSQXD16tVITEyss+bkyZPYvXv3Czf1T7dv34a1tXWd/1S/tPJ///d/NW4fMWKE3DFzc3OxaNEi9O7dGz169MDMmTORlZWl8t6JiIiIXla13hr++eefERMTIze2d+9eJCQk1Fj/5MkTJCcn4/XXX1dthwBMTU2xcuVKhfHS0lJ88803aN26NTp37gyg6s3lHj16wMfHR662ZcuWsj+XlZVh6tSpuHnzJiZNmgRjY2Ns2rQJvr6+iI6ORqtWrVT+GYiIiIheNrUGwSFDhuD777/Ho0ePAFStJXz37t065wls06YNAgICVN6koaEhPD09FcaXLl2KJ0+eYNWqVXj11VdRXl6OW7duYcaMGTXWV4uKikJycjI2bdqE999/HwDQr18/DBs2DOHh4Zg3b57KPwMRERHRy6bWIPjqq6/izJkzqKyshCAI6NatG2bOnImZM2fWfCAdHWhpKX2n+YWlpaVh+/bt8PLywrvvvgsAyMzMRHl5OSwtLevcNzY2Fu3atZOFQACwtLTEe++9h9jYWAZBIiIi0gh1vjWso/O/zRs2bED79u2hq6ur9qaUsWbNGujr62Pu3LmysfT0dACQBcGioiIYGRkp7JucnIw+ffoojNvY2ODMmTPIz8/Hq6++qqbOiYiIiF4OSk8f07dvXwBASUkJjh07hrS0NBQXF6Nly5bo1KkT+vbtCwMDA7U1+rTU1FQcP34ckydPxmuvvSYb/+OPPwAAu3btQmxsLB49egQzMzNMnz4dEyZMAFAVDqVSKczNzRWOa2ZmBgC4d+8egyARERE1e/WaR/DkyZNYtGgR8vLyIAiCbFwkEqFly5ZYvnw5+vfvr/Im/2nnzp3Q1tbGuHHj5Marrwimp6dj8eLFKC8vx969e7F06VIUFhZi1qxZKCoqAgDo6+srHLd6rLi4WM2fgIiIiKjxKR0Er127Bn9/f2hra2PSpEno2bMnXnvtNRQUFCApKQk7duzAnDlzsGvXLtkbvOpQUlKCX375BYMGDULbtm3ltg0ZMgR2dnaYNm2a7HlFDw8PjB07FuvXr4ePj48swIpEolq/xrOedWzVyhA6Otp11lDDMjNr0dgt0HPiuWvaeP6aLnWeu+tqOzJVU9X5UzoI/uc//4G2tjZ27tyJLl26yG17//334eLigrFjx+LHH3/EmjVrVNJcTX777TcUFxdj8ODBCtvc3d0VxrS0tODt7Y1FixbhypUrEIvFAKqmnvmnkpISAKjxucKn5eXxiuHL5sEDaWO3QM+J565p4/lrunjumrb6nL+6QqPSr/levHgREolEIQRWs7GxgUQiQVJSktKNPY+TJ0/ilVdewYABA5Tep3Xr1gCqbvkaGxvDxMQE9+/fV6irHnv6uUMiIiKi5krpIPj48eNnTrRsamoKqVS9/4dx6dIl2NnZKaxpXFZWBi8vL3z55ZcK+/z5558AAAsLCwBAly5dkJKSolCXkpKC9u3b80URIiIi0ghKB8H27dsjISEB5eXlNW4vKyvD2bNn0b59e5U190/l5eVIT09H165dFbbp6upCT08PBw4ckJv0WiqVYuvWrWjfvj3s7e0BAK6urvjzzz/lVknJyMjAuXPn4Obmprb+iYiIiF4mSgfBESNGICMjA5999hlyc3Pltt25cwfz5s1DZmYmhg8frvLDvJ7IAAAgAElEQVQmq927dw/l5eV44403atz++eefo7y8HGPHjkVYWBjCwsIwcuRI/P3331iyZInsJZBRo0ahY8eOmDNnDtavX4/w8HD4+fnB3NwcEydOVFv/RERERC8TpV8WmThxIn777TfExcXhyJEjaN++PYyNjXH//n3cv38fFRUV6NevH/z8/NTWbPVyd/+8LVzN3t4e4eHhCA4ORkhICEQiEbp3746VK1eie/fusjpdXV2Eh4djxYoVCAsLg7a2NsRiMRYuXMh1homIiEhjKB0EtbS08J///Ae7d+9GVFQU0tLS8PjxY+jr68POzg7Dhw+Ht7e3WpeZs7e3R1paWp017777LrZu3frMY5mbm+O7775TVWtERERETU69JpTW0tKCj48PfHx8AACVlZUNur4wEREREalOrSmuS5cuCA0NrXtnhkAiIiKiJqvWJCcIgtwyckRERETUvPCSHhEREZGGYhAkIiIi0lB1vixy584dnD9/vt4H7dWr13M3REREREQNo84gGBUVhaioqHof9Pr168/dEBERERE1jDqDoLW1Nbp06dJQvRARERFRA6ozCEokEvj7+zdUL0RERETUgPiyCBEREZGGYhAkIiIi0lAMgkREREQaqtZnBLdu3Yq2bds2ZC9ERERE1IBqDYJisbgh+yAiIiKiBsZbw0REREQaikGQiIiISEMxCBIRERFpKAZBIiIiIg3FIEhERESkoepcYq4mx48fx/79+5GamgqpVIrExERER0fj1q1bmDJlCoyMjNTRJxERERGpmNJBUBAEfP7554iKioIgCNDV1UV5eTkAIDk5GVu3bsWJEyewdetWGBsbq61hIiIiIlINpW8Nb9++Hfv378ewYcNw8uRJ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
+" /&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;From our data exploration, we can see that the average SAT scores are quite different for each district. We are interested in knowing if this is caused by random variation in data, or if there is an underlying cause. Since we have five different groups, we cannot use the t-test. Also note that the standard deviation of each group are also very different, so we've violated one of our assumpions. However, we are going to use the 1-way ANOVA test anyway just to understand the concepts.&lt;/p&gt;
+&lt;h3 id="The-Null-and-Alternative-Hypothesis"&gt;The Null and Alternative Hypothesis&lt;a class="anchor-link" href="#The-Null-and-Alternative-Hypothesis"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;There are no significant differences between the groups' mean SAT scores.&lt;/p&gt;
+&lt;p&gt;$ H_0 : \mu_1 = \mu_2 = \mu_3 = \mu_4 = \mu_5 $&lt;/p&gt;
+&lt;p&gt;There is a significant difference between the groups' mean SAT scores.&lt;/p&gt;
+&lt;p&gt;$ H_a : \mu_i \ne \mu_j $&lt;/p&gt;
+&lt;p&gt;Where  $\mu_i$ and $\mu_j$ can be the mean of any group. If there is at least one group with a significant difference with another group, the null hypothesis will be rejected.&lt;/p&gt;
+&lt;h3 id="1-way-ANOVA"&gt;1-way ANOVA&lt;a class="anchor-link" href="#1-way-ANOVA"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Similar to the t-test, we can calculate a score for the ANOVA. Then we can look up the score in the F-distribution and obtain a p-value.&lt;/p&gt;
+&lt;p&gt;The F-statistic is defined as follows:&lt;/p&gt;
+&lt;p&gt;$$ F = \frac{MS_{b}} {MS_w} $$&lt;/p&gt;
+&lt;p&gt;$$ MS_{b} = \frac{SS_{b}} {K-1}$$&lt;/p&gt;
+&lt;p&gt;$$ MS_{w} = \frac{SS_{w}} {N-K}$$&lt;/p&gt;
+&lt;p&gt;$$ SS_{b} = {n_k\sum(\bar{x_{k}}-\bar{x_{G}})^2} $$&lt;/p&gt;
+&lt;p&gt;$$ SS_{w} = \sum(x_{i}-\bar{x_{k}})^2 $$&lt;/p&gt;
+&lt;p&gt;Where $MS_{b}$ is the estimated variance between groups and $MS_{w}$ is the estimated variance within groups, $\bar{x_{k}}$ is the mean within each group, $n_k$ is the sample size for each group, ${x_i}$ is the individual data point, and $\bar{x_{G}}$ is the total mean.&lt;/p&gt;
+&lt;p&gt;This is quite a lot of math, fortunately scipy has a function that plugs in all the values for us. The documentation for calculating 1-way ANOVA using scipy is &lt;a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.f_oneway.html"&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [4]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;stats&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;f_oneway&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+             &lt;span class="n"&gt;district_dict&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'Brooklyn'&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;district_dict&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'Bronx'&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; \
+             &lt;span class="n"&gt;district_dict&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'Manhattan'&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;district_dict&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'Queens'&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; \
+             &lt;span class="n"&gt;district_dict&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'Staten Island'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt output_prompt"&gt;Out[4]:&lt;/div&gt;
+&lt;div class="output_text output_subarea output_execute_result"&gt;
+&lt;pre&gt;F_onewayResult(statistic=12.733085029201668, pvalue=1.0161974965566023e-09)&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;The resulting pvalue was less than 0.05. We can reject the null hypothesis and conclude that there is a significant difference between the SAT scores for each district. Even though we've obtained a very low p-value, we cannot make any assumptions about the magnitude of the effect. Also scipy does not calculate $SS_b$ and $SS_w$, so it is probably better to write our own code.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [5]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;districts&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'Brooklyn'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'Bronx'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'Manhattan'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'Queens'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'Staten Island'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+&lt;span class="n"&gt;ss_b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;districts&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;ss_b&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;district_dict&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;shape&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; \
+            &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sum&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;district_dict&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mean&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'total_score'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mean&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;ss_w&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;districts&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;ss_w&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sum&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;district_dict&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;district_dict&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mean&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;msb&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ss_b&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;
+&lt;span class="n"&gt;msw&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ss_w&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;msb&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;msw&lt;/span&gt;
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'F_statistic: &lt;/span&gt;&lt;span class="si"&gt;{}&lt;/span&gt;&lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
+&lt;pre&gt;F_statistic: 12.733085029201687
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="The-Effect-Size"&gt;The Effect Size&lt;a class="anchor-link" href="#The-Effect-Size"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;We can calculate the magnitude of the effect to determine how large the difference is. One of the measures we can use is Eta-squared.&lt;/p&gt;
+&lt;p&gt;$$ \eta^2 = \frac{SS_{b}} {SS_{total}}$$&lt;/p&gt;
+&lt;p&gt;$$ SS_{b} = {n_k\sum(\bar{x_{k}}-\bar{x_{G}})^2} $$&lt;/p&gt;
+&lt;p&gt;$$ SS_{total} = \sum(x_{i}-\bar{x_{G}})^2 $$&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [6]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;ss_t&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sum&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'total_score'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'total_score'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mean&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;        
+&lt;span class="n"&gt;eta_squared&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ss_b&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;ss_t&lt;/span&gt;
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'eta_squared: &lt;/span&gt;&lt;span class="si"&gt;{}&lt;/span&gt;&lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;eta_squared&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
+&lt;pre&gt;eta_squared: 0.12099887621529214
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;The general rules of thumb given by Cohen and Miles &amp; Shevlin (2001) for analyzing eta-squared, $\eta^2$:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Small effect: $ 0.01 $&lt;/li&gt;
+&lt;li&gt;Medium ffect: $ 0.06 $&lt;/li&gt;
+&lt;li&gt;Large effect: $ 0.14 $&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;From our calculations, the effect size for this ANOVA test would be "Medium". For a full write up on effect sizes click &lt;a href="http://imaging.mrc-cbu.cam.ac.uk/statswiki/FAQ/effectSize"&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;hr /&gt;
+&lt;p&gt;The files used for this article can be found in my &lt;a href="https://github.com/sengkchu/codingdisciple.content/tree/master/Learning%20data%20science/Learning/Studying%20Statistics/Hypothesis%20Testing%20ANOVA"&gt;GitHub repository&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: 'center'," +
+        "    displayIndent: '0em'," +
+        "    showMathMenu: true," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['$','$'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        " linebreaks: { automatic: true, width: '95% container' }, " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'black ! important'} }" +
+        "    } " +
+        "}); ";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+&lt;/script&gt;
+</content><category term="pandas"></category><category term="matplotlib"></category><category term="inferential statistics"></category><category term="ANOVA"></category><category term="python"></category></entry><entry><title>Hypothesis Testing with Welch's t-test in Python</title><link href="/hypothesis-testing-welch-python.html" rel="alternate"></link><published>2018-02-25T00:00:00-08:00</published><updated>2018-02-25T00:00:00-08:00</updated><author><name>Seng Chu</name></author><id>tag:None,2018-02-25:/hypothesis-testing-welch-python.html</id><summary type="html">
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
@@ -1003,10 +2484,8 @@ h6:hover .anchor-link {
 &lt;h3 id="Type-I-and-II-Errors"&gt;Type I and II Errors&lt;a class="anchor-link" href="#Type-I-and-II-Errors"&gt;¶&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;We have to determine whether we accept or reject the null hypothesis. This could result in four different outcomes.&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Retained the null hypothesis, and the null hypothesis was correct. (No error)&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Retained the null hypothesis, but the alternative hypothesis was correct. (Type II error, false negative)&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Rejected the null hypothesis, but the null hypothesis was correct. (Type I error, false positive)&lt;/p&gt;
-&lt;/li&gt;
+&lt;li&gt;Retained the null hypothesis, but the alternative hypothesis was correct. (Type II error, false negative)&lt;/li&gt;
+&lt;li&gt;Rejected the null hypothesis, but the null hypothesis was correct. (Type I error, false positive)&lt;/li&gt;
 &lt;li&gt;Rejected the null hypothesis, and the alternative hypothesis was correct. (No error)&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;Hypothesis testing uses the same logic as a court trial.  The null hypothesis(defendent) is innocent until proven guilty. We use data as evidence to determine if the claims made against the null hypothesis is true.&lt;/p&gt;
@@ -1114,9 +2593,9 @@ h6:hover .anchor-link {
 &lt;div class="prompt input_prompt"&gt;In [2]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
-&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;scipy.stats&lt;/span&gt; &lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="n"&gt;ttest_ind_from_stats&lt;/span&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;scipy&lt;/span&gt; &lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="n"&gt;stats&lt;/span&gt;
 
-&lt;span class="n"&gt;t_score&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ttest_ind_from_stats&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;mean1&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;12000&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;std1&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sqrt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10000000&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;nobs1&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;31&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; \
+&lt;span class="n"&gt;t_score&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;stats&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ttest_ind_from_stats&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;mean1&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;12000&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;std1&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sqrt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10000000&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;nobs1&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;31&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; \
                                &lt;span class="n"&gt;mean2&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;10000&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;std2&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sqrt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;20000000&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;nobs2&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;28&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; \
                                &lt;span class="n"&gt;equal_var&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;t_score&lt;/span&gt;
@@ -1129,7 +2608,7 @@ h6:hover .anchor-link {
 &lt;div class="output_area"&gt;
 &lt;div class="prompt output_prompt"&gt;Out[2]:&lt;/div&gt;
 &lt;div class="output_text output_subarea output_execute_result"&gt;
-&lt;pre&gt;Ttest_indResult(statistic=1.9641226483541647, pvalue=0.05531232625026703)&lt;/pre&gt;
+&lt;pre&gt;Ttest_indResult(statistic=1.9641226483541647, pvalue=0.055312326250267031)&lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -1332,7 +2811,7 @@ the data is related to 'posts' published during the year of 2014 on the Facebook
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;We are interested in knowing the amount of likes a 'Paid' post gets vs. an "Unpaid" post. Let's start with some histograms and descriptive statistics.&lt;/p&gt;
+&lt;h4 id="Exploring-'Paid'-and-'Unpaid'-Facebook-Posts"&gt;Exploring 'Paid' and 'Unpaid' Facebook Posts&lt;a class="anchor-link" href="#Exploring-'Paid'-and-'Unpaid'-Facebook-Posts"&gt;¶&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;We are interested in knowing the amount of likes a 'Paid' post gets vs. an "Unpaid" post. Let's start with some histograms and descriptive statistics.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -1342,6 +2821,7 @@ the data is related to 'posts' published during the year of 2014 on the Facebook
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
 &lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;unpaid_likes&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'Paid'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="s1"&gt;'like'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;unpaid_likes&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;unpaid_likes&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dropna&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;span class="n"&gt;sns&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;font_scale&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;1.65&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;fig&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;figure&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;figsize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 &lt;span class="n"&gt;ax&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;unpaid_likes&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;hist&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1500&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="n"&gt;bins&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -1370,7 +2850,7 @@ the data is related to 'posts' published during the year of 2014 on the Facebook
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;sample_size: 360
+&lt;pre&gt;sample_size: 359
 sample_mean: 155.84679665738162
 sample_variance: 48403.23623970993
 &lt;/pre&gt;
@@ -1425,7 +2905,55 @@ sample_variance: 247175.07048274425
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;We immediately notice that the sample mean of 'likes' in paid posts was higher than the sample mean of 'likes' in unpaid posts. We need to determine if the data we have is statistically significant.&lt;/p&gt;
+&lt;h4 id="The-Confidence-Interval"&gt;The Confidence Interval&lt;a class="anchor-link" href="#The-Confidence-Interval"&gt;¶&lt;/a&gt;&lt;/h4&gt;&lt;p&gt;We can also explore by the data by calculating the &lt;b&gt;confidence interval&lt;/b&gt;. This is a range of values that is likely to contain the value of an unknown population mean based on our sample mean. In this case, I've split the data into two  categories, 'Paid' and 'Unpaid'. As a result, the population mean will be calculated with respect to each categories.&lt;/p&gt;
+&lt;p&gt;Here are the assumptions:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The data must be sampled randomly.&lt;/li&gt;
+&lt;li&gt;The sample values must be independent of each other.&lt;/li&gt;
+&lt;li&gt;The sample size must be sufficiently large to use the Central Limit Theorem. Typically we want to use N &gt; 30.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We can calculate this interval by multiplying the standard error by the 1.96 which is the score for a 95% confidence. This means that we are 95% confident that the population mean is somewhere within this interval.&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;In other words, if we take many samples and the 95% confidence interval was computed for each sample, 95% of the intervals would contain the population mean.&lt;/b&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [6]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;paid_err&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mf"&gt;1.96&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;paid_likes&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sqrt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;paid_likes&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;shape&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]))&lt;/span&gt;
+&lt;span class="n"&gt;unpaid_err&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mf"&gt;1.96&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;unpaid_likes&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sqrt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;unpaid_likes&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;shape&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]))&lt;/span&gt;
+
+&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;'Paid Posts'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'Unpaid Posts'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;paid_likes&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mean&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="n"&gt;unpaid_likes&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mean&lt;/span&gt;&lt;span class="p"&gt;()]&lt;/span&gt;
+&lt;span class="n"&gt;fig&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;figure&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;figsize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="n"&gt;ax&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;sns&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;barplot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;yerr&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;paid_err&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;unpaid_err&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;span class="n"&gt;ax&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_ylim&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;400&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ylabel&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Likes'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;show&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+&lt;div class="output_area"&gt;
+&lt;div class="prompt"&gt;&lt;/div&gt;
+&lt;div class="output_png output_subarea "&gt;
+&lt;img src="data:image/png;base64,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ffvK19dX06dP13ffffeT68rPz7eOc/36da1Zs0ZDhgxRhw4d9Oijj2rPnj0255w+fVoTJkxQly5d5Ofnp5CQEP3jH/+QJMXExFj/Am/Tpo31FlFKSorGjBkjPz8/+fv7a/r06Tp37txPqh34uWnTpo12796tJUuWyN/fX35+fnrmmWeUk5Nj7RMcHKznnntOa9eu1SOPPCJ/f3/NnTtXV65csRlrz549GjlypDp16qSOHTvqySefVEJCgvV4WbdZExMTNXz4cGv//71e/Rht27aVJH3zzTfWtvj4eD355JPq1KmTevfurVdffdVmi8qVK1c0b948BQYGqmPHjnriiScUHx8vSTp69KjGj7/9a0VPP/20goODJd1+n2t4eLi6desmX19fjR07VkeOHPlJteP+IczBMM6fPy9JatasmSRp4cKFio+PV1hYmOLi4rRkyRKdPXtW8+fPV3nP9URGRmrdunV66qmntHbtWnl4eOj111//yXXVrl1b9evXl8Vi0dSpU/XWW2/pt7/9rTZs2KAePXrohRde0Lp16yTd/sWSKVOmyMPDQzExMVq9erUKCws1ZcoUmc1mjR49WmPHjpV0+18Wo0eP1oULFzR9+nS1b99eGzZs0PLly5Wenq6wsLBy5wqgbK+99pokKSoqSgsWLFBSUpJWrlxp0ycxMVEHDhzQH/7wBy1evFgpKSmaMmWKdX/stm3b9NJLL2nw4MHatGmTXnvtNTk5OWnevHm6fPlymd/75z//WbNnz1abNm20bt06DR06VAsWLPhJc/n+dTE6OlqLFy+Wv7+/1q5dq4kTJ2r37t0KDw+3XisWLFigc+fO6aWXXtLmzZvVtm1bLVq0SEePHlW7du30hz/8QZK0bNkyvfDCCyopKVFYWJgKCwsVERGh9evXq169epo2bVqpl/bDPrjNiirHYrHo5s2b1s+5ubn67LPPtHv3bgUFBcnT01NFRUUqLCzU888/r6CgIElSQECAzGazVq5cqdzc3FK3N65du6bt27dr0qRJmjlzpiSpV69eunz5sj7//PN7qstisSgnJ0cHDhzQoUOHNGnSJDk4OOjw4cP629/+pjVr1ljr6tmzp27evKmNGzdq3LhxyszMVG5urp5++ml17txZktSyZUvt2bNH+fn5atSokRo1aiRJ1tsmBw4c0PXr1xUWFiYvLy9J0i9+8QsdOnRI+fn5cnNz+9H/fQM/N7/61a+0YsUKSVJgYKBOnTqlTz/91KZPYWGh4uLi9Itf/ELS7Vum4eHh+uyzz9S3b199/fXXmjJlisLDw63nNGnSRCNHjtTx48c1dOjQUt+7bt06+fr6KjIyUtLt64+ku/6D8n+vi9euXVNqaqo2btyojh07qn379rp69areeOMNjRs3Ts8++6yk29cfLy8vzZkzR0eOHFHfvn31t7/9TTNmzNDAgQMl3b521qtXT87OznJzc5OPj48kqVWrVmrVqpWys7OVnp6u6dOnq0+fPpKkjh07au3atSoqKrqr2vFgEeZQ5fz1r39Vu3btbNpMJpMGDhyoF198UZJUo0YNxcbGSpIuX76sjIwMnT9/XklJSZJubw7+vn/84x8qLi7WgAEDbNqHDh16V2HunXfe0TvvvGPT5uLiotGjR2v27NmSpL///e9ydnbW4MGDbfoNGzZMb7/9tk6ePCl/f3/rvxiCgoLUq1cvBQYG/uBf6L6+vqpRo4aeeuopBQUFqXfv3urWrZs6duxYYd3Az933Hwy480fUHY0aNVJhYaFNW5cuXaxBTrr9MIOLi4tSU1PVt29fa1i6du2a0tPTlZmZqaNHj0oq+/pz/fp1/fOf/9TcuXNt2ocOHXpXYS4rK6vUddHBwUHdunXT8uXL5eDgoJMnT+rGjRt67LHHbPoFBQVp4cKFOnr0qPr27atu3bopJiZG//rXv9SrVy/16dNHixYtKve7GzRooFatWun5559XcnKyevbsqd69e2vJkiUV1o3KQZhDldOxY0ctW7ZM0u2LVc2aNdWkSRPVqlXLpt/nn3+uV155Renp6XJ1ddWvfvUr1a5dW5LKvPV4Z0/b91fsGjZseFd1DRgwQNOmTbPWVbt2bTVt2lQuLi4231G/fn05OtruYGjQoIGk24/8u7q6aufOndqwYYMOHjyoPXv2qGbNmnriiSe0dOlSm/HuaNq0qXbs2KHNmzdr//792rZtm+rUqaNx48bp97//Pe+Cws9W7dq1lZeXV+axkpIS3bp1q9S1o2bNmjafHR0dS71e6PsPWTk4OMjT01PXrl2TdDtcLVu2TH/5y1/k7Oysli1b6le/+pWk8q8/FotFHh4eP/g95WnUqJHWrl1rrcXFxUWNGze2WZW/c437/jXN0dFRnp6eMpvNkqTVq1dr48aNOnjwoBISEuTo6KgePXroD3/4g5o0aVLqux0cHBQXF6cNGzbok08+UXx8vJydnTVw4EC99NJLqlu37l3NAQ8OYQ5Vjqurqzp06PCDfbKysjRjxgwNGjRImzdvtu4X2blzZ7mrbHcuot9++63NU65Xr169q7o8PDwqrKtOnTrKyclRSUmJTaDLzs62qaFly5aKjIzUrVu39OWXX+q9997T22+/rRYtWmjSpElljn3ntsaNGzd07Ngx7dmzRxs3blTbtm01ZMiQu5oDUN00aNCg3AeB7jx4cOePqXvx/evCna0Vnp6eKikpUWhoqGrUqKH9+/fr17/+tZycnPTVV1+V+764evXqydHR0eZBi7K+pzwuLi4VXn/uhKrs7Gyba1xJSYmuXLlivf64u7trwYIFWrBggdLT03Xo0CGtX79ef/zjH7Vx48Yyx/by8tKLL76oF154QWfOnNHHH3+sN954Q/Xr19fzzz9/V3PAg8MDEDCk06dPq6ioSOHh4dYgJ8ka5Mp6ia+fn59q1qypjz/+2Kb9zq3Z+yEgIEDFxcVKTEy0af/www/l7Oysjh076pNPPtEjjzyi7OxsmUwm+fn56cUXX1SdOnWsT+qaTCab87dv367+/fvrxo0bcnFxUffu3fXHP/5RkqznAD9HAQEBunDhgk6dOlXqWGJiohwdHeXv73/P4x4/fty6CifdfnihuLhYjzzyiHJzc5WRkaExY8aoQ4cOcnK6vS7y2WefSSp7Za5GjRry8/NTQkKCzfE///nP91xbeXx9feXi4qIDBw7YtH/88ccqLi5Wly5ddOnSJfXp08d6HWzZsqWmTp2qHj16lHv9+fLLL9WjRw99+eWXcnBw0K9//WvNmTNHv/zlL7n+VBGszMGQ2rVrJycnJ0VGRiokJERFRUX605/+pMOHD0tSqf0v0u0Vv+nTpysqKko1a9ZUQECADh8+fF/DXO/eveXv76/nnntOly5dUuvWrXXkyBHt3r1b06ZNU506ddS5c2dZLBbNmDFDoaGhcnV11cGDB2U2m6177dzd3SXdDoGdOnXSI488ooiICM2YMUO/+93vZDKZtHv3btWoUUP9+vW7b/UDRvPoo4/qrbfeUmhoqMLCwvTrX/9aeXl5+utf/6rdu3dr4sSJaty48T2Pm5+fbx3z22+/1WuvvabAwEA98sgjkm4/7LBt2zY99NBDcnNz0+eff65t27ZJuv3apLLMnTtXEyZM0OzZszV69Gilp6dr06ZNP37y31OvXj1NnjxZGzdulJOTk/r06aP//Oc/iomJUUBAgHr16iVHR0c1adJEy5cvl9ls1sMPP6zTp0/ryJEjmj59uqTbdxgk6fDhw6pbt651C8vChQs1a9YsNWjQQF988YXS0tI0ceLE+1Y/fjzCHAypefPmev3117V27VqFh4erbt266tSpk7Zv367g4GClpqZan8j6X2FhYapdu7beeustbd26VX5+flq0aJH1wYqfytHRUZs2bVJUVJS2bNmi7777Ti1atNCLL76o3/zmN5Kk+vXrKzY2VqtXr9Zzzz2nwsJCtW7dWjExMdYVhKCgIL3//vtavHixxowZo2XLlmnTpk2KiYnR3LlzdevWLbVv315xcXFq3rz5fakdMCJnZ2dt375dGzZs0Ntvv61Lly7J2dlZ3t7eeumllzRq1KgfNW5AQID8/Py0YMECOTk56fHHH7f5lZf169fr5Zdf1sKFC+Xi4qJWrVppw4YNeuWVV3Ts2DGNGzeu1Jhdu3bVG2+8oVWrVmnmzJlq2rSpXnnlFZsnYn+q3//+92rQoIF27NihXbt2qUGDBho7dqxmzZpl3foRExOj1157TWvWrFFubq5+8YtfaNasWZo6daqk26t1o0aN0s6dO5WcnKwPPvhAsbGxev311/Xyyy/r2rVratGihf74xz/qiSeeuG+148dzsPCSKgAArIKDg2UymfTmm2/auxTgrrBnDgAAwMAIcwAAAAbGbVYAAAADY2UOAADAwAhzAAAABkaYAwAAMDDCHAAAgIER5gAAAAyMMAcAAGBg/wcPJk11zJGugwAAAABJRU5ErkJggg==
+" /&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;From the chart above, we can see that the error bars for 'Paid' posts and "Unpaid' posts have an overlapping region.
+We can also see that the sample mean of 'likes' in paid posts was higher than the sample mean of 'likes' in unpaid posts. We need to determine if the data we have is statistically significant and make sure that our results did not occur purely by chance.&lt;/p&gt;
 &lt;p&gt;The null hypothesis would suggest that paying for advertisements does not increase the amount of likes.&lt;/p&gt;
 &lt;p&gt;$$ H_0 : \mu_0 = \text{139 likes} $$&lt;/p&gt;
 &lt;p&gt;The alternative hypothesis would suggest that paying for advertisements does increase the amount of likes.&lt;/p&gt;
@@ -1436,7 +2964,7 @@ sample_variance: 247175.07048274425
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [6]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In [7]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
 &lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;s_welch&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sqrt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;paid_likes&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;var&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;paid_likes&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;shape&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;unpaid_likes&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;var&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;unpaid_likes&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;shape&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
@@ -1451,7 +2979,7 @@ sample_variance: 247175.07048274425
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;t-value: 1.8246693381852654
+&lt;pre&gt;t-value: 1.824490721115131
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -1460,7 +2988,7 @@ sample_variance: 247175.07048274425
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [7]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In [8]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
 &lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;df_num&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;paid_likes&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;var&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;paid_likes&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;shape&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;unpaid_likes&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;var&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;unpaid_likes&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;shape&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;
@@ -1478,7 +3006,7 @@ sample_variance: 247175.07048274425
 &lt;div class="output_area"&gt;
 &lt;div class="prompt"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_stream output_stdout output_text"&gt;
-&lt;pre&gt;degrees of freedom: 159.30733891825585
+&lt;pre&gt;degrees of freedom: 159.3668015083367
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -1496,12 +3024,10 @@ sample_variance: 247175.07048274425
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell rendered"&gt;
 &lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [8]:&lt;/div&gt;
+&lt;div class="prompt input_prompt"&gt;In [9]:&lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="input_area"&gt;
-&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;scipy.stats&lt;/span&gt; &lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="n"&gt;ttest_ind_from_stats&lt;/span&gt;
-
-&lt;span class="n"&gt;t_score&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ttest_ind_from_stats&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;paid_likes&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mean&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="n"&gt;paid_likes&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="n"&gt;paid_likes&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;shape&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; \
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;t_score&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;stats&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ttest_ind_from_stats&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;paid_likes&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mean&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="n"&gt;paid_likes&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="n"&gt;paid_likes&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;shape&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; \
                                &lt;span class="n"&gt;unpaid_likes&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mean&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="n"&gt;unpaid_likes&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="n"&gt;unpaid_likes&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;shape&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; \
                                &lt;span class="n"&gt;equal_var&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;t_score&lt;/span&gt;
@@ -1512,9 +3038,9 @@ sample_variance: 247175.07048274425
 &lt;div class="output_wrapper"&gt;
 &lt;div class="output"&gt;
 &lt;div class="output_area"&gt;
-&lt;div class="prompt output_prompt"&gt;Out[8]:&lt;/div&gt;
+&lt;div class="prompt output_prompt"&gt;Out[9]:&lt;/div&gt;
 &lt;div class="output_text output_subarea output_execute_result"&gt;
-&lt;pre&gt;Ttest_indResult(statistic=1.8246693381852654, pvalue=0.06992430563915134)&lt;/pre&gt;
+&lt;pre&gt;Ttest_indResult(statistic=1.8244907211151311, pvalue=0.069950722795108722)&lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -1525,7 +3051,8 @@ sample_variance: 247175.07048274425
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;From the Welch's t-test we ended up with a two-tailed p-value of ~0.07, or ~0.035 for a one-tail test. We will reject the null hypothesis, and accept that Facebook advertisements does have a positive effect on the number "likes" on a post.&lt;/p&gt;
-&lt;h4 id="Ending-Notes:"&gt;Ending Notes:&lt;a class="anchor-link" href="#Ending-Notes:"&gt;¶&lt;/a&gt;&lt;/h4&gt;&lt;ol&gt;
+&lt;p&gt;&lt;b&gt; Notes: &lt;/b&gt;&lt;/p&gt;
+&lt;ol&gt;
 &lt;li&gt;The p-value does NOT give us the probability that the null hypothesis is false. We also don't know the probability of the alternative hypothesis being true.&lt;/li&gt;
 &lt;li&gt;The p-value does not indicate the magnitude of the observed effect, we can only conclude that the effects were positive.&lt;/li&gt;
 &lt;li&gt;The 0.05 p-value is just a convention to determine statistical significance.&lt;/li&gt;
@@ -46660,7 +48187,7 @@ Despite the lack of motivation, I made it to work on time every single time. A p
 It is something that is core to a person's being. &lt;/p&gt;
 &lt;p&gt;If I set rules for myself, and tell myself I am going to complete at least two units of a course every single day. 
 I am going to do it and not make excuses. If I felt lazy that day, I am going to tell myself that I screwed up. That is all there is to it. 
-The point is to be aware of yourself. That is how we make improvements.&lt;/p&gt;</content><category term="discipline"></category></entry><entry><title>Exploring Gun Deaths in the US</title><link href="/exploring-gun-deaths.html" rel="alternate"></link><published>2018-01-27T00:00:00-08:00</published><updated>2018-01-27T00:00:00-08:00</updated><author><name>Seng Chu</name></author><id>tag:None,2018-01-27:/exploring-gun-deaths.html</id><summary type="html">
+The point is to be aware of yourself. That is how we make improvements.&lt;/p&gt;</content><category term="motivational"></category></entry><entry><title>Exploring Gun Deaths in the US</title><link href="/exploring-gun-deaths.html" rel="alternate"></link><published>2018-01-27T00:00:00-08:00</published><updated>2018-01-27T00:00:00-08:00</updated><author><name>Seng Chu</name></author><id>tag:None,2018-01-27:/exploring-gun-deaths.html</id><summary type="html">
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;

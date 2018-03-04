@@ -1138,10 +1138,8 @@ h6:hover .anchor-link {
 <h3 id="Type-I-and-II-Errors">Type I and II Errors<a class="anchor-link" href="#Type-I-and-II-Errors">¶</a></h3><p>We have to determine whether we accept or reject the null hypothesis. This could result in four different outcomes.</p>
 <ol>
 <li>Retained the null hypothesis, and the null hypothesis was correct. (No error)</li>
-<li><p>Retained the null hypothesis, but the alternative hypothesis was correct. (Type II error, false negative)</p>
-</li>
-<li><p>Rejected the null hypothesis, but the null hypothesis was correct. (Type I error, false positive)</p>
-</li>
+<li>Retained the null hypothesis, but the alternative hypothesis was correct. (Type II error, false negative)</li>
+<li>Rejected the null hypothesis, but the null hypothesis was correct. (Type I error, false positive)</li>
 <li>Rejected the null hypothesis, and the alternative hypothesis was correct. (No error)</li>
 </ol>
 <p>Hypothesis testing uses the same logic as a court trial.  The null hypothesis(defendent) is innocent until proven guilty. We use data as evidence to determine if the claims made against the null hypothesis is true.</p>
@@ -1249,9 +1247,9 @@ h6:hover .anchor-link {
 <div class="prompt input_prompt">In [2]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="k">import</span> <span class="n">ttest_ind_from_stats</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">scipy</span> <span class="k">import</span> <span class="n">stats</span>
 
-<span class="n">t_score</span> <span class="o">=</span> <span class="n">ttest_ind_from_stats</span><span class="p">(</span><span class="n">mean1</span><span class="o">=</span><span class="mi">12000</span><span class="p">,</span> <span class="n">std1</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">10000000</span><span class="p">),</span> <span class="n">nobs1</span><span class="o">=</span><span class="mi">31</span><span class="p">,</span> \
+<span class="n">t_score</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">ttest_ind_from_stats</span><span class="p">(</span><span class="n">mean1</span><span class="o">=</span><span class="mi">12000</span><span class="p">,</span> <span class="n">std1</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">10000000</span><span class="p">),</span> <span class="n">nobs1</span><span class="o">=</span><span class="mi">31</span><span class="p">,</span> \
                                <span class="n">mean2</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">std2</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">20000000</span><span class="p">),</span> <span class="n">nobs2</span><span class="o">=</span><span class="mi">28</span><span class="p">,</span> \
                                <span class="n">equal_var</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">t_score</span>
@@ -1264,7 +1262,7 @@ h6:hover .anchor-link {
 <div class="output_area">
 <div class="prompt output_prompt">Out[2]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>Ttest_indResult(statistic=1.9641226483541647, pvalue=0.05531232625026703)</pre>
+<pre>Ttest_indResult(statistic=1.9641226483541647, pvalue=0.055312326250267031)</pre>
 </div>
 </div>
 </div>
@@ -1467,7 +1465,7 @@ the data is related to 'posts' published during the year of 2014 on the Facebook
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We are interested in knowing the amount of likes a 'Paid' post gets vs. an "Unpaid" post. Let's start with some histograms and descriptive statistics.</p>
+<h4 id="Exploring-'Paid'-and-'Unpaid'-Facebook-Posts">Exploring 'Paid' and 'Unpaid' Facebook Posts<a class="anchor-link" href="#Exploring-'Paid'-and-'Unpaid'-Facebook-Posts">¶</a></h4><p>We are interested in knowing the amount of likes a 'Paid' post gets vs. an "Unpaid" post. Let's start with some histograms and descriptive statistics.</p>
 </div>
 </div>
 </div>
@@ -1477,6 +1475,7 @@ the data is related to 'posts' published during the year of 2014 on the Facebook
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">unpaid_likes</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">'Paid'</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">][</span><span class="s1">'like'</span><span class="p">]</span>
+<span class="n">unpaid_likes</span> <span class="o">=</span> <span class="n">unpaid_likes</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">font_scale</span><span class="o">=</span><span class="mf">1.65</span><span class="p">)</span>
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
 <span class="n">ax</span><span class="o">=</span><span class="n">unpaid_likes</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1500</span><span class="p">),</span><span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
@@ -1505,7 +1504,7 @@ the data is related to 'posts' published during the year of 2014 on the Facebook
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>sample_size: 360
+<pre>sample_size: 359
 sample_mean: 155.84679665738162
 sample_variance: 48403.23623970993
 </pre>
@@ -1560,7 +1559,55 @@ sample_variance: 247175.07048274425
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We immediately notice that the sample mean of 'likes' in paid posts was higher than the sample mean of 'likes' in unpaid posts. We need to determine if the data we have is statistically significant.</p>
+<h4 id="The-Confidence-Interval">The Confidence Interval<a class="anchor-link" href="#The-Confidence-Interval">¶</a></h4><p>We can also explore by the data by calculating the <b>confidence interval</b>. This is a range of values that is likely to contain the value of an unknown population mean based on our sample mean. In this case, I've split the data into two  categories, 'Paid' and 'Unpaid'. As a result, the population mean will be calculated with respect to each categories.</p>
+<p>Here are the assumptions:</p>
+<ul>
+<li>The data must be sampled randomly.</li>
+<li>The sample values must be independent of each other.</li>
+<li>The sample size must be sufficiently large to use the Central Limit Theorem. Typically we want to use N > 30.</li>
+</ul>
+<p>We can calculate this interval by multiplying the standard error by the 1.96 which is the score for a 95% confidence. This means that we are 95% confident that the population mean is somewhere within this interval.</p>
+<p><b>In other words, if we take many samples and the 95% confidence interval was computed for each sample, 95% of the intervals would contain the population mean.</b></p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [6]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">paid_err</span> <span class="o">=</span> <span class="mf">1.96</span><span class="o">*</span><span class="p">(</span><span class="n">paid_likes</span><span class="o">.</span><span class="n">std</span><span class="p">())</span><span class="o">/</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">paid_likes</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="n">unpaid_err</span> <span class="o">=</span> <span class="mf">1.96</span><span class="o">*</span><span class="p">(</span><span class="n">unpaid_likes</span><span class="o">.</span><span class="n">std</span><span class="p">())</span><span class="o">/</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">unpaid_likes</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'Paid Posts'</span><span class="p">,</span> <span class="s1">'Unpaid Posts'</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="n">paid_likes</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">unpaid_likes</span><span class="o">.</span><span class="n">mean</span><span class="p">()]</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="p">[</span><span class="n">paid_err</span><span class="p">,</span> <span class="n">unpaid_err</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'Likes'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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ffvK19dX06dP13ffffeT68rPz7eOc/36da1Zs0ZDhgxRhw4d9Oijj2rPnj0255w+fVoTJkxQly5d5Ofnp5CQEP3jH/+QJMXExFj/Am/Tpo31FlFKSorGjBkjPz8/+fv7a/r06Tp37txPqh34uWnTpo12796tJUuWyN/fX35+fnrmmWeUk5Nj7RMcHKznnntOa9eu1SOPPCJ/f3/NnTtXV65csRlrz549GjlypDp16qSOHTvqySefVEJCgvV4WbdZExMTNXz4cGv//71e/Rht27aVJH3zzTfWtvj4eD355JPq1KmTevfurVdffdVmi8qVK1c0b948BQYGqmPHjnriiScUHx8vSTp69KjGj7/9a0VPP/20goODJd1+n2t4eLi6desmX19fjR07VkeOHPlJteP+IczBMM6fPy9JatasmSRp4cKFio+PV1hYmOLi4rRkyRKdPXtW8+fPV3nP9URGRmrdunV66qmntHbtWnl4eOj111//yXXVrl1b9evXl8Vi0dSpU/XWW2/pt7/9rTZs2KAePXrohRde0Lp16yTd/sWSKVOmyMPDQzExMVq9erUKCws1ZcoUmc1mjR49WmPHjpV0+18Wo0eP1oULFzR9+nS1b99eGzZs0PLly5Wenq6wsLBy5wqgbK+99pokKSoqSgsWLFBSUpJWrlxp0ycxMVEHDhzQH/7wBy1evFgpKSmaMmWKdX/stm3b9NJLL2nw4MHatGmTXnvtNTk5OWnevHm6fPlymd/75z//WbNnz1abNm20bt06DR06VAsWLPhJc/n+dTE6OlqLFy+Wv7+/1q5dq4kTJ2r37t0KDw+3XisWLFigc+fO6aWXXtLmzZvVtm1bLVq0SEePHlW7du30hz/8QZK0bNkyvfDCCyopKVFYWJgKCwsVERGh9evXq169epo2bVqpl/bDPrjNiirHYrHo5s2b1s+5ubn67LPPtHv3bgUFBcnT01NFRUUqLCzU888/r6CgIElSQECAzGazVq5cqdzc3FK3N65du6bt27dr0qRJmjlzpiSpV69eunz5sj7//PN7qstisSgnJ0cHDhzQoUOHNGnSJDk4OOjw4cP629/+pjVr1ljr6tmzp27evKmNGzdq3LhxyszMVG5urp5++ml17txZktSyZUvt2bNH+fn5atSokRo1aiRJ1tsmBw4c0PXr1xUWFiYvLy9J0i9+8Qsd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0+eff65t27ZJuv3apLLMnTtXEyZM0OzZszV69Gilp6dr06ZNP37y31OvXj1NnjxZGzdulJOTk/r06aP//Oc/iomJUUBAgHr16iVHR0c1adJEy5cvl9ls1sMPP6zTp0/ryJEjmj59uqTbdxgk6fDhw6pbt651C8vChQs1a9YsNWjQQF988YXS0tI0ceLE+1Y/fjzCHAypefPmev3117V27VqFh4erbt266tSpk7Zv367g4GClpqZan8j6X2FhYapdu7beeustbd26VX5+flq0aJH1wYqfytHRUZs2bVJUVJS2bNmi7777Ti1atNCLL76o3/zmN5Kk+vXrKzY2VqtXr9Zzzz2nwsJCtW7dWjExMdYVhKCgIL3//vtavHixxowZo2XLlmnTpk2KiYnR3LlzdevWLbVv315xcXFq3rz5fakdMCJnZ2dt375dGzZs0Ntvv61Lly7J2dlZ3t7eeumllzRq1KgfNW5AQID8/Py0YMECOTk56fHHH7f5lZf169fr5Zdf1sKFC+Xi4qJWrVppw4YNeuWVV3Ts2DGNGzeu1Jhdu3bVG2+8oVWrVmnmzJlq2rSpXnnlFZsnYn+q3//+92rQoIF27NihXbt2qUGDBho7dqxmzZpl3foRExOj1157TWvWrFFubq5+8YtfaNasWZo6daqk26t1o0aN0s6dO5WcnKwPPvhAsbGxev311/Xyyy/r2rVratGihf74xz/qiSeeuG+148dzsPCSKgAArIKDg2UymfTmm2/auxTgrrBnDgAAwMAIcwAAAAbGbVYAAAADY2UOAADAwAhzAAAABkaYAwAAMDDCHAAAgIER5gAAAAyMMAcAAGBg/wcPJk11zJGugwAAAABJRU5ErkJggg==
+" />
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>From the chart above, we can see that the error bars for 'Paid' posts and "Unpaid' posts have an overlapping region.
+We can also see that the sample mean of 'likes' in paid posts was higher than the sample mean of 'likes' in unpaid posts. We need to determine if the data we have is statistically significant and make sure that our results did not occur purely by chance.</p>
 <p>The null hypothesis would suggest that paying for advertisements does not increase the amount of likes.</p>
 <p>$$ H_0 : \mu_0 = \text{139 likes} $$</p>
 <p>The alternative hypothesis would suggest that paying for advertisements does increase the amount of likes.</p>
@@ -1571,7 +1618,7 @@ sample_variance: 247175.07048274425
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [6]:</div>
+<div class="prompt input_prompt">In [7]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">s_welch</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">paid_likes</span><span class="o">.</span><span class="n">var</span><span class="p">()</span><span class="o">/</span><span class="n">paid_likes</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">unpaid_likes</span><span class="o">.</span><span class="n">var</span><span class="p">()</span><span class="o">/</span><span class="n">unpaid_likes</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
@@ -1586,7 +1633,7 @@ sample_variance: 247175.07048274425
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>t-value: 1.8246693381852654
+<pre>t-value: 1.824490721115131
 </pre>
 </div>
 </div>
@@ -1595,7 +1642,7 @@ sample_variance: 247175.07048274425
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [7]:</div>
+<div class="prompt input_prompt">In [8]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_num</span> <span class="o">=</span> <span class="p">(</span><span class="n">paid_likes</span><span class="o">.</span><span class="n">var</span><span class="p">()</span><span class="o">/</span><span class="n">paid_likes</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">unpaid_likes</span><span class="o">.</span><span class="n">var</span><span class="p">()</span><span class="o">/</span><span class="n">unpaid_likes</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span>
@@ -1613,7 +1660,7 @@ sample_variance: 247175.07048274425
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>degrees of freedom: 159.30733891825585
+<pre>degrees of freedom: 159.3668015083367
 </pre>
 </div>
 </div>
@@ -1631,12 +1678,10 @@ sample_variance: 247175.07048274425
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [8]:</div>
+<div class="prompt input_prompt">In [9]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="k">import</span> <span class="n">ttest_ind_from_stats</span>
-
-<span class="n">t_score</span> <span class="o">=</span> <span class="n">ttest_ind_from_stats</span><span class="p">(</span><span class="n">paid_likes</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">paid_likes</span><span class="o">.</span><span class="n">std</span><span class="p">(),</span> <span class="n">paid_likes</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> \
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">t_score</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">ttest_ind_from_stats</span><span class="p">(</span><span class="n">paid_likes</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">paid_likes</span><span class="o">.</span><span class="n">std</span><span class="p">(),</span> <span class="n">paid_likes</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> \
                                <span class="n">unpaid_likes</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">unpaid_likes</span><span class="o">.</span><span class="n">std</span><span class="p">(),</span> <span class="n">unpaid_likes</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> \
                                <span class="n">equal_var</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">t_score</span>
@@ -1647,9 +1692,9 @@ sample_variance: 247175.07048274425
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[8]:</div>
+<div class="prompt output_prompt">Out[9]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>Ttest_indResult(statistic=1.8246693381852654, pvalue=0.06992430563915134)</pre>
+<pre>Ttest_indResult(statistic=1.8244907211151311, pvalue=0.069950722795108722)</pre>
 </div>
 </div>
 </div>
@@ -1660,7 +1705,8 @@ sample_variance: 247175.07048274425
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>From the Welch's t-test we ended up with a two-tailed p-value of ~0.07, or ~0.035 for a one-tail test. We will reject the null hypothesis, and accept that Facebook advertisements does have a positive effect on the number "likes" on a post.</p>
-<h4 id="Ending-Notes:">Ending Notes:<a class="anchor-link" href="#Ending-Notes:">¶</a></h4><ol>
+<p><b> Notes: </b></p>
+<ol>
 <li>The p-value does NOT give us the probability that the null hypothesis is false. We also don't know the probability of the alternative hypothesis being true.</li>
 <li>The p-value does not indicate the magnitude of the observed effect, we can only conclude that the effects were positive.</li>
 <li>The 0.05 p-value is just a convention to determine statistical significance.</li>
@@ -1717,6 +1763,10 @@ sample_variance: 247175.07048274425
            <li><a href="/central-tendency.html">Understanding Central Tedency</a></li>
            <li><a href="/dispersion.html">Understanding Dispersion</a></li>
            <li><a href="/central-limit-theorem-data-science.html">The Normal Distribution and the Central Limit Theorem - Applications to Data Science</a></li>
+       </ul>
+       <h5>Next articles</h5>
+       <ul>
+           <li><a href="/hypothesis-testing-ANOVA-python.html">Hypothesis Testing with ANOVA in Python</a></li>
        </ul>
 </section>
     <hr />
@@ -1799,13 +1849,13 @@ sample_variance: 247175.07048274425
       <a href="/tag/data-cleaning.html">data cleaning</a>
     </li>
     <li class="list-group-item tag-2">
+      <a href="/tag/inferential-statistics.html">inferential statistics</a>
+    </li>
+    <li class="list-group-item tag-2">
       <a href="/tag/descriptive-statistics.html">descriptive statistics</a>
     </li>
     <li class="list-group-item tag-2">
       <a href="/tag/features-engineering.html">features engineering</a>
-    </li>
-    <li class="list-group-item tag-2">
-      <a href="/tag/inferential-statistics.html">inferential statistics</a>
     </li>
   </ul>
 </li>
@@ -1815,6 +1865,10 @@ sample_variance: 247175.07048274425
 <li class="list-group-item">
   <h4><i class="fa fa-database fa-lg"></i><span class="icon-label">Archive</span></h4>
   <ul class="list-group" id="archive">
+        <li class="list-group-item">
+          <a href="/2018/03/index.html"><i class="fa fa-calendar fa-lg"></i>March 2018 (1)
+          </a>
+        </li>
         <li class="list-group-item">
           <a href="/2018/02/index.html"><i class="fa fa-calendar fa-lg"></i>February 2018 (21)
           </a>
