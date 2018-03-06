@@ -1,0 +1,1971 @@
+<!DOCTYPE html>
+<link rel="canonical" href="/chi-squared-python.html"/>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>Chi-Squared Test for Independence in Python - Coding Disciple</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="/chi-squared-python.html">
+
+        <meta name="author" content="Seng Chu" />
+        <meta name="keywords" content="pandas,matplotlib,inferential statistics,hypothesis testing,python" />
+        <meta name="description" content="So far, we&#39;ve been comparing data with at least one one numerical(continuous) column and one categorical(nominal) column. So what happens if we want to determine the statistical significance of two independent categorical groups of data? This is where the Chi-squared test for independence is useful. Chi-Squared Test Assumptions¶We&#39;ll be looking at data from the census in 1994. Specifically, we are interested in the relationship between &#39;sex&#39; and &#39;hours-per-week&#39; worked. Click here" />
+
+        <meta property="og:site_name" content="Coding Disciple" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Chi-Squared Test for Independence in Python"/>
+        <meta property="og:url" content="/chi-squared-python.html"/>
+        <meta property="og:description" content="So far, we&#39;ve been comparing data with at least one one numerical(continuous) column and one categorical(nominal) column. So what happens if we want to determine the statistical significance of two independent categorical groups of data? This is where the Chi-squared test for independence is useful. Chi-Squared Test Assumptions¶We&#39;ll be looking at data from the census in 1994. Specifically, we are interested in the relationship between &#39;sex&#39; and &#39;hours-per-week&#39; worked. Click here"/>
+        <meta property="article:published_time" content="2018-03-04" />
+            <meta property="article:section" content="Learning Data Science" />
+            <meta property="article:tag" content="pandas" />
+            <meta property="article:tag" content="matplotlib" />
+            <meta property="article:tag" content="inferential statistics" />
+            <meta property="article:tag" content="hypothesis testing" />
+            <meta property="article:tag" content="python" />
+            <meta property="article:author" content="Seng Chu" />
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.cosmo.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/default.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+
+        <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Coding Disciple ATOM Feed"/>
+
+
+
+        <link href="/feeds/learning-data-science.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Coding Disciple Learning Data Science ATOM Feed"/>
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                    <li><a href="/">About me</a></li>
+                    <li><a href="/blog.html">Blog index</a></li>
+                         <li><a href="/pages/timeline.html">
+                             Timeline
+                          </a></li>
+                        <li class="active">
+                            <a href="/category/learning-data-science.html">Learning data science</a>
+                        </li>
+                        <li >
+                            <a href="/category/personal-exploration.html">Personal exploration</a>
+                        </li>
+                        <li >
+                            <a href="/category/projects.html">Projects</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<style>
+	#banner{
+	    background-image:url("/images/coding_tree.png");
+	}
+</style>
+
+<div id="banner">
+	<div class="container">
+		<div class="copy">
+			<h1>Coding Disciple</h1>
+				<p class="intro">A journey of self development</p>
+		</div>
+	</div>
+</div><!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9 col-sm-push-3">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/chi-squared-python.html"
+                       rel="bookmark"
+                       title="Permalink to Chi-Squared Test for Independence in Python">
+                        Chi-Squared Test for Independence in Python
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2018-03-04T00:00:00-08:00"> Sun 04 March 2018</time>
+    </span>
+
+            <span class="label label-default">Series</span>
+            Part 6 of Studying Statistics
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/pandas.html">pandas</a>
+        /
+	<a href="/tag/matplotlib.html">matplotlib</a>
+        /
+	<a href="/tag/inferential-statistics.html">inferential statistics</a>
+        /
+	<a href="/tag/hypothesis-testing.html">hypothesis testing</a>
+        /
+	<a href="/tag/python.html">python</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <style type="text/css">/*!
+*
+* IPython notebook
+*
+*/
+/* CSS font colors for translated ANSI colors. */
+.ansibold {
+  font-weight: bold;
+}
+/* use dark versions for foreground, to improve visibility */
+.ansiblack {
+  color: black;
+}
+.ansired {
+  color: darkred;
+}
+.ansigreen {
+  color: darkgreen;
+}
+.ansiyellow {
+  color: #c4a000;
+}
+.ansiblue {
+  color: darkblue;
+}
+.ansipurple {
+  color: darkviolet;
+}
+.ansicyan {
+  color: steelblue;
+}
+.ansigray {
+  color: gray;
+}
+/* and light for background, for the same reason */
+.ansibgblack {
+  background-color: black;
+}
+.ansibgred {
+  background-color: red;
+}
+.ansibggreen {
+  background-color: green;
+}
+.ansibgyellow {
+  background-color: yellow;
+}
+.ansibgblue {
+  background-color: blue;
+}
+.ansibgpurple {
+  background-color: magenta;
+}
+.ansibgcyan {
+  background-color: cyan;
+}
+.ansibggray {
+  background-color: gray;
+}
+div.cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border-radius: 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  width: 100%;
+  padding: 5px;
+  /* This acts as a spacer between cells, that is outside the border */
+  margin: 0px;
+  outline: none;
+  border-left-width: 1px;
+  padding-left: 5px;
+  background: linear-gradient(to right, transparent -40px, transparent 1px, transparent 1px, transparent 100%);
+}
+div.cell.jupyter-soft-selected {
+  border-left-color: #90CAF9;
+  border-left-color: #E3F2FD;
+  border-left-width: 1px;
+  padding-left: 5px;
+  border-right-color: #E3F2FD;
+  border-right-width: 1px;
+  background: #E3F2FD;
+}
+@media print {
+  div.cell.jupyter-soft-selected {
+    border-color: transparent;
+  }
+}
+div.cell.selected {
+  border-color: #ababab;
+  border-left-width: 0px;
+  padding-left: 6px;
+  background: linear-gradient(to right, #42A5F5 -40px, #42A5F5 5px, transparent 5px, transparent 100%);
+}
+@media print {
+  div.cell.selected {
+    border-color: transparent;
+  }
+}
+div.cell.selected.jupyter-soft-selected {
+  border-left-width: 0;
+  padding-left: 6px;
+  background: linear-gradient(to right, #42A5F5 -40px, #42A5F5 7px, #E3F2FD 7px, #E3F2FD 100%);
+}
+.edit_mode div.cell.selected {
+  border-color: #66BB6A;
+  border-left-width: 0px;
+  padding-left: 6px;
+  background: linear-gradient(to right, #66BB6A -40px, #66BB6A 5px, transparent 5px, transparent 100%);
+}
+@media print {
+  .edit_mode div.cell.selected {
+    border-color: transparent;
+  }
+}
+.prompt {
+  /* This needs to be wide enough for 3 digit prompt numbers: In[100]: */
+  min-width: 14ex;
+  /* This padding is tuned to match the padding on the CodeMirror editor. */
+  padding: 0.4em;
+  margin: 0px;
+  font-family: monospace;
+  text-align: right;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+  /* Don't highlight prompt number selection */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  /* Use default cursor */
+  cursor: default;
+}
+@media (max-width: 540px) {
+  .prompt {
+    text-align: left;
+  }
+}
+div.inner_cell {
+  min-width: 0;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_area {
+  border: 1px solid #cfcfcf;
+  border-radius: 2px;
+  background: #f7f7f7;
+  line-height: 1.21429em;
+}
+/* This is needed so that empty prompt areas can collapse to zero height when there
+   is no content in the output_subarea and the prompt. The main purpose of this is
+   to make sure that empty JavaScript output_subareas have no height. */
+div.prompt:empty {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+div.unrecognized_cell {
+  padding: 5px 5px 5px 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.unrecognized_cell .inner_cell {
+  border-radius: 2px;
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+  border: 1px solid #cfcfcf;
+  background: #eaeaea;
+}
+div.unrecognized_cell .inner_cell a {
+  color: inherit;
+  text-decoration: none;
+}
+div.unrecognized_cell .inner_cell a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+@media (max-width: 540px) {
+  div.unrecognized_cell > div.prompt {
+    display: none;
+  }
+}
+div.code_cell {
+  /* avoid page breaking on code cells when printing */
+}
+@media print {
+  div.code_cell {
+    page-break-inside: avoid;
+  }
+}
+/* any special styling for code cells that are currently running goes here */
+div.input {
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.input {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_prompt {
+  color: #303F9F;
+  border-top: 1px solid transparent;
+}
+div.input_area > div.highlight {
+  margin: 0.4em;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+div.input_area > div.highlight > pre {
+  margin: 0px;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+/* The following gets added to the <head> if it is detected that the user has a
+ * monospace font with inconsistent normal/bold/italic height.  See
+ * notebookmain.js.  Such fonts will have keywords vertically offset with
+ * respect to the rest of the text.  The user should select a better font.
+ * See: https://github.com/ipython/ipython/issues/1503
+ *
+ * .CodeMirror span {
+ *      vertical-align: bottom;
+ * }
+ */
+.CodeMirror {
+  line-height: 1.21429em;
+  /* Changed from 1em to our global default */
+  font-size: 14px;
+  height: auto;
+  /* Changed to auto to autogrow */
+  background: none;
+  /* Changed from white to allow our bg to show through */
+}
+.CodeMirror-scroll {
+  /*  The CodeMirror docs are a bit fuzzy on if overflow-y should be hidden or visible.*/
+  /*  We have found that if it is visible, vertical scrollbars appear with font size changes.*/
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+.CodeMirror-lines {
+  /* In CM2, this used to be 0.4em, but in CM3 it went to 4px. We need the em value because */
+  /* we have set a different line-height and want this to scale with that. */
+  padding: 0.4em;
+}
+.CodeMirror-linenumber {
+  padding: 0 8px 0 4px;
+}
+.CodeMirror-gutters {
+  border-bottom-left-radius: 2px;
+  border-top-left-radius: 2px;
+}
+.CodeMirror pre {
+  /* In CM3 this went to 4px from 0 in CM2. We need the 0 value because of how we size */
+  /* .CodeMirror-lines */
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+}
+/*
+
+Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Org>
+Adapted from GitHub theme
+
+*/
+.highlight-base {
+  color: #000;
+}
+.highlight-variable {
+  color: #000;
+}
+.highlight-variable-2 {
+  color: #1a1a1a;
+}
+.highlight-variable-3 {
+  color: #333333;
+}
+.highlight-string {
+  color: #BA2121;
+}
+.highlight-comment {
+  color: #408080;
+  font-style: italic;
+}
+.highlight-number {
+  color: #080;
+}
+.highlight-atom {
+  color: #88F;
+}
+.highlight-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.highlight-builtin {
+  color: #008000;
+}
+.highlight-error {
+  color: #f00;
+}
+.highlight-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.highlight-meta {
+  color: #AA22FF;
+}
+/* previously not defined, copying from default codemirror */
+.highlight-def {
+  color: #00f;
+}
+.highlight-string-2 {
+  color: #f50;
+}
+.highlight-qualifier {
+  color: #555;
+}
+.highlight-bracket {
+  color: #997;
+}
+.highlight-tag {
+  color: #170;
+}
+.highlight-attribute {
+  color: #00c;
+}
+.highlight-header {
+  color: blue;
+}
+.highlight-quote {
+  color: #090;
+}
+.highlight-link {
+  color: #00c;
+}
+/* apply the same style to codemirror */
+.cm-s-ipython span.cm-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-atom {
+  color: #88F;
+}
+.cm-s-ipython span.cm-number {
+  color: #080;
+}
+.cm-s-ipython span.cm-def {
+  color: #00f;
+}
+.cm-s-ipython span.cm-variable {
+  color: #000;
+}
+.cm-s-ipython span.cm-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-variable-2 {
+  color: #1a1a1a;
+}
+.cm-s-ipython span.cm-variable-3 {
+  color: #333333;
+}
+.cm-s-ipython span.cm-comment {
+  color: #408080;
+  font-style: italic;
+}
+.cm-s-ipython span.cm-string {
+  color: #BA2121;
+}
+.cm-s-ipython span.cm-string-2 {
+  color: #f50;
+}
+.cm-s-ipython span.cm-meta {
+  color: #AA22FF;
+}
+.cm-s-ipython span.cm-qualifier {
+  color: #555;
+}
+.cm-s-ipython span.cm-builtin {
+  color: #008000;
+}
+.cm-s-ipython span.cm-bracket {
+  color: #997;
+}
+.cm-s-ipython span.cm-tag {
+  color: #170;
+}
+.cm-s-ipython span.cm-attribute {
+  color: #00c;
+}
+.cm-s-ipython span.cm-header {
+  color: blue;
+}
+.cm-s-ipython span.cm-quote {
+  color: #090;
+}
+.cm-s-ipython span.cm-link {
+  color: #00c;
+}
+.cm-s-ipython span.cm-error {
+  color: #f00;
+}
+.cm-s-ipython span.cm-tab {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAMCAYAAAAkuj5RAAAAAXNSR0IArs4c6QAAAGFJREFUSMft1LsRQFAQheHPowAKoACx3IgEKtaEHujDjORSgWTH/ZOdnZOcM/sgk/kFFWY0qV8foQwS4MKBCS3qR6ixBJvElOobYAtivseIE120FaowJPN75GMu8j/LfMwNjh4HUpwg4LUAAAAASUVORK5CYII=);
+  background-position: right;
+  background-repeat: no-repeat;
+}
+div.output_wrapper {
+  /* this position must be relative to enable descendents to be absolute within it */
+  position: relative;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  z-index: 1;
+}
+/* class for the output area when it should be height-limited */
+div.output_scroll {
+  /* ideally, this would be max-height, but FF barfs all over that */
+  height: 24em;
+  /* FF needs this *and the wrapper* to specify full width, or it will shrinkwrap */
+  width: 100%;
+  overflow: auto;
+  border-radius: 2px;
+  -webkit-box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  display: block;
+}
+/* output div while it is collapsed */
+div.output_collapsed {
+  margin: 0px;
+  padding: 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+div.out_prompt_overlay {
+  height: 100%;
+  padding: 0px 0.4em;
+  position: absolute;
+  border-radius: 2px;
+}
+div.out_prompt_overlay:hover {
+  /* use inner shadow to get border that is computed the same on WebKit/FF */
+  -webkit-box-shadow: inset 0 0 1px #000;
+  box-shadow: inset 0 0 1px #000;
+  background: rgba(240, 240, 240, 0.5);
+}
+div.output_prompt {
+  color: #D84315;
+}
+/* This class is the outer container of all output sections. */
+div.output_area {
+  padding: 0px;
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.output_area .MathJax_Display {
+  text-align: left !important;
+}
+div.output_area 
+div.output_area 
+div.output_area img,
+div.output_area svg {
+  max-width: 100%;
+  height: auto;
+}
+div.output_area img.unconfined,
+div.output_area svg.unconfined {
+  max-width: none;
+}
+/* This is needed to protect the pre formating from global settings such
+   as that of bootstrap */
+.output {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.output_area {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+div.output_area pre {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+  color: black;
+  background-color: transparent;
+  border-radius: 0;
+}
+/* This class is for the output subarea inside the output_area and after
+   the prompt div. */
+div.output_subarea {
+  overflow-x: auto;
+  padding: 0.4em;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+  max-width: calc(100% - 14ex);
+}
+div.output_scroll div.output_subarea {
+  overflow-x: visible;
+}
+/* The rest of the output_* classes are for special styling of the different
+   output types */
+/* all text output has this class: */
+div.output_text {
+  text-align: left;
+  color: #000;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+}
+/* stdout/stderr are 'text' as well as 'stream', but execute_result/error are *not* streams */
+div.output_stderr {
+  background: #fdd;
+  /* very light red background for stderr */
+}
+div.output_latex {
+  text-align: left;
+}
+/* Empty output_javascript divs should have no height */
+div.output_javascript:empty {
+  padding: 0;
+}
+.js-error {
+  color: darkred;
+}
+/* raw_input styles */
+div.raw_input_container {
+  line-height: 1.21429em;
+  padding-top: 5px;
+}
+pre.raw_input_prompt {
+  /* nothing needed here. */
+}
+input.raw_input {
+  font-family: monospace;
+  font-size: inherit;
+  color: inherit;
+  width: auto;
+  /* make sure input baseline aligns with prompt */
+  vertical-align: baseline;
+  /* padding + margin = 0.5em between prompt and cursor */
+  padding: 0em 0.25em;
+  margin: 0em 0.25em;
+}
+input.raw_input:focus {
+  box-shadow: none;
+}
+p.p-space {
+  margin-bottom: 10px;
+}
+div.output_unrecognized {
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+}
+div.output_unrecognized a {
+  color: inherit;
+  text-decoration: none;
+}
+div.output_unrecognized a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+.rendered_html {
+  color: #000;
+  /* any extras will just be numbers: */
+}
+
+
+
+.rendered_html :link {
+  text-decoration: underline;
+}
+.rendered_html :visited {
+  text-decoration: underline;
+}
+
+
+
+
+
+
+.rendered_html h1:first-child {
+  margin-top: 0.538em;
+}
+.rendered_html h2:first-child {
+  margin-top: 0.636em;
+}
+.rendered_html h3:first-child {
+  margin-top: 0.777em;
+}
+.rendered_html h4:first-child {
+  margin-top: 1em;
+}
+.rendered_html h5:first-child {
+  margin-top: 1em;
+}
+.rendered_html h6:first-child {
+  margin-top: 1em;
+}
+
+
+
+
+
+
+
+
+.rendered_html * + ul {
+  margin-top: 1em;
+}
+.rendered_html * + ol {
+  margin-top: 1em;
+}
+
+
+.rendered_html pre,
+
+
+
+.rendered_html tr,
+.rendered_html th,
+
+.rendered_html td,
+
+
+.rendered_html * + table {
+  margin-top: 1em;
+}
+
+.rendered_html * + p {
+  margin-top: 1em;
+}
+
+.rendered_html * + img {
+  margin-top: 1em;
+}
+.rendered_html img,
+
+.rendered_html img.unconfined,
+
+div.text_cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.text_cell > div.prompt {
+    display: none;
+  }
+}
+div.text_cell_render {
+  /*font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;*/
+  outline: none;
+  resize: none;
+  width: inherit;
+  border-style: none;
+  padding: 0.5em 0.5em 0.5em 0.4em;
+  color: #000;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+a.anchor-link:link {
+  text-decoration: none;
+  padding: 0px 20px;
+  visibility: hidden;
+}
+h1:hover .anchor-link,
+h2:hover .anchor-link,
+h3:hover .anchor-link,
+h4:hover .anchor-link,
+h5:hover .anchor-link,
+h6:hover .anchor-link {
+  visibility: visible;
+}
+.text_cell.rendered .input_area {
+  display: none;
+}
+.text_cell.rendered 
+.text_cell.unrendered .text_cell_render {
+  display: none;
+}
+.cm-header-1,
+.cm-header-2,
+.cm-header-3,
+.cm-header-4,
+.cm-header-5,
+.cm-header-6 {
+  font-weight: bold;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.cm-header-1 {
+  font-size: 185.7%;
+}
+.cm-header-2 {
+  font-size: 157.1%;
+}
+.cm-header-3 {
+  font-size: 128.6%;
+}
+.cm-header-4 {
+  font-size: 110%;
+}
+.cm-header-5 {
+  font-size: 100%;
+  font-style: italic;
+}
+.cm-header-6 {
+  font-size: 100%;
+  font-style: italic;
+}
+</style>
+<style type="text/css">.highlight .hll { background-color: #ffffcc }
+.highlight  { background: #f8f8f8; }
+.highlight .c { color: #408080; font-style: italic } /* Comment */
+.highlight .err { border: 1px solid #FF0000 } /* Error */
+.highlight .k { color: #008000; font-weight: bold } /* Keyword */
+.highlight .o { color: #666666 } /* Operator */
+.highlight .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #BC7A00 } /* Comment.Preproc */
+.highlight .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #408080; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #A00000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #FF0000 } /* Generic.Error */
+.highlight .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #00A000 } /* Generic.Inserted */
+.highlight .go { color: #888888 } /* Generic.Output */
+.highlight .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #0044DD } /* Generic.Traceback */
+.highlight .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #008000 } /* Keyword.Pseudo */
+.highlight .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #B00040 } /* Keyword.Type */
+.highlight .m { color: #666666 } /* Literal.Number */
+.highlight .s { color: #BA2121 } /* Literal.String */
+.highlight .na { color: #7D9029 } /* Name.Attribute */
+.highlight .nb { color: #008000 } /* Name.Builtin */
+.highlight .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.highlight .no { color: #880000 } /* Name.Constant */
+.highlight .nd { color: #AA22FF } /* Name.Decorator */
+.highlight .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #0000FF } /* Name.Function */
+.highlight .nl { color: #A0A000 } /* Name.Label */
+.highlight .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #19177C } /* Name.Variable */
+.highlight .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mb { color: #666666 } /* Literal.Number.Bin */
+.highlight .mf { color: #666666 } /* Literal.Number.Float */
+.highlight .mh { color: #666666 } /* Literal.Number.Hex */
+.highlight .mi { color: #666666 } /* Literal.Number.Integer */
+.highlight .mo { color: #666666 } /* Literal.Number.Oct */
+.highlight .sa { color: #BA2121 } /* Literal.String.Affix */
+.highlight .sb { color: #BA2121 } /* Literal.String.Backtick */
+.highlight .sc { color: #BA2121 } /* Literal.String.Char */
+.highlight .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.highlight .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #BA2121 } /* Literal.String.Double */
+.highlight .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.highlight .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.highlight .sx { color: #008000 } /* Literal.String.Other */
+.highlight .sr { color: #BB6688 } /* Literal.String.Regex */
+.highlight .s1 { color: #BA2121 } /* Literal.String.Single */
+.highlight .ss { color: #19177C } /* Literal.String.Symbol */
+.highlight .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #0000FF } /* Name.Function.Magic */
+.highlight .vc { color: #19177C } /* Name.Variable.Class */
+.highlight .vg { color: #19177C } /* Name.Variable.Global */
+.highlight .vi { color: #19177C } /* Name.Variable.Instance */
+.highlight .vm { color: #19177C } /* Name.Variable.Magic */
+.highlight .il { color: #666666 } /* Literal.Number.Integer.Long */</style>
+<style type="text/css">
+/* Temporary definitions which will become obsolete with Notebook release 5.0 */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-bold { font-weight: bold; }
+</style>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>So far, we've been comparing data with at least one one numerical(continuous) column and one categorical(nominal) column. So what happens if we want to determine the statistical significance of two independent categorical groups of data?</p>
+<p>This is where the Chi-squared test for independence is useful.</p>
+<h3 id="Chi-Squared-Test-Assumptions">Chi-Squared Test Assumptions<a class="anchor-link" href="#Chi-Squared-Test-Assumptions">¶</a></h3><p>We'll be looking at data from the census in 1994. Specifically, we are interested in the relationship between 'sex' and 'hours-per-week' worked. Click <a href="https://archive.ics.uci.edu/ml/datasets/Census+Income">here</a> for the documentation and citation of the data. First let's get the assumptions out of the way:</p>
+<ul>
+<li>There must be different participants in each group with no participant being in more than one group. In our case, each individual can only have one 'sex' and can not be in multiple workhour categories.</li>
+<li>Random samples from the population. In our case, the census is a good representation of the population.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Data-Exploration">Data Exploration<a class="anchor-link" href="#Data-Exploration">¶</a></h3><p>For the sake of this example, we'll convert the numerical column 'hours-per-week' into a categorical column using pandas. Then we'll assign 'sex' and 'hours_per_week_categories' to a new dataframe.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'age'</span><span class="p">,</span> <span class="s1">'workclass'</span><span class="p">,</span> <span class="s1">'fnlwg'</span><span class="p">,</span> <span class="s1">'education'</span><span class="p">,</span> <span class="s1">'education-num'</span><span class="p">,</span> 
+        <span class="s1">'marital-status'</span><span class="p">,</span><span class="s1">'occupation'</span><span class="p">,</span><span class="s1">'relationship'</span><span class="p">,</span> <span class="s1">'race'</span><span class="p">,</span><span class="s1">'sex'</span><span class="p">,</span>
+        <span class="s1">'capital-gain'</span><span class="p">,</span> <span class="s1">'capital-loss'</span><span class="p">,</span> <span class="s1">'hours-per-week'</span><span class="p">,</span> <span class="s1">'native-country'</span><span class="p">,</span> <span class="s1">'income'</span><span class="p">]</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'census.csv'</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">cols</span><span class="p">)</span>
+
+<span class="c1">#Create a column for work hour categories.</span>
+<span class="k">def</span> <span class="nf">process_hours</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="n">cut_points</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">19</span><span class="p">,</span><span class="mi">29</span><span class="p">,</span><span class="mi">39</span><span class="p">,</span><span class="mi">49</span><span class="p">,</span><span class="mi">1000</span><span class="p">]</span>
+    <span class="n">label_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"0-9"</span><span class="p">,</span><span class="s2">"10-19"</span><span class="p">,</span><span class="s2">"20-29"</span><span class="p">,</span><span class="s2">"30-39"</span><span class="p">,</span><span class="s2">"40-49"</span><span class="p">,</span><span class="s2">"50+"</span><span class="p">]</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">"hours_per_week_categories"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"hours-per-week"</span><span class="p">],</span>
+                                             <span class="n">cut_points</span><span class="p">,</span><span class="n">labels</span><span class="o">=</span><span class="n">label_names</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">process_hours</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">workhour_by_sex</span> <span class="o">=</span> <span class="n">data</span><span class="p">[[</span><span class="s1">'sex'</span><span class="p">,</span> <span class="s1">'hours_per_week_categories'</span><span class="p">]]</span>
+<span class="n">workhour_by_sex</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[1]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>sex</th>
+<th>hours_per_week_categories</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>Male</td>
+<td>40-49</td>
+</tr>
+<tr>
+<th>1</th>
+<td>Male</td>
+<td>10-19</td>
+</tr>
+<tr>
+<th>2</th>
+<td>Male</td>
+<td>40-49</td>
+</tr>
+<tr>
+<th>3</th>
+<td>Male</td>
+<td>40-49</td>
+</tr>
+<tr>
+<th>4</th>
+<td>Female</td>
+<td>40-49</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [2]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">workhour_by_sex</span><span class="p">[</span><span class="s1">'sex'</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[2]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre> Male      21790
+ Female    10771
+Name: sex, dtype: int64</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [3]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">workhour_by_sex</span><span class="p">[</span><span class="s1">'hours_per_week_categories'</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[3]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>40-49    18336
+50+       6462
+30-39     3667
+20-29     2392
+10-19     1246
+0-9        458
+Name: hours_per_week_categories, dtype: int64</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="The-Null-and-Alternate-Hypotheses">The Null and Alternate Hypotheses<a class="anchor-link" href="#The-Null-and-Alternate-Hypotheses">¶</a></h3><p>Recall that we are interested in knowing if there is a relationship between 'sex' and 'hours_per_week_categories'. In order to do so, we would have to use the Chi-squared test. But first, let's state our null hypothesis and the alternative hypothesis.</p>
+<p>$ H_0 :  \text{There is no statistically significant relationship between sex and the # of hours per week worked.} $</p>
+<p>$ H_a :  \text{There is a statistically significant relationship between sex and the # of hours per week worked.} $</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Constructing-the-Contingency-Table">Constructing the Contingency Table<a class="anchor-link" href="#Constructing-the-Contingency-Table">¶</a></h3><p>The next step is to format the data into a frequency count table. This is called a <b>Contingency Table</b>, we can accomplish this by using the pd.crosstab() function in pandas.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [4]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">contingency_table</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span>
+    <span class="n">workhour_by_sex</span><span class="p">[</span><span class="s1">'sex'</span><span class="p">],</span>
+    <span class="n">workhour_by_sex</span><span class="p">[</span><span class="s1">'hours_per_week_categories'</span><span class="p">],</span>
+    <span class="n">margins</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="p">)</span>
+<span class="n">contingency_table</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[4]:</div>
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>hours_per_week_categories</th>
+<th>0-9</th>
+<th>10-19</th>
+<th>20-29</th>
+<th>30-39</th>
+<th>40-49</th>
+<th>50+</th>
+<th>All</th>
+</tr>
+<tr>
+<th>sex</th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>Female</th>
+<td>235</td>
+<td>671</td>
+<td>1287</td>
+<td>1914</td>
+<td>5636</td>
+<td>1028</td>
+<td>10771</td>
+</tr>
+<tr>
+<th>Male</th>
+<td>223</td>
+<td>575</td>
+<td>1105</td>
+<td>1753</td>
+<td>12700</td>
+<td>5434</td>
+<td>21790</td>
+</tr>
+<tr>
+<th>All</th>
+<td>458</td>
+<td>1246</td>
+<td>2392</td>
+<td>3667</td>
+<td>18336</td>
+<td>6462</td>
+<td>32561</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Each cell in this table represents a frequency count. For example, the intersection of the 'Male' row and the '10-19' column of the table would represent the number of males who works 10-19 hours per week from our sample data set. The intersection of the 'All' row and the '50+' column would represent the total number of people who works 50+ hours a week.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Visualizing-the-Contingency-Table-with-a-Stacked-Bar-Chart">Visualizing the Contingency Table with a Stacked Bar Chart<a class="anchor-link" href="#Visualizing-the-Contingency-Table-with-a-Stacked-Bar-Chart">¶</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [5]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Assigns the frequency values</span>
+<span class="n">malecount</span> <span class="o">=</span> <span class="n">contingency_table</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">femalecount</span> <span class="o">=</span> <span class="n">contingency_table</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+
+<span class="c1">#Plots the bar chart</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">font_scale</span><span class="o">=</span><span class="mf">1.8</span><span class="p">)</span>
+<span class="n">categories</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"0-9"</span><span class="p">,</span><span class="s2">"10-19"</span><span class="p">,</span><span class="s2">"20-29"</span><span class="p">,</span><span class="s2">"30-39"</span><span class="p">,</span><span class="s2">"40-49"</span><span class="p">,</span><span class="s2">"50+"</span><span class="p">]</span>
+<span class="n">p1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">categories</span><span class="p">,</span> <span class="n">malecount</span><span class="p">,</span> <span class="mf">0.55</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'#d62728'</span><span class="p">)</span>
+<span class="n">p2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">categories</span><span class="p">,</span> <span class="n">femalecount</span><span class="p">,</span> <span class="mf">0.55</span><span class="p">,</span> <span class="n">bottom</span><span class="o">=</span><span class="n">malecount</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="n">p2</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">p1</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="p">(</span><span class="s1">'Male'</span><span class="p">,</span> <span class="s1">'Female'</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">'Hours per Week Worked'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'Count'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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lRMbXRVJkhrGwKhu95nPHMjIke+oue2tb12/m2sjSZLaYmDswf4xdptGV2GZfwDr3DGrLvvaeutt2WqrMXXZlyRJ6nqOYZQkSVIpexjVIz3yyO+49NKLefTRRwB473tHccghn+c973nvsjL77DOJ7bbbgXe9K/jRj37ICy88z8Ybv5Ojjz6Ot751Pc4995vce+/dDBkyhF133Z1DDvk8q6ySf0davHgxV189nZtv/i1z5vydJUuWstFGb+c//3M/dt99j9K63XXXHUyffjl//nNi1VUH8v73j+Gww6by9rf/R9c1iCRJDWQPo7rdokULmTdv3gp/Fi9eDMDs2fcydeqhLFq0kEMO+RyTJ0/h+eefY+rUQ3n44YeW29edd97OpZdezKRJe3DggYfw5JNP8NWv/jdHHnk4q6zSj6lTj2Tjjd/J9OmXc+ONv172uVNPPYlLL72YLbfcii996b848MBDePXVVzj99FN46KEHWq37r399PccffzSDBg3i8MO/yH777c8jj/yeQw89gKeeerJrGkySpAazh1Hd7oQT/qvm+m9/+2K22GIrzjrrNDbbbHPOP/979O/fH4C9996XAw/8FOeeexaXX37Vss/MnfsCV1xxNe985yYALFjwMlddNZ2ddtqZk046DYAPf3hXdtttArNm3cuuu+7Oiy/+g5tu+g377z+Zz31u6rJ97bjjeD71qX2YOfNWttzy/SvUb9GihZx33jeZMGFnTjrp1GXrJ03ak09/+hNcdNF3OO20b3a+gSRJ6mEMjOp2RxxxJJts8q4V1m+yybv5058Szzwzhz333IcFCxYst3377cfyk59cxQsvPM+6674VgA03fNuysAiw0Ub5tvC4cR9atm711Vdn+PC38OKL/wBg7bXX4cYbZy67PQ2wdOnSZT2cr7zySs16z559H4sWLWLcuPHMmzdv2fr+/Qfw/veP4Z577mLx4sUMGOD/VpKk5uK/bOp2EZu2+pT07Nn3AXDhhedx4YXn1SxTHRiHD3/LctsqPZIt16+yyiosWbJk2d8HDhzIjTf+mlmz7uHvf3+Kp59+mldeWQTk8FjLnDlPA/C1r3251XObN28e66yzTqvbJUnqjQyM6lGWLHkDgIMP/hybbz6qZpm3v33ksv+uBMSO+Pe//81RRx3B73//MFtu+X7GjNmGfffdny222Iq99969pG45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
+" />
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The chart above visualizes our sample data from the census. If there is truly no relationship between sex and the number of hours per week worked. Then the data would show an even ratio split between 'Male' and 'Female' for each time category. For example, if 5% of the females worked 50+ hours, we would expect the same percentage for males who worked 50+ hours.</p>
+<h3 id="The-Chi-Squared-Test-for-Independence---Calculation-with-Numpy">The Chi-Squared Test for Independence - Calculation with Numpy<a class="anchor-link" href="#The-Chi-Squared-Test-for-Independence---Calculation-with-Numpy">¶</a></h3><p>In order to determine whether we accept or reject the null hypothesis. We have to compute p-value similar to the welch's t-test and ANOVA. For testing with two categorical variables, we will use the Chi-squared test.</p>
+<p>$$ X^2 = \frac{(observed - expected)^2} {(expected)}$$</p>
+<p>Where $X^2$ is the test statistic, $observecd$ are values we have in the contingency table, $expected$ are values we would expect assuming the null hypothesis is true. Theoretically speaking, if all the expected values are equal to the observed values, then the $X^2$ statistic will be 0. As a result, the null hypothesis will be retained.</p>
+<p>First, let's put the observed values into a one dimensional array, reading the contingency table from left to right then top to bottom.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [6]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">f_obs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">contingency_table</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">contingency_table</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<span class="n">f_obs</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[6]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>array([  235,   671,  1287,  1914,  5636,  1028,   223,   575,  1105,
+        1753, 12700,  5434], dtype=int64)</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Next, we need to calculate the expected values. The expected values assume that null hypothesis is true. We would need to calculate values if there is an equal percentage of males and females for each category. For example, this is how we would calculate the expected value for the top left cell:</p>
+<p>$$ \text{Expected # of Females in the '0-9' Category} = \frac{\text{Total # of Females} * \text{Number of People in the '0-9' Category}} {\text{Total # of People}}$$</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [7]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">row_sums</span> <span class="o">=</span> <span class="n">contingency_table</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">row_sums</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[7]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>array([10771, 21790], dtype=int64)</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [8]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">col_sums</span> <span class="o">=</span> <span class="n">contingency_table</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">col_sums</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[8]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>array([  458,  1246,  2392,  3667, 18336,  6462], dtype=int64)</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [9]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">total</span> <span class="o">=</span> <span class="n">contingency_table</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">'All'</span><span class="p">,</span> <span class="s1">'All'</span><span class="p">]</span>
+
+<span class="n">f_expected</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">col_sums</span><span class="p">:</span>
+        <span class="n">f_expected</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="n">row_sums</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">/</span><span class="n">total</span><span class="p">)</span>
+<span class="n">f_expected</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[9]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>[151.50388501581648,
+ 412.1699579251252,
+ 791.2604649734345,
+ 1213.0234636528362,
+ 6065.44811277295,
+ 2137.5941156598383,
+ 306.4961149841835,
+ 833.8300420748749,
+ 1600.7395350265656,
+ 2453.976536347164,
+ 12270.551887227051,
+ 4324.405884340162]</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now that we have all our observed and expected values, we can just plug everything into the Chi-squared test formula.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [10]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">chi_squared_statistic</span> <span class="o">=</span> <span class="p">((</span><span class="n">f_obs</span> <span class="o">-</span> <span class="n">f_expected</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="n">f_expected</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'Chi-squared Statistic: </span><span class="si">{}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">chi_squared_statistic</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Chi-squared Statistic: 2287.190943926107
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Degrees-of-Freedom">Degrees of Freedom<a class="anchor-link" href="#Degrees-of-Freedom">¶</a></h4><p>Similar to the Welch's t-test, we would have to calculate the degrees of freedom before we can determine the p-value.</p>
+<p>$$ DoF =  {(\text{Number of rows} - 1)}*{(\text{Number of columns} - 1)}$$</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [11]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dof</span> <span class="o">=</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">row_sums</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">col_sums</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Degrees of Freedom: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dof</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Degrees of Freedom: 5
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now we are ready to look into the Chi-squared distribution <a href="http://www.itl.nist.gov/div898/handbook/eda/section3/eda3674.htm">table</a>. The cut off for a p-value of 0.05 was 11.070. Our $X^2$ statistic was so large that the p-value is approximately zero. So we have evidence against the null hypothesis.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="The-Chi-Squared-Test-for-Independence---Using-Scipy">The Chi-Squared Test for Independence - Using Scipy<a class="anchor-link" href="#The-Chi-Squared-Test-for-Independence---Using-Scipy">¶</a></h3><p>Now that we've gone through all the calculations, it is time to look for shortcuts. Scipy has a function that plugs in all the values for us. Click <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.chi2_contingency.html">here</a> for the documentation.</p>
+<p>All we need to do is format the observed values into a two-dimensional array and plug it into the function.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [12]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">f_obs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">contingency_table</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+                  <span class="n">contingency_table</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">])</span>
+<span class="n">f_obs</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[12]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>array([[  235,   671,  1287,  1914,  5636,  1028],
+       [  223,   575,  1105,  1753, 12700,  5434]], dtype=int64)</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [13]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">scipy</span> <span class="k">import</span> <span class="n">stats</span>
+<span class="n">stats</span><span class="o">.</span><span class="n">chi2_contingency</span><span class="p">(</span><span class="n">f_obs</span><span class="p">)[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt output_prompt">Out[13]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>(2287.190943926107, 0.0, 5)</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The results were exactly the same as our calculations with Numpy. The $X^2$ = ~2287, p-value = ~0 and degrees of freedom = 5.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Conclusions">Conclusions<a class="anchor-link" href="#Conclusions">¶</a></h3><p>With a p-value < 0.05 , we can reject the null hypothesis. There is definitely some sort of relationship between 'sex' and the 'hours-per-week' column. We don't know what this relationship is, but we do know that these two variables are not independent of each other.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr />
+<p>The files used for this article can be found in my <a href="https://github.com/sengkchu/codingdisciple.content/tree/master/Learning%20data%20science/Learning/Studying%20Statistics/Chi-Squared%20Test%20for%20Independence">GitHub repository</a>.</p>
+</div>
+</div>
+</div>
+
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: 'center'," +
+        "    displayIndent: '0em'," +
+        "    showMathMenu: true," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['$','$'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        " linebreaks: { automatic: true, width: '95% container' }, " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'black ! important'} }" +
+        "    } " +
+        "}); ";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h4>Part 6 of the Studying Statistics series</h4>
+       <h5>Previous articles</h5>
+       <ul>
+           <li><a href="/central-tendency.html">Understanding Central Tedency</a></li>
+           <li><a href="/dispersion.html">Understanding Dispersion</a></li>
+           <li><a href="/central-limit-theorem-data-science.html">The Normal Distribution and the Central Limit Theorem - Applications to Data Science</a></li>
+           <li><a href="/hypothesis-testing-welch-python.html">Hypothesis Testing with Welch's t-test in Python</a></li>
+           <li><a href="/hypothesis-testing-ANOVA-python.html">Hypothesis Testing with ANOVA in Python</a></li>
+       </ul>
+</section>
+    <hr />
+    <!-- AddThis Button BEGIN -->
+    <div class="addthis_toolbox addthis_default_style">
+            <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+            <a class="addthis_button_tweet"></a>
+            <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    </div>
+    <!-- AddThis Button END -->
+    <hr/>
+    <section class="comments" id="comments">
+        <h2>Comments</h2>
+
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = 'codingdisciple'; // required: replace example with your forum shortname
+            var disqus_config = function () {
+                this.language = "en";
+                        this.page.identifier = '2018-03-04-chi-squared-python';
+            };
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function () {
+                var dsq = document.createElement('script');
+                dsq.type = 'text/javascript';
+                dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by
+            Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    </section>
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3 col-sm-pull-9" id="sidebar">
+            <aside>
+<!-- Sidebar -->
+<section class="well well-sm">
+  <ul class="list-group list-group-flush">
+
+<!-- Sidebar/Social -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+  <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="https://www.linkedin.com/in/seng-chu-338140142"><i class="fa fa-linkedin-square fa-lg"></i> linkedin</a></li>
+    <li class="list-group-item"><a href="https://github.com/sengkchu"><i class="fa fa-github-square fa-lg"></i> github</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Social -->
+
+<!-- Sidebar/Tag Cloud -->
+<li class="list-group-item">
+  <h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4>
+  <ul class="list-group " id="tags">
+    <li class="list-group-item tag-2">
+      <a href="/tag/pandas.html">pandas</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="/tag/matplotlib.html">matplotlib</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="/tag/data-analysis.html">data analysis</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="/tag/python.html">python</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="/tag/machine-learning.html">machine learning</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="/tag/sql.html">SQL</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="/tag/inferential-statistics.html">inferential statistics</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="/tag/data-cleaning.html">data cleaning</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="/tag/descriptive-statistics.html">descriptive statistics</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="/tag/features-engineering.html">features engineering</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Tag Cloud -->
+
+<!-- Sidebar/Archive -->
+<li class="list-group-item">
+  <h4><i class="fa fa-database fa-lg"></i><span class="icon-label">Archive</span></h4>
+  <ul class="list-group" id="archive">
+        <li class="list-group-item">
+          <a href="/2018/03/index.html"><i class="fa fa-calendar fa-lg"></i>March 2018 (2)
+          </a>
+        </li>
+        <li class="list-group-item">
+          <a href="/2018/02/index.html"><i class="fa fa-calendar fa-lg"></i>February 2018 (21)
+          </a>
+        </li>
+        <li class="list-group-item">
+          <a href="/2018/01/index.html"><i class="fa fa-calendar fa-lg"></i>January 2018 (7)
+          </a>
+        </li>
+  </ul>
+</li>
+<!-- End Sidebar/Archive -->
+  </ul>
+</section>
+<!-- End Sidebar -->            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2018 Seng Chu
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
+
+
+    <div class="prompt"> </div>
+
+    <div class="prompt input_prompt">  </div>
+
+    <script src="/theme/js/bodypadding.js"></script>
+    <!-- Disqus -->
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'codingdisciple'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+            var s = document.createElement('script');
+            s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+    </script>
+    <!-- End Disqus Code -->
+    <!-- Google Analytics -->
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-113145425-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+    <!-- End Google Analytics Code -->
+<style type="text/css">.text_cell .prompt {
+    display: none;
+}
+
+div.cell {
+    padding-bottom: 0.6em;
+}
+
+div.text_cell_render {
+    padding: 0;
+}
+
+div.prompt {
+    font-size: 13px;
+}
+
+
+table.dataframe {
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    line-height: 20px;
+}
+
+table.dataframe th, td {
+    padding: 4px;
+    text-align: center;
+}</style>
+
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a6ece335d878db6"></script>
+
+</body>
+</html>
