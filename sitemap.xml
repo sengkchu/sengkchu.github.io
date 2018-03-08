@@ -5,7 +5,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://codingdisciple.com/</loc>
-<lastmod>2018-03-05T20:59:00-00:00</lastmod>
+<lastmod>2018-03-07T18:15:29-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -74,7 +74,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>https://codingdisciple.com/business-data-analysis-sql-python.html</loc>
+<lastmod>2018-02-16T23:00:00-08:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://codingdisciple.com/titanic-survival.html</loc>
+<lastmod>2018-02-16T22:00:00-08:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
 <loc>https://codingdisciple.com/cross-validation-machine-learning.html</loc>
+<lastmod>2018-02-16T11:00:00-08:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://codingdisciple.com/scraping-reddit-data-pandas-dataframe.html</loc>
 <lastmod>2018-02-16T00:00:00-08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
@@ -111,13 +132,6 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://codingdisciple.com/predict-car-price-kneighbors.html</loc>
 <lastmod>2018-02-13T09:20:00-08:00</lastmod>
-<changefreq>monthly</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
-<loc>https://codingdisciple.com/Business-Data-Analysis-SQL-Python.html</loc>
-<lastmod>2018-02-12T00:00:00-08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
@@ -160,13 +174,6 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://codingdisciple.com/cia-factboook-sql.html</loc>
 <lastmod>2018-02-07T10:20:00-08:00</lastmod>
-<changefreq>monthly</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
-<loc>https://codingdisciple.com/titanic-survival.html</loc>
-<lastmod>2018-02-07T00:00:00-08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
@@ -222,13 +229,6 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://codingdisciple.com/exploring-births.html</loc>
-<lastmod>2018-01-26T00:00:00-08:00</lastmod>
-<changefreq>monthly</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
-<loc>https://codingdisciple.com/scraping-reddit-data-pandas-dataframe.html</loc>
 <lastmod>2018-01-26T00:00:00-08:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
