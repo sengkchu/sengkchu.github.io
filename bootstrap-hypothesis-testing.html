@@ -1111,7 +1111,7 @@ h6:hover .anchor-link {
 <p>Modern statiscal methods uses raw computational power to create the distribution. We can then use this distribution to estimate the likelihood of an event. This is very useful for answering questions such as  “Is A better than B?” or “Did adding feature X improve our product?”. The statistical method I am going to focus on in this article is <b>bootstrapping</b>. The great thing about this method is we don't have to assume a normal distribution.</p>
 <h3 id="Bootstrap-Confidence-Intervals-for-Facebook-Data---1-Group">Bootstrap Confidence Intervals for Facebook Data - 1 Group<a class="anchor-link" href="#Bootstrap-Confidence-Intervals-for-Facebook-Data---1-Group">¶</a></h3><p>The idea of bootstrapping is to take many samples with replacement from the observed data set to generate a bootstrap population. Then we can use the bootstrapped population to create a sampling distribution.</p>
 <p>For example, suppose that our data set looks something like this <code>[5, 2, 1, 10]</code>. Sampling with replacement can generate permutations such as: <code>[5, 5, 1, 10]</code> or <code>[2, 2, 2, 10]</code>. The idea is to take many permutations of this data set to create a bootstrap population.</p>
-<p>In this article, we'll look into Facebook data once again to determine if a paid post gets more "likes" than an unpaid post. Let's jump right in.</p>
+<p>In this article, we'll look into Facebook data once again to determine if a paid post gets more "likes" than an unpaid post. I've taken data from UCI's machine learning repository. Click <a href="https://archive.ics.uci.edu/ml/datasets/Facebook+metrics">here</a> for the link to the documentation and citation.</p>
 </div>
 </div>
 </div>
