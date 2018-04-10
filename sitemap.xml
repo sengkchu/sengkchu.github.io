@@ -5,7 +5,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://codingdisciple.com/</loc>
-<lastmod>2018-03-30T00:39:00-00:00</lastmod>
+<lastmod>2018-04-09T20:00:04-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -13,6 +13,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://codingdisciple.com/pages/about.html</loc>
 <lastmod>2018-01-26T00:00:00-08:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://codingdisciple.com/sf-gender-gap.html</loc>
+<lastmod>2018-04-09T00:00:00-07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
@@ -27,13 +34,6 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://codingdisciple.com/bootstrap-hypothesis-testing.html</loc>
 <lastmod>2018-03-23T00:00:00-07:00</lastmod>
-<changefreq>monthly</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
-<loc>https://codingdisciple.com/sf-gender-gap.html</loc>
-<lastmod>2018-03-18T00:00:00-07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
