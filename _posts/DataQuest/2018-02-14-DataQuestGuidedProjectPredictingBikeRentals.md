@@ -8,7 +8,7 @@ tags: [dataquest, data science, basics]
 
 In this project, we are going to look at 'bike_rental_hour.csv', a dataset that contains the hourly and daily count of rental bikes between years 2011 and 2012 in the Capital bikeshare system. From the dataset, we are going to apply various machine learning algorithms to generate a model that can predict the number of bike rentals.
 
-For more information on this dataset click [here](http://archive.ics.uci.edu/ml/datasets/Bike+Sharing+Dataset).
+For more information on this dataset click [here](https://archive.ics.uci.edu/ml/datasets/Bike+Sharing+Dataset).
 
 
 ```python
