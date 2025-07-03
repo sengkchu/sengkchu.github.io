@@ -1,9 +1,8 @@
 ---
-title: Building RAG Systems on Databricks
+title: Building RAG Systems on Databricks Part 1
 date: 2025-07-02 00:00:00 +/-0000
-categories: [AI, Databricks]
-tags: [databricks, langchain, RAG]     # TAG names should always be lowercase
-description: Part 1 of this series
+categories: [AI, RAG System]
+tags: [databricks, langchain, rag]
 ---
 
 ```python
