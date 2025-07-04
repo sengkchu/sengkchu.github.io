@@ -4,7 +4,7 @@ date: 2018-02-17 00:00:00 +/-0000
 categories: [Data Science, Statistics]
 tags: [statistics]
 image:
-  path: /posts_images/2018-02-17-UnderstandingCentralTendency/cover.png
+  path: /posts_images/2018-02-17-understanding-central-tendency/cover.png
 ---
 
 Data exploration is an essential part of data science. In order to fully understand the data, we must first understand descriptive statistics. In this exercise, we are going to use the bike sharing dataset from UCI machine learning repository.
@@ -56,7 +56,7 @@ print('Mode: {}'.format(data['season'].mode()[0]))
 
 
     
-![png](/posts_images/2018-02-17-UnderstandingCentralTendency/output_3_0.png)
+![png](/posts_images/2018-02-17-understanding-central-tendency/output_3_0.png)
     
 
 
@@ -92,7 +92,7 @@ print('Mode: {}'.format(data['weathersit'].mode()[0]))
 
 
     
-![png](/posts_images/2018-02-17-UnderstandingCentralTendency/output_6_0.png)
+![png](/posts_images/2018-02-17-understanding-central-tendency/output_6_0.png)
     
 
 
@@ -124,7 +124,7 @@ print('Mode: {}'.format(data['hum'].mode()[0]))
 
 
     
-![png](/posts_images/2018-02-17-UnderstandingCentralTendency/output_9_0.png)
+![png](/posts_images/2018-02-17-understanding-central-tendency/output_9_0.png)
     
 
 
@@ -162,7 +162,7 @@ print('Std Dev: {}'.format(data['cnt'].std().round(1)))
 
 
     
-![png](/posts_images/2018-02-17-UnderstandingCentralTendency/output_12_0.png)
+![png](/posts_images/2018-02-17-understanding-central-tendency/output_12_0.png)
     
 
 

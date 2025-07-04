@@ -4,7 +4,7 @@ date: 2018-01-27 00:00 +/-0000
 categories: [DataQuest]
 tags: [dataquest]
 image:
-  path: /posts_images/2018-01-27-DataQuestGuidedProjectExploringGunDeathsInTheUS/cover.PNG
+  path: /posts_images/2018-01-27-data-quest-guided-project-exploring-gun-deaths-in-the-us/cover.PNG
 ---
 
 

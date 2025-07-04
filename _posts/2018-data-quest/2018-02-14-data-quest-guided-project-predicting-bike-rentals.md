@@ -4,7 +4,7 @@ date: 2018-02-14 00:00 +/-0000
 categories: [DataQuest]
 tags: [dataquest]
 image:
-  path: /posts_images/2018-02-14-DataQuestGuidedProjectPredictingBikeRentals/cover.PNG
+  path: /posts_images/2018-02-14-data-quest-guided-project-predicting-bike-rentals/cover.PNG
 ---
 
 
@@ -196,7 +196,7 @@ plt.hist(bike_rentals['cnt'])
 
 
     
-![png](/posts_images/2018-02-14-DataQuestGuidedProjectPredictingBikeRentals/output_3_1.png)
+![png](/posts_images/2018-02-14-data-quest-guided-project-predicting-bike-rentals/output_3_1.png)
     
 
 

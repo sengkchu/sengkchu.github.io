@@ -4,14 +4,12 @@ date: 2018-02-16 00:00:00 +/-0000
 categories: [Data Science, Machine Learning]
 tags: [machine learning]
 image:
-  path: /posts_images/2018-02-16-CrossValidationMethodsforMachineLearning/cover.png
+  path: /posts_images/2018-02-16-cross-validation-methods-for-machine-learning/cover.png
 ---
-
-In the [Predicting House Prices with Linear Regression](https://sengkchu.github.io/posts/predict-house-price-regression.html) project, I talked a little bit about model evaluation. Specifically, I talked about cross validation. I want to expand on this topic.
 
 Suppose we are given some data set:
 
-![png](/posts_images/2018-02-16-CrossValidationMethodsforMachineLearning/dataset1.png)
+![png](/posts_images/2018-02-16-cross-validation-methods-for-machine-learning/dataset1.png)
 
 Let's assume this dataset has been fully cleaned and processed. We are interested in using a linear regression model on this dataset. However, we need a way to evaluate this model's performance.
 
@@ -216,7 +214,7 @@ We are interested in creating a model that can predict the "Sale Price" with the
 + A training set to fit the model.
 + A testing set to predict our results.
 
-![png](/posts_images/2018-02-16-CrossValidationMethodsforMachineLearning/method1.png)
+![png](/posts_images/2018-02-16-cross-validation-methods-for-machine-learning/method1.png)
 
 We can then compare the predictions from the testing set with the actual data using RMSE as the error metric.
 
@@ -291,7 +289,7 @@ So how do we know if the model is actually good at predicting new data?
 
 This is where cross validation is really useful. Suppose we split the data set into four blocks (K = 4). We can train four linear regression models with each block being the test set once. The rest of the data will be the training set.
 
-![png](/posts_images/2018-02-16-CrossValidationMethodsforMachineLearning/Kfold.png)
+![png](/posts_images/2018-02-16-cross-validation-methods-for-machine-learning/Kfold.png)
 
 
 Each one of these model will have its own error, in our this case this error will be the RMSE. We can evaluate the model based on the average error from the four models. This method is useful because we are eliminating some of the selection bias. In the first method, only part of the data end up as the training set. In cross validation, all of the data end up in both the training set and the testing set.
@@ -332,7 +330,7 @@ print(np.mean(rmse_list))
 
 So what happens if we take K to the extreme, and set K = n. Where n is the number of rows in a dataset. We are going to train n number of models. Each one of these models will have one row as the testing set, and the rest of the data as the training set.
 
-![png](/posts_images/2018-02-16-CrossValidationMethodsforMachineLearning/leaveoneout.png)
+![png](/posts_images/2018-02-16-cross-validation-methods-for-machine-learning/leaveoneout.png)
 
 
 We generate n number of models. Each one of these models will use every single row except for one row as the training set. Then we'll test the model with the row that was not a part of the training set. Finally, we check the error of this model. 
@@ -431,7 +429,7 @@ plt.show()
 
 
     
-![png](/posts_images/2018-02-16-CrossValidationMethodsforMachineLearning/output_13_0.png)
+![png](/posts_images/2018-02-16-cross-validation-methods-for-machine-learning/output_13_0.png)
     
 
 

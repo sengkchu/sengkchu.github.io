@@ -4,7 +4,7 @@ date: 2018-01-26 00:00 +/-0000
 categories: [DataQuest]
 tags: [dataquest]
 image:
-  path: /posts_images/2018-01-26-DataQuestGuidedProjectExploreUSBirths/cover.PNG
+  path: /posts_images/2018-01-26-data-quest-guided-project-explore-us-births/cover.PNG
 ---
 
 

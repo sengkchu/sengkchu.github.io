@@ -4,7 +4,7 @@ date: 2018-02-16 00:00:00 +/-0000
 categories: [Data Science, Data Analysis]
 tags: [sql]
 image:
-  path: /posts_images/2018-02-16-AnsweringBusinessQuestionsWithSQL/cover.png
+  path: /posts_images/2018-02-16-answering-business-questions-with-sql/cover.png
 ---
 
 In this project, we are going to explore the database, 'chinook.db'. We are going to come up with some business questions that might be interesting. Then we'll try to answer them with SQL. 
@@ -37,7 +37,7 @@ def run_command(command):
 
 Below, I've attached an image of the database scehma.
 
-![png](/posts_images/2018-02-16-AnsweringBusinessQuestionsWithSQL/relationchart.png)
+![png](/posts_images/2018-02-16-answering-business-questions-with-sql/relationchart.png)
 
 ```python
 def show_tables():
@@ -344,7 +344,7 @@ plt.show()
 
 
     
-![png](/posts_images/2018-02-16-AnsweringBusinessQuestionsWithSQL/output_7_0.png)
+![png](/posts_images/2018-02-16-answering-business-questions-with-sql/output_7_0.png)
     
 
 
@@ -478,7 +478,7 @@ plt.show()
 
 
     
-![png](/posts_images/2018-02-16-AnsweringBusinessQuestionsWithSQL/output_11_0.png)
+![png](/posts_images/2018-02-16-answering-business-questions-with-sql/output_11_0.png)
     
 
 
@@ -710,7 +710,7 @@ plt.show()
 
 
     
-![png](/posts_images/2018-02-16-AnsweringBusinessQuestionsWithSQL/output_15_0.png)
+![png](/posts_images/2018-02-16-answering-business-questions-with-sql/output_15_0.png)
     
 
 
@@ -880,7 +880,7 @@ plt.show()
 
 
     
-![png](/posts_images/2018-02-16-AnsweringBusinessQuestionsWithSQL/output_21_0.png)
+![png](/posts_images/2018-02-16-answering-business-questions-with-sql/output_21_0.png)
     
 
 
@@ -1086,7 +1086,7 @@ plt.show()
 
 
     
-![png](/posts_images/2018-02-16-AnsweringBusinessQuestionsWithSQL/output_25_0.png)
+![png](/posts_images/2018-02-16-answering-business-questions-with-sql/output_25_0.png)
     
 
 
@@ -1276,7 +1276,7 @@ plt.show()
 
 
     
-![png](/posts_images/2018-02-16-AnsweringBusinessQuestionsWithSQL/output_29_0.png)
+![png](/posts_images/2018-02-16-answering-business-questions-with-sql/output_29_0.png)
     
 
 

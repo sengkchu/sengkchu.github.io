@@ -4,7 +4,7 @@ date: 2018-02-07 00:00 +/-0000
 categories: [DataQuest]
 tags: [dataquest]
 image:
-  path: /posts_images/2018-02-07-DataQuestGuidedProjectAnalyzingCIAFactbookDataUsingSQLiteAndPython/cover.PNG
+  path: /posts_images/2018-02-07-data-quest-guided-project-analyzing-cia-factbook-data-using-sqlite-and-python/cover.PNG
 ---
 
 
@@ -514,7 +514,7 @@ plt.show()
 
 
     
-![png](/posts_images/2018-02-07-DataQuestGuidedProjectAnalyzingCIAFactbookDataUsingSQLiteAndPython/output_11_0.png)
+![png](/posts_images/2018-02-07-data-quest-guided-project-analyzing-cia-factbook-data-using-sqlite-and-python/output_11_0.png)
     
 
 
@@ -608,7 +608,7 @@ plt.show()
 
 
     
-![png](/posts_images/2018-02-07-DataQuestGuidedProjectAnalyzingCIAFactbookDataUsingSQLiteAndPython/output_15_0.png)
+![png](/posts_images/2018-02-07-data-quest-guided-project-analyzing-cia-factbook-data-using-sqlite-and-python/output_15_0.png)
     
 
 
@@ -626,7 +626,7 @@ plt.show()
 
 
     
-![png](/posts_images/2018-02-07-DataQuestGuidedProjectAnalyzingCIAFactbookDataUsingSQLiteAndPython/output_17_0.png)
+![png](/posts_images/2018-02-07-data-quest-guided-project-analyzing-cia-factbook-data-using-sqlite-and-python/output_17_0.png)
     
 
 

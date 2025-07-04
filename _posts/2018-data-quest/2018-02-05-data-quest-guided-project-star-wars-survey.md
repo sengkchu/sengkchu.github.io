@@ -4,7 +4,7 @@ date: 2018-02-05 00:00 +/-0000
 categories: [DataQuest]
 tags: [dataquest]
 image:
-  path: /posts_images/2018-02-05-DataQuestGuidedProjectStarWarsSurvey/cover.PNG
+  path: /posts_images/2018-02-05-data-quest-guided-project-star-wars-survey/cover.PNG
 ---
 
 
@@ -715,7 +715,7 @@ plt.ylabel('Average Ranking')
 
 
     
-![png](/posts_images/2018-02-05-DataQuestGuidedProjectStarWarsSurvey/output_14_1.png)
+![png](/posts_images/2018-02-05-data-quest-guided-project-star-wars-survey/output_14_1.png)
     
 
 
@@ -741,7 +741,7 @@ plt.ylabel('Total Respondants')
 
 
     
-![png](/posts_images/2018-02-05-DataQuestGuidedProjectStarWarsSurvey/output_16_1.png)
+![png](/posts_images/2018-02-05-data-quest-guided-project-star-wars-survey/output_16_1.png)
     
 
 
@@ -770,13 +770,13 @@ plt.show()
 
 
     
-![png](/posts_images/2018-02-05-DataQuestGuidedProjectStarWarsSurvey/output_19_0.png)
+![png](/posts_images/2018-02-05-data-quest-guided-project-star-wars-survey/output_19_0.png)
     
 
 
 
     
-![png](/posts_images/2018-02-05-DataQuestGuidedProjectStarWarsSurvey/output_19_1.png)
+![png](/posts_images/2018-02-05-data-quest-guided-project-star-wars-survey/output_19_1.png)
     
 
 
@@ -797,13 +797,13 @@ plt.show()
 
 
     
-![png](/posts_images/2018-02-05-DataQuestGuidedProjectStarWarsSurvey/output_20_0.png)
+![png](/posts_images/2018-02-05-data-quest-guided-project-star-wars-survey/output_20_0.png)
     
 
 
 
     
-![png](/posts_images/2018-02-05-DataQuestGuidedProjectStarWarsSurvey/output_20_1.png)
+![png](/posts_images/2018-02-05-data-quest-guided-project-star-wars-survey/output_20_1.png)
     
 
 

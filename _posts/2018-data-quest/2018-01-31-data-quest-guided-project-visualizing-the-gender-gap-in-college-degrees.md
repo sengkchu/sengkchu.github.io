@@ -4,7 +4,7 @@ date: 2018-01-31 00:00 +/-0000
 categories: [DataQuest]
 tags: [dataquest]
 image:
-  path: /posts_images/2018-01-31-DataQuestGuidedProjectVisualizingTheGenderGapInCollegeDegrees/cover.PNG
+  path: /posts_images/2018-01-31-data-quest-guided-project-visualizing-the-gender-gap-in-college-degrees/cover.PNG
 ---
 
 
@@ -127,7 +127,7 @@ plt.show()
 
 
     
-![png](/posts_images/2018-01-31-DataQuestGuidedProjectVisualizingTheGenderGapInCollegeDegrees/output_3_0.png)
+![png](/posts_images/2018-01-31-data-quest-guided-project-visualizing-the-gender-gap-in-college-degrees/output_3_0.png)
     
 
 

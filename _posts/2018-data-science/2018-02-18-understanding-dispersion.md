@@ -4,7 +4,7 @@ date: 2018-02-18 00:00:00 +/-0000
 categories: [Data Science, Statistics]
 tags: [statistics]
 image:
-  path: /posts_images/2018-02-18-UnderstandingDispersion/cover.png
+  path: /posts_images/2018-02-18-understanding-dispersion/cover.png
 ---
 
 In the previous article in this series, we explored the concept of central tendency. The central tedency allows us to grasp the "middle" of the data, but it doesn't tell us anything about the variability of the data. Specifically, how the data is spread out, or the <b>dispersion</b>.
@@ -184,7 +184,7 @@ print('median_absolute_deviation_hum: {}'.format(mad(data['hum'], 'median').roun
 
 
     
-![png](/posts_images/2018-02-18-UnderstandingDispersion/output_12_0.png)
+![png](/posts_images/2018-02-18-understanding-dispersion/output_12_0.png)
     
 
 
@@ -213,7 +213,7 @@ print('median_absolute_deviation_cnt: {}'.format(mad(data['cnt'], 'median').roun
 
 
     
-![png](/posts_images/2018-02-18-UnderstandingDispersion/output_14_0.png)
+![png](/posts_images/2018-02-18-understanding-dispersion/output_14_0.png)
     
 
 
@@ -244,7 +244,7 @@ print('median_absolute_deviation_cnt: {}'.format(mad(test, 'median').round(3)))
 
 
     
-![png](/posts_images/2018-02-18-UnderstandingDispersion/output_16_0.png)
+![png](/posts_images/2018-02-18-understanding-dispersion/output_16_0.png)
     
 
 

@@ -4,7 +4,7 @@ date: 2018-02-25 00:00:00 +/-0000
 categories: [Data Science, Statistics]
 tags: [statistics]
 image:
-  path: /posts_images/2018-02-25-HypothesisTestingWelch/cover.png
+  path: /posts_images/2018-02-25-hypothesis-testing-welch/cover.png
 ---
 
 Suppose that we are in the data science team for an orange juice company. In the meeting, the marketing team claimed that their new marketing strategy resulted in an increase of sales. The management team asked us to determine if this is actually true.
@@ -104,7 +104,7 @@ plt.show()
 
 
     
-![png](/posts_images/2018-02-25-HypothesisTestingWelch/output_2_0.png)
+![png](/posts_images/2018-02-25-hypothesis-testing-welch/output_2_0.png)
     
 
 
@@ -350,7 +350,7 @@ print('sample_variance: {}'.format(unpaid_likes.var()))
 
 
     
-![png](/posts_images/2018-02-25-HypothesisTestingWelch/output_10_0.png)
+![png](/posts_images/2018-02-25-hypothesis-testing-welch/output_10_0.png)
     
 
 
@@ -377,7 +377,7 @@ print('sample_variance: {}'.format(paid_likes.var()))
 
 
     
-![png](/posts_images/2018-02-25-HypothesisTestingWelch/output_11_0.png)
+![png](/posts_images/2018-02-25-hypothesis-testing-welch/output_11_0.png)
     
 
 
@@ -416,7 +416,7 @@ plt.show()
 
 
     
-![png](/posts_images/2018-02-25-HypothesisTestingWelch/output_13_0.png)
+![png](/posts_images/2018-02-25-hypothesis-testing-welch/output_13_0.png)
     
 
 

@@ -4,10 +4,10 @@ date: 2018-02-16 00:00:00 +/-0000
 categories: [Data Science, Machine Learning]
 tags: [machine learning]
 image:
-  path: /posts_images/2018-02-16-PredictingTitanicSurvival/cover.png
+  path: /posts_images/2018-02-16-predicting-titanic-survival/cover.png
 ---
 
-In this project we are going to explore the machine learning workflow. Specifically, we'll be looking at the famous titanic dataset. This project is an extended version of a guided project from dataquest, you can check them out [here](https://dataquest.io).
+In this project we are going to explore the machine learning workflow. Specifically, we'll be looking at the famous titanic dataset.
 
 The goal of this project is to accurately predict if a passenger survived the sinking of the Titanic or not. We must predict a 0 or 1 value for the 'Survived' column in the test dataset. Then we'll submit the file of the predictions to kaggle.
 
@@ -201,7 +201,7 @@ plt.show()
 
 
     
-![png](/posts_images/2018-02-16-PredictingTitanicSurvival/output_7_0.png)
+![png](/posts_images/2018-02-16-predicting-titanic-survival/output_7_0.png)
     
 
 
@@ -305,7 +305,7 @@ plt.show()
 
 
     
-![png](/posts_images/2018-02-16-PredictingTitanicSurvival/output_16_1.png)
+![png](/posts_images/2018-02-16-predicting-titanic-survival/output_16_1.png)
     
 
 
@@ -331,7 +331,7 @@ print(train['Survived'].groupby(Ages_category).mean().sort_values())
 
 
     
-![png](/posts_images/2018-02-16-PredictingTitanicSurvival/output_20_0.png)
+![png](/posts_images/2018-02-16-predicting-titanic-survival/output_20_0.png)
     
 
 
@@ -362,13 +362,13 @@ plt.show()
 
 
     
-![png](/posts_images/2018-02-16-PredictingTitanicSurvival/output_23_0.png)
+![png](/posts_images/2018-02-16-predicting-titanic-survival/output_23_0.png)
     
 
 
 
     
-![png](/posts_images/2018-02-16-PredictingTitanicSurvival/output_23_1.png)
+![png](/posts_images/2018-02-16-predicting-titanic-survival/output_23_1.png)
     
 
 
@@ -530,7 +530,7 @@ print(train['Survived'].groupby(Fare_categories).mean().sort_values())
 
 
     
-![png](/posts_images/2018-02-16-PredictingTitanicSurvival/output_28_0.png)
+![png](/posts_images/2018-02-16-predicting-titanic-survival/output_28_0.png)
     
 
 
@@ -729,7 +729,7 @@ plt.show()
 
 
     
-![png](/posts_images/2018-02-16-PredictingTitanicSurvival/output_43_0.png)
+![png](/posts_images/2018-02-16-predicting-titanic-survival/output_43_0.png)
     
 
 

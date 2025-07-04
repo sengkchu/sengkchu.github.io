@@ -4,7 +4,7 @@ date: 2018-02-08 00:00 +/-0000
 categories: [DataQuest]
 tags: [dataquest]
 image:
-  path: /posts_images/2018-02-08-DataQuestGuidedProjectAnalyzingMovieReviews/cover.PNG
+  path: /posts_images/2018-02-08-data-quest-guided-project-analyzing-movie-reviews/cover.PNG
 ---
 
 
@@ -208,13 +208,13 @@ plt.show()
 
 
     
-![png](/posts_images/2018-02-08-DataQuestGuidedProjectAnalyzingMovieReviews/output_3_0.png)
+![png](/posts_images/2018-02-08-data-quest-guided-project-analyzing-movie-reviews/output_3_0.png)
     
 
 
 
     
-![png](/posts_images/2018-02-08-DataQuestGuidedProjectAnalyzingMovieReviews/output_3_1.png)
+![png](/posts_images/2018-02-08-data-quest-guided-project-analyzing-movie-reviews/output_3_1.png)
     
 
 
@@ -259,7 +259,7 @@ plt.show()
 
 
     
-![png](/posts_images/2018-02-08-DataQuestGuidedProjectAnalyzingMovieReviews/output_8_0.png)
+![png](/posts_images/2018-02-08-data-quest-guided-project-analyzing-movie-reviews/output_8_0.png)
     
 
 
@@ -508,7 +508,7 @@ plt.show()
 
 
     
-![png](/posts_images/2018-02-08-DataQuestGuidedProjectAnalyzingMovieReviews/output_17_0.png)
+![png](/posts_images/2018-02-08-data-quest-guided-project-analyzing-movie-reviews/output_17_0.png)
     
 
 

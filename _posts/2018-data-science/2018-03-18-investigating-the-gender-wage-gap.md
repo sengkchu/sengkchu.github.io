@@ -4,7 +4,7 @@ date: 2018-03-18 00:00:00 +/-0000
 categories: [Data Science, Data Analysis]
 tags: [statistics]
 image:
-  path: /posts_images/2018-03-18-InvestigatingtheGenderWageGap/cover.png
+  path: /posts_images/2018-03-18-investigating-the-gender-wage-gap/cover.png
 ---
 
 
@@ -527,7 +527,7 @@ plt.show()
 
 
     
-![png](/posts_images/2018-03-18-InvestigatingtheGenderWageGap/output_29_0.png)
+![png](/posts_images/2018-03-18-investigating-the-gender-wage-gap/output_29_0.png)
     
 
 
@@ -550,7 +550,7 @@ plt.show()
 
 
     
-![png](/posts_images/2018-03-18-InvestigatingtheGenderWageGap/output_31_0.png)
+![png](/posts_images/2018-03-18-investigating-the-gender-wage-gap/output_31_0.png)
     
 
 
@@ -582,7 +582,7 @@ plt.tight_layout()
 
 
     
-![png](/posts_images/2018-03-18-InvestigatingtheGenderWageGap/output_34_0.png)
+![png](/posts_images/2018-03-18-investigating-the-gender-wage-gap/output_34_0.png)
     
 
 
@@ -653,7 +653,7 @@ plt.show()
 
 
     
-![png](/posts_images/2018-03-18-InvestigatingtheGenderWageGap/output_40_0.png)
+![png](/posts_images/2018-03-18-investigating-the-gender-wage-gap/output_40_0.png)
     
 
 
@@ -693,7 +693,7 @@ plt.show()
 
 
     
-![png](/posts_images/2018-03-18-InvestigatingtheGenderWageGap/output_42_0.png)
+![png](/posts_images/2018-03-18-investigating-the-gender-wage-gap/output_42_0.png)
     
 
 
@@ -746,7 +746,7 @@ plt.show()
 
 
     
-![png](/posts_images/2018-03-18-InvestigatingtheGenderWageGap/output_45_0.png)
+![png](/posts_images/2018-03-18-investigating-the-gender-wage-gap/output_45_0.png)
     
 
 
@@ -901,7 +901,7 @@ plt.show()
 
 
     
-![png](/posts_images/2018-03-18-InvestigatingtheGenderWageGap/output_49_0.png)
+![png](/posts_images/2018-03-18-investigating-the-gender-wage-gap/output_49_0.png)
     
 
 
@@ -928,7 +928,7 @@ plt.show()
 
 
     
-![png](/posts_images/2018-03-18-InvestigatingtheGenderWageGap/output_53_0.png)
+![png](/posts_images/2018-03-18-investigating-the-gender-wage-gap/output_53_0.png)
     
 
 
@@ -1120,7 +1120,7 @@ plt.show()
 
 
     
-![png](/posts_images/2018-03-18-InvestigatingtheGenderWageGap/output_56_0.png)
+![png](/posts_images/2018-03-18-investigating-the-gender-wage-gap/output_56_0.png)
     
 
 
@@ -1327,7 +1327,7 @@ plt.show()
 
 
     
-![png](/posts_images/2018-03-18-InvestigatingtheGenderWageGap/output_60_0.png)
+![png](/posts_images/2018-03-18-investigating-the-gender-wage-gap/output_60_0.png)
     
 
 
@@ -1682,7 +1682,7 @@ plt.show()
 
 
     
-![png](/posts_images/2018-03-18-InvestigatingtheGenderWageGap/output_70_0.png)
+![png](/posts_images/2018-03-18-investigating-the-gender-wage-gap/output_70_0.png)
     
 
 
@@ -1724,7 +1724,7 @@ plt.show()
 
 
     
-![png](/posts_images/2018-03-18-InvestigatingtheGenderWageGap/output_72_0.png)
+![png](/posts_images/2018-03-18-investigating-the-gender-wage-gap/output_72_0.png)
     
 
 
@@ -1851,7 +1851,7 @@ plt.show()
 
 
     
-![png](/posts_images/2018-03-18-InvestigatingtheGenderWageGap/output_76_0.png)
+![png](/posts_images/2018-03-18-investigating-the-gender-wage-gap/output_76_0.png)
     
 
 
@@ -2010,7 +2010,7 @@ plt.show()
 
 
     
-![png](/posts_images/2018-03-18-InvestigatingtheGenderWageGap/output_81_0.png)
+![png](/posts_images/2018-03-18-investigating-the-gender-wage-gap/output_81_0.png)
     
 
 
@@ -2040,7 +2040,7 @@ plt.show()
 
 
     
-![png](/posts_images/2018-03-18-InvestigatingtheGenderWageGap/output_82_0.png)
+![png](/posts_images/2018-03-18-investigating-the-gender-wage-gap/output_82_0.png)
     
 
 

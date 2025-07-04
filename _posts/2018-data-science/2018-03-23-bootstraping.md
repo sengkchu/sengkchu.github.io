@@ -4,10 +4,10 @@ date: 2018-03-23 00:00:00 +/-0000
 categories: [Data Science, Statistics]
 tags: [statistics]
 image:
-  path: /posts_images/2018-03-23-Bootstraping/cover.png
+  path: /posts_images/2018-03-23-bootstraping/cover.png
 ---
 
-In a previous [article](https://sengkchu.github.io/posts/HypothesisTestingWelch/) of this series, I talked about hypothesis testing and confidence intervals using classical methods. However, we had to make assumptions to justify our methods. So what if the distribution is not normal? What if our sample size is so small that we can't use the central limit theorem.
+In a previous [article](https://sengkchu.github.io/posts/hypothesis-testing-welch/) of this series, I talked about hypothesis testing and confidence intervals using classical methods. However, we had to make assumptions to justify our methods. So what if the distribution is not normal? What if our sample size is so small that we can't use the central limit theorem.
 
 Modern statiscal methods uses raw computational power to create the distribution. We can then use this distribution to estimate the likelihood of an event. This is very useful for answering questions such as  “Is A better than B?” or “Did adding feature X improve our product?”. The statistical method I am going to focus on in this article is <b>bootstrapping</b>. The great thing about this method is we don't have to assume a normal distribution.
 
@@ -70,7 +70,7 @@ print('paid_mean: {}'.format(paid_likes.mean()))
 
 
     
-![png](/posts_images/2018-03-23-Bootstraping/output_4_0.png)
+![png](/posts_images/2018-03-23-bootstraping/output_4_0.png)
     
 
 
@@ -198,7 +198,7 @@ print('Upper bound: {}'.format(upper_bound))
 
 
     
-![png](/posts_images/2018-03-23-Bootstraping/output_15_0.png)
+![png](/posts_images/2018-03-23-bootstraping/output_15_0.png)
     
 
 
@@ -228,7 +228,7 @@ plt.show()
 
 
     
-![png](/posts_images/2018-03-23-Bootstraping/output_18_0.png)
+![png](/posts_images/2018-03-23-bootstraping/output_18_0.png)
     
 
 
@@ -298,7 +298,7 @@ print('Upper bound: {}'.format(upper_bound))
 
 
     
-![png](/posts_images/2018-03-23-Bootstraping/output_23_0.png)
+![png](/posts_images/2018-03-23-bootstraping/output_23_0.png)
     
 
 
@@ -374,7 +374,7 @@ plt.show()
 
 
     
-![png](/posts_images/2018-03-23-Bootstraping/output_29_0.png)
+![png](/posts_images/2018-03-23-bootstraping/output_29_0.png)
     
 
 
@@ -413,7 +413,7 @@ plt.show()
 
 
     
-![png](/posts_images/2018-03-23-Bootstraping/output_34_0.png)
+![png](/posts_images/2018-03-23-bootstraping/output_34_0.png)
     
 
 

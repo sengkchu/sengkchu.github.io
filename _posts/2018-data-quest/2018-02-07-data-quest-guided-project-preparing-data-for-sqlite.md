@@ -4,7 +4,7 @@ date: 2018-02-07 00:00 +/-0000
 categories: [DataQuest]
 tags: [dataquest]
 image:
-  path: /posts_images/2018-02-07-DataQuestGuidedProjectPreparingDataForSQLite/cover.PNG
+  path: /posts_images/2018-02-07-data-quest-guided-project-preparing-data-for-sqlite/cover.PNG
 ---
 
 In this project, we will prepare data in preparation for SQL. We'll have to first clean the data.

@@ -4,7 +4,7 @@ date: 2018-03-04 00:00:00 +/-0000
 categories: [Data Science, Statistics]
 tags: [statistics]
 image:
-  path: /posts_images/2018-03-04-Chi-SquaredTestforIndependence/cover.png
+  path: /posts_images/2018-03-04-chi-squared-test-for-independence/cover.png
 ---
 
 So far, we've been comparing data with at least one one numerical(continuous) column and one categorical(nominal) column. So what happens if we want to determine the statistical significance of two independent categorical groups of data?
@@ -262,7 +262,7 @@ plt.show()
 
 
     
-![png](/posts_images/2018-03-04-Chi-SquaredTestforIndependence/output_10_0.png)
+![png](/posts_images/2018-03-04-chi-squared-test-for-independence/output_10_0.png)
     
 
 

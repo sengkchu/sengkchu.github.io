@@ -4,7 +4,7 @@ date: 2018-03-01 00:00:00 +/-0000
 categories: [Data Science, Statistics]
 tags: [statistics]
 image:
-  path: /posts_images/2018-03-01-HypothesisTestingANOVA/cover.png
+  path: /posts_images/2018-03-01-hypothesis-testing-anova/cover.png
 ---
 
 In the previous article, we talked about hypothesis testing using the Welch's t-test on two independent samples of data. So what happens if we want know the statiscal significance for $k$ groups of data?
@@ -271,7 +271,7 @@ plt.show()
 
 
     
-![png](/posts_images/2018-03-01-HypothesisTestingANOVA/output_6_1.png)
+![png](/posts_images/2018-03-01-hypothesis-testing-anova/output_6_1.png)
     
 
 

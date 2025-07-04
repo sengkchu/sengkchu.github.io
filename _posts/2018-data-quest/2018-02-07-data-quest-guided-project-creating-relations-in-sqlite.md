@@ -4,7 +4,7 @@ date: 2018-02-07 00:00 +/-0000
 categories: [DataQuest]
 tags: [dataquest]
 image:
-  path: /posts_images/2018-02-07-DataQuestGuidedProjectCreatingRelationsInSQLite/cover.PNG
+  path: /posts_images/2018-02-07-data-quest-guided-project-creating-relations-in-sqlite/cover.PNG
 ---
 
 In this project we will use the cleaned data from the previous mission and work mainly in SQL. We will use SQL to transform the nominations tables into new tables, and create relations across these tables.

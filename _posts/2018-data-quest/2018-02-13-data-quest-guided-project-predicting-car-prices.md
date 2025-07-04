@@ -4,7 +4,7 @@ date: 2018-02-13 00:00 +/-0000
 categories: [DataQuest]
 tags: [dataquest]
 image:
-  path: /posts_images/2018-02-13-DataQuestGuidedProjectPredictingCarPrices/cover.PNG
+  path: /posts_images/2018-02-13-data-quest-guided-project-predicting-car-prices/cover.PNG
 ---
 
 
@@ -1161,7 +1161,7 @@ plt.show()
 
 
     
-![png](/posts_images/2018-02-13-DataQuestGuidedProjectPredictingCarPrices/output_25_1.png)
+![png](/posts_images/2018-02-13-data-quest-guided-project-predicting-car-prices/output_25_1.png)
     
 
 
@@ -1392,7 +1392,7 @@ plt.show()
 
 
     
-![png](/posts_images/2018-02-13-DataQuestGuidedProjectPredictingCarPrices/output_36_0.png)
+![png](/posts_images/2018-02-13-data-quest-guided-project-predicting-car-prices/output_36_0.png)
     
 
 

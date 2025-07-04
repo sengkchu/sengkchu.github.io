@@ -4,7 +4,7 @@ date: 2018-01-30 00:00 +/-0000
 categories: [DataQuest]
 tags: [dataquest]
 image:
-  path: /posts_images/2018-01-30-DataQuestGuidedProjectVisualizingEarningsBasedOnCollegeMajors/cover.PNG
+  path: /posts_images/2018-01-30-data-quest-guided-project-visualizing-earnings-based-on-college-majors/cover.PNG
 ---
 
 
@@ -1990,37 +1990,37 @@ recent_grads.plot(x='Women', y='Median', kind = 'scatter')
 
 
     
-![png](/posts_images/2018-01-30-DataQuestGuidedProjectVisualizingEarningsBasedOnCollegeMajors/output_9_1.png)
+![png](/posts_images/2018-01-30-data-quest-guided-project-visualizing-earnings-based-on-college-majors/output_9_1.png)
     
 
 
 
     
-![png](/posts_images/2018-01-30-DataQuestGuidedProjectVisualizingEarningsBasedOnCollegeMajors/output_9_2.png)
+![png](/posts_images/2018-01-30-data-quest-guided-project-visualizing-earnings-based-on-college-majors/output_9_2.png)
     
 
 
 
     
-![png](/posts_images/2018-01-30-DataQuestGuidedProjectVisualizingEarningsBasedOnCollegeMajors/output_9_3.png)
+![png](/posts_images/2018-01-30-data-quest-guided-project-visualizing-earnings-based-on-college-majors/output_9_3.png)
     
 
 
 
     
-![png](/posts_images/2018-01-30-DataQuestGuidedProjectVisualizingEarningsBasedOnCollegeMajors/output_9_4.png)
+![png](/posts_images/2018-01-30-data-quest-guided-project-visualizing-earnings-based-on-college-majors/output_9_4.png)
     
 
 
 
     
-![png](/posts_images/2018-01-30-DataQuestGuidedProjectVisualizingEarningsBasedOnCollegeMajors/output_9_5.png)
+![png](/posts_images/2018-01-30-data-quest-guided-project-visualizing-earnings-based-on-college-majors/output_9_5.png)
     
 
 
 
     
-![png](/posts_images/2018-01-30-DataQuestGuidedProjectVisualizingEarningsBasedOnCollegeMajors/output_9_6.png)
+![png](/posts_images/2018-01-30-data-quest-guided-project-visualizing-earnings-based-on-college-majors/output_9_6.png)
     
 
 
@@ -2044,7 +2044,7 @@ recent_grads['Median'].hist(bins=25)
 
 
     
-![png](/posts_images/2018-01-30-DataQuestGuidedProjectVisualizingEarningsBasedOnCollegeMajors/output_11_1.png)
+![png](/posts_images/2018-01-30-data-quest-guided-project-visualizing-earnings-based-on-college-majors/output_11_1.png)
     
 
 
@@ -2063,7 +2063,7 @@ recent_grads['Employed'].hist(bins=25)
 
 
     
-![png](/posts_images/2018-01-30-DataQuestGuidedProjectVisualizingEarningsBasedOnCollegeMajors/output_12_1.png)
+![png](/posts_images/2018-01-30-data-quest-guided-project-visualizing-earnings-based-on-college-majors/output_12_1.png)
     
 
 
@@ -2082,7 +2082,7 @@ recent_grads['Full_time'].hist(bins=25)
 
 
     
-![png](/posts_images/2018-01-30-DataQuestGuidedProjectVisualizingEarningsBasedOnCollegeMajors/output_13_1.png)
+![png](/posts_images/2018-01-30-data-quest-guided-project-visualizing-earnings-based-on-college-majors/output_13_1.png)
     
 
 
@@ -2101,7 +2101,7 @@ recent_grads['ShareWomen'].hist(bins=25)
 
 
     
-![png](/posts_images/2018-01-30-DataQuestGuidedProjectVisualizingEarningsBasedOnCollegeMajors/output_14_1.png)
+![png](/posts_images/2018-01-30-data-quest-guided-project-visualizing-earnings-based-on-college-majors/output_14_1.png)
     
 
 
@@ -2120,7 +2120,7 @@ recent_grads['Unemployment_rate'].hist(bins=25)
 
 
     
-![png](/posts_images/2018-01-30-DataQuestGuidedProjectVisualizingEarningsBasedOnCollegeMajors/output_15_1.png)
+![png](/posts_images/2018-01-30-data-quest-guided-project-visualizing-earnings-based-on-college-majors/output_15_1.png)
     
 
 
@@ -2139,7 +2139,7 @@ recent_grads['Men'].hist(bins=25)
 
 
     
-![png](/posts_images/2018-01-30-DataQuestGuidedProjectVisualizingEarningsBasedOnCollegeMajors/output_16_1.png)
+![png](/posts_images/2018-01-30-data-quest-guided-project-visualizing-earnings-based-on-college-majors/output_16_1.png)
     
 
 
@@ -2157,7 +2157,7 @@ recent_grads['Women'].hist(bins=25)
 
 
     
-![png](/posts_images/2018-01-30-DataQuestGuidedProjectVisualizingEarningsBasedOnCollegeMajors/output_17_1.png)
+![png](/posts_images/2018-01-30-data-quest-guided-project-visualizing-earnings-based-on-college-majors/output_17_1.png)
     
 
 
@@ -2187,7 +2187,7 @@ scatter_matrix(recent_grads[['Sample_size', 'Median']], figsize=(10,10))
 
 
     
-![png](/posts_images/2018-01-30-DataQuestGuidedProjectVisualizingEarningsBasedOnCollegeMajors/output_20_1.png)
+![png](/posts_images/2018-01-30-data-quest-guided-project-visualizing-earnings-based-on-college-majors/output_20_1.png)
     
 
 
@@ -2213,7 +2213,7 @@ scatter_matrix(recent_grads[['Men', 'ShareWomen', 'Median']], figsize=(10,10))
 
 
     
-![png](/posts_images/2018-01-30-DataQuestGuidedProjectVisualizingEarningsBasedOnCollegeMajors/output_21_1.png)
+![png](/posts_images/2018-01-30-data-quest-guided-project-visualizing-earnings-based-on-college-majors/output_21_1.png)
     
 
 
@@ -2236,13 +2236,13 @@ recent_grads[163:].plot(kind='bar', x='Major', y='ShareWomen', colormap='winter'
 
 
     
-![png](/posts_images/2018-01-30-DataQuestGuidedProjectVisualizingEarningsBasedOnCollegeMajors/output_23_1.png)
+![png](/posts_images/2018-01-30-data-quest-guided-project-visualizing-earnings-based-on-college-majors/output_23_1.png)
     
 
 
 
     
-![png](/posts_images/2018-01-30-DataQuestGuidedProjectVisualizingEarningsBasedOnCollegeMajors/output_23_2.png)
+![png](/posts_images/2018-01-30-data-quest-guided-project-visualizing-earnings-based-on-college-majors/output_23_2.png)
     
 
 
@@ -2263,13 +2263,13 @@ recent_grads[163:].plot(kind='bar', x='Major', y='Median', colormap='winter')
 
 
     
-![png](/posts_images/2018-01-30-DataQuestGuidedProjectVisualizingEarningsBasedOnCollegeMajors/output_25_1.png)
+![png](/posts_images/2018-01-30-data-quest-guided-project-visualizing-earnings-based-on-college-majors/output_25_1.png)
     
 
 
 
     
-![png](/posts_images/2018-01-30-DataQuestGuidedProjectVisualizingEarningsBasedOnCollegeMajors/output_25_2.png)
+![png](/posts_images/2018-01-30-data-quest-guided-project-visualizing-earnings-based-on-college-majors/output_25_2.png)
     
 
 

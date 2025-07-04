@@ -4,7 +4,7 @@ date: 2018-02-09 00:00 +/-0000
 categories: [DataQuest]
 tags: [dataquest]
 image:
-  path: /posts_images/2018-02-09-DataQuestGuidedProjectWinningJeopardy/cover.PNG
+  path: /posts_images/2018-02-09-data-quest-guided-project-winning-jeopardy/cover.PNG
 ---
 
 

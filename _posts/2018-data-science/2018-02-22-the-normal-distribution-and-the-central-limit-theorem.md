@@ -4,7 +4,7 @@ date: 2018-02-22 00:00:00 +/-0000
 categories: [Data Science, Statistics]
 tags: [statistics]
 image:
-  path: /posts_images/2018-02-22-TheNormalDistributionandtheCentralLimitTheorem/cover.png
+  path: /posts_images/2018-02-22-the-normal-distribution-and-the-central-limit-theorem/cover.png
 ---
 
 In the previous article of the series, we explored the concept of dispersion in data. I mentioned how the standard deviation is a very powerful measure of dispersion when the distribution is similar to the gaussian function. In this exercise I am going to dig into this subject to figure out what this actually means. I also want to discover how we can apply this to real data and machine learning.
@@ -48,7 +48,7 @@ gaussian(sigma=1, mu=0, i=1)
 
 
     
-![png](/posts_images/2018-02-22-TheNormalDistributionandtheCentralLimitTheorem/output_2_0.png)
+![png](/posts_images/2018-02-22-the-normal-distribution-and-the-central-limit-theorem/output_2_0.png)
     
 
 
@@ -61,19 +61,19 @@ gaussian(sigma=1, mu=-1, i=3)
 
 
     
-![png](/posts_images/2018-02-22-TheNormalDistributionandtheCentralLimitTheorem/output_3_0.png)
+![png](/posts_images/2018-02-22-the-normal-distribution-and-the-central-limit-theorem/output_3_0.png)
     
 
 
 
     
-![png](/posts_images/2018-02-22-TheNormalDistributionandtheCentralLimitTheorem/output_3_1.png)
+![png](/posts_images/2018-02-22-the-normal-distribution-and-the-central-limit-theorem/output_3_1.png)
     
 
 
 
     
-![png](/posts_images/2018-02-22-TheNormalDistributionandtheCentralLimitTheorem/output_3_2.png)
+![png](/posts_images/2018-02-22-the-normal-distribution-and-the-central-limit-theorem/output_3_2.png)
     
 
 
@@ -86,19 +86,19 @@ gaussian(sigma=1.6, mu=0, i=3)
 
 
     
-![png](/posts_images/2018-02-22-TheNormalDistributionandtheCentralLimitTheorem/output_4_0.png)
+![png](/posts_images/2018-02-22-the-normal-distribution-and-the-central-limit-theorem/output_4_0.png)
     
 
 
 
     
-![png](/posts_images/2018-02-22-TheNormalDistributionandtheCentralLimitTheorem/output_4_1.png)
+![png](/posts_images/2018-02-22-the-normal-distribution-and-the-central-limit-theorem/output_4_1.png)
     
 
 
 
     
-![png](/posts_images/2018-02-22-TheNormalDistributionandtheCentralLimitTheorem/output_4_2.png)
+![png](/posts_images/2018-02-22-the-normal-distribution-and-the-central-limit-theorem/output_4_2.png)
     
 
 
@@ -123,7 +123,7 @@ gaussian_tall(sigma=0.1, mu=2, i=1)
 
 
     
-![png](/posts_images/2018-02-22-TheNormalDistributionandtheCentralLimitTheorem/output_6_0.png)
+![png](/posts_images/2018-02-22-the-normal-distribution-and-the-central-limit-theorem/output_6_0.png)
     
 
 
@@ -174,7 +174,7 @@ plt.show()
 
 
     
-![png](/posts_images/2018-02-22-TheNormalDistributionandtheCentralLimitTheorem/output_8_0.png)
+![png](/posts_images/2018-02-22-the-normal-distribution-and-the-central-limit-theorem/output_8_0.png)
     
 
 
@@ -221,7 +221,7 @@ plt.show()
 
 
     
-![png](/posts_images/2018-02-22-TheNormalDistributionandtheCentralLimitTheorem/output_13_0.png)
+![png](/posts_images/2018-02-22-the-normal-distribution-and-the-central-limit-theorem/output_13_0.png)
     
 
 
@@ -241,7 +241,7 @@ plt.show()
 
 
     
-![png](/posts_images/2018-02-22-TheNormalDistributionandtheCentralLimitTheorem/output_15_0.png)
+![png](/posts_images/2018-02-22-the-normal-distribution-and-the-central-limit-theorem/output_15_0.png)
     
 
 
@@ -265,7 +265,7 @@ plt.show()
 
 
     
-![png](/posts_images/2018-02-22-TheNormalDistributionandtheCentralLimitTheorem/output_17_0.png)
+![png](/posts_images/2018-02-22-the-normal-distribution-and-the-central-limit-theorem/output_17_0.png)
     
 
 
@@ -316,7 +316,7 @@ plt.show()
 
 
     
-![png](/posts_images/2018-02-22-TheNormalDistributionandtheCentralLimitTheorem/output_19_0.png)
+![png](/posts_images/2018-02-22-the-normal-distribution-and-the-central-limit-theorem/output_19_0.png)
     
 
 
@@ -362,7 +362,7 @@ plt.show()
 
 
     
-![png](/posts_images/2018-02-22-TheNormalDistributionandtheCentralLimitTheorem/output_22_1.png)
+![png](/posts_images/2018-02-22-the-normal-distribution-and-the-central-limit-theorem/output_22_1.png)
     
 
 
