@@ -10,7 +10,7 @@ image:
 
 ### 1.0 - Introduction
 
-In this project, I will focus on data analysis and visualization for the gender wage gap. Specifically, I am going to focus on public jobs in the city of San Francisco. This data set is publically available on [Kaggle](https://www.kaggle.com/kaggle/sf-salaries).  For a complete list of requirements and files used, check out my GitHub repository [here](https://github.com/sengkchu/Projects). 
+In this project, I will focus on data analysis and visualization for the gender wage gap. Specifically, I am going to focus on public jobs in the city of San Francisco. This data set is publically available on [Kaggle](https://www.kaggle.com/kaggle/sf-salaries).
 
 The following questions will be explored:
 
@@ -501,7 +501,7 @@ male_female_only['Job_Group'].value_counts()
 
 ### 4.0 - Data Analysis and Visualizations
 
-In this section, we are going to use the data to answer the questions stated in the [introduction section](#1.0---Introduction).
+In this section, we are going to use the data to answer the questions stated in the introduction.
 
 #### 4.1 - Overview of the gender gap
 
