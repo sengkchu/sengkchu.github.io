@@ -284,7 +284,7 @@ combined.plot.scatter(['sat_score'], ["saf_s_11"])
 
 
     
-![png](/posts_images/018-02-03-data-quest-guided-project-analyzing-nyc-high-school-data/output_21_1.png)
+![png](/posts_images/2018-02-03-data-quest-guided-project-analyzing-nyc-high-school-data/output_21_1.png)
     
 
 
@@ -323,7 +323,7 @@ plt.show()
 
 
     
-![png](/posts_images/018-02-03-data-quest-guided-project-analyzing-nyc-high-school-data/output_23_0.png)
+![png](/posts_images/2018-02-03-data-quest-guided-project-analyzing-nyc-high-school-data/output_23_0.png)
     
 
 
@@ -362,7 +362,7 @@ correlations[races].plot.bar()
 
 
     
-![png](/posts_images/018-02-03-data-quest-guided-project-analyzing-nyc-high-school-data/output_26_1.png)
+![png](/posts_images/2018-02-03-data-quest-guided-project-analyzing-nyc-high-school-data/output_26_1.png)
     
 
 
@@ -382,7 +382,7 @@ combined.plot.scatter(['sat_score'], ["hispanic_per"])
 
 
     
-![png](/posts_images/018-02-03-data-quest-guided-project-analyzing-nyc-high-school-data/output_28_1.png)
+![png](/posts_images/2018-02-03-data-quest-guided-project-analyzing-nyc-high-school-data/output_28_1.png)
     
 
 
@@ -813,7 +813,7 @@ correlations[genders].plot.bar()
 
 
     
-![png](/posts_images/018-02-03-data-quest-guided-project-analyzing-nyc-high-school-data/output_34_1.png)
+![png](/posts_images/2018-02-03-data-quest-guided-project-analyzing-nyc-high-school-data/output_34_1.png)
     
 
 
@@ -833,7 +833,7 @@ combined.plot.scatter(["female_per"], ['sat_score'])
 
 
     
-![png](/posts_images/018-02-03-data-quest-guided-project-analyzing-nyc-high-school-data/output_36_1.png)
+![png](/posts_images/2018-02-03-data-quest-guided-project-analyzing-nyc-high-school-data/output_36_1.png)
     
 
 
@@ -1099,7 +1099,7 @@ combined.plot.scatter(['ap_per'],['sat_score'])
 
 
     
-![png](/posts_images/018-02-03-data-quest-guided-project-analyzing-nyc-high-school-data/output_40_1.png)
+![png](/posts_images/2018-02-03-data-quest-guided-project-analyzing-nyc-high-school-data/output_40_1.png)
     
 
 
