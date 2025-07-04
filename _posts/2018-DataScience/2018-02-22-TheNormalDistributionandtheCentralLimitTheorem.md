@@ -190,7 +190,7 @@ Where $\mu$ is the mean, and $\sigma$ is the standard deviation. This formula tr
 
 In data science, we can transfrom for every data point in a column into z-scores. This is a feature scaling technique is known as <b>standardization</b>. Standardization transforms the data to have zero mean and unit variance. This technique is useful for machine learning estimators in scikit-learn that assumes all features to be centered around zero and have variance in the same order.
 
-Suppose we are using a the KNN estimator, this algorithm is sensitive to magnitude. If the training data has a feature that has an order of magnitude many times greater than the other features, it can dominate the estimator. As a result, the other features will be undervalued in our final model. For more information on this click [here](http://scikit-learn.org/stable/modules/preprocessing.html).
+Suppose we are using a the KNN estimator, this algorithm is sensitive to magnitude. If the training data has a feature that has an order of magnitude many times greater than the other features, it can dominate the estimator. As a result, the other features will be undervalued in our final model. For more information on this click [here](https://scikit-learn.org/stable/modules/preprocessing.html).
 
 
 ### Detecting Outliers Using the Z-Score

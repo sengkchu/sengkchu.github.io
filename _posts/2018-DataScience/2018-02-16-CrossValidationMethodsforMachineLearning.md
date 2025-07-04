@@ -4,7 +4,7 @@ date: 2018-02-16 00:00:00 +/-0000
 categories: [Data Science]
 tags: [machine learning]
 image:
-  path: /posts_images/2018-02-16-CrossValidationMethodsforMachineLearning/cover.PNG
+  path: /posts_images/2018-02-16-CrossValidationMethodsforMachineLearning/cover.png
 ---
 
 In the [Predicting House Prices with Linear Regression](https://sengkchu.github.io/posts/predict-house-price-regression.html) project, I talked a little bit about model evaluation. Specifically, I talked about cross validation. I want to expand on this topic.

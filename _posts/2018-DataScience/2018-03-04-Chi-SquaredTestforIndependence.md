@@ -378,7 +378,7 @@ print("Degrees of Freedom: {}".format(dof))
     Degrees of Freedom: 5
     
 
-Now we are ready to look into the Chi-squared distribution [table](http://www.itl.nist.gov/div898/handbook/eda/section3/eda3674.htm). The cut off for a p-value of 0.05 was 11.070. Our $X^2$ statistic was so large that the p-value is approximately zero. So we have evidence against the null hypothesis.
+Now we are ready to look into the Chi-squared distribution [table](https://www.itl.nist.gov/div898/handbook/eda/section3/eda3674.htm). The cut off for a p-value of 0.05 was 11.070. Our $X^2$ statistic was so large that the p-value is approximately zero. So we have evidence against the null hypothesis.
 
 ### The Chi-Squared Test for Independence - Using Scipy
 

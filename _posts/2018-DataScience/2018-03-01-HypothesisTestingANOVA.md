@@ -376,7 +376,7 @@ The general rules of thumb given by Cohen and Miles & Shevlin (2001) for analyzi
 + Medium ffect: $ 0.06 $
 + Large effect: $ 0.14 $
 
-From our calculations, the effect size for this ANOVA test would be "Medium". For a full write up on effect sizes click [here](http://imaging.mrc-cbu.cam.ac.uk/statswiki/FAQ/effectSize).
+From our calculations, the effect size for this ANOVA test would be "Medium". For a full write up on effect sizes click [here](https://imaging.mrc-cbu.cam.ac.uk/statswiki/FAQ/effectSize).
 
 ---
 

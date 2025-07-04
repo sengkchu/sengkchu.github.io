@@ -7,30 +7,6 @@ image:
   path: /posts_images/2018-03-18-InvestigatingtheGenderWageGap/cover.png
 ---
 
-- [1.0 - Introduction](#10---introduction)
-  - [1.1 - Library imports and loading the data from SQL to pandas](#11---library-imports-and-loading-the-data-from-sql-to-pandas)
-- [2.0 - Data Cleaning](#20---data-cleaning)
-  - [2.1 - Pre-cleaning, investigating data types](#21---pre-cleaning-investigating-data-types)
-  - [2.2 - Dealing with non-numerical values](#22---dealing-with-non-numerical-values)
-- [3.0 - Creating New Features](#30---creating-new-features)
-  - [3.1 - Creating the 'gender' column](#31---creating-the-gender-column)
-  - [3.2 - Categorizing job titles](#32---categorizing-job-titles)
-- [4.0 - Data Analysis and Visualizations](#40---data-analysis-and-visualizations)
-  - [4.1 - Overview of the gender gap](#41---overview-of-the-gender-gap)
-  - [4.2 - Exploring the year column](#42---exploring-the-year-column)
-  - [4.3 - Full time vs. part time employees](#43---full-time-vs-part-time-employees)
-  - [4.4 - Breaking down the total pay](#44---breaking-down-the-total-pay)
-  - [4.5 - Breaking down the base pay by job category](#45---breaking-down-the-base-pay-by-job-category)
-  - [4.6 - Gender representation by job category](#46---gender-representation-by-job-category)
-  - [4.7 - Significance testing by exact job title](#47---significance-testing-by-exact-job-title)
-- [5.0 - San Francisco vs. Newport Beach](#50---san-francisco-vs-newport-beach)
-  - [5.1 - Part time vs. full time workers](#51---part-time-vs-full-time-workers)
-  - [5.2 - Comparisons by job cateogry](#52---comparisons-by-job-cateogry)
-  - [5.3 - Gender representation by job category](#53---gender-representation-by-job-category)
-- [6.0 - Conclusion](#60---conclusion)
-
-    
-    
 
 ### 1.0 - Introduction
 
@@ -929,7 +905,7 @@ plt.show()
     
 
 
-This makes a lot of sense because an employee's benefits is based on a percentage of their base pay. The San Francisco Human Resources department includes this information on their website [here](http://sfdhr.org/benefits-overview).
+This makes a lot of sense because an employee's benefits is based on a percentage of their base pay. The San Francisco Human Resources department includes this information on their website [here](https://sfdhr.org/benefits-overview).
 
 As we move further into our analysis of the data, it makes the most sense to focus on the `BasePay` column. Both `Benefits` and `OvertimePay` are dependent of the `BasePay`. 
 
