@@ -3,6 +3,8 @@ title: Dataquest Guided Project - Star Wars Survey
 date: 2018-02-05 00:00 +/-0000
 categories: [DataQuest]
 tags: [dataquest, data science, basics]
+image:
+  path: /posts_images/2018-02-05-DataQuestGuidedProjectStarWarsSurvey/cover.png
 ---
 
 

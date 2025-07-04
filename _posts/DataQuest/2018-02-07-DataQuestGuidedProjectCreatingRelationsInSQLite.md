@@ -3,6 +3,8 @@ title: Dataquest Guided Project - Creating Relations In SQLite
 date: 2018-02-07 00:00 +/-0000
 categories: [DataQuest]
 tags: [dataquest, data science, basics]
+image:
+  path: /posts_images/2018-02-07-DataQuestGuidedProjectCreatingRelationsInSQLite/cover.png
 ---
 
 In this project we will use the cleaned data from the previous mission and work mainly in SQL. We will use SQL to transform the nominations tables into new tables, and create relations across these tables.

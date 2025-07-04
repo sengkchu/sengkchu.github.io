@@ -3,6 +3,8 @@ title: Dataquest Guided Project - Analyzing NYC High School Data
 date: 2018-02-03 00:00 +/-0000
 categories: [DataQuest]
 tags: [dataquest, data science, basics]
+image:
+  path: /posts_images/2018-02-03-DataQuestGuidedProjectAnalyzingNYCHighSchoolData/cover.png
 ---
 
 

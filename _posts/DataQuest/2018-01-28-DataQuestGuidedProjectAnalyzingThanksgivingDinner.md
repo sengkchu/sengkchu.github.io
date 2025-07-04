@@ -3,6 +3,8 @@ title: Dataquest Guided Project - Analyzing Thanksgiving Dinner
 date: 2018-01-28 00:00 +/-0000
 categories: [DataQuest]
 tags: [dataquest, data science, basics]
+image:
+  path: /posts_images/2018-01-28-DataQuestGuidedProjectAnalyzingThanksgivingDinner/cover.png
 ---
 
 
