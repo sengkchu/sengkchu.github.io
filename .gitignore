@@ -26,3 +26,4 @@ package-lock.json
 _sass/vendors
 assets/js/dist
 file_commands.ipynb
+.ipynb_checkpoints/*

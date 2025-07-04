@@ -1,7 +1,7 @@
 ---
 title: Cross Validation Methods for Machine Learning
 date: 2018-02-16 00:00:00 +/-0000
-categories: [Data Science]
+categories: [Data Science, Machine Learning]
 tags: [machine learning]
 image:
   path: /posts_images/2018-02-16-CrossValidationMethodsforMachineLearning/cover.png
@@ -487,8 +487,3 @@ We got an average RMSE value of 21428 from the leave one out validation method. 
 In practice, the number of folds we should use depends on the dataset. If we have a small dataset, say ~500 rows and we use K = 2. The models will only have 250 rows as the training set. If we have a large dataset, say ~500,000 rows then using K = 2 might be acceptable.
 
 Most academic research papers use K = 10, but keep in mind their datasets are generally small. If we are working with big data, computation time becomes a problem. If that is the case, we should consider using a lower K value.
-
----
-
-The files used for this article can be found in my [GitHub repository](https://github.com/sengkchu/codingdisciple.content/tree/master/Learning%20data%20science/Learning/Cross%20validation%20Methods%20for%20Machine%20Learning).
-

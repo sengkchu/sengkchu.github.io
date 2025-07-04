@@ -1,7 +1,7 @@
 ---
 title: Investigating the Gender Wage Gap
 date: 2018-03-18 00:00:00 +/-0000
-categories: [Data Science]
+categories: [Data Science, Data Analysis]
 tags: [statistics]
 image:
   path: /posts_images/2018-03-18-InvestigatingtheGenderWageGap/cover.png
@@ -1337,7 +1337,7 @@ The chart above does not include any information based on pay. I wanted to show 
 
 So what if breaking down the wage gap by job category is not good enough? Should we break down the gender gap by exact job title? Afterall, the argument is for equal pay for equal work. We can assume equal work if the job titles are exactly the same.
 
-We can use hypothesis testing using the Welch's t-test to determine if there is a statistically significant result between male and female wages. The Welch's t-test is very robust as it doesn't assume equal variance and equal sample size. It does however, assume a normal distrbution which is well represented by the KDE plots. I talk about this in detail in my blog post [here](https://codingdisciple.com/hypothesis-testing-welch-python.html).
+We can use hypothesis testing using the Welch's t-test to determine if there is a statistically significant result between male and female wages. The Welch's t-test is very robust as it doesn't assume equal variance and equal sample size. It does however, assume a normal distrbution which is well represented by the KDE plots. I talk about this in detail in my blog post [here](https://sengkchu.github.io/posts/HypothesisTestingWelch/).
 
 Let's state our null and alternative hypothesis:
 

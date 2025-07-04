@@ -1,7 +1,7 @@
 ---
 title: Chi-Squared Test for Independence
 date: 2018-03-04 00:00:00 +/-0000
-categories: [Data Science]
+categories: [Data Science, Statistics]
 tags: [statistics]
 image:
   path: /posts_images/2018-03-04-Chi-SquaredTestforIndependence/cover.png
@@ -419,7 +419,3 @@ The results were exactly the same as our calculations with Numpy. The $X^2$ = ~2
 ### Conclusions
 
 With a p-value < 0.05 , we can reject the null hypothesis. There is definitely some sort of relationship between 'sex' and the 'hours-per-week' column. We don't know what this relationship is, but we do know that these two variables are not independent of each other.
-
----
-
-The files used for this article can be found in my [GitHub repository](https://github.com/sengkchu/codingdisciple.content/tree/master/Learning%20data%20science/Learning/Studying%20Statistics/Chi-Squared%20Test%20for%20Independence).

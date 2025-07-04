@@ -1,7 +1,7 @@
 ---
 title: Understanding Central Tendency
 date: 2018-02-17 00:00:00 +/-0000
-categories: [Data Science]
+categories: [Data Science, Statistics]
 tags: [statistics]
 image:
   path: /posts_images/2018-02-17-UnderstandingCentralTendency/cover.png
@@ -209,8 +209,4 @@ In summary I would follow this table:
 
 
 For an indepth explanation on what each type of variable means, click [here](https://statistics.laerd.com/statistical-guides/types-of-variable.php).
-
----
-
-The files used for this article can be found in my [GitHub repository](https://github.com/sengkchu/codingdisciple.content/tree/master/Learning%20data%20science/Learning/Studying%20Statistics/Understanding%20Central%20Tendency).
 

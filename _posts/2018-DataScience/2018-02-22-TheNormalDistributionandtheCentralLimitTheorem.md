@@ -1,7 +1,7 @@
 ---
 title: The Normal Distribution and the Central Limit Theorem
 date: 2018-02-22 00:00:00 +/-0000
-categories: [Data Science]
+categories: [Data Science, Statistics]
 tags: [statistics]
 image:
   path: /posts_images/2018-02-22-TheNormalDistributionandtheCentralLimitTheorem/cover.png
@@ -381,7 +381,3 @@ print('z-score: {}'.format((5200-np.mean(peak_rpm_cleaned))/np.std(average_peak_
 We can use a z-table to determine the probability of finding a sample with at least 5200 peak rpm. The table shows that with a z-score of 1.27, the probability of finding data with less than 5200 peak rpm is 0.8980. That means the probability of finding a sample with more than 5200 peak rpm is 0.1020.
 
 Link to z-table from udacity [here](https://s3.amazonaws.com/udacity-hosted-downloads/ZTable.jpg).
-
----
-
-The files used for this article can be found in my [GitHub repository](https://github.com/sengkchu/codingdisciple.content/tree/master/Learning%20data%20science/Learning/Studying%20Statistics/The%20Normal%20Distribution%20and%20the%20Central%20Limit%20Theorem).

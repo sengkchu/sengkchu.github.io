@@ -1,7 +1,7 @@
 ---
 title: Hypothesis Testing ANOVA
 date: 2018-03-01 00:00:00 +/-0000
-categories: [Data Science]
+categories: [Data Science, Statistics]
 tags: [statistics]
 image:
   path: /posts_images/2018-03-01-HypothesisTestingANOVA/cover.png
@@ -377,7 +377,3 @@ The general rules of thumb given by Cohen and Miles & Shevlin (2001) for analyzi
 + Large effect: $ 0.14 $
 
 From our calculations, the effect size for this ANOVA test would be "Medium". For a full write up on effect sizes click [here](https://imaging.mrc-cbu.cam.ac.uk/statswiki/FAQ/effectSize).
-
----
-
-The files used for this article can be found in my [GitHub repository](https://github.com/sengkchu/codingdisciple.content/tree/master/Learning%20data%20science/Learning/Studying%20Statistics/Hypothesis%20Testing%20ANOVA).

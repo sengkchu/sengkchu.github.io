@@ -1,7 +1,7 @@
 ---
 title: Answering Business Questions With SQL
 date: 2018-02-16 00:00:00 +/-0000
-categories: [Data Science]
+categories: [Data Science, Data Analysis]
 tags: [sql]
 image:
   path: /posts_images/2018-02-16-AnsweringBusinessQuestionsWithSQL/cover.png
@@ -1288,7 +1288,5 @@ My recommendation for the company is to perform more research on these artists w
 #### Learning Summary
 
 Concepts explored: data visualization, SQL, business oriented data analysis, seaborn plots
-
-The files used for this project can be found in my [GitHub repository](https://github.com/sengkchu/codingdisciple.content/tree/master/Learning%20data%20science/Learning/Answering%20Business%20Questions%20using%20SQL).
 
 

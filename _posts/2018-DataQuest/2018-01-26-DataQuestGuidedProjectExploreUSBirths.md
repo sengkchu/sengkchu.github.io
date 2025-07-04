@@ -2,7 +2,7 @@
 title: Dataquest Guided Project - Explore US Births
 date: 2018-01-26 00:00 +/-0000
 categories: [DataQuest]
-tags: [dataquest, basics]
+tags: [dataquest]
 image:
   path: /posts_images/2018-01-26-DataQuestGuidedProjectExploreUSBirths/cover.PNG
 ---

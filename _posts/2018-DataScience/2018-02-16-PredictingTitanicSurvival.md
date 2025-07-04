@@ -1,7 +1,7 @@
 ---
 title: Predicting Titanic Survival
 date: 2018-02-16 00:00:00 +/-0000
-categories: [Data Science]
+categories: [Data Science, Machine Learning]
 tags: [machine learning]
 image:
   path: /posts_images/2018-02-16-PredictingTitanicSurvival/cover.png
@@ -997,7 +997,3 @@ We managed to hit the 50 percentile in the competition which is a great start.
 #### Learning Summary
 
 Concepts explored: feature engineering, feature selection, model selection, model tuning, binary classification problem
-
-The files used for this project can be found in my [GitHub repository](https://github.com/sengkchu/codingdisciple.content/tree/master/Learning%20data%20science/Learning/Predicting%20Titanic%20Survival).
-
-

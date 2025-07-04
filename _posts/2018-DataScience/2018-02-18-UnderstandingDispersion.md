@@ -1,7 +1,7 @@
 ---
 title: Understanding Dispersion
 date: 2018-02-18 00:00:00 +/-0000
-categories: [Data Science]
+categories: [Data Science, Statistics]
 tags: [statistics]
 image:
   path: /posts_images/2018-02-18-UnderstandingDispersion/cover.png
@@ -260,7 +260,3 @@ This [paper](https://www.leeds.ac.uk/educol/documents/00003759.htm) presented at
 #### Summary
 
 Determining the best measure of dispersion is something we have to look at in a case by case scenerio. In most cases, the standard deviation will work very well. This is especially true in very large set of data where the normal distribution is well represented. However, it is good practice to always explore the data first and remove outliers if possible.
-
----
-
-The files used for this article can be found in my [GitHub repository](https://github.com/sengkchu/codingdisciple.content/tree/master/Learning%20data%20science/Learning/Studying%20Statistics/Understanding%20Dispersion).

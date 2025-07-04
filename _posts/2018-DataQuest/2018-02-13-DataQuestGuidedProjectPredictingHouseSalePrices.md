@@ -2,7 +2,7 @@
 title: Dataquest Guided Project - Predicting House Sale Prices
 date: 2018-02-13 00:00 +/-0000
 categories: [DataQuest]
-tags: [dataquest, basics]
+tags: [dataquest]
 image:
   path: /posts_images/2018-02-13-DataQuestGuidedProjectPredictingHouseSalePrices/cover.PNG
 ---

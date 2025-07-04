@@ -1,13 +1,13 @@
 ---
 title: Bootstraping in Python
 date: 2018-03-23 00:00:00 +/-0000
-categories: [Data Science]
-tags: [machine learning]
+categories: [Data Science, Statistics]
+tags: [statistics]
 image:
   path: /posts_images/2018-03-23-Bootstraping/cover.png
 ---
 
-In a previous [article](https://codingdisciple.com/hypothesis-testing-welch-python.html) of this series, I talked about hypothesis testing and confidence intervals using classical methods. However, we had to make assumptions to justify our methods. So what if the distribution is not normal? What if our sample size is so small that we can't use the central limit theorem.
+In a previous [article](https://sengkchu.github.io/posts/HypothesisTestingWelch/) of this series, I talked about hypothesis testing and confidence intervals using classical methods. However, we had to make assumptions to justify our methods. So what if the distribution is not normal? What if our sample size is so small that we can't use the central limit theorem.
 
 Modern statiscal methods uses raw computational power to create the distribution. We can then use this distribution to estimate the likelihood of an event. This is very useful for answering questions such as  “Is A better than B?” or “Did adding feature X improve our product?”. The statistical method I am going to focus on in this article is <b>bootstrapping</b>. The great thing about this method is we don't have to assume a normal distribution.
 
@@ -419,6 +419,3 @@ plt.show()
 
 Out of 10,000 bootstrap samples, only 137 of these samples had a difference in means of 79.8 or higher shown by the red line above. Resulting in a p-value of 0.0137. This is not a very likely occurence. As a result, we will reject the null hypothesis.
 
----
-
-The files used for this article can be found in my [GitHub repository](https://github.com/sengkchu/codingdisciple.content/tree/master/Learning%20data%20science/Learning/Studying%20Statistics/Nonparametric%20Methods%20-%20Bootstrap%20Confidence%20Intervals%20and%20Permutation%20Hypothesis%20Testing).

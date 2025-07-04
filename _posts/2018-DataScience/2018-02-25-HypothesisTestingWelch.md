@@ -1,7 +1,7 @@
 ---
 title: Hypothesis Testing with Welch's T-test
 date: 2018-02-25 00:00:00 +/-0000
-categories: [Data Science]
+categories: [Data Science, Statistics]
 tags: [statistics]
 image:
   path: /posts_images/2018-02-25-HypothesisTestingWelch/cover.png
@@ -483,8 +483,3 @@ From the Welch's t-test we ended up with a two-tailed p-value of ~0.07, or ~0.03
 2. The p-value does not indicate the magnitude of the observed effect, we can only conclude that the effects were positive.
 3. The 0.05 p-value is just a convention to determine statistical significance.
 4. We can not make any predictions about the repeatability of the t-test, we could get completely different p-values based on the sample size.
-
-
----
-
-The files used for this article can be found in my [GitHub repository](https://github.com/sengkchu/codingdisciple.content/tree/master/Learning%20data%20science/Learning/Studying%20Statistics/Hypothesis%20Testing).
