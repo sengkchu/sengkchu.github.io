@@ -4,7 +4,7 @@ date: 2018-02-13 00:00 +/-0000
 categories: [DataQuest]
 tags: [dataquest, data science, basics]
 image:
-  path: /posts_images/2018-02-13-DataQuestGuidedProjectPredictingHouseSalePrices/cover.png
+  path: /posts_images/2018-02-13-DataQuestGuidedProjectPredictingHouseSalePrices/cover.PNG
 ---
 
 In this project, we are going to apply machine learning algorithms to predict the price of a house using 'AmesHousing.tsv'. In order to do so, we'll have to transform the data and apply various feature engineering techniques.

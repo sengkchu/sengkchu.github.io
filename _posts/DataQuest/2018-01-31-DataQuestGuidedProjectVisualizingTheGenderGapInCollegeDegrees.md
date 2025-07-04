@@ -4,7 +4,7 @@ date: 2018-01-31 00:00 +/-0000
 categories: [DataQuest]
 tags: [dataquest, data science, basics]
 image:
-  path: /posts_images/2018-01-31-DataQuestGuidedProjectVisualizingTheGenderGapInCollegeDegrees/cover.png
+  path: /posts_images/2018-01-31-DataQuestGuidedProjectVisualizingTheGenderGapInCollegeDegrees/cover.PNG
 ---
 
 

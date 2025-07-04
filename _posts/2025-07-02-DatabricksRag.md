@@ -4,7 +4,7 @@ date: 2025-07-02 00:00:00 +/-0000
 categories: [AI, RAG System]
 tags: [databricks, langchain, rag]
 image:
-  path: /posts_images/2018-01-30-DataQuestGuidedProjectVisualizingEarningsBasedOnCollegeMajors/output_9_1.png
+  path: /posts_images/2018-01-30-DataQuestGuidedProjectVisualizingEarningsBasedOnCollegeMajors/output_9_1.PNG
 ---
 
 ```python

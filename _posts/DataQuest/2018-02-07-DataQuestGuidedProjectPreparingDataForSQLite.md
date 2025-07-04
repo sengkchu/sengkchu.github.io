@@ -4,7 +4,7 @@ date: 2018-02-07 00:00 +/-0000
 categories: [DataQuest]
 tags: [dataquest, data science, basics]
 image:
-  path: /posts_images/2018-02-07-DataQuestGuidedProjectCreatingRelationsInSQLite/cover.png
+  path: /posts_images/2018-02-07-DataQuestGuidedProjectCreatingRelationsInSQLite/cover.PNG
 ---
 
 In this project, we will prepare data in preparation for SQL. We'll have to first clean the data.

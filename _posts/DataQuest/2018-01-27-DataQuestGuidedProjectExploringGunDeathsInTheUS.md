@@ -4,7 +4,7 @@ date: 2018-01-27 00:00 +/-0000
 categories: [DataQuest]
 tags: [dataquest, data science, basics]
 image:
-  path: /posts_images/2018-01-27-DataQuestGuidedProjectExploringGunDeathsInTheUS/cover.png
+  path: /posts_images/2018-01-27-DataQuestGuidedProjectExploringGunDeathsInTheUS/cover.PNG
 ---
 
 
