@@ -3,6 +3,7 @@ title: Chi-Squared Test for Independence
 date: 2018-03-04 00:00:00 +/-0000
 categories: [Data Science, Statistics]
 tags: [statistics]
+math: true
 image:
   path: /posts_images/2018-03-04-chi-squared-test-for-independence/cover.png
 ---

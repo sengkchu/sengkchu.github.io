@@ -3,6 +3,7 @@ title: The Normal Distribution and the Central Limit Theorem
 date: 2018-02-22 00:00:00 +/-0000
 categories: [Data Science, Statistics]
 tags: [statistics]
+math: true
 image:
   path: /posts_images/2018-02-22-the-normal-distribution-and-the-central-limit-theorem/cover.png
 ---

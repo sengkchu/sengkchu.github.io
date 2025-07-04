@@ -3,6 +3,7 @@ title: Hypothesis Testing with Welch's T-test
 date: 2018-02-25 00:00:00 +/-0000
 categories: [Data Science, Statistics]
 tags: [statistics]
+math: true
 image:
   path: /posts_images/2018-02-25-hypothesis-testing-welch/cover.png
 ---

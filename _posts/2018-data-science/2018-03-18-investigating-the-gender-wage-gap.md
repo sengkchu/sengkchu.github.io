@@ -3,6 +3,7 @@ title: Investigating the Gender Wage Gap
 date: 2018-03-18 00:00:00 +/-0000
 categories: [Data Science, Data Analysis]
 tags: [statistics]
+math: true
 image:
   path: /posts_images/2018-03-18-investigating-the-gender-wage-gap/cover.png
 ---

@@ -3,6 +3,7 @@ title: Bootstraping in Python
 date: 2018-03-23 00:00:00 +/-0000
 categories: [Data Science, Statistics]
 tags: [statistics]
+math: true
 image:
   path: /posts_images/2018-03-23-bootstraping/cover.png
 ---
