@@ -349,6 +349,7 @@ print('F_statistic: {}'.format(f))
 
     F_statistic: 12.733085029201687
     
+To find out which specific districts differ (e.g., is Manhattan's mean score significantly different from the Bronx's?), you need to perform post-hoc tests, such as Tukey's Honestly Significant Difference (HSD) test. However, this is outside the scope of this article.
 
 ### The Effect Size
 

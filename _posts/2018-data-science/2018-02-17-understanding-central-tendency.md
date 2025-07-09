@@ -25,9 +25,9 @@ data = pd.read_csv('bike_rental_hour.csv')
 
 ### Measuring the Central Tendency
 
-Suppose we are interested in finding the central tendency of the data. Specifically, we want to grasp what the "middle" of the data is. I assume the readers of my blog would probably understand hwo to calculate the mean, median, and mode. So I won't go into details about it.
+Suppose we are interested in finding the central tendency of the data. Specifically, we want to grasp what the "middle" of the data is. We can use metrics such as the mean, median, and mode.
 
-The question is which one of these metrics is the best for measuring the central tendency.
+However, the question is which one of these metrics is the best for measuring the central tendency.
 
 
 #### The Categorical Case:
@@ -66,7 +66,7 @@ print('Mode: {}'.format(data['season'].mode()[0]))
     Mode: 3
     
 
-In this case, it doesn't make sense to use the mean nor the median. Each bar shown on the plot represents a different category. If we want to know the most frequent season in our data, we should use the <b>mode</b>.
+In this case, it doesn't make sense to use the mean nor the median. Each bar shown on the plot represents a different category. The mean 2.5 wouldn't fall into any of the categories. If we want to know the most frequent season in our data, we should use the <b>mode</b>.
 
 #### The Ordinal Case:
 
@@ -173,7 +173,7 @@ print('Std Dev: {}'.format(data['cnt'].std().round(1)))
     Std Dev: 181.4
     
 
-The case above is an example of a right skewed distribution or a positively skewed distribution. The frequency curve has a tail to the right and <b>Mean > Median > Mode</b>.
+The case above is an example of a right skewed distribution or a positively skewed distribution. The frequency curve has a tail to the right and the values are sorted in this way: <b>Mean > Median > Mode</b>.
 
 In a left skewed distribution or negatively skewed distribution, the frequency curve has a longer tail to the left and the <b>Mean < Median < Mode</b>.
 

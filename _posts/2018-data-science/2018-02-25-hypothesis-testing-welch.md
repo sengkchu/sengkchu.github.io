@@ -119,7 +119,7 @@ If our alternative hypothesis was $\mu_0 \ne \mu_1$, then we would have to use a
 
 ### The Welch's t-test
 
-One way to tackle this problem is to calculate the probability of finding February data in the rejection region using the Welch's t-test. This version of the t-test can be used for equal or unequal sample sizes. In addition, this t-test can be used for two samples with different variances. This is often praised as the most robust form of the t-test. However, the Welch's t-test assumes that the two samples of data are independent and identically distributed.
+One way to tackle this problem is to calculate the probability of finding February data in the rejection region using the Welch's t-test. This version of the t-test can be used for equal or unequal sample sizes. In addition, this t-test can be used for two samples with different variances. This is often praised as the most robust form of the t-test. However, the Welch's t-test assumes that the two samples of data are independent and drawn from populations that are approximately normally distributed.
 
 The t-score can be calculated using the following formula:
 
@@ -131,7 +131,7 @@ The degrees of freedom can be calculated using the following formula:
 
 $$ DoF = \frac{\bigg({\frac{s^2_1} {n_1}+\frac{s^2_2} {n_2}}\bigg)^2} {\frac{({s^2_1}/{n_1})^2}{n_1-1} + \frac{({s^2_2}/{n_2})^2}{n_2-1}}$$
 
-Where $\bar {X}$ is the sample average, $s$ is the variance, and $n$ is the sample size. With the degrees of freedom and the t-score, we can use a t-table or a t-distribution calculator to determine the p-value. If the p-value is less than the significance level, then we can conclude that our data is statistically significant and the null hypothesis will be rejected.
+Where $\bar {X}$ is the sample average, $s^2$ is the variance, and $n$ is the sample size. With the degrees of freedom and the t-score, we can use a t-table or a t-distribution calculator to determine the p-value. If the p-value is less than the significance level, then we can conclude that our data is statistically significant and the null hypothesis will be rejected.
 
 We could plug in every number into python, and then looking up a t-table. But it is easier to just use the scipy.stats module. Click [here](https://docs.scipy.org/doc/scipy/reference/stats.html) for the link to the documentation.
 
@@ -152,7 +152,7 @@ t_score
 
 
 
-From the Welch's t-test we ended up with a p-value of 0.055. Scipy calculates this value based on the two tailed case. If we just want the p-value of the right-tail, we can divide this value by 2. This means that the probability that there is a ~2.57% chance of finding the observed values from February given the data from January. We should reject the null hypothesis.
+From the Welch's t-test we ended up with a p-value of 0.055. Scipy calculates this value based on the two tailed case. If we just want the p-value of the right-tail, we can divide this value by 2. This means that the probability that there is a ~2.77% chance of finding the observed values from February given the data from January. We should reject the null hypothesis.
 
 ### The Welch's t-test with Facebook Data
 
@@ -424,13 +424,13 @@ plt.show()
 From the chart above, we can see that the error bars for 'Paid' posts and "Unpaid' posts have an overlapping region.
 We can also see that the sample mean of 'likes' in paid posts was higher than the sample mean of 'likes' in unpaid posts. We need to determine if the data we have is statistically significant and make sure that our results did not occur purely by chance.
 
-The null hypothesis would suggest that paying for advertisements does not increase the amount of likes.
+The null hypothesis would suggest that paying for advertisements does not increase the amount of likes. To be more specific, the population mean of likes for paid posts is equal to the population mean of likes for unpaid posts.
 
-$$ H_0 : \mu_0 = \text{139 likes} $$
+$$ $H_0 : \mu_{paid} = \mu_{unpaid} $$
 
-The alternative hypothesis would suggest that paying for advertisements does increase the amount of likes.
+The alternative hypothesis would suggest that the population mean of likes for paid posts is greater than the population mean of likes for unpaid posts.
 
-$$ H_a : \mu_1 > \text{139 likes}$$
+$$ H_a : \mu_{paid} > \mu_{unpaid} $$
 
 We can come to a decision using the right-tailed Welch's t-test again. This time, we'll calculate the p-value in using the formulas in the previous section instead of the scipy module.
 

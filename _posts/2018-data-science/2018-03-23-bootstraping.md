@@ -322,7 +322,7 @@ differences[differences <= 0].shape[0]
 106 samples out of 10,000 were under or equal 0 assuming an increase did not happen. We are 95% confident that the true difference between paid groups and unpaid groups is between 7.52 and 179.79.
 
 
-### Hypothesis testing - Paid vs. Unpaid Groups
+### Hypothesis testing - Paid vs. Unpaid Groups (Permutation Test)
 
 We can also use bootstrapping for hypothesis testing. We want to know if paying for advertisements on Facebook will increase the amount of likes on the post. Our null hypothesis would suggest that paying for advertisements <b>does not</b> affect the amount of likes.
 

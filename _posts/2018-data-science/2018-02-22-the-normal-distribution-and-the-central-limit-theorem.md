@@ -32,7 +32,7 @@ import pandas as pd
 ```python
 def gaussian(sigma, mu, i):
     x = np.linspace(-3, 3, 100)
-    y = 1/(math.sqrt(sigma**math.pi))*np.exp(-1*np.power((x - mu)/sigma, 2)/2)
+    y = 1/(sigma*math.sqrt(2*math.pi))*np.exp(-1*np.power((x - mu)/sigma, 2)/2)
     
     sns.set(font_scale=1.5)    
     fig = plt.figure(figsize=(11,9))
@@ -272,9 +272,7 @@ plt.show()
 
 ### The Central Limit Theorem
 
-So we just detected some outliers using the z-score, but why are we allowed to do that? The distribution did not even resemble the normal distribution. This is where the central limit theorem comes in.
-
-The central limit theorem states that if you have a sufficient number of randomly selected samples, the means of those samples will follow a normal distribution. As a result, we can apply statistical techniques that assume normality even if the samples themselves do not appear to be normal.
+The central limit theorem states that the distribution of the sample means of a large number of samples drawn from a population will approach a normal distribution, regardless of the shape of the population's distribution. As a result, we can apply statistical techniques that assume normality even if the samples themselves do not appear to be normal.
 
 Let's take the original peak-rpm data again without removing the outlier. This is what we are going to do:
 
@@ -284,7 +282,7 @@ Let's take the original peak-rpm data again without removing the outlier. This i
 
 3. Repeat the first two steps 1000 times.
 
-3. Plot the resulting histogram.
+4. Plot the resulting histogram.
 
 
 
